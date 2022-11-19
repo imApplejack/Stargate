@@ -8,5 +8,12 @@ namespace Stargate
 {
     public class Player
     {
+
+        public List<SGCharacter> Team { get; set; } = null ;
+
+
+        public Player() { 
+        
+        }
     }
 }

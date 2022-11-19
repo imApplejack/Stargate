@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://SGGodot/Character.cs" type="Script" id=1]
+
+[node name="Character" type="Control"]
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 130.0
+margin_bottom = 160.0
+
+[node name="Culture" type="Label" parent="Panel"]
+margin_left = 10.0
+margin_top = 29.0
+margin_right = 48.0
+margin_bottom = 43.0
+rect_pivot_offset = Vector2( 25, 8 )
+text = "Culture"
+
+[node name="Science" type="Label" parent="Panel"]
+margin_left = 10.0
+margin_top = 53.0
+margin_right = 48.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( 25, 8 )
+text = "Science"
+
+[node name="Combat" type="Label" parent="Panel"]
+margin_left = 10.0
+margin_top = 77.0
+rect_pivot_offset = Vector2( 25, 8 )
+text = "Combat"
+
+[node name="Ingenuity" type="Label" parent="Panel"]
+margin_left = 10.0
+margin_top = 100.0
+rect_pivot_offset = Vector2( 25, 8 )
+text = "Ingenuity"

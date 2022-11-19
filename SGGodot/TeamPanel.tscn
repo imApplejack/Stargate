@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://SGGodot/TeamPanel.cs" type="Script" id=1]
+
+[node name="TeamPanel" type="Container"]
+margin_left = 266.0
+margin_top = 435.0
+margin_right = 800.0
+margin_bottom = 597.0
+script = ExtResource( 1 )

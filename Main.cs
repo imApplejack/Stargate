@@ -1,6 +1,7 @@
 using Godot;
 using Stargate;
 using System;
+using System.Collections.Generic;
 
 public class Main : Node
 {
@@ -15,8 +16,28 @@ public class Main : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        game = new StargateGame();
 
+        Player player1 = new Player();
+        //player1.Team = new List<SGCharacter>() { new SGCharacter() { Combat = 2, Culture = 3, Ingenuity = 0, Science = 1 }, new SGCharacter(), new SGCharacter(), new SGCharacter() } ;
+
+        player1.Team = new List<SGCharacter>() { new SGCharacter() { Combat = 2, Culture = 3, Ingenuity = 0, Science = 1 }};
+
+        Player player2 = new Player();
+        game = new StargateGame(player1, player2);
+
+
+
+
+        this.intTeamPanel(player1.Team);
+    }
+
+
+    private void intTeamPanel(List<SGCharacter> characters)
+    {
+
+        TeamPanel tm = (TeamPanel)this.GetNode("TeamPanel");
+        tm.Team = characters;
+        tm.initTeam();
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
