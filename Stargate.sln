@@ -5,8 +5,6 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stargate", "Stargate.csproj", "{DC2FED4C-DA52-42A0-81FB-F76BE74E6A6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StargateConsoleApp", "..\StargateConsoleApp\StargateConsoleApp.csproj", "{DA0E113B-D278-4BA7-B2D2-434CCC34BD84}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,14 +21,6 @@ Global
 		{DC2FED4C-DA52-42A0-81FB-F76BE74E6A6A}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 		{DC2FED4C-DA52-42A0-81FB-F76BE74E6A6A}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{DC2FED4C-DA52-42A0-81FB-F76BE74E6A6A}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
-		{DA0E113B-D278-4BA7-B2D2-434CCC34BD84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA0E113B-D278-4BA7-B2D2-434CCC34BD84}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA0E113B-D278-4BA7-B2D2-434CCC34BD84}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA0E113B-D278-4BA7-B2D2-434CCC34BD84}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{DA0E113B-D278-4BA7-B2D2-434CCC34BD84}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{DA0E113B-D278-4BA7-B2D2-434CCC34BD84}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
-		{DA0E113B-D278-4BA7-B2D2-434CCC34BD84}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA0E113B-D278-4BA7-B2D2-434CCC34BD84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

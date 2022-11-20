@@ -1,6 +1,7 @@
 using Godot;
 using Stargate;
 using System;
+using System.Data.Common;
 
 public class Character : Control
 {
@@ -9,6 +10,9 @@ public class Character : Control
     // private string b = "text";
 
     // Called when the node enters the scene tree for the first time.
+
+
+ 
 
 
     public SGCharacter SGCharacter { get; set; }  = null;
@@ -21,6 +25,8 @@ public class Character : Control
 
     public override void _Ready()
     {
+
+
         Culture = (Label)GetNode("Panel/Culture");
         Science = (Label)GetNode("Panel/Science");
         Combat = (Label)GetNode("Panel/Combat");
@@ -28,6 +34,16 @@ public class Character : Control
         Build();
     }
 
+
+    public static Character Factory(SGCharacter character)
+    {
+        // probablement mettre ca au dessus pour des raisons de perf
+        var scene = GD.Load<PackedScene>("res://SGGodot/Character.tscn");
+        Character instance = (Character)scene.Instance();
+        instance.SGCharacter = character;
+        return instance;
+
+    }
 
     public void Build()
     {

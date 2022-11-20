@@ -39,14 +39,10 @@ public class TeamPanel : Container
 
     public void initTeam()
     {
-        var scene = GD.Load<PackedScene>("res://SGGodot/Character.tscn");
         GD.Print(Team);
         foreach (SGCharacter item in Team)
         {
-
-            Character instance = (Character)scene.Instance();
-            instance.SGCharacter = item;
-            AddChild(instance);
+            AddChild(Character.Factory(item));
         }
         
     }

@@ -3,7 +3,7 @@
     <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="SGGodot\" />
-    <Folder Include="Stargate\NewFolder\" />
+    <Compile Remove="Stargate\NewFolder\**" />
+    <EmbeddedResource Remove="Stargate\NewFolder\**" />
   </ItemGroup>
 </Project>
