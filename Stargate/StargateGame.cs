@@ -13,12 +13,16 @@ namespace Stargate
 
         Player player1= null;
         Player player2= null;
+        
+        public SGMissionEvent Mission { get; set; } = null;
+        public Player CurrentPlayer { get; set; } = null;
 
 
         public StargateGame()
         {
             Player player1 = new Player();
             Player player2 = new Player();
+            this.CurrentPlayer = player1;
             Console.WriteLine("coucou");
         }
 

@@ -11,8 +11,24 @@ script = ExtResource( 1 )
 margin_right = 100.0
 margin_bottom = 140.0
 rect_min_size = Vector2( 100, 140 )
+hint_tooltip = "un bonhomme"
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+modulate = Color( 0.576471, 0.568627, 0.560784, 0.560784 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Science" type="Label" parent="Panel"]
+margin_left = 10.0
+margin_top = 53.0
+margin_right = 59.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( 25, 8 )
+custom_colors/font_color = Color( 0.745098, 0.113725, 0.113725, 1 )
+text = "Science"
 
 [node name="Culture" type="Label" parent="Panel"]
+modulate = Color( 0.0196078, 0.0156863, 0.0156863, 1 )
 margin_left = 10.0
 margin_top = 29.0
 margin_right = 48.0
@@ -20,22 +36,16 @@ margin_bottom = 43.0
 rect_pivot_offset = Vector2( 25, 8 )
 text = "Culture"
 
-[node name="Science" type="Label" parent="Panel"]
-margin_left = 10.0
-margin_top = 53.0
-margin_right = 48.0
-margin_bottom = 67.0
-rect_pivot_offset = Vector2( 25, 8 )
-text = "Science"
-
 [node name="Combat" type="Label" parent="Panel"]
 margin_left = 10.0
 margin_top = 77.0
 rect_pivot_offset = Vector2( 25, 8 )
+custom_colors/font_color = Color( 0.0823529, 0.698039, 0.164706, 1 )
 text = "Combat"
 
 [node name="Ingenuity" type="Label" parent="Panel"]
 margin_left = 10.0
 margin_top = 100.0
 rect_pivot_offset = Vector2( 25, 8 )
+custom_colors/font_color = Color( 0.121569, 0.164706, 0.831373, 1 )
 text = "Ingenuity"

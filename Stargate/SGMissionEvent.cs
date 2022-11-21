@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Stargate
 {
-    public class Player : SGEntity
+    public class SGMissionEvent
     {
+        public SGMission mission { get; set; } = null;
 
-        public List<SGCharacter> Team { get; set; } = null ;
-
-
-        public Player() { 
         
+
+        public SGMissionEvent()
+        {
+
         }
+
     }
 }
