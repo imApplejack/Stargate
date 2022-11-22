@@ -22,6 +22,7 @@ public class Character : Control
     public override void _Ready()
     {
 
+        GD.Print(this);
 
         Culture = (Label)GetNode("Panel/Culture");
         Science = (Label)GetNode("Panel/Science");
@@ -43,10 +44,15 @@ public class Character : Control
 
     public void Build()
     {
-        Culture.Text = SGCharacter.Culture.ToString();
-        Science.Text = SGCharacter.Science.ToString();
-        Combat.Text = SGCharacter.Combat.ToString();
-        Ingenuity.Text = SGCharacter.Ingenuity.ToString();
+
+        if (SGCharacter != null)
+        {
+            Culture.Text = SGCharacter.Culture.ToString();
+            Science.Text = SGCharacter.Science.ToString();
+            Combat.Text = SGCharacter.Combat.ToString();
+            Ingenuity.Text = SGCharacter.Ingenuity.ToString();
+        }
+      
         
     }
 

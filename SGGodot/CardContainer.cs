@@ -3,7 +3,7 @@ using Stargate;
 using System;
 using System.Collections.Generic;
 
-public class TeamContainer : HBoxContainer
+public class CardContainer : HBoxContainer
 {
     public List<SGCharacter> Team { get; set; }
 

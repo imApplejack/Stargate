@@ -24,6 +24,8 @@ public class Main : Node
 
         Player player2 = new Player();
         game = new StargateGame(player1, player2);
+       
+        
         game.Mission = new SGMissionEvent() { mission = new SGMission() { Combat = 2 } };
 
 
@@ -36,9 +38,15 @@ public class Main : Node
     private void intTeamPanel(List<SGCharacter> characters)
     {
 
-        TeamContainer tm = (TeamContainer)this.GetNode("Panel/TeamContainer");
+        CardContainer tm = (CardContainer)this.FindNode("TeamContainer");
         tm.Team = characters;
         tm.initTeam();
+
+        CardContainer hc = (CardContainer)this.FindNode("HandContainer");
+        hc.Team = characters;
+        hc.initTeam();
+
+
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stargate
 {
-    abstract public class SGEntity
+    public class SGCard
     {
         uint Reference { get; set; }
     }

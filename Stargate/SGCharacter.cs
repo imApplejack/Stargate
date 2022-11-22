@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stargate
-{
-    public class SGCharacter
+namespace Stargate { 
+    
+    public class SGCharacter : SGEntity
     {
 
 
