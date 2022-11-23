@@ -17,6 +17,7 @@ public class Character : Control
     Label Science;
     Label Combat;
     Label Ingenuity;
+    Label Cost;
 
 
     public override void _Ready()
@@ -28,8 +29,20 @@ public class Character : Control
         Science = (Label)GetNode("Panel/Science");
         Combat = (Label)GetNode("Panel/Combat");
         Ingenuity = (Label)GetNode("Panel/Ingenuity");
+        Cost = (Label)GetNode("Panel/Cost");
         Build();
     }
+
+    public void _on_Panel_mouse_entered()
+    {
+        GD.Print("enter " + this);
+    }
+
+    public void _on_Panel_mouse_exited()
+    {
+        GD.Print("leave " + this);
+    }
+    
 
 
     public static Character Factory(SGCharacter character)
@@ -51,6 +64,7 @@ public class Character : Control
             Science.Text = SGCharacter.Science.ToString();
             Combat.Text = SGCharacter.Combat.ToString();
             Ingenuity.Text = SGCharacter.Ingenuity.ToString();
+            Cost.Text = SGCharacter.Cost.ToString();
         }
       
         

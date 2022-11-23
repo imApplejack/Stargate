@@ -20,7 +20,7 @@ public class Main : Node
         Player player1 = new Player();
         //player1.Team = new List<SGCharacter>() { new SGCharacter() { Combat = 2, Culture = 3, Ingenuity = 0, Science = 1 }, new SGCharacter(), new SGCharacter(), new SGCharacter() } ;
 
-        player1.Team = new List<SGCharacter>() { new SGCharacter() { Combat = 2, Culture = 3, Ingenuity = 0, Science = 1 }, new SGCharacter() { Combat = 1, Culture = 0, Ingenuity = 0, Science = 1 } , };
+        player1.Team = new List<SGCharacter>() { new SGCharacter() { Combat = 2, Culture = 3, Ingenuity = 0, Science = 1 }, new SGCharacter() { Combat = 1, Culture = 0, Ingenuity = 0, Science = 1, Cost = 3 } , };
 
         Player player2 = new Player();
         game = new StargateGame(player1, player2);
@@ -38,6 +38,7 @@ public class Main : Node
     private void intTeamPanel(List<SGCharacter> characters)
     {
 
+       
         CardContainer tm = (CardContainer)this.FindNode("TeamContainer");
         tm.Team = characters;
         tm.initTeam();
@@ -45,7 +46,7 @@ public class Main : Node
         CardContainer hc = (CardContainer)this.FindNode("HandContainer");
         hc.Team = characters;
         hc.initTeam();
-
+       
 
     }
 

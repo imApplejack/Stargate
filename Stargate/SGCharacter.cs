@@ -15,6 +15,8 @@ namespace Stargate {
         public int Combat { get; set; } = 0;
         public int Ingenuity { get; set; } = 0;
 
+        public int Cost { get; set; } = 0;
+
 
 
         //public string Name { get; set; }
