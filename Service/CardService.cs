@@ -14,11 +14,18 @@ namespace Stargate.Service
 
         public CardRepository CardRepository { get; set; } = new CardRepository();
 
+
+
+        public List<CardModel> GetAllCards()
+        {
+            return this.CardRepository.GetAll();
+        }
+
+
         public CardModel CreateCardModel(SGCard card)
         {
             return new CardModel(card);
         }
-
 
         /** 
          * generate deck from card template for player

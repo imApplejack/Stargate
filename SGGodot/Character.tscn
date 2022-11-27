@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://SGGodot/Character.cs" type="Script" id=1]
-[ext_resource path="res://Asset/Cards/bad4982e-a94d-4023-8dc9-38b1c9ceccf9/Cards/4901fb59-e7cc-47d4-8f3a-4f1f2e93f78d.jpg" type="Texture" id=2]
+[ext_resource path="res://Asset/Cards/bad4982e-a94d-4023-8dc9-38b1c9ceccf9/Cards/0a124022-4054-4952-83d9-3ac43d16e7a1.jpg" type="Texture" id=2]
 [ext_resource path="res://Asset/Cards/LAYOUTOVERRIDE.png" type="Texture" id=3]
 
 [node name="Character" type="Control"]

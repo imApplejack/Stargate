@@ -46,6 +46,13 @@ namespace Stargate.Repository
             }
         }
 
+
+        public List<CardModel> getPlayerCards(Player player)
+        {
+            return Cards.FindAll(cardModel => cardModel.Owner == player);
+        }
+
+
         public List<CardModel> GetAll()
         {
             return this.Cards;

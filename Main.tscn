@@ -25,44 +25,44 @@ alignment = 1
 
 [node name="BoardContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 830.0
-margin_bottom = 300.0
+margin_bottom = 404.0
 alignment = 1
 script = ExtResource( 2 )
 
 [node name="Character" parent="VBoxContainer/BoardContainer" instance=ExtResource( 4 )]
-margin_left = 308.0
-margin_right = 522.0
-margin_bottom = 300.0
+margin_left = 272.0
+margin_right = 558.0
+margin_bottom = 404.0
 
 [node name="HandContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 304.0
+margin_top = 408.0
 margin_right = 830.0
-margin_bottom = 604.0
+margin_bottom = 812.0
 alignment = 1
 script = ExtResource( 2 )
 
 [node name="Character" parent="VBoxContainer/HandContainer" instance=ExtResource( 4 )]
-margin_left = 277.0
-margin_right = 491.0
-margin_bottom = 300.0
+margin_left = 241.0
+margin_right = 527.0
+margin_bottom = 404.0
 
 [node name="Button" type="Button" parent="VBoxContainer/HandContainer"]
-margin_left = 495.0
-margin_right = 552.0
-margin_bottom = 300.0
+margin_left = 531.0
+margin_right = 588.0
+margin_bottom = 404.0
 text = "bouton"
 
 [node name="TeamContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 608.0
+margin_top = 816.0
 margin_right = 830.0
-margin_bottom = 908.0
+margin_bottom = 1220.0
 alignment = 1
 script = ExtResource( 2 )
 
 [node name="Character" parent="VBoxContainer/TeamContainer" instance=ExtResource( 4 )]
-margin_left = 308.0
-margin_right = 522.0
-margin_bottom = 300.0
+margin_left = 272.0
+margin_right = 558.0
+margin_bottom = 404.0
 
 [node name="Zoom" type="Control" parent="."]
 grow_horizontal = 0
@@ -80,14 +80,14 @@ margin_bottom = 300.0
 alignment = 2
 
 [node name="Character" parent="MissionContainer" instance=ExtResource( 4 )]
-margin_left = 164.0
+margin_left = 92.0
 margin_right = 378.0
-margin_bottom = 300.0
+margin_bottom = 404.0
 
 [node name="TextureRect" type="TextureRect" parent="MissionContainer"]
 margin_left = 382.0
 margin_right = 596.0
-margin_bottom = 300.0
+margin_bottom = 404.0
 texture = ExtResource( 3 )
 
 [node name="EndTurnButton" type="Button" parent="."]
