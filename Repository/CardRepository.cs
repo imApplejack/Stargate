@@ -11,12 +11,10 @@ namespace Stargate.Repository
     public class CardRepository
     {
 
-
-        private List<CardModel> Cards = new List<CardModel>();
+        public List<CardModel> Cards = new List<CardModel>();
 
         // librairie à part pour des raisons de cassecouilleness shuffle ect...
         public Dictionary<Player, CardModel> Libraries = new Dictionary<Player, CardModel>();
-
 
         public CardModel AddCard(CardModel card)
         {
@@ -39,9 +37,7 @@ namespace Stargate.Repository
             }
         }
 
-
-
-        public List<CardModel> GetCall()
+        public List<CardModel> GetAll()
         {
             return this.Cards;
         }

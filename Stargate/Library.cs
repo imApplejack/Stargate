@@ -10,7 +10,7 @@ namespace Stargate.Stargate
     public class Library
     {
 
-        SGCard getCardById(string id) // id = hash bdd
+        public SGCard getCardById(string id) // id = hash bdd
         {
 
             // mock 3 chars
@@ -31,6 +31,22 @@ namespace Stargate.Stargate
             }
         }
 
+
+
+        /**
+         * genere un deck depuis une liste de hash bdd
+         */
+        public List<SGCard> GetDeckFromHashList(List<string> hashlist)
+        {
+            List<SGCard> retour = new List<SGCard>();
+
+            foreach (string hash in hashlist)
+            {
+                retour.Add(this.getCardById(hash));
+            }
+          
+            return retour;
+        }
 
           
     }

@@ -12,11 +12,11 @@ namespace Stargate.Service
     public class CardService
     {
 
-        private CardRepository CardRepository { get; set; } = new CardRepository();
+        public CardRepository CardRepository { get; set; } = new CardRepository();
 
         public CardModel CreateCardModel(SGCard card)
         {
-            return new CardModel { Card = card };
+            return new CardModel(card);
         }
 
 
@@ -27,10 +27,9 @@ namespace Stargate.Service
         {
             foreach(SGCard card in cards)
             {
-                this.CardRepository.AddCard(new CardModel { Card = card, Owner = player, State = CardState.Library });
+                CardModel cl = new CardModel(card) { Owner = player, State = CardState.Library };
+                this.CardRepository.AddCard(cl);
             }
         }
-
-
     }
 }
