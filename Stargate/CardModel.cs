@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stargate.Stargate.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,30 +7,6 @@ using System.Threading.Tasks;
 
 namespace Stargate.Stargate
 {
-
-    public enum CardState
-    {
-        Team,
-        Hand,
-        Library,
-        Ready,
-        Mission,
-        Stop,
-        Disabled,
-        Destroy
-    };
-
-
-    public enum CardType
-    {
-        Adversary,
-        SupportCharacter,
-        Event,
-        Gear,
-        Obstacle,
-        TeamCharacter
-    };
-
 
     public class CardModel
     {
@@ -41,6 +18,9 @@ namespace Stargate.Stargate
         public CardModel()
         {
         }
+
+
+        public CardType Type { get; set; }
 
         public CardState State { get; set; }
 

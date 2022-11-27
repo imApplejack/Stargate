@@ -2,8 +2,4 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Stargate\NewFolder\**" />
-    <EmbeddedResource Remove="Stargate\NewFolder\**" />
-  </ItemGroup>
 </Project>

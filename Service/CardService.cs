@@ -1,5 +1,6 @@
 ﻿using Stargate.Repository;
 using Stargate.Stargate;
+using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
