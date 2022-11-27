@@ -14,9 +14,12 @@ public class Main : Node
 
 
 
-  //  private CardModel cardmodeltest = new CardModel();
+    //  private CardModel cardmodeltest = new CardModel();
 
-  //  private StargateGame game;
+    //  private StargateGame game;
+
+
+    public PlayerControl Player1Vue;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -26,6 +29,8 @@ public class Main : Node
         Player Player1 = new Player();
         Library library = new Library();
         MappingMVC mappingMVC = new MappingMVC();
+        Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
+        Player1Vue.player = Player1;
 
 
 
@@ -34,25 +39,22 @@ public class Main : Node
         cardService.InitPlayersLibrary();
 
 
+
+        //cardService.Draw(Player1);
+
+
         mappingMVC.InitRessources(cardService.GetAllCards());
+        Player1Vue.MappingMVC = mappingMVC;
+
+        foreach (var item in mappingMVC.Mapping)
+        {
+            Player1Vue.MajCardControl(item.Key);
+        }
 
     }
 
 
-      private void intTeamPanel(List<SGCharacter> characters)
-      {
 
-         
-          CardContainer tm = (CardContainer)this.FindNode("TeamContainer");
-          tm.Team = characters;
-          tm.initTeam();
-
-          CardContainer hc = (CardContainer)this.FindNode("HandContainer");
-          hc.Team = characters;
-          hc.initTeam();
-         
-
-    }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)

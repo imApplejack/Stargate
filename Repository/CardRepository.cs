@@ -63,5 +63,11 @@ namespace Stargate.Repository
             return this.Cards[id];
         }
 
+        public void Draw(Player player)
+        {
+            CardModel topCardLibrary = Libraries[player][Libraries[player].Count];
+            topCardLibrary.State = CardState.Hand;
+            Libraries[player].Remove(topCardLibrary);
+        }
     }
 }

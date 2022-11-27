@@ -44,7 +44,7 @@ namespace Stargate.Service
         {
             foreach (SGCard card in cards)
             {
-                // faire des if pour verifier la pertinance Isteam
+                // faire des if pour verifier la pertinance IsTeam
                 CardModel cl = new CardModel(card) { Owner = player, State = CardState.Team };
                 this.CardRepository.AddCard(cl);
             }
@@ -53,6 +53,11 @@ namespace Stargate.Service
         public void InitPlayersLibrary()
         {
             this.CardRepository.InitPlayersLibrary();
+        }
+
+        public void Draw(Player player)
+        {
+            this.CardRepository.Draw(player);
         }
     }
 }

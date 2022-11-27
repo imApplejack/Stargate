@@ -11,17 +11,18 @@ namespace Stargate.SGGodot
     public class MappingMVC
     {
 
-        Dictionary<CardModel, GDCard> Mapping = new Dictionary<CardModel, GDCard>();
+        public Dictionary<CardModel, GDCard> Mapping = new Dictionary<CardModel, GDCard>();
 
 
         public void InitRessources(List<CardModel> cards)
         {
             foreach (CardModel item in cards)
             {
-              //  var scene = GD.Load<PackedScene>("res://SGGodot/Character.tscn");
-              //  GDCard instance = (GDCard)scene.Instance();
+                var scene = GD.Load<PackedScene>("res://SGGodot/Character.tscn");
+                GDCard instance = (GDCard)scene.Instance();
                 //CardModel.CardModelObservable += new EventHandler(instance.HandleRefreshCard);
-              //  this.Add(item, instance);
+                instance.Card = item;
+                this.Add(item, instance);
             }
         }
         
