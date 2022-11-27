@@ -64,7 +64,5 @@ public class Main : Node
         cardmodeltest.RefreshView();
         GD.Print("refreshview");
 
-
-
   }
 }
