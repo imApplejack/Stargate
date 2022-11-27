@@ -76,7 +76,7 @@ public class Character : Control
     {
         if(sender is CardModel)
         {
-            GD.Print("card maj {1} de: {0}", sender.ToString(), e.ToString());
+            GD.Print("card maj " + sender + " de: " + e.ToString());
 
         }
 

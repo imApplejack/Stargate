@@ -9,6 +9,7 @@ namespace Stargate.Stargate
 
     public enum CardState
     {
+        Team,
         Hand,
         Library,
         Ready,
@@ -16,6 +17,17 @@ namespace Stargate.Stargate
         Stop,
         Disabled,
         Destroy
+    };
+
+
+    public enum CardType
+    {
+        Adversary,
+        SupportCharacter,
+        Event,
+        Gear,
+        Obstacle,
+        TeamCharacter
     };
 
 
