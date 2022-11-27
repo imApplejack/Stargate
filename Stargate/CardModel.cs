@@ -31,10 +31,11 @@ namespace Stargate.Stargate
         }
        */
 
-
         public static event EventHandler CardModelObservable;
 
         public int Id { get; set; } // unique id 
+        public CardState State { get; set; }
+        public Player Owner { get; set; }
 
 
         public CardModel()
@@ -56,23 +57,15 @@ namespace Stargate.Stargate
 
 
         public string Name { get; set; } = String.Empty;
-
         public int Cost { get; set; } = 0;
         public int? Culture { get; set; } = null;
         public int? Science { get; set; } = null;
         public int? Combat { get; set; } = null;
         public int? Ingenuity { get; set; } = null;
-
         public int? Revive { get; set; } = null;
-
         public CardType Type { get; set; }
 
-        public CardState State { get; set; }
-
-        public Player Owner { get; set; }
-
         public SGCard Card { get; set; }
-
         public void RefreshView()
         {
             CardModelObservable(this, new CardModelEventArgs());

@@ -42,8 +42,6 @@ namespace Stargate.Repository
                         Libraries.Add(card.Owner, new List<CardModel>());
                         Libraries[card.Owner].Add(card);
                     }
-
-                    
                 }
             }
         }

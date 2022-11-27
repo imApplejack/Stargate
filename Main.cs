@@ -60,7 +60,7 @@ public class Main : Node
       private void intTeamPanel(List<SGCharacter> characters)
       {
 
-         /*
+         
           CardContainer tm = (CardContainer)this.FindNode("TeamContainer");
           tm.Team = characters;
           tm.initTeam();
@@ -68,7 +68,7 @@ public class Main : Node
           CardContainer hc = (CardContainer)this.FindNode("HandContainer");
           hc.Team = characters;
           hc.initTeam();
-         */
+         
 
     }
 
