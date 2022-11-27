@@ -36,7 +36,7 @@ namespace Stargate.Stargate
         /**
          * genere un deck depuis une liste de hash bdd
          */
-        public List<SGCard> GetDeckFromHashList(List<string> hashlist)
+        public List<SGCard> GetCardsFromHashList(List<string> hashlist)
         {
             List<SGCard> retour = new List<SGCard>();
 

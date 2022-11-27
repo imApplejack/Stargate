@@ -23,13 +23,29 @@ namespace Stargate.Service
         /** 
          * generate deck from card template for player
          */
-        public void CreatePlayerLibrary(Player player, List<SGCard> cards)
+        public void CreatePlayerDeck(Player player, List<SGCard> cards)
         {
             foreach(SGCard card in cards)
             {
+                // faire des if pour verifier la pertinance IsNotTeam
                 CardModel cl = new CardModel(card) { Owner = player, State = CardState.Library };
                 this.CardRepository.AddCard(cl);
             }
+        }
+
+        public void CreatePlayerTeam(Player player, List<SGCard> cards)
+        {
+            foreach (SGCard card in cards)
+            {
+                // faire des if pour verifier la pertinance Isteam
+                CardModel cl = new CardModel(card) { Owner = player, State = CardState.Team };
+                this.CardRepository.AddCard(cl);
+            }
+        }
+
+        public void InitPlayersLibrary()
+        {
+            this.CardRepository.InitPlayersLibrary();
         }
     }
 }

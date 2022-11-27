@@ -14,7 +14,8 @@ namespace Stargate.Repository
         public List<CardModel> Cards = new List<CardModel>();
 
         // librairie à part pour des raisons de cassecouilleness shuffle ect...
-        public Dictionary<Player, CardModel> Libraries = new Dictionary<Player, CardModel>();
+        public Dictionary<Player, List<CardModel>> Libraries = new Dictionary<Player, List<CardModel>>();
+
 
         public CardModel AddCard(CardModel card)
         {
@@ -26,13 +27,23 @@ namespace Stargate.Repository
 
         public void InitPlayersLibrary()
         {
-            Libraries = new Dictionary<Player, CardModel>();
+            Libraries = new Dictionary<Player, List<CardModel>>();
 
             foreach (CardModel card in this.Cards)
             {
                 if(card.State == CardState.Library && card.Owner is Player)
                 {
-                    Libraries.Add(card.Owner, card);
+                    if(Libraries.ContainsKey(card.Owner))
+                    {
+                        Libraries[card.Owner].Add(card);
+                    }
+                    else
+                    {
+                        Libraries.Add(card.Owner, new List<CardModel>());
+                        Libraries[card.Owner].Add(card);
+                    }
+
+                    
                 }
             }
         }
