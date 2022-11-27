@@ -1,5 +1,6 @@
 using Godot;
 using Stargate;
+using Stargate.Stargate;
 using System;
 using System.Data.Common;
 
@@ -50,6 +51,7 @@ public class Character : Control
         // probablement mettre ca au dessus pour des raisons de perf
         var scene = GD.Load<PackedScene>("res://SGGodot/Character.tscn");
         Character instance = (Character)scene.Instance();
+        CardModel.CardModelObservable += new EventHandler(instance.HandleRefreshCard);
         instance.SGCharacter = character;
         return instance;
 
@@ -66,13 +68,24 @@ public class Character : Control
             Ingenuity.Text = SGCharacter.Ingenuity.ToString();
             Cost.Text = SGCharacter.Cost.ToString();
         }
-      
-        
+ 
     }
 
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(float delta)
+    public void HandleRefreshCard(object sender, EventArgs e)
+    {
+        if(sender is CardModel)
+        {
+            GD.Print("card maj {1} de: {0}", sender.ToString(), e.ToString());
+
+        }
+
+      
+    }
+
+
+    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
   {
       //  GD.Print("draw objet");
        // GD.Print(SGCharacter.ToString());

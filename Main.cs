@@ -1,5 +1,6 @@
 using Godot;
 using Stargate;
+using Stargate.Stargate;
 using System;
 using System.Collections.Generic;
 
@@ -10,6 +11,8 @@ public class Main : Node
     // private string b = "text";
 
 
+
+    private CardModel cardmodeltest = new CardModel();
 
     private StargateGame game;
 
@@ -32,6 +35,11 @@ public class Main : Node
 
 
         this.intTeamPanel(player1.Team);
+
+
+
+        cardmodeltest = new CardModel();
+
     }
 
 
@@ -50,9 +58,13 @@ public class Main : Node
 
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+  // Called every frame. 'delta' is the elapsed time since the previous frame.
+  public override void _Process(float delta)
+  {
+        cardmodeltest.RefreshView();
+        GD.Print("refreshview");
+
+
+
+  }
 }

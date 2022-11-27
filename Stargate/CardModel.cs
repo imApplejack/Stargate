@@ -22,7 +22,9 @@ namespace Stargate.Stargate
     public class CardModel
     {
 
-        public int Id { get; set; }
+        public static event EventHandler CardModelObservable;
+
+        public int Id { get; set; } // unique id 
 
         public CardModel()
         {
@@ -34,5 +36,19 @@ namespace Stargate.Stargate
 
         public SGCard Card { get; set; }
 
+        public void RefreshView()
+        {
+            CardModelObservable(this, new CardModelEventArgs());
+        }
+
     }
+
+    class CardModelEventArgs : EventArgs
+    {
+        public override string ToString()
+        {
+            return "CardModel call handler kikoo";
+        }
+    }
+
 }
