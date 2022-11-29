@@ -9,5 +9,13 @@ namespace Stargate
     public class SGCard
     {
         uint Reference { get; set; }
+
+        public void TestHandler(object sender, EventArgs e)
+        {
+            Console.WriteLine(e);
+
+
+        }
+
     }
 }
