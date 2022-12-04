@@ -18,13 +18,16 @@ public class PlayerControl : Control
     public MappingMVC MappingMVC { get; set; }
     public Player player { get; set; }
 
+
+    public Main Api { get; set; }  // api stargate en pointeur  = dirty
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
 
         TeamContainer = (CardContainer)this.FindNode("TeamContainer");
         BoardContainer = (CardContainer)this.FindNode("BoardContainer");
-        HandContainer = (CardContainer)this.FindNode("handContainer");
+        HandContainer = (CardContainer)this.FindNode("HandContainer");
 
     }
 
@@ -68,13 +71,13 @@ public class PlayerControl : Control
         {
             // @todo adversaire
         }
-
-
-
-   
-
     }
 
+
+    public void AskForDraw()
+    {
+        Api.AskForDraw(this.player);
+    }
 
 
     private GDCard GetCard(CardModel card)

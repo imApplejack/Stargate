@@ -3,6 +3,7 @@ using Stargate;
 using Stargate.Service;
 using Stargate.SGGodot;
 using Stargate.Stargate;
+using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
 
@@ -21,16 +22,19 @@ public class Main : Node
 
     public PlayerControl Player1Vue;
 
+    CardService cardService = new CardService();
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
 
-        CardService cardService = new CardService();
+      
         Player Player1 = new Player();
         Library library = new Library();
         MappingMVC mappingMVC = new MappingMVC();
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
         Player1Vue.player = Player1;
+        Player1Vue.Api = this; // :'(
 
 
 
@@ -51,8 +55,44 @@ public class Main : Node
             Player1Vue.MajCardControl(item.Key);
         }
 
+
+
+
     }
 
+    public void AskForDraw(Player player) {
+
+       
+
+        StargateResult result = this.cardService.Draw(player);
+        GD.Print(result);
+        if (result.actionResult == ActionResult.Success)
+        {
+           
+            this.MajVue(result);
+        }
+    }
+
+
+
+    /// <summary>
+    /// Ici tout le routing de maj des vues
+    /// </summary>
+    /// <param name="result"></param>
+    public void MajVue(StargateResult result)
+    {
+        switch (result.StargateResultType)
+        {
+
+            case StargateResultType.ChangeCard :
+                CardModel card = (CardModel)result.attr;
+                if(card.Owner == Player1Vue.player)
+                {
+                    Player1Vue.MajCardControl(card);
+                }
+                break;
+        }
+    }
 
 
 

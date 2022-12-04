@@ -14,8 +14,6 @@ namespace Stargate.Service
 
         public CardRepository CardRepository { get; set; } = new CardRepository();
 
-
-
         public List<CardModel> GetAllCards()
         {
             return this.CardRepository.GetAll();
@@ -55,9 +53,9 @@ namespace Stargate.Service
             this.CardRepository.InitPlayersLibrary();
         }
 
-        public void Draw(Player player)
+        public StargateResult Draw(Player player)
         {
-            this.CardRepository.Draw(player);
+            return (this.CardRepository.Draw(player));
         }
     }
 }

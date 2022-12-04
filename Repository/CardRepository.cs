@@ -63,11 +63,21 @@ namespace Stargate.Repository
             return this.Cards[id];
         }
 
-        public void Draw(Player player)
+        public StargateResult Draw(Player player)
         {
-            CardModel topCardLibrary = Libraries[player][Libraries[player].Count];
-            topCardLibrary.State = CardState.Hand;
-            Libraries[player].Remove(topCardLibrary);
+
+            /// TODO faire les cas bibliotheque vide ect... 
+            try
+            {
+                CardModel topCardLibrary = Libraries[player][Libraries[player].Count - 1];
+                topCardLibrary.State = CardState.Hand;
+                Libraries[player].Remove(topCardLibrary);
+                return new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = topCardLibrary };
+            }
+            catch(Exception e)
+            {
+                return new StargateResult { actionResult = ActionResult.Failure};
+            }
         }
     }
 }
