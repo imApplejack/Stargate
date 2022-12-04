@@ -34,8 +34,8 @@ public class Main : Node
 
 
 
-        cardService.CreatePlayerDeck(Player1, library.GetCardsFromHashList(new List<string> { "79974bc9-9b81-41e1-8868-c75f8fc58837", "79974bc9-9b81-41e1-8868-c75f8fc58837", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1" }));
-        cardService.CreatePlayerTeam(Player1, library.GetCardsFromHashList(new List<string> { "4901fb59-e7cc-47d4-8f3a-4f1f2e93f78d" }));
+        cardService.CreatePlayerDeck(Player1, library.GetCardsFromGuidList(new List<string> { "79974bc9-9b81-41e1-8868-c75f8fc58837", "79974bc9-9b81-41e1-8868-c75f8fc58837", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1" }));
+        cardService.CreatePlayerTeam(Player1, library.GetCardsFromGuidList(new List<string> { "4901fb59-e7cc-47d4-8f3a-4f1f2e93f78d" }));
         cardService.InitPlayersLibrary();
 
 
