@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stargate", "Stargate.csproj", "{DC2FED4C-DA52-42A0-81FB-F76BE74E6A6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StargateConsole", "..\StargateConsole\StargateConsole.csproj", "{3DCC44F9-16A0-4560-B383-DAED3262C03C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StargateApi", "..\StargateApi\StargateApi.csproj", "{9D81550C-374F-4E19-9528-56273FF0D814}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{DC2FED4C-DA52-42A0-81FB-F76BE74E6A6A}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 		{DC2FED4C-DA52-42A0-81FB-F76BE74E6A6A}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{DC2FED4C-DA52-42A0-81FB-F76BE74E6A6A}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
-		{3DCC44F9-16A0-4560-B383-DAED3262C03C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DCC44F9-16A0-4560-B383-DAED3262C03C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DCC44F9-16A0-4560-B383-DAED3262C03C}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DCC44F9-16A0-4560-B383-DAED3262C03C}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{3DCC44F9-16A0-4560-B383-DAED3262C03C}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{3DCC44F9-16A0-4560-B383-DAED3262C03C}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
-		{3DCC44F9-16A0-4560-B383-DAED3262C03C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DCC44F9-16A0-4560-B383-DAED3262C03C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D81550C-374F-4E19-9528-56273FF0D814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D81550C-374F-4E19-9528-56273FF0D814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D81550C-374F-4E19-9528-56273FF0D814}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D81550C-374F-4E19-9528-56273FF0D814}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{9D81550C-374F-4E19-9528-56273FF0D814}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{9D81550C-374F-4E19-9528-56273FF0D814}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{9D81550C-374F-4E19-9528-56273FF0D814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D81550C-374F-4E19-9528-56273FF0D814}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

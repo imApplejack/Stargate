@@ -1,5 +1,6 @@
 ﻿using Stargate.Repository;
 using Stargate.Stargate;
+using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +12,50 @@ namespace Stargate.Service
     public class CardService
     {
 
-        private CardRepository CardRepository { get; set; } = new CardRepository();
+        public CardRepository CardRepository { get; set; } = new CardRepository();
+
+        public List<CardModel> GetAllCards()
+        {
+            return this.CardRepository.GetAll();
+        }
+
 
         public CardModel CreateCardModel(SGCard card)
         {
-            return new CardModel { Card = card };
+            return new CardModel(card);
         }
-
 
         /** 
          * generate deck from card template for player
          */
-        public void CreatePlayerLibrary(Player player, List<SGCard> cards)
+        public void CreatePlayerDeck(Player player, List<SGCard> cards)
         {
             foreach(SGCard card in cards)
             {
-                this.CardRepository.AddCard(new CardModel { Card = card, Owner = player, State = CardState.Library });
+                // faire des if pour verifier la pertinance IsNotTeam
+                CardModel cl = new CardModel(card) { Owner = player, State = CardState.Library };
+                this.CardRepository.AddCard(cl);
             }
         }
 
+        public void CreatePlayerTeam(Player player, List<SGCard> cards)
+        {
+            foreach (SGCard card in cards)
+            {
+                // faire des if pour verifier la pertinance IsTeam
+                CardModel cl = new CardModel(card) { Owner = player, State = CardState.Team };
+                this.CardRepository.AddCard(cl);
+            }
+        }
 
+        public void InitPlayersLibrary()
+        {
+            this.CardRepository.InitPlayersLibrary();
+        }
+
+        public StargateResult Draw(Player player)
+        {
+            return (this.CardRepository.Draw(player));
+        }
     }
 }

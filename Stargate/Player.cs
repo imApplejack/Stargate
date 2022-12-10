@@ -9,9 +9,6 @@ namespace Stargate
     public class Player : SGEntity
     {
 
-        public List<SGCharacter> Team { get; set; } = null ;
-
-
         public Player() { 
         
         }

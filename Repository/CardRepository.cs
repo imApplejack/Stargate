@@ -1,4 +1,5 @@
 ﻿using Stargate.Stargate;
+using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,10 @@ namespace Stargate.Repository
     public class CardRepository
     {
 
-
-        private List<CardModel> Cards = new List<CardModel>();
+        public List<CardModel> Cards = new List<CardModel>();
 
         // librairie à part pour des raisons de cassecouilleness shuffle ect...
-        public Dictionary<Player, CardModel> Libraries = new Dictionary<Player, CardModel>();
+        public Dictionary<Player, List<CardModel>> Libraries = new Dictionary<Player, List<CardModel>>();
 
 
         public CardModel AddCard(CardModel card)
@@ -27,20 +27,33 @@ namespace Stargate.Repository
 
         public void InitPlayersLibrary()
         {
-            Libraries = new Dictionary<Player, CardModel>();
+            Libraries = new Dictionary<Player, List<CardModel>>();
 
             foreach (CardModel card in this.Cards)
             {
                 if(card.State == CardState.Library && card.Owner is Player)
                 {
-                    Libraries.Add(card.Owner, card);
+                    if(Libraries.ContainsKey(card.Owner))
+                    {
+                        Libraries[card.Owner].Add(card);
+                    }
+                    else
+                    {
+                        Libraries.Add(card.Owner, new List<CardModel>());
+                        Libraries[card.Owner].Add(card);
+                    }
                 }
             }
         }
 
 
+        public List<CardModel> getPlayerCards(Player player)
+        {
+            return Cards.FindAll(cardModel => cardModel.Owner == player);
+        }
 
-        public List<CardModel> GetCall()
+
+        public List<CardModel> GetAll()
         {
             return this.Cards;
         }
@@ -50,5 +63,21 @@ namespace Stargate.Repository
             return this.Cards[id];
         }
 
+        public StargateResult Draw(Player player)
+        {
+
+            /// TODO faire les cas bibliotheque vide ect... 
+            try
+            {
+                CardModel topCardLibrary = Libraries[player][Libraries[player].Count - 1];
+                topCardLibrary.State = CardState.Hand;
+                Libraries[player].Remove(topCardLibrary);
+                return new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = topCardLibrary };
+            }
+            catch(Exception e)
+            {
+                return new StargateResult { actionResult = ActionResult.Failure};
+            }
+        }
     }
 }

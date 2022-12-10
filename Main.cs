@@ -1,6 +1,9 @@
 using Godot;
 using Stargate;
+using Stargate.Service;
+using Stargate.SGGodot;
 using Stargate.Stargate;
+using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
 
@@ -12,57 +15,92 @@ public class Main : Node
 
 
 
-    private CardModel cardmodeltest = new CardModel();
+    //  private CardModel cardmodeltest = new CardModel();
 
-    private StargateGame game;
+    //  private StargateGame game;
+
+
+    public PlayerControl Player1Vue;
+
+    CardService cardService = new CardService();
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
 
-        Player player1 = new Player();
-        //player1.Team = new List<SGCharacter>() { new SGCharacter() { Combat = 2, Culture = 3, Ingenuity = 0, Science = 1 }, new SGCharacter(), new SGCharacter(), new SGCharacter() } ;
-
-        player1.Team = new List<SGCharacter>() { new SGCharacter() { Combat = 2, Culture = 3, Ingenuity = 0, Science = 1 }, new SGCharacter() { Combat = 1, Culture = 0, Ingenuity = 0, Science = 1, Cost = 3 } , };
-
-        Player player2 = new Player();
-        game = new StargateGame(player1, player2);
-       
-        
-        game.Mission = new SGMissionEvent() { mission = new SGMission() { Combat = 2 } };
+      
+        Player Player1 = new Player();
+        Library library = new Library();
+        MappingMVC mappingMVC = new MappingMVC();
+        Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
+        Player1Vue.player = Player1;
+        Player1Vue.Api = this; // :'(
 
 
 
+        cardService.CreatePlayerDeck(Player1, library.GetCardsFromGuidList(new List<string> { "79974bc9-9b81-41e1-8868-c75f8fc58837", "79974bc9-9b81-41e1-8868-c75f8fc58837", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1" }));
+        cardService.CreatePlayerTeam(Player1, library.GetCardsFromGuidList(new List<string> { "4901fb59-e7cc-47d4-8f3a-4f1f2e93f78d" }));
+        cardService.InitPlayersLibrary();
 
-        this.intTeamPanel(player1.Team);
+
+
+        //cardService.Draw(Player1);
+
+
+        mappingMVC.InitRessources(cardService.GetAllCards());
+        Player1Vue.MappingMVC = mappingMVC;
+
+        foreach (var item in mappingMVC.Mapping)
+        {
+            Player1Vue.MajCardControl(item.Key);
+        }
 
 
 
-        cardmodeltest = new CardModel();
 
     }
 
+    public void AskForDraw(Player player) {
 
-    private void intTeamPanel(List<SGCharacter> characters)
+       
+
+        StargateResult result = this.cardService.Draw(player);
+        GD.Print(result);
+        if (result.actionResult == ActionResult.Success)
+        {
+           
+            this.MajVue(result);
+        }
+    }
+
+
+
+    /// <summary>
+    /// Ici tout le routing de maj des vues
+    /// </summary>
+    /// <param name="result"></param>
+    public void MajVue(StargateResult result)
     {
+        switch (result.StargateResultType)
+        {
 
-       
-        CardContainer tm = (CardContainer)this.FindNode("TeamContainer");
-        tm.Team = characters;
-        tm.initTeam();
-
-        CardContainer hc = (CardContainer)this.FindNode("HandContainer");
-        hc.Team = characters;
-        hc.initTeam();
-       
-
+            case StargateResultType.ChangeCard :
+                CardModel card = (CardModel)result.attr;
+                if(card.Owner == Player1Vue.player)
+                {
+                    Player1Vue.MajCardControl(card);
+                }
+                break;
+        }
     }
 
-  // Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(float delta)
+
+
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
   {
-        cardmodeltest.RefreshView();
-        GD.Print("refreshview");
+       // cardmodeltest.RefreshView();
+       // GD.Print("refreshview");
 
   }
 }

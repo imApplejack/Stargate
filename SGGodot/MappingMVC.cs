@@ -1,4 +1,5 @@
-﻿using Stargate.Stargate;
+﻿using Godot;
+using Stargate.Stargate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,30 @@ namespace Stargate.SGGodot
     public class MappingMVC
     {
 
-        Dictionary<CardModel, GDCard> Mapping = new Dictionary<CardModel, GDCard>();
+        public Dictionary<CardModel, GDCard> Mapping = new Dictionary<CardModel, GDCard>();
 
-        void add(CardModel CardModel, GDCard gDCard)
+
+        public void InitRessources(List<CardModel> cards)
+        {
+            foreach (CardModel item in cards)
+            {
+                var scene = GD.Load<PackedScene>("res://SGGodot/Character.tscn");
+                GDCard instance = (GDCard)scene.Instance();
+                TextureRect cardBackground = (TextureRect)instance.FindNode("Cardbackground");
+                cardBackground.Texture = ResourceLoader.Load(Const.AssetPath + "/" + item.Card.Id + ".jpg") as Texture;
+
+                //CardModel.CardModelObservable += new EventHandler(instance.HandleRefreshCard);
+                instance.Card = item;
+                this.Add(item, instance);
+            }
+        }
+        
+        public void Add(CardModel CardModel, GDCard gDCard)
         {
             Mapping.Add(CardModel, gDCard);
         }
 
-        GDCard get(CardModel CardModel)
+        public GDCard Get(CardModel CardModel)
         {
             return Mapping[CardModel];
         }

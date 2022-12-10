@@ -34,11 +34,13 @@ public class CardContainer : HBoxContainer
 
     public void initTeam()
     {
+        /*
         GD.Print(Team);
         foreach (SGCharacter item in Team)
         {
             AddChild(Character.Factory(item));
         }
+        */
 
     }
 
