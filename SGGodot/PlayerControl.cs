@@ -74,6 +74,13 @@ public class PlayerControl : Control
     }
 
 
+    public void Zoom(CardModel card)
+    {
+
+    }
+
+
+
     public void AskForDraw()
     {
         Api.AskForDraw(this.player);
