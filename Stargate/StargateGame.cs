@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Stargate.Service;
+using Stargate.Stargate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +13,12 @@ namespace Stargate
     {
 
 
-        Player player1= null;
-        Player player2= null;
+        public Player player1= null;
+        public Player player2 = null;
+
+        public CardService cardService = new CardService();
+
+        public Library Library = new Library();
         
         public SGMissionEvent Mission { get; set; } = null;
         public Player CurrentPlayer { get; set; } = null;
@@ -20,18 +26,10 @@ namespace Stargate
 
         public StargateGame()
         {
-            Player player1 = new Player();
-            Player player2 = new Player();
-            this.CurrentPlayer = player1;
-            Console.WriteLine("coucou");
+          
         }
 
-        public StargateGame(Player player1, Player player2)
-        {
-            this.player1 = player1;
-            this.player2 = player2;
-            Console.WriteLine("coucou");
-        }
+      
 
 
 

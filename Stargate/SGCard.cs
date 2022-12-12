@@ -18,5 +18,10 @@ namespace Stargate
         public int? Combat { get; set; } = null;
         public int? Ingenuity { get; set; } = null;
         public int? Revive { get; set; } = null;
+        public int? Experience { get; set; } = null;
+
+        public Glyphe Glyphe { get; set; } = Glyphe.NONE;
+
+
     }
 }

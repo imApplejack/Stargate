@@ -15,6 +15,7 @@ public class PlayerControl : Control
     public CardContainer TeamContainer;
     public CardContainer BoardContainer;
     public CardContainer HandContainer;
+    public BoxContainer MissionContainer;
     public MappingMVC MappingMVC { get; set; }
     public Player player { get; set; }
 
@@ -28,6 +29,7 @@ public class PlayerControl : Control
         TeamContainer = (CardContainer)this.FindNode("TeamContainer");
         BoardContainer = (CardContainer)this.FindNode("BoardContainer");
         HandContainer = (CardContainer)this.FindNode("HandContainer");
+        MissionContainer = (HBoxContainer)this.FindNode("MissionContainer");
 
     }
 
@@ -63,6 +65,13 @@ public class PlayerControl : Control
                     break;
                 }
 
+                case CardState.Mission:
+                { 
+                    // ici gerer le type de carte en mission ou deleger au script de mission container
+                    MissionContainer.AddChild(GDCard);
+                    break;
+                }
+             
                 default:
                     break;
             }

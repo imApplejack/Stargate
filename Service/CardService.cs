@@ -48,14 +48,30 @@ namespace Stargate.Service
             }
         }
 
-        public void InitPlayersLibrary()
+        public void CreatePlayerMissions(Player player, List<SGCard> cards)
+        {
+            foreach (SGCard card in cards)
+            {
+                // faire des if pour verifier la pertinance isMission
+                CardModel cl = new CardModel(card) { Owner = player, State = CardState.MissionPile };
+                this.CardRepository.AddCard(cl);
+            }
+        }
+
+        public void InitPlayersLibraryAndMissions()
         {
             this.CardRepository.InitPlayersLibrary();
+            this.CardRepository.InitPlayersMissions();
         }
 
         public StargateResult Draw(Player player)
         {
             return (this.CardRepository.Draw(player));
+        }
+
+        public StargateResult PlayMission(Player player)
+        {
+            return (this.CardRepository.PlayMission(player));
         }
     }
 }

@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.cs" type="Script" id=1]
 [ext_resource path="res://SGGodot/CardContainer.cs" type="Script" id=2]
-[ext_resource path="res://Asset/Cards/STARSG1158.jpg" type="Texture" id=3]
 [ext_resource path="res://SGGodot/Character.tscn" type="PackedScene" id=4]
 [ext_resource path="res://SGGodot/Zoom.cs" type="Script" id=5]
 [ext_resource path="res://SGGodot/PlayerControl.cs" type="Script" id=6]
@@ -64,17 +63,6 @@ anchor_right = 1.0
 margin_left = -596.0
 margin_bottom = 404.0
 alignment = 2
-
-[node name="Character" parent="PlayerControl/MissionContainer" instance=ExtResource( 4 )]
-margin_left = 92.0
-margin_right = 378.0
-margin_bottom = 404.0
-
-[node name="TextureRect" type="TextureRect" parent="PlayerControl/MissionContainer"]
-margin_left = 382.0
-margin_right = 596.0
-margin_bottom = 404.0
-texture = ExtResource( 3 )
 
 [node name="EndTurnButton" type="Button" parent="PlayerControl"]
 anchor_left = 1.0

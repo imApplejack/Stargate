@@ -38,32 +38,38 @@ public class Main : Node
 
 
 
+        // init player 1 avec des mocks
         cardService.CreatePlayerDeck(Player1, library.GetCardsFromGuidList(new List<string> { "79974bc9-9b81-41e1-8868-c75f8fc58837", "79974bc9-9b81-41e1-8868-c75f8fc58837", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1" }));
         cardService.CreatePlayerTeam(Player1, library.GetCardsFromGuidList(new List<string> { "4901fb59-e7cc-47d4-8f3a-4f1f2e93f78d" }));
-        cardService.InitPlayersLibrary();
+        cardService.CreatePlayerMissions(Player1, library.GetCardsFromGuidList(new List<string> { "c81249ce-abc2-489c-a32c-28ca0e18293b" })); 
+        cardService.InitPlayersLibraryAndMissions();
+
 
 
 
         //cardService.Draw(Player1);
+        //StargateGame stargateGame = new StargateGame() { player1 = Player1, Library = library, cardService = cardService };
+
+
 
 
         mappingMVC.InitRessources(cardService.GetAllCards());
         Player1Vue.MappingMVC = mappingMVC;
-
+       
+        
         foreach (var item in mappingMVC.Mapping)
         {
             Player1Vue.MajCardControl(item.Key);
         }
 
 
+        MajVue(cardService.PlayMission(Player1));
+
 
 
     }
 
     public void AskForDraw(Player player) {
-
-       
-
         StargateResult result = this.cardService.Draw(player);
         GD.Print(result);
         if (result.actionResult == ActionResult.Success)
@@ -81,16 +87,32 @@ public class Main : Node
     /// <param name="result"></param>
     public void MajVue(StargateResult result)
     {
+
+        GD.Print(result);
         switch (result.StargateResultType)
         {
 
-            case StargateResultType.ChangeCard :
-                CardModel card = (CardModel)result.attr;
-                if(card.Owner == Player1Vue.player)
+            case StargateResultType.ChangeCard:
                 {
-                    Player1Vue.MajCardControl(card);
+                    CardModel card = (CardModel)result.attr;
+                    if (card.Owner == Player1Vue.player)
+                    {
+                        Player1Vue.MajCardControl(card);
+                    }
+                    break;
                 }
-                break;
+                
+                /*
+            case StargateResultType.PlayMission:
+                {
+                    CardModel card = (CardModel)result.attr;
+                    if (card.Owner == Player1Vue.player)
+                    {
+                        Player1Vue.MajCardControl(card);
+                    }
+                    break;
+                }*/
+               
         }
     }
 

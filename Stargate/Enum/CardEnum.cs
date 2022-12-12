@@ -15,7 +15,8 @@ namespace Stargate.Stargate.Enum
         Mission,
         Stop,
         Disabled,
-        Destroy
+        Destroy,
+        MissionPile
     };
 
 
@@ -27,6 +28,13 @@ namespace Stargate.Stargate.Enum
         Gear,
         Obstacle,
         TeamCharacter,
+        Mission,
+        NONE
+    };
+
+    public enum Glyphe
+    {
+        Orion,
         NONE
     };
 }

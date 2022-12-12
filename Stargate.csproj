@@ -3,4 +3,16 @@
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Sets\0a99b89f-4b11-44aa-9d0c-57f43ee74bc1\set.xml" />
+    <Content Include="Sets\600074dd-49c4-4272-9960-90d0d760ba67\set.xml" />
+    <Content Include="Sets\61768251-83ec-4a86-a74e-98543f864cdf\set.xml" />
+    <Content Include="Sets\6ef37d01-fdf5-4cb8-b651-be218e0ae53c\set.xml" />
+    <Content Include="Sets\71f75361-fe98-48c7-a120-da61d3097fb2\set.xml" />
+    <Content Include="Sets\91aa8580-2456-4897-955d-7987cc6bbca4\set.xml" />
+    <Content Include="Sets\bad4982e-a94d-4023-8dc9-38b1c9ceccf9\set.xml" />
+    <Content Include="Sets\c56ef325-1ac4-42a8-9baa-421c2df01775\set.xml" />
+    <Content Include="Sets\c7f034ea-d30b-4b58-9923-292f214db512\set.xml" />
+    <Content Include="Sets\cb577ebe-a21e-4cfa-a175-51ea768852e0\set.xml" />
+  </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,13 @@ namespace Stargate.Stargate
 
                 case "dd59e9ee-9cf8-4d61-b891-5477c550b2b1":
                     return new SGCard() { Id = guid, Name = "Yu", Cost = 2, Culture = 2, Combat = 2, Revive = 3,  Type = CardType.Adversary };
+
+                case "c81249ce-abc2-489c-a32c-28ca0e18293b":
+                    return new SGCard() { Id = guid, Name = "Salvage Technology", Glyphe=Glyphe.Orion , Experience = 5 ,  Science = 5 , Type = CardType.Mission };
                 default: return null;
 
-                    
+
+
             }
         }
 

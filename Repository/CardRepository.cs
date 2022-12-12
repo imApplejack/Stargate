@@ -16,6 +16,8 @@ namespace Stargate.Repository
         // librairie à part pour des raisons de cassecouilleness shuffle ect...
         public Dictionary<Player, List<CardModel>> Libraries = new Dictionary<Player, List<CardModel>>();
 
+        public Dictionary<Player, List<CardModel>> Missions = new Dictionary<Player, List<CardModel>>();
+
 
         public CardModel AddCard(CardModel card)
         {
@@ -46,11 +48,34 @@ namespace Stargate.Repository
             }
         }
 
+        public void InitPlayersMissions()
+        {
+            Missions = new Dictionary<Player, List<CardModel>>();
+
+            foreach (CardModel card in this.Cards)
+            {
+                if (card.State == CardState.MissionPile && card.Owner is Player)
+                {
+                    if (Missions.ContainsKey(card.Owner))
+                    {
+                        Missions[card.Owner].Add(card);
+                    }
+                    else
+                    {
+                        Missions.Add(card.Owner, new List<CardModel>());
+                        Missions[card.Owner].Add(card);
+                    }
+                }
+            }
+        }
+
 
         public List<CardModel> getPlayerCards(Player player)
         {
             return Cards.FindAll(cardModel => cardModel.Owner == player);
         }
+
+
 
 
         public List<CardModel> GetAll()
@@ -65,7 +90,6 @@ namespace Stargate.Repository
 
         public StargateResult Draw(Player player)
         {
-
             /// TODO faire les cas bibliotheque vide ect... 
             try
             {
@@ -79,5 +103,23 @@ namespace Stargate.Repository
                 return new StargateResult { actionResult = ActionResult.Failure};
             }
         }
+
+
+        public StargateResult PlayMission(Player player)
+        {
+            /// TODO faire les cas bibliotheque vide ect... 
+            try
+            {
+                CardModel topCardMission = Missions[player][Missions[player].Count - 1];
+                topCardMission.State = CardState.Mission;
+                Libraries[player].Remove(topCardMission);
+                return new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = topCardMission };
+            }
+            catch (Exception e)
+            {
+                return new StargateResult { actionResult = ActionResult.Failure };
+            }
+        }
+
     }
 }
