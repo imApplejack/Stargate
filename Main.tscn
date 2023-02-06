@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Main.cs" type="Script" id=1]
 [ext_resource path="res://SGGodot/CardContainer.cs" type="Script" id=2]
-[ext_resource path="res://SGGodot/Character.tscn" type="PackedScene" id=4]
 [ext_resource path="res://SGGodot/PlayerControl.cs" type="Script" id=6]
 
 [node name="Main" type="Node"]
@@ -48,12 +47,8 @@ margin_bottom = 306.0
 alignment = 1
 script = ExtResource( 2 )
 
-[node name="Zoom" type="Control" parent="PlayerControl"]
+[node name="ZoomContainer" type="Control" parent="PlayerControl"]
 grow_horizontal = 0
-
-[node name="Character" parent="PlayerControl/Zoom" instance=ExtResource( 4 )]
-margin_right = 214.0
-margin_bottom = 300.0
 
 [node name="MissionContainer" type="HBoxContainer" parent="PlayerControl"]
 anchor_left = 1.0

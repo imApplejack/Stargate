@@ -22,12 +22,13 @@ public class GDCard : Control
     public void _on_Panel_mouse_entered()
     {
         GD.Print("enter " + this);
-        zoomEvent.EmitSignal("ZoomEventSignal");
+        zoomEvent.EmitSignal("Enter", this);
     }
 
     public void _on_Panel_mouse_exited()
     {
         GD.Print("leave " + this);
+        zoomEvent.EmitSignal("Leave", this);
     }
 
 }

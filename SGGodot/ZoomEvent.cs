@@ -4,5 +4,8 @@ using System;
 public class ZoomEvent : Node
 {
     [Signal]
-    delegate void ZoomEventSignal();
+    delegate void Enter(GDCard card);
+
+    [Signal]
+    delegate void Leave(GDCard card);
 }

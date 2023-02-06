@@ -16,6 +16,7 @@ public class PlayerControl : Control
     public CardContainer BoardContainer;
     public CardContainer HandContainer;
     public BoxContainer MissionContainer;
+    public Control ZoomContainer;
     public MappingMVC MappingMVC { get; set; }
     public Player player { get; set; }
 
@@ -26,10 +27,25 @@ public class PlayerControl : Control
 
 
 
-    public void ZoomEvent()
+    public void EnterZoom(GDCard card)
     {
-        GD.PrintErr("zoom sur la carte");
+        GD.PrintErr("zoom sur la carte", card);
+
+        GDCard myZoomedCard = (GDCard)card.Duplicate();
+        myZoomedCard.RectPosition = new Vector2(0,0);
+
+        ZoomContainer.AddChild(myZoomedCard);
     }
+
+    public void LeaveZoom(GDCard card)
+    {
+        GD.PrintErr("dezoom sur la carte", card);
+        foreach (Node item in ZoomContainer.GetChildren())
+        {
+            item.QueueFree();
+        }  
+    }
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -39,9 +55,10 @@ public class PlayerControl : Control
         BoardContainer = (CardContainer)this.FindNode("BoardContainer");
         HandContainer = (CardContainer)this.FindNode("HandContainer");
         MissionContainer = (HBoxContainer)this.FindNode("MissionContainer");
+        ZoomContainer = (Control)this.FindNode("ZoomContainer");
         zoomEvent = GetNode<ZoomEvent>("/root/ZoomEvent");
-        zoomEvent.Connect("ZoomEventSignal", this, "ZoomEvent");
-
+        zoomEvent.Connect("Enter", this, "EnterZoom");
+        zoomEvent.Connect("Leave", this, "LeaveZoom");
     }
 
 
