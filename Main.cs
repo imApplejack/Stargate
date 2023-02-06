@@ -67,6 +67,8 @@ public class Main : Node
 
 
 
+
+
     }
 
     public void AskForDraw(Player player) {
@@ -102,7 +104,7 @@ public class Main : Node
                     break;
                 }
                 
-                /*
+             /*   
             case StargateResultType.PlayMission:
                 {
                     CardModel card = (CardModel)result.attr;
@@ -111,8 +113,8 @@ public class Main : Node
                         Player1Vue.MajCardControl(card);
                     }
                     break;
-                }*/
-               
+                }
+               */
         }
     }
 

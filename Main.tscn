@@ -60,7 +60,8 @@ margin_bottom = 300.0
 [node name="MissionContainer" type="HBoxContainer" parent="PlayerControl"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -596.0
+margin_left = -670.0
+margin_right = -184.0
 margin_bottom = 404.0
 alignment = 2
 

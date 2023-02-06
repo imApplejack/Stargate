@@ -24,7 +24,7 @@ namespace Stargate.SGGodot
 
         public void initCardModel(CardModel model)
         {
-            var scene = GD.Load<PackedScene>("res://SGGodot/Character.tscn");
+            var scene = GD.Load<PackedScene>("res://SGGodot/"+model.Card.Type.ToString()+".tscn");
             GDCard instance = (GDCard)scene.Instance();
             TextureRect cardBackground = (TextureRect)instance.FindNode("Cardbackground");
             cardBackground.Texture = ResourceLoader.Load(Const.AssetPath + "/" + model.Card.Id + ".jpg") as Texture;
