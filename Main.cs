@@ -55,8 +55,7 @@ public class Main : Node
 
         mappingMVC.InitRessources(cardService.GetAllCards());
         Player1Vue.MappingMVC = mappingMVC;
-       
-        
+
         foreach (var item in mappingMVC.Mapping)
         {
             Player1Vue.MajCardControl(item.Key);
@@ -70,7 +69,7 @@ public class Main : Node
 
 
     }
-
+    
     public void AskForDraw(Player player) {
         StargateResult result = this.cardService.Draw(player);
         GD.Print(result);
@@ -103,18 +102,6 @@ public class Main : Node
                     }
                     break;
                 }
-                
-             /*   
-            case StargateResultType.PlayMission:
-                {
-                    CardModel card = (CardModel)result.attr;
-                    if (card.Owner == Player1Vue.player)
-                    {
-                        Player1Vue.MajCardControl(card);
-                    }
-                    break;
-                }
-               */
         }
     }
 

@@ -11,10 +11,18 @@ public class GDCard : Control
 
     public CardModel Card { get; set; } = null;
 
+    private ZoomEvent zoomEvent { get; set; }
+
+
+    public override void _Ready()
+    {
+        zoomEvent = GetNode<ZoomEvent>("/root/ZoomEvent");
+    }
 
     public void _on_Panel_mouse_entered()
     {
         GD.Print("enter " + this);
+        zoomEvent.EmitSignal("ZoomEventSignal");
     }
 
     public void _on_Panel_mouse_exited()
