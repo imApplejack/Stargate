@@ -1,4 +1,5 @@
 ﻿using Stargate;
+using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Xml;
 
 
 
-namespace StargateConsole.Importer
+namespace Stargate.Stargate
 {
     public class CardImporter
     {
@@ -16,27 +17,102 @@ namespace StargateConsole.Importer
 
         public string Path { get; set; } = String.Empty;
 
-
-        
+        public Dictionary<string, SGCard> list = new Dictionary<string, SGCard>();
 
 
         private SGCard generateCardFromXmlElement(XmlElement element)
         {
 
             string name = element.Attributes["name"].Value;
-            string id = element.Attributes["name"].Value;
+            string id = element.Attributes["id"].Value;
 
-            var Property =  element.SelectSingleNode("property[@name='Type']"); // ici on a le type de card -> faire un switch pour appeler la factory correspondant au type
+            string type = element.SelectSingleNode("property[@name='Type']").Attributes["value"].Value; // ici on a le type de card -> faire un switch pour appeler la factory correspondant au type
 
-            /*
-            foreach (XmlElement CardNode in element.SelectSingleNode["property"])
+            SGCard card =  GenerateCard(element);
+            card.Name = name;
+            card.Id = id;
+            list[card.Id] = card;
+            return card;
+
+
+            
+        }
+
+        private void FillPropertyValue(SGCard c, XmlNode element)
+        {
+
+            try
             {
+                
+                // TODO le texte n'est pas une value a faire
+                string value = element.Attributes["value"].Value;
+
+                switch (element.Attributes["name"].Value)
+                {
+
+
+                    case "Type":
+                        switch (value)
+                        {
+                            case "Adversary" :  c.Type = CardType.Adversary; break;
+                            case "Support Character": c.Type = CardType.SupportCharacter; break;
+                            case "Mission": c.Type = CardType.Mission   ; break;
+                            case "Team Character": c.Type = CardType.TeamCharacter  ; break;
+
+                        }
+
+                        break;
+
+
+                    case "Subtitle":
+                        c.Subtitle = value;
+                        break;
+
+                    case "Cost":
+                        c.Cost = int.Parse(value);
+                        break;
+
+                    case "Culture":
+                        c.Culture = int.Parse(value);
+                        break;
+
+                    case "Science":
+                        c.Science = int.Parse(value);
+                        break;
+
+                    case "Ingenuity":
+                        c.Ingenuity = int.Parse(value);
+                        break;
+
+                    case "Combat":
+                        c.Combat = int.Parse(value);
+                        break;
+
+                    case "Revive":
+                        c.Revive = int.Parse(value);
+                        break;
+
+                }
+
+            }catch(Exception ex) { 
+            
+                // logger dans les TU pour implementer les manquantes, event armes ect...
+            }
+            
+        }
+
+
+        private SGCard GenerateCard(XmlElement element)
+        {
+            SGCard c = new SGCard() { };
+            foreach(XmlNode item in element.ChildNodes)
+            {
+                FillPropertyValue(c, item);
 
             }
-            */
 
 
-            return new SGCard();
+            return c;
         }
 
         public List<SGCard> Process()
@@ -45,120 +121,15 @@ namespace StargateConsole.Importer
 
             XmlDocument xml = new XmlDocument();
 
-
             xml.Load(Path);
             XmlNodeList Nodes = xml.SelectNodes("set/cards/card");
-
 
             foreach (XmlElement CardNode in Nodes)
             {
                 this.generateCardFromXmlElement(CardNode);
             }
-
-            /*
-         
-            XmlReader reader = XmlReader.Create(this.Path);
-
-
-            reader.ReadToFollowing("card");
-
-            //reader.ReadEndElement
-
-            do
-            {
-
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.None:
-                        break;
-                    case XmlNodeType.Element:
-                        Console.WriteLine("Element " + reader.Name);
-                        break;
-                    case XmlNodeType.Attribute:
-                        Console.WriteLine("Attribute");
-                        break;
-                    case XmlNodeType.Text:
-                        break;
-                    case XmlNodeType.CDATA:
-                        break;
-                    case XmlNodeType.EntityReference:
-                        break;
-                    case XmlNodeType.Entity:
-                        break;
-                    case XmlNodeType.ProcessingInstruction:
-                        break;
-                    case XmlNodeType.Comment:
-                        break;
-                    case XmlNodeType.Document:
-                        break;
-                    case XmlNodeType.DocumentType:
-                        break;
-                    case XmlNodeType.DocumentFragment:
-                        break;
-                    case XmlNodeType.Notation:
-                        break;
-                    case XmlNodeType.Whitespace:
-                        break;
-                    case XmlNodeType.SignificantWhitespace:
-                        break;
-                    case XmlNodeType.EndElement:
-                        Console.WriteLine("Endelement");
-                        break;
-                    case XmlNodeType.EndEntity:
-                        break;
-                    case XmlNodeType.XmlDeclaration:
-                        break;
-                    default:
-                        break;
-                }
-
-                //Console.WriteLine($"NodeType: {reader.NodeType}");
-            } while (reader.Read());
-
-            */
-            /*
-            do
-            {
-                reader.MoveToFirstAttribute();
-                Console.WriteLine($"{reader.Name}: {reader.Value}");
-                reader.MoveToNextAttribute(); 
-                Console.WriteLine($"{reader.Name}: {reader.Value}");
-
-
-
-                reader.ReadToFollowing("property");
-                do
-                {
-
-
-
-                    do
-                    {
-
-                        Console.WriteLine($"StartElement: {reader.}");
-
-                        Console.WriteLine($"NodeType: {reader.NodeType}");
-
-                        //Console.WriteLine($"  {reader.Name}: {reader.Value}");
-                    } while (reader.MoveToNextAttribute());
-
-
-
-                } while (reader.ReadToFollowing("property"));
-
-
-                Console.WriteLine("-------------------------");
-
-            } while (reader.ReadToFollowing("card"));
-            */
-
             return retour;
-
         }
-
-
-
-
 
 
     }

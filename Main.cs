@@ -35,6 +35,7 @@ public class Main : Node
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
         Player1Vue.player = Player1;
         Player1Vue.Api = this; // :'(
+        Player1Vue.MappingMVC = mappingMVC;
 
 
 
@@ -54,16 +55,14 @@ public class Main : Node
 
 
         mappingMVC.InitRessources(cardService.GetAllCards());
-        Player1Vue.MappingMVC = mappingMVC;
-
-        foreach (var item in mappingMVC.Mapping)
-        {
-            Player1Vue.MajCardControl(item.Key);
-        }
-
-
+        Player1Vue.MajControl();
+     
+        
         MajVue(cardService.PlayMission(Player1));
 
+
+
+        CardImporter ci = new CardImporter() { Path = Const.SetFile };
 
 
 

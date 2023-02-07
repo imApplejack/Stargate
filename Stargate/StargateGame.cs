@@ -13,8 +13,8 @@ namespace Stargate
     {
 
 
-        public Player player1= null;
-        public Player player2 = null;
+        public Player player1 { get; set; } = null;
+        public Player player2 { get; set; } = null;
 
         public CardService cardService = new CardService();
 

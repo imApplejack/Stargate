@@ -12,6 +12,8 @@ namespace Stargate
         public string Id { get; set; } // hash
         public string Name { get; set; } = String.Empty;
         public CardType Type { get; set; } = CardType.NONE;
+
+        public string Subtitle { get; set; } = String.Empty;
         public int Cost { get; set; } = 0;
         public int? Culture { get; set; } = null;
         public int? Science { get; set; } = null;

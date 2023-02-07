@@ -65,7 +65,7 @@ public class PlayerControl : Control
 
 
     /// <summary>
-    /// permet de mettre à jour tout le plateau de jeu éé
+    /// permet de mettre � jour tout le plateau de jeu 
     /// </summary>
     public void MajControl()
     {
