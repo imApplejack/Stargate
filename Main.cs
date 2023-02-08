@@ -28,15 +28,16 @@ public class Main : Node
     public override void _Ready()
     {
 
-      
+        
+
+
         Player Player1 = new Player();
-        Library library = new Library();
+        Library library = new Library("C:\\Projets\\Stargate\\Stargate\\Sets\\");
         MappingMVC mappingMVC = new MappingMVC();
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
         Player1Vue.player = Player1;
         Player1Vue.Api = this; // :'(
         Player1Vue.MappingMVC = mappingMVC;
-
 
 
         // init player 1 avec des mocks
@@ -46,11 +47,8 @@ public class Main : Node
         cardService.InitPlayersLibraryAndMissions();
 
 
-
-
         //cardService.Draw(Player1);
         //StargateGame stargateGame = new StargateGame() { player1 = Player1, Library = library, cardService = cardService };
-
 
 
 

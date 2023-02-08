@@ -110,17 +110,29 @@ namespace Stargate.Stargate
                 FillPropertyValue(c, item);
 
             }
-
-
             return c;
         }
 
-        public List<SGCard> Process()
+
+
+
+        public SGCard GetCardFromGUID(string guid)
+        {
+            if (list.ContainsKey(guid))
+            {
+                return list[guid];
+            }
+            else throw new Exception("card not found in lib");
+      
+        }
+
+
+        public List<SGCard> Load()
         {
             List<SGCard> retour = new List<SGCard>();
 
             XmlDocument xml = new XmlDocument();
-
+            
             xml.Load(Path);
             XmlNodeList Nodes = xml.SelectNodes("set/cards/card");
 
@@ -128,6 +140,8 @@ namespace Stargate.Stargate
             {
                 this.generateCardFromXmlElement(CardNode);
             }
+
+            
             return retour;
         }
 
