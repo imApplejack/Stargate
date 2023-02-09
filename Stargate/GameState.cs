@@ -23,8 +23,15 @@ namespace Stargate.Stargate
 
         public GameState(int seed)
         {
-            random= new Random(seed);
+            random = new Random(seed);
         }
+
+
+        public void InitGame()
+        {
+            CurrentPlayer = player1;
+        }
+
 
        
 

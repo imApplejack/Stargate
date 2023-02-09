@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stargate
+namespace Stargate.StateMachine
 {
-    public class Player
-    {
+        public class Phase
+        {
+           
 
-        public Player() { 
-        
         }
-    }
+
 }
