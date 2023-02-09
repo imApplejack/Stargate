@@ -48,11 +48,11 @@ public class Main : Node
 
 
         //cardService.Draw(Player1);
-        //StargateGame stargateGame = new StargateGame() { player1 = Player1, Library = library, cardService = cardService };
+        StargateGame stargateGame = new StargateGame() { player1 = Player1, Library = library, cardService = cardService };
 
 
 
-        mappingMVC.InitRessources(cardService.GetAllCards());
+        mappingMVC.InitRessources(stargateGame.cardService.GetAllCards());
         Player1Vue.MajControl();
      
         
@@ -60,7 +60,7 @@ public class Main : Node
 
 
 
-        CardImporter ci = new CardImporter() { Path = Const.SetFile };
+        
 
 
 

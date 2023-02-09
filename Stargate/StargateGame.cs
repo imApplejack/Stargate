@@ -18,7 +18,7 @@ namespace Stargate
 
         public CardService cardService = new CardService();
 
-        public Library Library = new Library("C:\\Projets\\Stargate\\Stargate\\Sets\\");
+        public Library Library { get; set; }
         
         public SGMissionEvent Mission { get; set; } = null;
         public Player CurrentPlayer { get; set; } = null;
@@ -26,7 +26,7 @@ namespace Stargate
 
         public StargateGame()
         {
-          
+           
         }
 
       
