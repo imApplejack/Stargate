@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Stargate
 {
+    /// <summary>
+    /// API
+    /// </summary>
     public class StargateGame
     {
 
@@ -20,16 +23,18 @@ namespace Stargate
 
         public Library Library { get; set; }
         
-        public SGMissionEvent Mission { get; set; } = null;
-        public Player CurrentPlayer { get; set; } = null;
+        public GameState GameState { get; set; } = null;
 
 
 
    
 
-        public StargateGame()
+        public StargateGame(int seed, Library library)
         {
-           
+            Library = library;
+            player1 = new Player();
+            player2 = new Player();
+            GameState = new GameState(seed) { player1 = player1, player2 = player2, CardService = CardService};
         }
 
       
