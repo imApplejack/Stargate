@@ -16,13 +16,16 @@ namespace Stargate
         public Player player1 { get; set; } = null;
         public Player player2 { get; set; } = null;
 
-        public CardService cardService = new CardService();
+        public CardService CardService { get; set; }  = new CardService();
 
         public Library Library { get; set; }
         
         public SGMissionEvent Mission { get; set; } = null;
         public Player CurrentPlayer { get; set; } = null;
 
+
+
+   
 
         public StargateGame()
         {

@@ -1,5 +1,6 @@
 using Godot;
 using Stargate;
+using Stargate.Mock;
 using Stargate.Service;
 using Stargate.SGGodot;
 using Stargate.Stargate;
@@ -17,12 +18,11 @@ public class Main : Node
 
     //  private CardModel cardmodeltest = new CardModel();
 
-    //  private StargateGame game;
+      private StargateGame game;
 
 
     public PlayerControl Player1Vue;
 
-    CardService cardService = new CardService();
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -31,32 +31,33 @@ public class Main : Node
         
 
 
-        Player Player1 = new Player();
+
         Library library = new Library("C:\\Projets\\Stargate\\Stargate\\Sets\\");
+
+
+        //cardService.Draw(Player1);
+        game = new StargateGame() { player1 = new Player(), Library = library };
+
+
+        StargateGameMock.InitPlayer1WithMock(game);
+
+
         MappingMVC mappingMVC = new MappingMVC();
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
-        Player1Vue.player = Player1;
+        Player1Vue.player = game.player1;
         Player1Vue.Api = this; // :'(
         Player1Vue.MappingMVC = mappingMVC;
 
 
-        // init player 1 avec des mocks
-        cardService.CreatePlayerDeck(Player1, library.GetCardsFromGuidList(new List<string> { "79974bc9-9b81-41e1-8868-c75f8fc58837", "79974bc9-9b81-41e1-8868-c75f8fc58837", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1" }));
-        cardService.CreatePlayerTeam(Player1, library.GetCardsFromGuidList(new List<string> { "4901fb59-e7cc-47d4-8f3a-4f1f2e93f78d" }));
-        cardService.CreatePlayerMissions(Player1, library.GetCardsFromGuidList(new List<string> { "c81249ce-abc2-489c-a32c-28ca0e18293b" })); 
-        cardService.InitPlayersLibraryAndMissions();
 
-
-        //cardService.Draw(Player1);
-        StargateGame stargateGame = new StargateGame() { player1 = Player1, Library = library, cardService = cardService };
-
-
-
-        mappingMVC.InitRessources(stargateGame.cardService.GetAllCards());
-        Player1Vue.MajControl();
-     
+        mappingMVC.InitRessources(game.CardService.GetAllCards());
         
-        MajVue(cardService.PlayMission(Player1));
+        Player1Vue.MajControl();
+
+        GD.Print(Player1Vue.player);
+
+        
+        MajVue(game.CardService.PlayMission(game.player1));
 
 
 
@@ -68,7 +69,7 @@ public class Main : Node
     }
     
     public void AskForDraw(Player player) {
-        StargateResult result = this.cardService.Draw(player);
+        StargateResult result = game.CardService.Draw(player);
         GD.Print(result);
         if (result.actionResult == ActionResult.Success)
         {
@@ -87,16 +88,27 @@ public class Main : Node
     {
 
         GD.Print(result);
+        GD.Print(Player1Vue);
+        GD.Print(Player1Vue.player);
+
+
         switch (result.StargateResultType)
         {
 
             case StargateResultType.ChangeCard:
                 {
                     CardModel card = (CardModel)result.attr;
+
+                    GD.Print(card);
+                    GD.Print( card.Owner);
+                    GD.Print( Player1Vue);
+                    GD.Print( Player1Vue.player);
+
                     if (card.Owner == Player1Vue.player)
                     {
                         Player1Vue.MajCardControl(card);
                     }
+                    
                     break;
                 }
         }
