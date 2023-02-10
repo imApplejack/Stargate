@@ -27,7 +27,7 @@ public class Main : Node
 
 
         //cardService.Draw(Player1);
-        game = new StargateGame(1, library );
+        game = new StargateGame(library);
         game.GameState.StargateResultHandler += HandleResult;
         StargateGameMock.InitPlayer1WithMock(game);
 

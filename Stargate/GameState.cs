@@ -76,7 +76,7 @@ namespace Stargate.Stargate
 
         public void ForwardEvent(StargateResult e)
         {
-            StargateResultHandler.Invoke(this, e);
+            StargateResultHandler?.Invoke(this, e);
         }
 
         

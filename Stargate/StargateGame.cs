@@ -29,7 +29,7 @@ namespace Stargate
 
    
 
-        public StargateGame(int seed, Library library)
+        public StargateGame(Library library)
         {
             Library = library;
             player1 = new Player();
