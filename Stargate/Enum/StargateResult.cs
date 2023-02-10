@@ -19,7 +19,8 @@ namespace Stargate.Stargate.Enum
     }
 
 
-    public class StargateResult {
+    public class StargateResult : EventArgs
+    {
         public ActionResult actionResult { get; set; }
         public StargateResultType StargateResultType { get; set; }
         public Object attr { get; set; }

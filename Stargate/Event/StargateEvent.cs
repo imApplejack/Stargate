@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 namespace Stargate.Stargate.Event
 {
 
+
+
+
+
     public enum EventType
     {
         PLAYCARD,

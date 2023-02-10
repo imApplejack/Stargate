@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace Stargate.Stargate
 {
+
+    
+
     public class GameState
     {
+
+      
 
         public Random random = null;
 
