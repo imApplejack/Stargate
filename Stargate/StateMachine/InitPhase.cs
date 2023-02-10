@@ -14,7 +14,7 @@ namespace Stargate.StateMachine
         {
         }
 
-        public new void Run()
+        public override void Run()
         {
 
 

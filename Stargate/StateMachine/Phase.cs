@@ -31,7 +31,7 @@ namespace Stargate.StateMachine
             //throw new NotImplementedException();
         }
 
-        public void Run()
+        public virtual void Run()
         {
             //throw new NotImplementedException();
         }
