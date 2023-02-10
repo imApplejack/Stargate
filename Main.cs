@@ -28,6 +28,7 @@ public class Main : Node
 
         //cardService.Draw(Player1);
         game = new StargateGame(1, library );
+        game.GameState.StargateResultHandler += HandleResult;
         StargateGameMock.InitPlayer1WithMock(game);
 
 
@@ -48,7 +49,12 @@ public class Main : Node
 
       
 
-        MajVue(game.CardService.PlayMission(game.player1));
+        //MajVue(game.CardService.PlayMission(game.player1));
+
+
+
+
+        game.GameState.InitGame(1);
 
 
     }
@@ -63,6 +69,12 @@ public class Main : Node
         }
     }
 
+
+
+    public void HandleResult(object sender, EventArgs e)
+    {
+        MajVue((StargateResult)e);
+    }
 
 
     /// <summary>

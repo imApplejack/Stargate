@@ -13,13 +13,13 @@ namespace Stargate.StateMachine
 {
     public  class Phase : IPhase
     {
-        protected GameState gameState = null;
+        public GameState gameState = null;
 
-        public event EventHandler StargateResultHandler;
+
 
         public void SendEvent(StargateResult r)
         {
-            StargateResultHandler(this, r);
+            gameState.ForwardEvent(r);
         }
 
         public Phase(GameState _gameState)

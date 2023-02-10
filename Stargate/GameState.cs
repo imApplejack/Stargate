@@ -1,4 +1,5 @@
 ﻿using Stargate.Service;
+using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
 using Stargate.StateMachine;
 using System;
@@ -15,7 +16,6 @@ namespace Stargate.Stargate
     public class GameState
     {
 
-      
 
         public Random random = null;
 
@@ -28,6 +28,8 @@ namespace Stargate.Stargate
         public CardService CardService { get; set; }
 
         public Stack<Phase> GameStack { get; set; }
+
+        public event EventHandler StargateResultHandler;
 
 
         public GameState()
@@ -71,6 +73,12 @@ namespace Stargate.Stargate
         {
             GameStack.Peek().ProcessEvent(myEvent);
         }
+
+        public void ForwardEvent(StargateResult e)
+        {
+            StargateResultHandler.Invoke(this, e);
+        }
+
         
     }
 
