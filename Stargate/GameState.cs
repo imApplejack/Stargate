@@ -1,4 +1,6 @@
 ﻿using Stargate.Service;
+using Stargate.Stargate.Event;
+using Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,23 +22,59 @@ namespace Stargate.Stargate
 
         public CardService CardService { get; set; }
 
+        public Stack<Phase> GameStack { get; set; }
 
-        public GameState(int seed)
+
+        public GameState()
+        {
+
+        }
+
+
+       public Player GetEnemyPlayer()
+        {
+            if(CurrentPlayer == player1)
+            {
+                return player2;
+            }
+            else
+            {
+                return player1;
+            }
+        }
+
+
+        public Player GetHeroPlayer()
+        {
+            return CurrentPlayer;
+        }
+
+
+        public void InitGame(int seed)
         {
             random = new Random(seed);
-        }
-
-
-        public void InitGame()
-        {
             CurrentPlayer = player1;
+            GameStack = new Stack<Phase>();
+            GameStack.Push(new InitPhase(this));
+            GameStack.Peek().Run();
         }
 
+
+        public void Update() { }
+
+        public void ProcessEvent(StargateEvent myEvent)
+        {
+            GameStack.Peek().ProcessEvent(myEvent);
+        }
+        
+    }
+
+
+
+}
 
        
 
 
 
 
-    }
-}

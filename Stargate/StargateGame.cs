@@ -34,7 +34,7 @@ namespace Stargate
             Library = library;
             player1 = new Player();
             player2 = new Player();
-            GameState = new GameState(seed) { player1 = player1, player2 = player2, CardService = CardService};
+            GameState = new GameState() { player1 = player1, player2 = player2, CardService = CardService};
         }
 
       
