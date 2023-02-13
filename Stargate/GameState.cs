@@ -19,11 +19,11 @@ namespace Stargate.Stargate
 
         public Random random = null;
 
-        public SGMissionEvent Mission { get; set; } = null;
         public Player CurrentPlayer { get; set; } = null;
 
         public Player player1 { get; set; } = null;
         public Player player2 { get; set; } = null;
+
 
         public CardService CardService { get; set; }
 
@@ -36,6 +36,8 @@ namespace Stargate.Stargate
         {
 
         }
+
+
 
 
        public Player GetEnemyPlayer()
@@ -71,12 +73,18 @@ namespace Stargate.Stargate
 
         public void ProcessEvent(StargateEvent myEvent)
         {
+
+            Godot.GD.Print(myEvent);
             GameStack.Peek().ProcessEvent(myEvent);
         }
 
         public void ForwardEvent(StargateResult e)
         {
-            StargateResultHandler?.Invoke(this, e);
+            if(e.actionResult == ActionResult.Success)
+            {
+                StargateResultHandler?.Invoke(this, e);
+            }
+           
         }
 
         

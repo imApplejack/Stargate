@@ -13,10 +13,13 @@ public class GDCard : Control
 
     private ZoomEvent zoomEvent { get; set; }
 
+    private PlayEvent playEvent { get; set; }
+
 
     public override void _Ready()
     {
         zoomEvent = GetNode<ZoomEvent>("/root/ZoomEvent");
+        playEvent = GetNode<PlayEvent>("/root/PlayEvent");
     }
 
     public void _on_Panel_mouse_entered()
@@ -30,5 +33,25 @@ public class GDCard : Control
         GD.Print("leave " + this);
         zoomEvent.EmitSignal("Leave", this);
     }
+
+
+    public void _on_Panel_gui_input(InputEvent _event)
+    {
+        InputEventMouseButton myMouseEvent = _event as InputEventMouseButton;
+
+        if (myMouseEvent != null)
+        {
+
+            //if (myMouseEvent.ButtonIndex == (int)ButtonList.Left && myMouseEvent.Pressed == true &&  !GetTree().IsInputHandled())
+            if (myMouseEvent.ButtonIndex == (int)ButtonList.Left && myMouseEvent.Pressed == true)
+            {
+                GD.Print("bouton sur une carte");
+                playEvent.EmitSignal("PlayCard", this);
+            }
+        }
+    }
+
+
+
 
 }

@@ -3,6 +3,7 @@ using Stargate;
 using Stargate.SGGodot;
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
+using Stargate.Stargate.Event;
 using System;
 
 public class PlayerControl : Control
@@ -21,6 +22,8 @@ public class PlayerControl : Control
     public Player player { get; set; }
 
     private ZoomEvent zoomEvent { get; set; }
+
+    private PlayEvent playEvent { get; set; }
 
     public Main Api { get; set; }  // api stargate en pointeur  = dirty
 
@@ -46,6 +49,14 @@ public class PlayerControl : Control
     }
 
 
+
+    public void PlayCard(GDCard card)
+    {
+        GD.PrintErr("playCard", card);
+        Api.SendEvent(new PlayCardEvent() { player = player, cardModel = card.Card });
+    }
+
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -58,6 +69,9 @@ public class PlayerControl : Control
         zoomEvent = GetNode<ZoomEvent>("/root/ZoomEvent");
         zoomEvent.Connect("Enter", this, "EnterZoom");
         zoomEvent.Connect("Leave", this, "LeaveZoom");
+
+        playEvent = GetNode<PlayEvent>("/root/PlayEvent");
+        playEvent.Connect("PlayCard", this, "PlayCard");
     }
 
 
@@ -73,6 +87,20 @@ public class PlayerControl : Control
         {
             MajCardControl(item.Key);
         }
+    }
+
+    public void MajPlayerAttr(Player _player)
+    {
+
+        if (player == _player)
+        {
+            ((Label)FindNode("PowerLabel")).Text = _player.Energy.ToString();
+        }
+        else
+        {
+            // @todo adversaire
+        }
+
     }
 
 

@@ -22,7 +22,15 @@ namespace Stargate.StateMachine
             gameState.ForwardEvent(r);
         }
 
-        public Phase(GameState _gameState)
+        public void PopAndNewPhase(Phase newPhase)
+        {
+            newPhase.gameState = gameState;
+            gameState.GameStack.Pop();
+            gameState.GameStack.Push(newPhase);
+            gameState.GameStack.Peek().Run();
+        }
+
+        public Phase(GameState _gameState = null)
         {
             gameState = _gameState;
             
@@ -34,7 +42,7 @@ namespace Stargate.StateMachine
 
         }
 
-        public void ProcessEvent(StargateEvent myEvent)
+        public virtual void ProcessEvent(StargateEvent myEvent)
         {
 
         }

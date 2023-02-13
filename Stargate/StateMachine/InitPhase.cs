@@ -16,7 +16,7 @@ namespace Stargate.StateMachine
        // public event EventHandler StargateResultHandler;
 
 
-        public InitPhase(GameState gameState) : base(gameState)
+        public InitPhase(GameState gameState = null ) : base(gameState)
         {
         }
 
@@ -28,6 +28,7 @@ namespace Stargate.StateMachine
 
 
 
+            PopAndNewPhase(new MPPhase());
         }
 
     }
