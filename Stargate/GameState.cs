@@ -38,6 +38,8 @@ namespace Stargate.Stargate
         }
 
 
+
+
        public Player GetEnemyPlayer()
         {
             if(CurrentPlayer == player1)
@@ -71,12 +73,18 @@ namespace Stargate.Stargate
 
         public void ProcessEvent(StargateEvent myEvent)
         {
+
+            Godot.GD.Print(myEvent);
             GameStack.Peek().ProcessEvent(myEvent);
         }
 
         public void ForwardEvent(StargateResult e)
         {
-            StargateResultHandler?.Invoke(this, e);
+            if(e.actionResult == ActionResult.Success)
+            {
+                StargateResultHandler?.Invoke(this, e);
+            }
+           
         }
 
         

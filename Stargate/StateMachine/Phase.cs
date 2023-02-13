@@ -42,7 +42,7 @@ namespace Stargate.StateMachine
 
         }
 
-        public void ProcessEvent(StargateEvent myEvent)
+        public virtual void ProcessEvent(StargateEvent myEvent)
         {
 
         }

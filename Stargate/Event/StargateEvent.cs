@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stargate.Stargate.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Stargate.Stargate.Event
 {
-
 
 
 
@@ -23,7 +23,11 @@ namespace Stargate.Stargate.Event
 
         public EventType Type { get; set; }
 
-        public List<Object> Data { get; set; } 
+
+        public override string ToString()
+        {
+            return Type.ToString();
+        }
 
 
     }

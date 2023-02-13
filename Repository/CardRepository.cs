@@ -88,6 +88,13 @@ namespace Stargate.Repository
             return this.Cards[id];
         }
 
+
+
+        public bool IsInHand(Player player, CardModel card)
+        {
+            return Cards.Exists(cardModel => cardModel.Owner == player && cardModel.State == CardState.Hand && cardModel == card);
+        }
+
         public StargateResult Draw(Player player)
         {
             /// TODO faire les cas bibliotheque vide ect... 

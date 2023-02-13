@@ -5,6 +5,7 @@ using Stargate.Service;
 using Stargate.SGGodot;
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
+using Stargate.Stargate.Event;
 using System;
 using System.Collections.Generic;
 
@@ -49,7 +50,7 @@ public class Main : Node
 
       
 
-        MajVue(game.CardService.PlayMission(game.player1));
+       // MajVue(game.CardService.PlayMission(game.player1));
 
 
 
@@ -69,6 +70,12 @@ public class Main : Node
         }
     }
 
+
+    public void SendEvent(StargateEvent stargateEvent){
+
+        // caller le reseau ici ?
+        game.GameState.ProcessEvent(stargateEvent);
+    }
 
 
     public void HandleResult(object sender, EventArgs e)

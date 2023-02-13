@@ -1,6 +1,7 @@
 ﻿using Stargate.Repository;
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
+using Stargate.Stargate.Event;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,21 @@ namespace Stargate.Service
                 this.CardRepository.AddCard(cl);
             }
         }
+
+
+        public StargateResult PlayCard(PlayCardEvent playCardEvent){
+            if (CardRepository.IsInHand(playCardEvent.player, playCardEvent.cardModel) && playCardEvent.player.Energy >= playCardEvent.cardModel.Card.Cost)
+            {
+                playCardEvent.player.Energy -= playCardEvent.cardModel.Card.Cost;
+                playCardEvent.cardModel.State = CardState.Ready; // probablement passer par le repository pour faire ca
+                return new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = playCardEvent.cardModel };
+            }
+            else
+            {
+                return new StargateResult() { actionResult = ActionResult.Failure };
+            }
+        }
+
 
         public void InitPlayersLibraryAndMissions()
         {

@@ -75,5 +75,6 @@ margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Cost"
 
+[connection signal="gui_input" from="Panel" to="." method="_on_Panel_gui_input"]
 [connection signal="mouse_entered" from="Panel" to="." method="_on_Panel_mouse_entered"]
 [connection signal="mouse_exited" from="Panel" to="." method="_on_Panel_mouse_exited"]
