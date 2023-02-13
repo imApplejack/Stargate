@@ -10,9 +10,20 @@ namespace Stargate.StateMachine
 {
     public class MPPhase : Phase, IPhase
     {
-        public MPPhase(GameState gameState) : base(gameState)
+        public MPPhase(GameState gameState = null) : base(gameState)
         {
+
         }
+
+        public override void Run() {
+
+            gameState.CurrentPlayer.Energy = 3;
+
+            PopAndNewPhase(new QuestPhase());
+
+
+        }
+
 
     }
 

@@ -49,7 +49,7 @@ public class Main : Node
 
       
 
-        //MajVue(game.CardService.PlayMission(game.player1));
+        MajVue(game.CardService.PlayMission(game.player1));
 
 
 

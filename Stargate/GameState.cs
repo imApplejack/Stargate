@@ -19,11 +19,11 @@ namespace Stargate.Stargate
 
         public Random random = null;
 
-        public SGMissionEvent Mission { get; set; } = null;
         public Player CurrentPlayer { get; set; } = null;
 
         public Player player1 { get; set; } = null;
         public Player player2 { get; set; } = null;
+
 
         public CardService CardService { get; set; }
 
