@@ -75,6 +75,20 @@ public class PlayerControl : Control
         }
     }
 
+    public void MajPlayerAttr(Player _player)
+    {
+
+        if (player == _player)
+        {
+            ((Label)FindNode("PowerLabel")).Text = _player.Energy.ToString();
+        }
+        else
+        {
+            // @todo adversaire
+        }
+
+    }
+
 
     public void MajCardControl(CardModel card)
     {

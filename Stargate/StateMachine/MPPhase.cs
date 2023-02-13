@@ -1,4 +1,5 @@
 ﻿using Stargate.Stargate;
+using Stargate.Stargate.Enum;
 using Stargate.Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,13 @@ namespace Stargate.StateMachine
 
         public override void Run() {
 
-            gameState.CurrentPlayer.Energy = 3;
+
+            // @todo process main phase abilities
+
+
+            gameState.CurrentPlayer.Energy = 3; // RG à ajouter + joueur 2 
+            SendEvent(new StargateResult() {StargateResultType = StargateResultType.ChangePlayerAttr , attr = gameState.CurrentPlayer});
+
 
             PopAndNewPhase(new QuestPhase());
 

@@ -95,6 +95,13 @@ public class Main : Node
                     Player1Vue.MajCardControl(card);
                     break;
                 }
+
+                case StargateResultType.ChangePlayerAttr:
+                    {
+                        Player card = (Player)result.attr;
+                        Player1Vue.MajPlayerAttr(card);
+                        break;
+                    }
             }
         }
 
