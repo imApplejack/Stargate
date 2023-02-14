@@ -73,7 +73,6 @@ namespace Stargate.Stargate
 
         public void ProcessEvent(StargateEvent myEvent)
         {
-
             Godot.GD.Print(myEvent);
             GameStack.Peek().ProcessEvent(myEvent);
         }

@@ -28,10 +28,7 @@ namespace Stargate.StateMachine
 
             PopAndNewPhase(new QuestPhase());
 
-
         }
 
-
     }
-
 }

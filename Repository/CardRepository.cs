@@ -18,7 +18,6 @@ namespace Stargate.Repository
 
         public Dictionary<Player, List<CardModel>> Missions = new Dictionary<Player, List<CardModel>>();
 
-
         public CardModel AddCard(CardModel card)
         {
             int id = Cards.Count;

@@ -37,23 +37,15 @@ public class Main : Node
         mappingMVC.InitRessources(game.CardService.GetAllCards());
 
 
-
-
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
         Player1Vue.player = game.player1;
         Player1Vue.Api = this; // :'(
         Player1Vue.MappingMVC = mappingMVC;
 
 
-
         Player1Vue.MajControl();
 
-      
-
        // MajVue(game.CardService.PlayMission(game.player1));
-
-
-
 
         game.GameState.InitGame(1);
 
@@ -74,7 +66,7 @@ public class Main : Node
     public void SendEvent(StargateEvent stargateEvent){
 
         // caller le reseau ici ?
-        game.GameState.ProcessEvent(stargateEvent);
+          game.GameState.ProcessEvent(stargateEvent);
     }
 
 
@@ -103,12 +95,12 @@ public class Main : Node
                     break;
                 }
 
-                case StargateResultType.ChangePlayerAttr:
-                    {
-                        Player card = (Player)result.attr;
-                        Player1Vue.MajPlayerAttr(card);
-                        break;
-                    }
+            case StargateResultType.ChangePlayerAttr:
+                {
+                    Player card = (Player)result.attr;
+                    Player1Vue.MajPlayerAttr(card);
+                    break;
+                }
             }
         }
 

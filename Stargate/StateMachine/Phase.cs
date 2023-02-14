@@ -44,7 +44,7 @@ namespace Stargate.StateMachine
 
         public virtual void ProcessEvent(StargateEvent myEvent)
         {
-
+            
         }
 
         public virtual void Init()

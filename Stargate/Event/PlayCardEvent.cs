@@ -9,15 +9,12 @@ namespace Stargate.Stargate.Event
 {
 
   
-
-
     public class PlayCardEvent : StargateEvent
     {
 
-        public Player player  { get; set; }
+        public Player player { get; set; }
 
         public CardModel cardModel { get; set; }
-
 
         public PlayCardEvent()
         {

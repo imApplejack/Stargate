@@ -13,6 +13,6 @@ namespace Stargate.SGGodot
 
         public static string SetFile = Const.SetPath + "/set.xml";
 
-        public static string AssetPath = "res://Asset/Cards/bad4982e-a94d-4023-8dc9-38b1c9ceccf9/Cards";
+        public static string AssetPath = "res://Asset/Cards/" + SetPath  + "/Cards";
     }
 }
