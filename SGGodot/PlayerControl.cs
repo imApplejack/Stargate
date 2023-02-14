@@ -153,15 +153,6 @@ public class PlayerControl : Control
     }
 
 
-    public void AskForDraw()
-    {
-
-        //GD.Print(Api);
-        //GD.Print(this.player);
-        Api.AskForDraw(this.player);
-    }
-
-
     private GDCard GetCard(CardModel card)
     {
         return this.MappingMVC.Get(card);

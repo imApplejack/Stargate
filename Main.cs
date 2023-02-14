@@ -52,16 +52,6 @@ public class Main : Node
 
     }
     
-    public void AskForDraw(Player player) {
-        StargateResult result = game.CardService.Draw(player);
-        GD.Print(result);
-        if (result.actionResult == ActionResult.Success)
-        {
-           
-            this.MajVue(result);
-        }
-    }
-
 
     public void SendEvent(StargateEvent stargateEvent){
 
