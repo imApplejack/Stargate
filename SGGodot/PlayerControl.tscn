@@ -57,6 +57,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -304.5
 margin_right = 304.5
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
 [node name="PlayerContainer" type="VBoxContainer" parent="."]

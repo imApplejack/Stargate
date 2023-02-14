@@ -24,7 +24,7 @@ public class Main : Node
     {
 
 
-        Library library = new Library("C:\\Users\\lolec\\Documents\\Projets\\Stargate\\Sets\\");
+        Library library = new Library("C:\\Projets\\Stargate\\Stargate\\Sets\\");
 
 
         //cardService.Draw(Player1);
