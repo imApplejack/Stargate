@@ -40,6 +40,14 @@ namespace Stargate.StateMachine
                     SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).player });
 
                     break;
+
+
+                case EventType.ASSIGNCHAR:
+                    SendEvent(gameState.CardService.AssignChar((AssignCharEvent)myEvent));
+                    break;
+
+
+
             }
 
 

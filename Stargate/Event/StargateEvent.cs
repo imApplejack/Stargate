@@ -14,6 +14,7 @@ namespace Stargate.Stargate.Event
     public enum EventType
     {
         PLAYCARD,
+        ASSIGNCHAR,
         DRAWCARD
     }
 

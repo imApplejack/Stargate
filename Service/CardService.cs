@@ -73,8 +73,21 @@ namespace Stargate.Service
             }
         }
 
+        public StargateResult AssignChar(AssignCharEvent assignCardEvent)
+        {
+            if (assignCardEvent.cardModel.State == CardState.Ready || assignCardEvent.cardModel.State == CardState.Team)
+            {
+                assignCardEvent.cardModel.State = CardState.Mission; 
+                return new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = assignCardEvent.cardModel };
+            }
+            else
+            {
+                return new StargateResult() { actionResult = ActionResult.Failure };
+            }
+        }
 
-        public void InitPlayersLibraryAndMissions()
+
+            public void InitPlayersLibraryAndMissions()
         {
             this.CardRepository.InitPlayersLibrary();
             this.CardRepository.InitPlayersMissions();

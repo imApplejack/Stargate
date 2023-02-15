@@ -66,11 +66,17 @@ public class PlayerControl : Control
     public void PlayCard(GDCard card)
     {
 
-        if(card.Card.Owner == player)
+        if(card.Card.Owner == player && card.Card.State == CardState.Hand)
             // hack nul à cause des message partagés
         {
             GD.PrintErr("playCard", card);
             Api.SendEvent(new PlayCardEvent() { player = player, cardModel = card.Card });
+        }
+
+        else if (card.Card.Owner == player && (card.Card.State == CardState.Ready || card.Card.State == CardState.Team))
+        {
+            GD.PrintErr("AssignCard", card);
+            Api.SendEvent(new AssignCharEvent() { player = player, cardModel = card.Card });
         }
        
     }
@@ -89,7 +95,9 @@ public class PlayerControl : Control
         EnemyHandContainer = (CardContainer)this.FindNode("EnemyHandContainer");
 
 
-        MissionContainer = (VBoxContainer)this.FindNode("MissionCardContainer");
+        MissionContainer = (HBoxContainer)this.FindNode("MissionContainer");
+
+
         ZoomContainer = (Control)this.FindNode("ZoomContainer");
         zoomEvent = GetNode<ZoomEvent>("/root/ZoomEvent");
         zoomEvent.Connect("Enter", this, "EnterZoom");
@@ -163,7 +171,17 @@ public class PlayerControl : Control
                 case CardState.Mission:
                     {
                         // ici gerer le type de carte en mission ou deleger au script de mission container
-                        MissionContainer.AddChild(GDCard);
+                        
+                        if(GDCard.Card.Card.Type == CardType.Mission)
+                        {
+                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard);
+                        }
+                        else
+                        {
+                            MissionContainer.FindNode("PlayerMissionContainer").AddChild(GDCard);
+                        }
+                        
+                       
                         break;
                     }
 
@@ -196,7 +214,14 @@ public class PlayerControl : Control
                 case CardState.Mission:
                     {
                         // ici gerer le type de carte en mission ou deleger au script de mission container
-                        MissionContainer.AddChild(GDCard);
+                        if (GDCard.Card.Card.Type == CardType.Mission)
+                        {
+                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard);
+                        }
+                        else
+                        {
+                            MissionContainer.FindNode("EnemyMissionContainer").AddChild(GDCard);
+                        }
                         break;
                     }
 
