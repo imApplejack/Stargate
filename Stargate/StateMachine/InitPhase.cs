@@ -26,6 +26,9 @@ namespace Stargate.StateMachine
             SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
             SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
 
+            SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
+            //SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
+
 
 
 

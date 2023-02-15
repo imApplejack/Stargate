@@ -17,6 +17,7 @@ public class Main : Node
 
 
       public PlayerControl Player1Vue;
+     public PlayerControl Player2Vue;
 
 
     // Called when the node enters the scene tree for the first time.
@@ -29,8 +30,8 @@ public class Main : Node
 
         //cardService.Draw(Player1);
         game = new StargateGame(library);
-        game.GameState.StargateResultHandler += HandleResult;
-        StargateGameMock.InitPlayer1WithMock(game);
+        
+        StargateGameMock.InitPlayersWithMock(game);
 
 
         MappingMVC mappingMVC = new MappingMVC();
@@ -41,11 +42,30 @@ public class Main : Node
         Player1Vue.player = game.player1;
         Player1Vue.Api = this; // :'(
         Player1Vue.MappingMVC = mappingMVC;
-
+        game.GameState.StargateResultHandler += Player1Vue.HandleResult;
 
         Player1Vue.MajControl();
 
-       // MajVue(game.CardService.PlayMission(game.player1));
+
+
+
+        MappingMVC mappingMVC2 = new MappingMVC();
+        mappingMVC2.InitRessources(game.CardService.GetAllCards());
+
+        Player2Vue = (PlayerControl)this.FindNode("PlayerControl2");
+        Player2Vue.player = game.player2;
+        Player2Vue.Api = this; // :'(
+        Player2Vue.MappingMVC = mappingMVC2;
+        game.GameState.StargateResultHandler += Player2Vue.HandleResult;
+
+        Player2Vue.MajControl();
+        
+
+
+
+
+
+        // MajVue(game.CardService.PlayMission(game.player1));
 
         game.GameState.InitGame(1);
 
@@ -57,44 +77,6 @@ public class Main : Node
 
         // caller le reseau ici ?
           game.GameState.ProcessEvent(stargateEvent);
-    }
-
-
-    public void HandleResult(object sender, EventArgs e)
-    {
-        MajVue((StargateResult)e);
-    }
-
-
-    /// <summary>
-    /// Ici tout le routing de maj des vues
-    /// </summary>
-    /// <param name="result"></param>
-    public void MajVue(StargateResult result)
-    {
-
-        if(result.actionResult == ActionResult.Success)
-        {
-            switch (result.StargateResultType)
-            {
-
-                case StargateResultType.ChangeCard:
-                {
-                    CardModel card = (CardModel)result.attr;
-                    Player1Vue.MajCardControl(card);
-                    break;
-                }
-
-            case StargateResultType.ChangePlayerAttr:
-                {
-                    Player card = (Player)result.attr;
-                    Player1Vue.MajPlayerAttr(card);
-                    break;
-                }
-            }
-        }
-
-       
     }
 
 

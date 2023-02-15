@@ -16,6 +16,11 @@ public class PlayerControl : Control
     public CardContainer TeamContainer;
     public CardContainer BoardContainer;
     public CardContainer HandContainer;
+
+    public CardContainer EnemyTeamContainer;
+    public CardContainer EnemyBoardContainer;
+    public CardContainer EnemyHandContainer;
+
     public BoxContainer MissionContainer;
     public Control ZoomContainer;
     public MappingMVC MappingMVC { get; set; }
@@ -31,29 +36,43 @@ public class PlayerControl : Control
 
     public void EnterZoom(GDCard card)
     {
-        GD.PrintErr("zoom sur la carte", card);
+       // if (card.Card.Owner == player)
+        // hack nul à cause des message partagés
+        {
+            GD.PrintErr("zoom sur la carte", card);
 
-        GDCard myZoomedCard = (GDCard)card.Duplicate();
-        myZoomedCard.RectPosition = new Vector2(0,0);
+            GDCard myZoomedCard = (GDCard)card.Duplicate();
+            myZoomedCard.RectPosition = new Vector2(0, 0);
 
-        ZoomContainer.AddChild(myZoomedCard);
+            ZoomContainer.AddChild(myZoomedCard);
+        }
     }
 
     public void LeaveZoom(GDCard card)
     {
-        GD.PrintErr("dezoom sur la carte", card);
-        foreach (Node item in ZoomContainer.GetChildren())
+        //if (card.Card.Owner == player)
+        // hack nul à cause des message partagés
         {
-            item.QueueFree();
-        }  
+            GD.PrintErr("dezoom sur la carte", card);
+            foreach (Node item in ZoomContainer.GetChildren())
+            {
+                item.QueueFree();
+            }
+        }
     }
 
 
 
     public void PlayCard(GDCard card)
     {
-        GD.PrintErr("playCard", card);
-        Api.SendEvent(new PlayCardEvent() { player = player, cardModel = card.Card });
+
+        if(card.Card.Owner == player)
+            // hack nul à cause des message partagés
+        {
+            GD.PrintErr("playCard", card);
+            Api.SendEvent(new PlayCardEvent() { player = player, cardModel = card.Card });
+        }
+       
     }
 
 
@@ -64,6 +83,12 @@ public class PlayerControl : Control
         TeamContainer = (CardContainer)this.FindNode("TeamContainer");
         BoardContainer = (CardContainer)this.FindNode("BoardContainer");
         HandContainer = (CardContainer)this.FindNode("HandContainer");
+
+        EnemyTeamContainer = (CardContainer)this.FindNode("EnemyTeamContainer");
+        EnemyBoardContainer = (CardContainer)this.FindNode("EnemyBoardContainer");
+        EnemyHandContainer = (CardContainer)this.FindNode("EnemyHandContainer");
+
+
         MissionContainer = (HBoxContainer)this.FindNode("MissionContainer");
         ZoomContainer = (Control)this.FindNode("ZoomContainer");
         zoomEvent = GetNode<ZoomEvent>("/root/ZoomEvent");
@@ -120,35 +145,58 @@ public class PlayerControl : Control
             switch (GDCard.Card.State)
             {
                 case CardState.Hand:
-                {
-                    HandContainer.AddChild(GDCard);
-                    break;
-                }
+                    {
+                        HandContainer.AddChild(GDCard);
+                        break;
+                    }
                 case CardState.Team:
-                {
-                    TeamContainer.AddChild(GDCard);
-                    break;
-                }
+                    {
+                        TeamContainer.AddChild(GDCard);
+                        break;
+                    }
                 case CardState.Ready:
-                {
-                    BoardContainer.AddChild(GDCard);
-                    break;
-                }
+                    {
+                        BoardContainer.AddChild(GDCard);
+                        break;
+                    }
 
                 case CardState.Mission:
-                { 
-                    // ici gerer le type de carte en mission ou deleger au script de mission container
-                    MissionContainer.AddChild(GDCard);
-                    break;
-                }
-             
+                    {
+                        // ici gerer le type de carte en mission ou deleger au script de mission container
+                        MissionContainer.AddChild(GDCard);
+                        break;
+                    }
+
                 default:
                     break;
             }
         }
         else
         {
-            // @todo adversaire
+            
+            switch (GDCard.Card.State)
+            {
+                case CardState.Hand:
+                    {
+                        EnemyHandContainer.AddChild(GDCard);
+                        break;
+                    }
+
+                case CardState.Team:
+                    {
+                        EnemyTeamContainer.AddChild(GDCard);
+                        break;
+                    }
+                case CardState.Ready:
+                    {
+                        EnemyBoardContainer.AddChild(GDCard);
+                        break;
+                    }
+
+                default:
+                    break;
+            }
+            
         }
     }
 
@@ -158,9 +206,42 @@ public class PlayerControl : Control
         return this.MappingMVC.Get(card);
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+
+    public void HandleResult(object sender, EventArgs e)
+    {
+        MajVue((StargateResult)e);
+    }
+
+    public void MajVue(StargateResult result)
+    {
+
+        if (result.actionResult == ActionResult.Success)
+        {
+            switch (result.StargateResultType)
+            {
+
+                case StargateResultType.ChangeCard:
+                    {
+                        CardModel card = (CardModel)result.attr;
+                        MajCardControl(card);
+                        break;
+                    }
+
+                case StargateResultType.ChangePlayerAttr:
+                    {
+                        Player card = (Player)result.attr;
+                        MajPlayerAttr(card);
+                        break;
+                    }
+            }
+        }
+    }
+
+
+
+    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
+    //  public override void _Process(float delta)
+    //  {
+    //      
+    //  }
 }
