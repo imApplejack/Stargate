@@ -25,6 +25,10 @@ namespace Stargate.StateMachine
             gameState.CurrentPlayer.Energy = 3; // RG à ajouter + joueur 2 
             SendEvent(new StargateResult() {StargateResultType = StargateResultType.ChangePlayerAttr , attr = gameState.CurrentPlayer});
 
+            gameState.GetEnemyPlayer().Energy = 3; // RG à ajouter + joueur 2 
+            SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = gameState.GetEnemyPlayer() });
+
+
 
             PopAndNewPhase(new QuestPhase());
 

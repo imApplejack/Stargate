@@ -89,7 +89,7 @@ public class PlayerControl : Control
         EnemyHandContainer = (CardContainer)this.FindNode("EnemyHandContainer");
 
 
-        MissionContainer = (HBoxContainer)this.FindNode("MissionContainer");
+        MissionContainer = (VBoxContainer)this.FindNode("MissionCardContainer");
         ZoomContainer = (Control)this.FindNode("ZoomContainer");
         zoomEvent = GetNode<ZoomEvent>("/root/ZoomEvent");
         zoomEvent.Connect("Enter", this, "EnterZoom");
@@ -190,6 +190,13 @@ public class PlayerControl : Control
                 case CardState.Ready:
                     {
                         EnemyBoardContainer.AddChild(GDCard);
+                        break;
+                    }
+
+                case CardState.Mission:
+                    {
+                        // ici gerer le type de carte en mission ou deleger au script de mission container
+                        MissionContainer.AddChild(GDCard);
                         break;
                     }
 

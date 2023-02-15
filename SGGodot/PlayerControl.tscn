@@ -69,11 +69,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -304.5
-margin_right = 304.5
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
+margin_left = -206.0
+margin_top = -143.0
+margin_right = 206.0
+margin_bottom = 143.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_pivot_offset = Vector2( 204, 140 )
+
+[node name="EnemyMissionContainer" type="HBoxContainer" parent="MissionContainer"]
+margin_bottom = 286.0
+
+[node name="MissionCardContainer" type="VBoxContainer" parent="MissionContainer"]
+margin_left = 4.0
+margin_right = 4.0
+margin_bottom = 286.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PlayerMissionContainer" type="HBoxContainer" parent="MissionContainer"]
+margin_left = 8.0
+margin_right = 8.0
+margin_bottom = 286.0
 
 [node name="PlayerContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
