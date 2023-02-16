@@ -2,6 +2,7 @@ using Godot;
 using Stargate;
 using Stargate.Stargate;
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
 
 public class GDCard : Control
@@ -9,11 +10,55 @@ public class GDCard : Control
     // Declare member variables here. Examples:
     // private int a = 2;
 
-    public CardModel Card { get; set; } = null;
+
+    private CardModel card = null;
+
+    public CardModel Card
+    {
+        get
+        {
+           if(Origin != null) { return Origin.Card; } else { return card; }
+        }
+        set
+        {
+            card = value;
+        }
+    }
 
     private ZoomEvent zoomEvent { get; set; }
 
     private PlayEvent playEvent { get; set; }
+
+    private List<GDCard> IngameInstances { get; set; } = new List<GDCard>();
+
+
+    // permet de connaitre la GDCard Original situe dans le mappingMVC pour simplifier le code dans les appels depuis les enfants
+    private GDCard Origin { get; set; } = null; 
+
+    public void ClearIngameInstances()
+    {
+        foreach (Node item in IngameInstances)
+        {
+            item.QueueFree();
+        }
+        IngameInstances = new List<GDCard>();
+    }
+
+    public GDCard GetClone()
+    {
+        GDCard instance;
+        if (Origin == null)
+        {
+            instance = (GDCard)this.Duplicate();
+        }
+        else
+        {
+            instance = (GDCard)Origin.Duplicate();
+        }
+        IngameInstances.Add(instance);
+        instance.Origin = this;
+        return instance;
+    }
 
 
     public override void _Ready()

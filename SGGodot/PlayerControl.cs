@@ -41,10 +41,11 @@ public class PlayerControl : Control
         {
             GD.PrintErr("zoom sur la carte", card);
 
-            GDCard myZoomedCard = (GDCard)card.Duplicate();
-            myZoomedCard.RectPosition = new Vector2(0, 0);
-
-            ZoomContainer.AddChild(myZoomedCard);
+            if (!card.IsQueuedForDeletion())
+            {
+                GDCard myZoomedCard = (GDCard)card.GetClone();
+                ZoomContainer.AddChild(myZoomedCard);
+            }
         }
     }
 
@@ -141,12 +142,7 @@ public class PlayerControl : Control
     {
 
         GDCard GDCard = this.GetCard(card);
-
-        if (GDCard.GetParent() is CardContainer)
-        {
-            GDCard.GetParent().RemoveChild(GDCard);
-        }
-
+        GDCard.ClearIngameInstances();
 
         if (card.Owner == this.player)
         {
@@ -154,17 +150,17 @@ public class PlayerControl : Control
             {
                 case CardState.Hand:
                     {
-                        HandContainer.AddChild(GDCard);
+                        HandContainer.AddChild(GDCard.GetClone());
                         break;
                     }
                 case CardState.Team:
                     {
-                        TeamContainer.AddChild(GDCard);
+                        TeamContainer.AddChild(GDCard.GetClone());
                         break;
                     }
                 case CardState.Ready:
                     {
-                        BoardContainer.AddChild(GDCard);
+                        BoardContainer.AddChild(GDCard.GetClone());
                         break;
                     }
 
@@ -174,11 +170,11 @@ public class PlayerControl : Control
                         
                         if(GDCard.Card.Card.Type == CardType.Mission)
                         {
-                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard);
+                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard.GetClone());
                         }
                         else
                         {
-                            MissionContainer.FindNode("PlayerMissionContainer").AddChild(GDCard);
+                            MissionContainer.FindNode("PlayerMissionContainer").AddChild(GDCard.GetClone());
                         }
                         
                        
@@ -196,18 +192,18 @@ public class PlayerControl : Control
             {
                 case CardState.Hand:
                     {
-                        EnemyHandContainer.AddChild(GDCard);
+                        EnemyHandContainer.AddChild(GDCard.GetClone());
                         break;
                     }
 
                 case CardState.Team:
                     {
-                        EnemyTeamContainer.AddChild(GDCard);
+                        EnemyTeamContainer.AddChild(GDCard.GetClone());
                         break;
                     }
                 case CardState.Ready:
                     {
-                        EnemyBoardContainer.AddChild(GDCard);
+                        EnemyBoardContainer.AddChild(GDCard.GetClone());
                         break;
                     }
 
@@ -216,11 +212,11 @@ public class PlayerControl : Control
                         // ici gerer le type de carte en mission ou deleger au script de mission container
                         if (GDCard.Card.Card.Type == CardType.Mission)
                         {
-                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard);
+                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard.GetClone());
                         }
                         else
                         {
-                            MissionContainer.FindNode("EnemyMissionContainer").AddChild(GDCard);
+                            MissionContainer.FindNode("EnemyMissionContainer").AddChild(GDCard.GetClone());
                         }
                         break;
                     }
