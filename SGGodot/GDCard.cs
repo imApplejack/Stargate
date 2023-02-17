@@ -50,14 +50,14 @@ public class GDCard : Control
         if (Origin == null)
         {
             instance = (GDCard)this.Duplicate();
+            IngameInstances.Add(instance);
+            instance.Origin = this;
+            return instance;
         }
         else
         {
-            instance = (GDCard)Origin.Duplicate();
+            return   (GDCard)Origin.GetClone();
         }
-        IngameInstances.Add(instance);
-        instance.Origin = this;
-        return instance;
     }
 
 
