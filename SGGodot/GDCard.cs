@@ -39,7 +39,10 @@ public class GDCard : Control
     {
         foreach (Node item in IngameInstances)
         {
-            item.QueueFree();
+            if (IsInstanceValid(item) && !item.IsQueuedForDeletion())
+            {
+                item.QueueFree();
+            }
         }
         IngameInstances = new List<GDCard>();
     }
@@ -56,7 +59,7 @@ public class GDCard : Control
         }
         else
         {
-            return   (GDCard)Origin.GetClone();
+            return (GDCard)Origin.GetClone();
         }
     }
 

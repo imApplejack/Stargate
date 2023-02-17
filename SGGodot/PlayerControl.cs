@@ -41,7 +41,7 @@ public class PlayerControl : Control
         {
             GD.PrintErr("zoom sur la carte", card);
 
-            if (!card.IsQueuedForDeletion())
+            if (IsInstanceValid(card) && !card.IsQueuedForDeletion())
             {
                 GDCard myZoomedCard = (GDCard)card.GetClone();
                 ZoomContainer.AddChild(myZoomedCard);
