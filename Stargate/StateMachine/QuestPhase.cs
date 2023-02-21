@@ -29,10 +29,10 @@ namespace Stargate.StateMachine
         public override void ProcessEvent(StargateEvent myEvent)
         {
 
-            Godot.GD.Print(myEvent);
+            //Godot.GD.Print(myEvent);
             switch (myEvent.Type) {
                     
-                    case EventType.PLAYCARD:
+                case EventType.PLAYCARD:
 
                     StargateResult  sr = gameState.CardService.PlayCard((PlayCardEvent)myEvent);
                     GD.Print(sr);
@@ -44,6 +44,11 @@ namespace Stargate.StateMachine
 
                 case EventType.ASSIGNCHAR:
                     SendEvent(gameState.CardService.AssignChar((AssignCharEvent)myEvent));
+                    break;
+
+
+                case EventType.PASS:
+                    //GD.Print((PassEvent)myEvent);
                     break;
 
 

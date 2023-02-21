@@ -39,6 +39,13 @@ public class PlayerControl : Control
 
 
 
+
+    public void _on_PassButton_button_down()
+    {
+        GD.Print("PASSBUTTK");
+        Api.SendEvent(new PassEvent() { player = Player });
+    }
+
     public void EnterZoom(GDCard card)
     {
        // if (card.Card.Owner == player)
