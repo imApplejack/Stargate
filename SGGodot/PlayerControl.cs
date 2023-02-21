@@ -21,10 +21,15 @@ public class PlayerControl : Control
     public CardContainer EnemyBoardContainer;
     public CardContainer EnemyHandContainer;
 
-    public BoxContainer MissionContainer;
+    public MissionContainer MissionContainer;
     public Control ZoomContainer;
     public MappingMVC MappingMVC { get; set; }
-    public Player player { get; set; }
+
+    private Player player;
+    
+    public Player Player { get { return player; } set {
+            player = value; 
+        } }
 
     private ZoomEvent zoomEvent { get; set; }
 
@@ -67,17 +72,17 @@ public class PlayerControl : Control
     public void PlayCard(GDCard card)
     {
 
-        if(card.Card.Owner == player && card.Card.State == CardState.Hand)
+        if(card.Card.Owner == Player && card.Card.State == CardState.Hand)
             // hack nul à cause des message partagés
         {
             GD.PrintErr("playCard", card);
-            Api.SendEvent(new PlayCardEvent() { player = player, cardModel = card.Card });
+            Api.SendEvent(new PlayCardEvent() { player = Player, cardModel = card.Card });
         }
 
-        else if (card.Card.Owner == player && (card.Card.State == CardState.Ready || card.Card.State == CardState.Team))
+        else if (card.Card.Owner == Player && (card.Card.State == CardState.Ready || card.Card.State == CardState.Team))
         {
             GD.PrintErr("AssignCard", card);
-            Api.SendEvent(new AssignCharEvent() { player = player, cardModel = card.Card });
+            Api.SendEvent(new AssignCharEvent() { player = Player, cardModel = card.Card });
         }
        
     }
@@ -96,7 +101,7 @@ public class PlayerControl : Control
         EnemyHandContainer = (CardContainer)this.FindNode("EnemyHandContainer");
 
 
-        MissionContainer = (HBoxContainer)this.FindNode("MissionContainer");
+        MissionContainer = (MissionContainer)this.FindNode("MissionContainer");
 
 
         ZoomContainer = (Control)this.FindNode("ZoomContainer");
@@ -109,7 +114,11 @@ public class PlayerControl : Control
     }
 
 
-
+    public void Init()
+    {
+        MissionContainer.player = player;
+        MajControl();
+    }
 
 
     /// <summary>
@@ -167,7 +176,7 @@ public class PlayerControl : Control
                 case CardState.Mission:
                     {
                         // ici gerer le type de carte en mission ou deleger au script de mission container
-                        
+                        /*
                         if(GDCard.Card.Card.Type == CardType.Mission)
                         {
                             MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard.GetClone());
@@ -176,8 +185,13 @@ public class PlayerControl : Control
                         {
                             MissionContainer.FindNode("PlayerMissionContainer").AddChild(GDCard.GetClone());
                         }
-                        
-                       
+                        */
+
+
+                        MissionContainer.Assign(GDCard.GetClone());
+
+
+
                         break;
                     }
 
@@ -209,15 +223,7 @@ public class PlayerControl : Control
 
                 case CardState.Mission:
                     {
-                        // ici gerer le type de carte en mission ou deleger au script de mission container
-                        if (GDCard.Card.Card.Type == CardType.Mission)
-                        {
-                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard.GetClone());
-                        }
-                        else
-                        {
-                            MissionContainer.FindNode("EnemyMissionContainer").AddChild(GDCard.GetClone());
-                        }
+                        MissionContainer.Assign(GDCard.GetClone());
                         break;
                     }
 
