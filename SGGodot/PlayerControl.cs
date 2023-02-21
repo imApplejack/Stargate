@@ -175,23 +175,7 @@ public class PlayerControl : Control
 
                 case CardState.Mission:
                     {
-                        // ici gerer le type de carte en mission ou deleger au script de mission container
-                        /*
-                        if(GDCard.Card.Card.Type == CardType.Mission)
-                        {
-                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard.GetClone());
-                        }
-                        else
-                        {
-                            MissionContainer.FindNode("PlayerMissionContainer").AddChild(GDCard.GetClone());
-                        }
-                        */
-
-
                         MissionContainer.Assign(GDCard.GetClone());
-
-
-
                         break;
                     }
 
