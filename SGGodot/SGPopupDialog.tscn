@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://SGGodot/TeamCharacter.tscn" type="PackedScene" id=1]
+
+[node name="PopupDialog" type="PopupDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -469.0
+margin_top = -338.0
+margin_right = 385.0
+margin_bottom = 181.0
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -437.0
+margin_top = -429.0
+margin_right = 429.0
+margin_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Character" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_right = 286.0
+margin_bottom = 404.0
+
+[node name="Character3" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 290.0
+margin_right = 576.0
+margin_bottom = 404.0
+
+[node name="Character4" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 580.0
+margin_right = 866.0
+margin_bottom = 404.0
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -90.0
+margin_top = 10.0
+margin_right = 90.0
+margin_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Selectionnez un bonhomme"
+align = 1

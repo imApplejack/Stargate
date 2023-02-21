@@ -66,6 +66,18 @@ public class Main : Node
         // MajVue(game.CardService.PlayMission(game.player1));
 
         game.GameState.InitGame(1);
+
+
+
+        Popup p = (Popup)this.FindNode("PopupDialog");
+        p.RectSize = ((HBoxContainer)p.FindNode("HBoxContainer")).RectSize;
+        p.RectSize = p.RectSize +  new Vector2(30.0f, 100.0f);
+
+
+
+
+        p.Show();
+
     }
     
 
@@ -82,5 +94,7 @@ public class Main : Node
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
+
+      
     }
 }
