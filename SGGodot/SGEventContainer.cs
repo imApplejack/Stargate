@@ -12,4 +12,5 @@ public class SGEventContainer : Node
         SGEvent = stargateEvent;
     }
 
+
 }

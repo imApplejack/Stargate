@@ -17,6 +17,12 @@ public class CardContainer : Container
     }
 
 
+    public void ForwardEvent(StargateEvent sgevent)
+    {
+        playEvent.EmitSignal("PlaySGEvent", new SGEventContainer(sgevent));
+    }
+
+
     public virtual void ProcessCardAction(GDCard card) // d'autres attr peut etre ?
     {
     }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://SGGodot/CardContainer.cs" type="Script" id=1]
 [ext_resource path="res://SGGodot/PlayerControl.cs" type="Script" id=2]
 [ext_resource path="res://SGGodot/MissionContainer.cs" type="Script" id=3]
 [ext_resource path="res://SGGodot/HandContainer.cs" type="Script" id=4]
+[ext_resource path="res://SGGodot/ReadyContainer.cs" type="Script" id=5]
 
 [node name="PlayerControl" type="Control"]
 anchor_right = 1.0
@@ -120,11 +121,13 @@ alignment = 1
 margin_left = 23.0
 margin_right = 23.0
 alignment = 1
+script = ExtResource( 5 )
 
 [node name="BoardContainer" type="HBoxContainer" parent="PlayerContainer/HBoxContainer"]
 margin_left = 27.0
 margin_right = 27.0
 alignment = 1
+script = ExtResource( 5 )
 
 [node name="HandContainer" type="HBoxContainer" parent="PlayerContainer"]
 margin_top = 4.0

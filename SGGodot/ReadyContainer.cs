@@ -1,9 +1,8 @@
 using Godot;
 using Stargate.Stargate.Event;
-using Stargate;
 using System;
 
-public class HandContainer : CardContainer
+public class ReadyContainer : CardContainer
 {
     // Declare member variables here. Examples:
     // private int a = 2;
@@ -14,7 +13,10 @@ public class HandContainer : CardContainer
 
     public override void ProcessCardAction(GDCard card)
     {
-        ForwardEvent(new PlayCardEvent() { player = card.Card.Owner, cardModel = card.Card });
+
+        //GD.Print(" card: " + card + "  event:" + playEvent);
+
+        ForwardEvent(new AssignCharEvent() { player = card.Card.Owner, cardModel = card.Card });
     }
 
 

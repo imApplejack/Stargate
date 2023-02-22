@@ -78,7 +78,7 @@ public class PlayerControl : Control
     
     public void PlayEvent(SGEventContainer container)
     {
-        //GD.Print("reception de event play event" + sgevent);
+        GD.Print("reception de event play event" + container);
         Api.SendEvent(container.SGEvent);
     }
 
