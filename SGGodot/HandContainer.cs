@@ -2,6 +2,7 @@ using Godot;
 using Stargate.Stargate.Event;
 using Stargate;
 using System;
+using Stargate.Stargate.Enum;
 
 public class HandContainer : CardContainer
 {
@@ -14,7 +15,10 @@ public class HandContainer : CardContainer
 
     public override void ProcessCardAction(GDCard card)
     {
-        ForwardEvent(new PlayCardEvent() { player = card.Card.Owner, cardModel = card.Card });
+        if ( card.Card.State == CardState.Hand)
+        {
+            ForwardEvent(new PlayCardEvent() { player = card.Card.Owner, cardModel = card.Card });
+        }   
     }
 
 

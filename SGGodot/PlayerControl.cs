@@ -82,25 +82,6 @@ public class PlayerControl : Control
         Api.SendEvent(container.SGEvent);
     }
 
-    public void PlayCard(GDCard card)
-    {
-        /*
-        if(card.Card.Owner == Player && card.Card.State == CardState.Hand)
-            // hack nul à cause des message partagés
-        {
-            GD.PrintErr("playCard", card);
-            Api.SendEvent(new PlayCardEvent() { player = Player, cardModel = card.Card });
-        }
-
-        else if (card.Card.Owner == Player && (card.Card.State == CardState.Ready || card.Card.State == CardState.Team))
-        {
-            GD.PrintErr("AssignCard", card);
-            Api.SendEvent(new AssignCharEvent() { player = Player, cardModel = card.Card });
-        }
-        */
-       
-    }
-
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
