@@ -89,6 +89,11 @@ namespace Stargate.Repository
 
 
 
+        public List<CardModel> GetPlayerTeamCharactersReady(Player player)
+        {
+            return Cards.FindAll(cardModel => cardModel.Owner == player && cardModel.Card.Type == CardType.TeamCharacter);
+        }
+
         public bool IsInHand(Player player, CardModel card)
         {
             return Cards.Exists(cardModel => cardModel.Owner == player && cardModel.State == CardState.Hand && cardModel == card);

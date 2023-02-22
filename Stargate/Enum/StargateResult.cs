@@ -15,7 +15,8 @@ namespace Stargate.Stargate.Enum
     public enum StargateResultType
     {
         ChangeCard,
-        ChangePlayerAttr
+        ChangePlayerAttr,
+        ChooseCard
     }
 
 

@@ -33,7 +33,7 @@ namespace Stargate.StateMachine
 
 
 
-            PopAndNewPhase(new MPPhase());
+            PopAndNewPhase(new StopPartyCharacter());
         }
 
     }

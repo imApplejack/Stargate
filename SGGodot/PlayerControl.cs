@@ -4,7 +4,9 @@ using Stargate.SGGodot;
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
+using Stargate.Stargate.Result;
 using System;
+using System.Collections.Generic;
 
 public class PlayerControl : Control
 {
@@ -69,7 +71,12 @@ public class PlayerControl : Control
             GD.PrintErr("dezoom sur la carte", card);
             foreach (Node item in ZoomContainer.GetChildren())
             {
-                item.QueueFree();
+
+                 if (IsInstanceValid(item) && !item.IsQueuedForDeletion())
+                 {
+                   item.QueueFree();
+                 }
+                   
             }
         }
     }
@@ -106,6 +113,26 @@ public class PlayerControl : Control
 
         playEvent = GetNode<PlayEvent>("/root/PlayEvent");
         playEvent.Connect("PlaySGEvent", this, "PlayEvent");
+
+
+
+        try
+        {
+            /*  Popup p = (Popup)this.FindNode("PopupDialog");
+              p.RectSize = ((HBoxContainer)p.FindNode("HBoxContainer")).RectSize;
+              p.RectSize = p.RectSize + new Vector2(30.0f, 100.0f);
+              p.Show();*/
+
+
+
+
+           
+
+
+        }
+        catch(Exception e) { }
+    
+      
     }
 
 
@@ -157,6 +184,11 @@ public class PlayerControl : Control
                         HandContainer.AddChild(GDCard.GetClone());
                         break;
                     }
+                
+                
+                
+                
+                
                 case CardState.Ready:
                     {
 
@@ -170,6 +202,24 @@ public class PlayerControl : Control
                         }
                         break;
                     }
+
+                case CardState.Stop:
+                    {
+
+                        if (GDCard.Card.Card.Type == CardType.TeamCharacter)
+                        {
+                            TeamContainer.AddChild(GDCard.GetClone());
+                        }
+                        else
+                        {
+                            BoardContainer.AddChild(GDCard.GetClone());
+                        }
+                        break;
+                    }
+
+
+
+
 
                 case CardState.Mission:
                     {
@@ -206,6 +256,22 @@ public class PlayerControl : Control
                         break;
                     }
 
+
+                case CardState.Stop:
+                    {
+
+                        if (GDCard.Card.Card.Type == CardType.TeamCharacter)
+                        {
+                            EnemyTeamContainer.AddChild(GDCard.GetClone());
+                        }
+                        else
+                        {
+                            EnemyBoardContainer.AddChild(GDCard.GetClone());
+                        }
+                        break;
+                    }
+
+
                 case CardState.Mission:
                     {
                         MissionContainer.Assign(GDCard.GetClone());
@@ -227,10 +293,35 @@ public class PlayerControl : Control
     }
 
 
+    private List<GDCard> GetCards(List<CardModel> cards)
+    {
+        List<GDCard> retour = this.MappingMVC.Get(cards);
+        foreach(GDCard card in retour)
+        {
+            card.Decorate();
+        }
+        return retour;
+    }
+
+
     public void HandleResult(object sender, EventArgs e)
     {
         MajVue((StargateResult)e);
     }
+
+
+    public void PopupDialog(ChooseCardResult popupdialogattr)
+    {
+
+        PackedScene scene = GD.Load<PackedScene>("res://SGGodot/SGPopupDialog.tscn");
+        SGPopupDialog instance = (SGPopupDialog)scene.Instance();
+        
+        instance.Init(GetCards(popupdialogattr.cards), popupdialogattr.count);
+
+        this.AddChild(instance);
+        instance.Show();
+    }
+
 
     public void MajVue(StargateResult result)
     {
@@ -253,6 +344,18 @@ public class PlayerControl : Control
                         MajPlayerAttr(card);
                         break;
                     }
+
+                case StargateResultType.ChooseCard:
+                    {
+                        ChooseCardResult e = (ChooseCardResult)result;
+                        if(e.player == player)
+                        {
+                            PopupDialog(e);
+                        }
+
+                        break;
+                    }
+
             }
         }
     }

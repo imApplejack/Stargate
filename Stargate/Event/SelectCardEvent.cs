@@ -8,27 +8,23 @@ using System.Threading.Tasks;
 namespace Stargate.Stargate.Event
 {
 
-
-    public enum EventType
-    {
-        PLAYCARD,
-        ASSIGNCHAR,
-        PASS,
-        DRAWCARD,
-        SELECTCARD
-    }
-
-
-    public class StargateEvent
+  
+    public class SelectCardEvent : StargateEvent
     {
 
-        public EventType Type { get; set; }
+        public CardModel cardModel { get; set; }
 
+        public SelectCardEvent()
+        {
+            Type = EventType.SELECTCARD;
+
+        }
 
         public override string ToString()
         {
-            return Type.ToString();
+            return base.ToString() + " " + cardModel;
         }
+
 
 
     }

@@ -45,6 +45,19 @@ namespace Stargate.SGGodot
             return Mapping[CardModel];
         }
 
+        public List<GDCard> Get(List<CardModel> CardModels)
+        {
+            List<GDCard> retour = new List<GDCard>();
+            foreach (CardModel cardModel in CardModels)
+            {
+                retour.Add(Get(cardModel));
+            }
+            return retour;
+        }
+
+
+
+
 
     }
 }
