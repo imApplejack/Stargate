@@ -157,14 +157,17 @@ public class PlayerControl : Control
                         HandContainer.AddChild(GDCard.GetClone());
                         break;
                     }
-                case CardState.Team:
-                    {
-                        TeamContainer.AddChild(GDCard.GetClone());
-                        break;
-                    }
                 case CardState.Ready:
                     {
-                        BoardContainer.AddChild(GDCard.GetClone());
+
+                        if (GDCard.Card.Card.Type == CardType.TeamCharacter)
+                        {
+                            TeamContainer.AddChild(GDCard.GetClone());
+                        }
+                        else
+                        {
+                            BoardContainer.AddChild(GDCard.GetClone());
+                        }
                         break;
                     }
 
@@ -189,14 +192,17 @@ public class PlayerControl : Control
                         break;
                     }
 
-                case CardState.Team:
-                    {
-                        EnemyTeamContainer.AddChild(GDCard.GetClone());
-                        break;
-                    }
                 case CardState.Ready:
                     {
-                        EnemyBoardContainer.AddChild(GDCard.GetClone());
+
+                        if(GDCard.Card.Card.Type == CardType.TeamCharacter)
+                        {
+                            EnemyTeamContainer.AddChild(GDCard.GetClone());
+                        }
+                        else
+                        {
+                            EnemyBoardContainer.AddChild(GDCard.GetClone());
+                        }
                         break;
                     }
 

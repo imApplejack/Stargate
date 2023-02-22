@@ -13,9 +13,6 @@ public class ReadyContainer : CardContainer
 
     public override void ProcessCardAction(GDCard card)
     {
-
-        //GD.Print(" card: " + card + "  event:" + playEvent);
-
         ForwardEvent(new AssignCharEvent() { player = card.Card.Owner, cardModel = card.Card });
     }
 
