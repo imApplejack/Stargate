@@ -1,47 +1,24 @@
 using Godot;
 using Stargate;
+using Stargate.Stargate.Event;
 using System;
 using System.Collections.Generic;
 
-public class CardContainer : HBoxContainer
+public class CardContainer : Container
 {
-    public List<SGCharacter> Team { get; set; }
 
-    //  Control test = null;
+    protected PlayEvent playEvent { get; set; }
 
-
-    // public bool a = true;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-
-
-
-
-        // foreach (SGCharacter item in Team)
-        // {
-        //var instance = scene.Instance();
-
-        // Character newChar = new Character(item);
-        //  AddChild(instance);
-        // }
-
-
-        //        test = (Control)GetNode("Character");
-
+        playEvent = GetNode<PlayEvent>("/root/PlayEvent");
     }
 
-    public void initTeam()
-    {
-        /*
-        GD.Print(Team);
-        foreach (SGCharacter item in Team)
-        {
-            AddChild(Character.Factory(item));
-        }
-        */
 
+    public virtual void ProcessCardAction(GDCard card) // d'autres attr peut etre ?
+    {
     }
 
 
@@ -50,24 +27,6 @@ public class CardContainer : HBoxContainer
     {
 
 
-        // GD.Print(GetChildren()[0]);
-
-        // Character c = (Character)GetChildren()[0];
-        // c.SGCharacter = Team[0];
-        // c.
-
-        //    (Character)GetChildren()[0].SGC
-
-        /*if (GetChildren().Count == 1)
-        {
-            this.RemoveChild(test);
-        }
-        else
-        {
-            this.AddChild(test);
-        }*/
-
-        // this.RemoveChild(GetNode("Character"));
 
     }
 }

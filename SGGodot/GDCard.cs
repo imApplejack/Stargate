@@ -93,8 +93,20 @@ public class GDCard : Control
             //if (myMouseEvent.ButtonIndex == (int)ButtonList.Left && myMouseEvent.Pressed == true &&  !GetTree().IsInputHandled())
             if (myMouseEvent.ButtonIndex == (int)ButtonList.Left && myMouseEvent.Pressed == true)
             {
-                GD.Print("bouton sur une carte");
-                playEvent.EmitSignal("PlayCard", this);
+
+                //if(this.GetParent<CardContainer>)
+
+                // check si le parent est capade de gerer une card action
+                CardContainer parent = this.GetParentOrNull<CardContainer>();
+                if(parent != null)
+                {
+                    parent.ProcessCardAction(this);
+                }
+
+                
+
+                //GD.Print("bouton sur une carte");
+                //playEvent.EmitSignal("PlayCard", this);
             }
         }
     }

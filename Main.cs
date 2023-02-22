@@ -68,20 +68,21 @@ public class Main : Node
         game.GameState.InitGame(1);
 
 
-
+        /*
         Popup p = (Popup)this.FindNode("PopupDialog");
         p.RectSize = ((HBoxContainer)p.FindNode("HBoxContainer")).RectSize;
         p.RectSize = p.RectSize +  new Vector2(30.0f, 100.0f);
+         p.Show();
+        */
 
 
 
 
-        p.Show();
 
     }
-    
 
-   
+
+
 
     public void SendEvent(StargateEvent stargateEvent){
 

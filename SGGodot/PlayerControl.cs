@@ -13,13 +13,13 @@ public class PlayerControl : Control
     // private string b = "text";
 
 
-    public CardContainer TeamContainer;
-    public CardContainer BoardContainer;
-    public CardContainer HandContainer;
+    public Node TeamContainer;
+    public Node BoardContainer;
+    public Node HandContainer;
 
-    public CardContainer EnemyTeamContainer;
-    public CardContainer EnemyBoardContainer;
-    public CardContainer EnemyHandContainer;
+    public Node EnemyTeamContainer;
+    public Node EnemyBoardContainer;
+    public Node EnemyHandContainer;
 
     public MissionContainer MissionContainer;
     public Control ZoomContainer;
@@ -75,10 +75,16 @@ public class PlayerControl : Control
     }
 
 
+    
+    public void PlayEvent(SGEventContainer container)
+    {
+        //GD.Print("reception de event play event" + sgevent);
+        Api.SendEvent(container.SGEvent);
+    }
 
     public void PlayCard(GDCard card)
     {
-
+        /*
         if(card.Card.Owner == Player && card.Card.State == CardState.Hand)
             // hack nul à cause des message partagés
         {
@@ -91,6 +97,7 @@ public class PlayerControl : Control
             GD.PrintErr("AssignCard", card);
             Api.SendEvent(new AssignCharEvent() { player = Player, cardModel = card.Card });
         }
+        */
        
     }
 
@@ -99,13 +106,13 @@ public class PlayerControl : Control
     public override void _Ready()
     {
        
-        TeamContainer = (CardContainer)this.FindNode("TeamContainer");
-        BoardContainer = (CardContainer)this.FindNode("BoardContainer");
-        HandContainer = (CardContainer)this.FindNode("HandContainer");
+        TeamContainer = (Node)this.FindNode("TeamContainer");
+        BoardContainer = (Node)this.FindNode("BoardContainer");
+        HandContainer = (Node)this.FindNode("HandContainer");
 
-        EnemyTeamContainer = (CardContainer)this.FindNode("EnemyTeamContainer");
-        EnemyBoardContainer = (CardContainer)this.FindNode("EnemyBoardContainer");
-        EnemyHandContainer = (CardContainer)this.FindNode("EnemyHandContainer");
+        EnemyTeamContainer = (Node)this.FindNode("EnemyTeamContainer");
+        EnemyBoardContainer = (Node)this.FindNode("EnemyBoardContainer");
+        EnemyHandContainer = (Node)this.FindNode("EnemyHandContainer");
 
 
         MissionContainer = (MissionContainer)this.FindNode("MissionContainer");
@@ -117,7 +124,7 @@ public class PlayerControl : Control
         zoomEvent.Connect("Leave", this, "LeaveZoom");
 
         playEvent = GetNode<PlayEvent>("/root/PlayEvent");
-        playEvent.Connect("PlayCard", this, "PlayCard");
+        playEvent.Connect("PlaySGEvent", this, "PlayEvent");
     }
 
 
