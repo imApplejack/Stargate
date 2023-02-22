@@ -222,7 +222,8 @@ public class PlayerControl : Control
 
     private GDCard GetCard(CardModel card)
     {
-        return this.MappingMVC.Get(card);
+        GDCard retour = this.MappingMVC.Get(card).Decorate();
+        return retour;
     }
 
 

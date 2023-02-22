@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://SGGodot/GDCard.cs" type="Script" id=1]
+[ext_resource path="res://SGGodot/Mission.cs" type="Script" id=1]
 [ext_resource path="res://Asset/Cards/bad4982e-a94d-4023-8dc9-38b1c9ceccf9/Cards/c81249ce-abc2-489c-a32c-28ca0e18293b.jpg" type="Texture" id=2]
 [ext_resource path="res://Asset/Cards/LAYOUTOVERRIDE.png" type="Texture" id=3]
 

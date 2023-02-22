@@ -1,6 +1,7 @@
 using Godot;
 using Stargate;
 using Stargate.Stargate;
+using Stargate.Stargate.Event;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -111,7 +112,10 @@ public class GDCard : Control
         }
     }
 
-
+    public virtual GDCard Decorate()
+    {
+        return this;
+    }
 
 
 }
