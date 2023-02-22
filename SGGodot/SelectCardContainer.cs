@@ -10,11 +10,14 @@ public class SelectCardContainer : CardContainer
 
     // Called when the node enters the scene tree for the first time.
 
+    [Signal]
+    public delegate void close_popup();
 
     public override void ProcessCardAction(GDCard card)
     {
         ForwardEvent(new SelectCardEvent() { cardModel = card.Card });
-        GetParent().QueueFree();
+        //GetParent().QueueFree();
+        EmitSignal("close_popup");
     }
 
 

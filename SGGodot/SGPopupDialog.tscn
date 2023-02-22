@@ -40,3 +40,5 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Selectionnez un bonhomme"
 align = 1
+
+[connection signal="close_popup" from="HBoxContainer" to="." method="close_popup"]
