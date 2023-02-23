@@ -28,7 +28,7 @@ namespace Stargate.StateMachine
 
         public StatePhase AddAction(StateAction myAction)
         {
-            queue[numElements] =  myAction;
+            queue[numElements] = myAction;
             numElements++;
             return this;
         }
@@ -39,13 +39,6 @@ namespace Stargate.StateMachine
             numElements++;
             return this;
         }
-
-
-        public void DelegateMethod(StateEvent e = null)
-        {
-            Debug.WriteLine("delegate");
-        }
-
 
         public override void Play(StateEvent e = null)
         {

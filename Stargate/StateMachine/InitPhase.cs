@@ -20,10 +20,11 @@ namespace Stargate.StateMachine
         public InitPhase() 
         {
             this.AddAction(new StateAction())
-                .AddAction(MyInitDelegateMethod)
-                .AddAction(MyBlockingAction)
-                .AddAction(new StateAction())
-                .AddAction(MyInitDelegateMethod2);
+                 .AddAction(MyInitDelegateMethod)
+                 .AddAction(MyBlockingAction)
+                 .AddAction(new StateAction())
+                 .AddAction(MyInitDelegateMethod2)
+                ;
         }
 
 
