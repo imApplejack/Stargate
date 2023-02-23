@@ -8,7 +8,6 @@ namespace Stargate.Stargate.Enum
 {
     public enum CardState
     {
-        Team,
         Hand,
         Library,
         Ready,

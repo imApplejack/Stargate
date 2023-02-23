@@ -4,7 +4,9 @@ using Stargate.SGGodot;
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
+using Stargate.Stargate.Result;
 using System;
+using System.Collections.Generic;
 
 public class PlayerControl : Control
 {
@@ -13,18 +15,23 @@ public class PlayerControl : Control
     // private string b = "text";
 
 
-    public CardContainer TeamContainer;
-    public CardContainer BoardContainer;
-    public CardContainer HandContainer;
+    public Node TeamContainer;
+    public Node BoardContainer;
+    public Node HandContainer;
 
-    public CardContainer EnemyTeamContainer;
-    public CardContainer EnemyBoardContainer;
-    public CardContainer EnemyHandContainer;
+    public Node EnemyTeamContainer;
+    public Node EnemyBoardContainer;
+    public Node EnemyHandContainer;
 
-    public BoxContainer MissionContainer;
+    public MissionContainer MissionContainer;
     public Control ZoomContainer;
     public MappingMVC MappingMVC { get; set; }
-    public Player player { get; set; }
+
+    private Player player;
+    
+    public Player Player { get { return player; } set {
+            player = value; 
+        } }
 
     private ZoomEvent zoomEvent { get; set; }
 
@@ -33,6 +40,13 @@ public class PlayerControl : Control
     public Main Api { get; set; }  // api stargate en pointeur  = dirty
 
 
+
+
+    public void _on_PassButton_button_down()
+    {
+        GD.Print("PASSBUTTK");
+        Api.SendEvent(new PassEvent() { player = Player });
+    }
 
     public void EnterZoom(GDCard card)
     {
@@ -57,29 +71,22 @@ public class PlayerControl : Control
             GD.PrintErr("dezoom sur la carte", card);
             foreach (Node item in ZoomContainer.GetChildren())
             {
-                item.QueueFree();
+
+                 if (IsInstanceValid(item) && !item.IsQueuedForDeletion())
+                 {
+                   item.QueueFree();
+                 }
+                   
             }
         }
     }
 
 
-
-    public void PlayCard(GDCard card)
+    
+    public void PlayEvent(SGEventContainer container)
     {
-
-        if(card.Card.Owner == player && card.Card.State == CardState.Hand)
-            // hack nul à cause des message partagés
-        {
-            GD.PrintErr("playCard", card);
-            Api.SendEvent(new PlayCardEvent() { player = player, cardModel = card.Card });
-        }
-
-        else if (card.Card.Owner == player && (card.Card.State == CardState.Ready || card.Card.State == CardState.Team))
-        {
-            GD.PrintErr("AssignCard", card);
-            Api.SendEvent(new AssignCharEvent() { player = player, cardModel = card.Card });
-        }
-       
+        GD.Print("reception de event play event" + container);
+        Api.SendEvent(container.SGEvent);
     }
 
 
@@ -87,16 +94,16 @@ public class PlayerControl : Control
     public override void _Ready()
     {
        
-        TeamContainer = (CardContainer)this.FindNode("TeamContainer");
-        BoardContainer = (CardContainer)this.FindNode("BoardContainer");
-        HandContainer = (CardContainer)this.FindNode("HandContainer");
+        TeamContainer = (Node)this.FindNode("TeamContainer");
+        BoardContainer = (Node)this.FindNode("BoardContainer");
+        HandContainer = (Node)this.FindNode("HandContainer");
 
-        EnemyTeamContainer = (CardContainer)this.FindNode("EnemyTeamContainer");
-        EnemyBoardContainer = (CardContainer)this.FindNode("EnemyBoardContainer");
-        EnemyHandContainer = (CardContainer)this.FindNode("EnemyHandContainer");
+        EnemyTeamContainer = (Node)this.FindNode("EnemyTeamContainer");
+        EnemyBoardContainer = (Node)this.FindNode("EnemyBoardContainer");
+        EnemyHandContainer = (Node)this.FindNode("EnemyHandContainer");
 
 
-        MissionContainer = (HBoxContainer)this.FindNode("MissionContainer");
+        MissionContainer = (MissionContainer)this.FindNode("MissionContainer");
 
 
         ZoomContainer = (Control)this.FindNode("ZoomContainer");
@@ -105,11 +112,35 @@ public class PlayerControl : Control
         zoomEvent.Connect("Leave", this, "LeaveZoom");
 
         playEvent = GetNode<PlayEvent>("/root/PlayEvent");
-        playEvent.Connect("PlayCard", this, "PlayCard");
+        playEvent.Connect("PlaySGEvent", this, "PlayEvent");
+
+
+
+        try
+        {
+            /*  Popup p = (Popup)this.FindNode("PopupDialog");
+              p.RectSize = ((HBoxContainer)p.FindNode("HBoxContainer")).RectSize;
+              p.RectSize = p.RectSize + new Vector2(30.0f, 100.0f);
+              p.Show();*/
+
+
+
+
+           
+
+
+        }
+        catch(Exception e) { }
+    
+      
     }
 
 
-
+    public void Init()
+    {
+        MissionContainer.player = player;
+        MajControl();
+    }
 
 
     /// <summary>
@@ -153,31 +184,46 @@ public class PlayerControl : Control
                         HandContainer.AddChild(GDCard.GetClone());
                         break;
                     }
-                case CardState.Team:
-                    {
-                        TeamContainer.AddChild(GDCard.GetClone());
-                        break;
-                    }
+                
+                
+                
+                
+                
                 case CardState.Ready:
                     {
-                        BoardContainer.AddChild(GDCard.GetClone());
-                        break;
-                    }
 
-                case CardState.Mission:
-                    {
-                        // ici gerer le type de carte en mission ou deleger au script de mission container
-                        
-                        if(GDCard.Card.Card.Type == CardType.Mission)
+                        if (GDCard.Card.Card.Type == CardType.TeamCharacter)
                         {
-                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard.GetClone());
+                            TeamContainer.AddChild(GDCard.GetClone());
                         }
                         else
                         {
-                            MissionContainer.FindNode("PlayerMissionContainer").AddChild(GDCard.GetClone());
+                            BoardContainer.AddChild(GDCard.GetClone());
                         }
-                        
-                       
+                        break;
+                    }
+
+                case CardState.Stop:
+                    {
+
+                        if (GDCard.Card.Card.Type == CardType.TeamCharacter)
+                        {
+                            TeamContainer.AddChild(GDCard.GetClone());
+                        }
+                        else
+                        {
+                            BoardContainer.AddChild(GDCard.GetClone());
+                        }
+                        break;
+                    }
+
+
+
+
+
+                case CardState.Mission:
+                    {
+                        MissionContainer.Assign(GDCard.GetClone());
                         break;
                     }
 
@@ -196,28 +242,39 @@ public class PlayerControl : Control
                         break;
                     }
 
-                case CardState.Team:
-                    {
-                        EnemyTeamContainer.AddChild(GDCard.GetClone());
-                        break;
-                    }
                 case CardState.Ready:
                     {
-                        EnemyBoardContainer.AddChild(GDCard.GetClone());
-                        break;
-                    }
 
-                case CardState.Mission:
-                    {
-                        // ici gerer le type de carte en mission ou deleger au script de mission container
-                        if (GDCard.Card.Card.Type == CardType.Mission)
+                        if(GDCard.Card.Card.Type == CardType.TeamCharacter)
                         {
-                            MissionContainer.FindNode("MissionCardContainer").AddChild(GDCard.GetClone());
+                            EnemyTeamContainer.AddChild(GDCard.GetClone());
                         }
                         else
                         {
-                            MissionContainer.FindNode("EnemyMissionContainer").AddChild(GDCard.GetClone());
+                            EnemyBoardContainer.AddChild(GDCard.GetClone());
                         }
+                        break;
+                    }
+
+
+                case CardState.Stop:
+                    {
+
+                        if (GDCard.Card.Card.Type == CardType.TeamCharacter)
+                        {
+                            EnemyTeamContainer.AddChild(GDCard.GetClone());
+                        }
+                        else
+                        {
+                            EnemyBoardContainer.AddChild(GDCard.GetClone());
+                        }
+                        break;
+                    }
+
+
+                case CardState.Mission:
+                    {
+                        MissionContainer.Assign(GDCard.GetClone());
                         break;
                     }
 
@@ -231,7 +288,19 @@ public class PlayerControl : Control
 
     private GDCard GetCard(CardModel card)
     {
-        return this.MappingMVC.Get(card);
+        GDCard retour = this.MappingMVC.Get(card).Decorate();
+        return retour;
+    }
+
+
+    private List<GDCard> GetCards(List<CardModel> cards)
+    {
+        List<GDCard> retour = this.MappingMVC.Get(cards);
+        foreach(GDCard card in retour)
+        {
+            card.Decorate();
+        }
+        return retour;
     }
 
 
@@ -239,6 +308,20 @@ public class PlayerControl : Control
     {
         MajVue((StargateResult)e);
     }
+
+
+    public void PopupDialog(ChooseCardResult popupdialogattr)
+    {
+
+        PackedScene scene = GD.Load<PackedScene>("res://SGGodot/SGPopupDialog.tscn");
+        SGPopupDialog instance = (SGPopupDialog)scene.Instance();
+        
+        instance.Init(GetCards(popupdialogattr.cards), popupdialogattr.count);
+
+        this.AddChild(instance);
+        instance.Show();
+    }
+
 
     public void MajVue(StargateResult result)
     {
@@ -261,6 +344,18 @@ public class PlayerControl : Control
                         MajPlayerAttr(card);
                         break;
                     }
+
+                case StargateResultType.ChooseCard:
+                    {
+                        ChooseCardResult e = (ChooseCardResult)result;
+                        if(e.player == player)
+                        {
+                            PopupDialog(e);
+                        }
+
+                        break;
+                    }
+
             }
         }
     }
