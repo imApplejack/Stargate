@@ -49,16 +49,29 @@ namespace Stargate.StateMachine
 
         public override void Play(StateEvent e = null)
         {
-            for (int i = 0; i <= numElements; i++)
+            for (int i = currentOperation; i <= numElements; i++)
             {
-                if (queue.ContainsKey(i))
+                try
                 {
-                    ((StateAction)queue[i]).Play(e);
+                    if (queue.ContainsKey(i))
+                    {
+                        ((StateAction)queue[i]).Play(e);
+                    }
+                    else if (delegates.ContainsKey(i))
+                    {
+                        ((Delegate)delegates[i])(e);
+                    }
                 }
-                else if (delegates.ContainsKey(i))
-                {
-                    ((Delegate)delegates[i])(e);
-                } 
+                catch(StateResultException ex) { 
+                   
+                    if(ex.response == StateResult.STOP)
+                    {
+                        currentOperation = i;
+                        return;
+                    }
+                }
+
+               
             }
            
 

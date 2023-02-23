@@ -21,20 +21,33 @@ namespace Stargate.StateMachine
         {
             this.AddAction(new StateAction())
                 .AddAction(MyInitDelegateMethod)
+                .AddAction(MyBlockingAction)
                 .AddAction(new StateAction())
                 .AddAction(MyInitDelegateMethod2);
         }
 
 
-        public  void MyInitDelegateMethod(StateEvent e = null)
+        public void MyInitDelegateMethod(StateEvent e = null)
         {
             Debug.WriteLine("MyInitDelegateMethod" +  " toto = " + toto);
             toto++;
         }
 
-        public  void MyInitDelegateMethod2(StateEvent e = null)
+        public void MyInitDelegateMethod2(StateEvent e = null)
         {
             Debug.WriteLine("MyInitDelegateMethod2" + " toto = " + toto);
+        }
+
+        public void MyBlockingAction(StateEvent e = null)
+        {
+            Debug.WriteLine("my blocking action");
+            
+            if(e == null)
+            {
+                throw new StateResultException(StateResult.STOP);
+            }
+            
+          
         }
 
         /*

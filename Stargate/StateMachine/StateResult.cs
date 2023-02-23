@@ -13,13 +13,20 @@ using System.Threading.Tasks;
 
 namespace Stargate.StateMachine
 {
-    public class StateWait 
-    {      
-        public virtual void Play()
-        {
-            Debug.WriteLine("poua");
-        }
 
+    public enum StateResult
+    {      
+      SUCCESS,
+      STOP
+    }
+
+    public class StateResultException : Exception
+    {
+        public StateResult response;
+        public StateResultException(StateResult response)
+        {
+            this.response = response;
+        }
     }
 
 }
