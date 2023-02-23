@@ -66,10 +66,10 @@ namespace Stargate.StateMachine
                    
                     if(ex.response == StateResult.STOP)
                     {
-                        currentOperation = i;
                         return;
                     }
                 }
+                finally { currentOperation = i; }
 
                
             }
