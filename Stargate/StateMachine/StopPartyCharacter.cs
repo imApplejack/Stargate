@@ -12,11 +12,12 @@ using System.Threading.Tasks;
 
 namespace Stargate.StateMachine
 {
-    public class StopPartyCharacter : Phase, IPhase
+    public class StopPartyCharacter : StatePhase, IPhase
     {
 
         // public event EventHandler StargateResultHandler;
 
+        /*
 
         public StopPartyCharacter(GameState gameState = null) : base(gameState)
         {
@@ -45,6 +46,6 @@ namespace Stargate.StateMachine
 
            
         }
-
+        */
     }
 }

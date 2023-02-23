@@ -1,4 +1,5 @@
 ﻿using Stargate.Stargate.Enum;
+using Stargate.Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Stargate.Stargate.Event
     }
 
 
-    public class StargateEvent
+    public class StargateEvent : StateEvent
     {
 
         public EventType Type { get; set; }

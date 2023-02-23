@@ -1,6 +1,5 @@
 ﻿using Stargate.Stargate;
 using Stargate.Stargate.Enum;
-using Stargate.Stargate.Result;
 using Stargate.Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
@@ -10,23 +9,40 @@ using System.Threading.Tasks;
 
 namespace Stargate.StateMachine
 {
-    public class MPPhase :StargatePhase
+    public class GameLoop : StargatePhase
     {
 
-        public MPPhase(GameState gs) : base(gs)
+        public GameLoop(GameState gs) : base(gs)
         {
-            AddAction(Energy);
+            AddAction(new MPPhase(gs))
+            .AddAction(new QuestPhase(gs))
+            ;
         }
 
-
-        public void Energy(StateEvent e = null)
+        /*
+        public MPPhase(GameState gameState = null) : base(gameState)
         {
+
+        }
+
+        public override void Run() {
+
+
+            // @todo process main phase abilities
+
+
             gameState.CurrentPlayer.Energy = 3; // RG à ajouter + joueur 2 
-            SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = gameState.CurrentPlayer });
+            SendEvent(new StargateResult() {StargateResultType = StargateResultType.ChangePlayerAttr , attr = gameState.CurrentPlayer});
+
             gameState.GetEnemyPlayer().Energy = 3; // RG à ajouter + joueur 2 
             SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = gameState.GetEnemyPlayer() });
-        }
 
-      
+
+
+            PopAndNewPhase(new QuestPhase());
+
+        }
+        */
+
     }
 }

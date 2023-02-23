@@ -9,11 +9,12 @@ namespace Stargate.Stargate.StateMachine
 {
     public interface IPhase
     {
-         void Init();
+        /*
+        void Init();
 
         void Run();
 
         void ProcessEvent(StargateEvent myEvent);
-
+        */
     }
 }

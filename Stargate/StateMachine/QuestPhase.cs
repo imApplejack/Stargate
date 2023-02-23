@@ -12,29 +12,41 @@ using System.Threading.Tasks;
 
 namespace Stargate.StateMachine
 {
-    public class QuestPhase : Phase, IPhase
+    public class QuestPhase : StargatePhase
     {
-        public QuestPhase(GameState gameState = null) : base(gameState)
+
+        public QuestPhase(GameState gs) : base(gs)
         {
+            AddAction(PlayMission)
+            .AddAction(PlayAction)
+            ;
         }
 
 
-        public override void Run()
+        public void PlayMission(StateEvent e = null)
         {
             SendEvent(gameState.CardService.PlayMission(gameState.CurrentPlayer));
         }
 
 
 
-        public override void ProcessEvent(StargateEvent myEvent)
+        public void PlayAction(StateEvent e = null)
         {
 
-            //Godot.GD.Print(myEvent);
-            switch (myEvent.Type) {
-                    
+            GD.Print("Questphase playaction");
+           // throw new StateResultException(StateResult.STOP);
+           
+            
+            StargateEvent myEvent = (StargateEvent)e;
+
+
+
+            switch (myEvent.Type)
+            {
+
                 case EventType.PLAYCARD:
 
-                    StargateResult  sr = gameState.CardService.PlayCard((PlayCardEvent)myEvent);
+                    StargateResult sr = gameState.CardService.PlayCard((PlayCardEvent)myEvent);
                     GD.Print(sr);
                     SendEvent(sr);
                     SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).player });
@@ -51,13 +63,11 @@ namespace Stargate.StateMachine
                     //GD.Print((PassEvent)myEvent);
                     break;
 
-
-
             }
+
+            throw new StateResultException(StateResult.STOP);
 
 
         }
-
-
     }
 }
