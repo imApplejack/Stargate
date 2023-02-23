@@ -3,6 +3,7 @@ using Stargate.Stargate.Event;
 using Stargate.Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -10,32 +11,50 @@ using System.Threading.Tasks;
 
 namespace Stargate.StateMachine
 {
-    public class InitPhase : Phase , IPhase
+    public class InitPhase : StatePhase 
     {
 
-       // public event EventHandler StargateResultHandler;
+        private int toto = 0;
+       
 
-
-        public InitPhase(GameState gameState = null ) : base(gameState)
+        public InitPhase() 
         {
+            this.AddAction(new StateAction())
+                .AddAction(MyInitDelegateMethod)
+                .AddAction(new StateAction())
+                .AddAction(MyInitDelegateMethod2);
         }
 
-        public override void Run()
+
+        public  void MyInitDelegateMethod(StateEvent e = null)
         {
-
-            SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
-            SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
-
-            SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
-            //SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
-
-
-
-
-
-            PopAndNewPhase(new StopPartyCharacter());
+            Debug.WriteLine("MyInitDelegateMethod" +  " toto = " + toto);
+            toto++;
         }
 
+        public  void MyInitDelegateMethod2(StateEvent e = null)
+        {
+            Debug.WriteLine("MyInitDelegateMethod2" + " toto = " + toto);
+        }
+
+        /*
+
+       public override void Run()
+       {
+
+           SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
+           SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
+
+           SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
+           //SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
+
+
+
+
+
+           PopAndNewPhase(new StopPartyCharacter());
+       }
+       */
     }
 
 }

@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace Stargate.StateMachine
 {
-    public class MPPhase : Phase, IPhase
+    public class MPPhase : StatePhase, IPhase
     {
+
+        /*
         public MPPhase(GameState gameState = null) : base(gameState)
         {
 
@@ -33,6 +35,7 @@ namespace Stargate.StateMachine
             PopAndNewPhase(new QuestPhase());
 
         }
+        */
 
     }
 }

@@ -12,8 +12,10 @@ using System.Threading.Tasks;
 
 namespace Stargate.StateMachine
 {
-    public class QuestPhase : Phase, IPhase
+    public class QuestPhase : StatePhase, IPhase
     {
+
+        /*
         public QuestPhase(GameState gameState = null) : base(gameState)
         {
         }
@@ -57,6 +59,7 @@ namespace Stargate.StateMachine
 
 
         }
+        */
 
 
     }

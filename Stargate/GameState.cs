@@ -27,7 +27,7 @@ namespace Stargate.Stargate
 
         public CardService CardService { get; set; }
 
-        public Stack<Phase> GameStack { get; set; }
+        public Stack<StatePhase> GameStack { get; set; }
 
         public event EventHandler StargateResultHandler;
 
@@ -63,9 +63,9 @@ namespace Stargate.Stargate
         {
             random = new Random(seed);
             CurrentPlayer = player1;
-            GameStack = new Stack<Phase>();
-            GameStack.Push(new InitPhase(this));
-            GameStack.Peek().Run();
+            GameStack = new Stack<StatePhase>();
+            //GameStack.Push(new InitPhase(this));
+            //GameStack.Peek().Run();
         }
 
 
@@ -74,7 +74,7 @@ namespace Stargate.Stargate
         public void ProcessEvent(StargateEvent myEvent)
         {
             Godot.GD.Print(myEvent);
-            GameStack.Peek().ProcessEvent(myEvent);
+            //GameStack.Peek().ProcessEvent(myEvent);
         }
 
         public void ForwardEvent(StargateResult e)
