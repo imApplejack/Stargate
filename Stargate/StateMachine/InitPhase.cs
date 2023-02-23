@@ -1,5 +1,7 @@
 ﻿using Stargate.Stargate;
+using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
+using Stargate.Stargate.Result;
 using Stargate.Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
@@ -11,64 +13,45 @@ using System.Threading.Tasks;
 
 namespace Stargate.StateMachine
 {
-    public class InitPhase : StatePhase 
+    public class InitPhase : StargatePhase 
     {
 
-        private int toto = 0;
-       
-
-        public InitPhase() 
+        public InitPhase(GameState gs) : base (gs)
         {
-            this.AddAction(new StateAction())
-                 .AddAction(MyInitDelegateMethod)
-                 .AddAction(MyBlockingAction)
-                 .AddAction(new StateAction())
-                 .AddAction(MyInitDelegateMethod2)
+            this.AddAction(Draw)
+                .AddAction(ChooseParty)
+                .AddAction(ChoosePartyEvent)
+                .AddAction(new GameLoop(gs))
                 ;
         }
 
-
-        public void MyInitDelegateMethod(StateEvent e = null)
-        {
-            Debug.WriteLine("MyInitDelegateMethod" +  " toto = " + toto);
-            toto++;
-        }
-
-        public void MyInitDelegateMethod2(StateEvent e = null)
-        {
-            Debug.WriteLine("MyInitDelegateMethod2" + " toto = " + toto);
-        }
-
-        public void MyBlockingAction(StateEvent e = null)
-        {
-            Debug.WriteLine("my blocking action");
-            
-            if(e == null)
-            {
-                throw new StateResultException(StateResult.STOP);
-            }
-            
-          
-        }
-
-        /*
-
-       public override void Run()
+       public void Draw(StateEvent e = null)
        {
-
            SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
            SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
 
            SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
            //SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
-
-
-
-
-
-           PopAndNewPhase(new StopPartyCharacter());
        }
-       */
+
+        public void ChooseParty(StateEvent e = null)
+        {
+            SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = gameState.CardService.CardRepository.GetPlayerTeamCharactersReady(gameState.CurrentPlayer) });
+        }
+
+        public void ChoosePartyEvent(StateEvent e = null)
+        {
+
+            if (e == null || ((StargateEvent )e).Type != EventType.SELECTCARD)
+            {
+                throw new StateResultException(StateResult.STOP);
+            }
+            else {
+                SelectCardEvent sle = (SelectCardEvent)e;
+                sle.cardModel.State = CardState.Stop;
+                SendEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = sle.cardModel });
+            }
+        }
     }
 
 }
