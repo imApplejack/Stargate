@@ -42,7 +42,7 @@ namespace Stargate.StateMachine
 
         public override void Play(StateEvent e = null)
         {
-            for (int i = currentOperation; i <= numElements; i++)
+            for (int i = currentOperation; i < numElements; i++)
             {
                 try
                 {

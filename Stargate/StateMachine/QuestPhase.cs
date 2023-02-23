@@ -34,17 +34,10 @@ namespace Stargate.StateMachine
         {
 
             GD.Print("Questphase playaction");
-            throw new StateResultException(StateResult.STOP);
+           // throw new StateResultException(StateResult.STOP);
            
             
             StargateEvent myEvent = (StargateEvent)e;
-
-
-
-            if (e == null || ((StargateEvent)e).Type != EventType.PLAYCARD)
-            {
-                throw new StateResultException(StateResult.STOP);
-            }
 
 
 
@@ -72,7 +65,8 @@ namespace Stargate.StateMachine
 
             }
 
-           
+            throw new StateResultException(StateResult.STOP);
+
 
         }
     }
