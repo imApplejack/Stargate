@@ -20,10 +20,10 @@ namespace Stargate.StateMachine
         public MockPhase() 
         {
             this
-                 //.AddAction(new StateAction())
+                 .AddAction(new StateAction())
                  .AddAction(MyInitDelegateMethod)
-                 //.AddAction(MyBlockingAction)
-                 //.AddAction(new StateAction())
+                 .AddAction(MyBlockingAction)
+                 .AddAction(new StateAction())
                  .AddAction(MyInitDelegateMethod2)
                 ;
         }
