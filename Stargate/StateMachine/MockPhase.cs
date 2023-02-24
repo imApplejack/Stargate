@@ -19,10 +19,11 @@ namespace Stargate.StateMachine
 
         public MockPhase() 
         {
-            this.AddAction(new StateAction())
+            this
+                 //.AddAction(new StateAction())
                  .AddAction(MyInitDelegateMethod)
-                 .AddAction(MyBlockingAction)
-                 .AddAction(new StateAction())
+                 //.AddAction(MyBlockingAction)
+                 //.AddAction(new StateAction())
                  .AddAction(MyInitDelegateMethod2)
                 ;
         }
@@ -32,11 +33,15 @@ namespace Stargate.StateMachine
         {
             Debug.WriteLine("MyInitDelegateMethod" +  " toto = " + toto);
             toto++;
+            QueueAction(new MockState());
         }
 
         public void MyInitDelegateMethod2(StateEvent e = null)
         {
             Debug.WriteLine("MyInitDelegateMethod2" + " toto = " + toto);
+
+            QueueAction(new MockState()).QueueAction(new MockState());
+
         }
 
         public void MyBlockingAction(StateEvent e = null)
@@ -48,7 +53,6 @@ namespace Stargate.StateMachine
                 throw new StateResultException(StateResult.STOP);
             }
             
-          
         }
 
         /*

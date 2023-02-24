@@ -17,9 +17,10 @@ namespace Stargate.StateMachine
     public class StatePhase : StateAction
     {
 
-        public Dictionary<int, StateAction> queue = new Dictionary<int, StateAction>();
+        public Dictionary<int, StateAction> actions = new Dictionary<int, StateAction>();
         public delegate void Delegate(StateEvent e = null);
         public Dictionary<int, Delegate> delegates = new Dictionary<int, Delegate>();
+        public Queue<StateAction> queue = new Queue<StateAction>();
 
 
         public int currentOperation = 0;
@@ -28,7 +29,7 @@ namespace Stargate.StateMachine
 
         public StatePhase AddAction(StateAction myAction)
         {
-            queue[numElements] = myAction;
+            actions[numElements] = myAction;
             numElements++;
             return this;
         }
@@ -40,15 +41,30 @@ namespace Stargate.StateMachine
             return this;
         }
 
+        public StatePhase QueueAction(StateAction myAction)
+        {
+            queue.Enqueue(myAction);
+            return this;
+        }
+
+
+
         public override void Play(StateEvent e = null)
         {
-            for (int i = currentOperation; i < numElements; i++)
+            int i = currentOperation;
+            while (i < numElements || queue.Count > 0)
             {
                 try
                 {
-                    if (queue.ContainsKey(i))
+
+                    while(queue.Count > 0)
                     {
-                        ((StateAction)queue[i]).Play(e);
+                        queue.Dequeue().Play(e);
+                    }
+
+                    if (actions.ContainsKey(i))
+                    {
+                        ((StateAction)actions[i]).Play(e);
                     }
                     else if (delegates.ContainsKey(i))
                     {
@@ -64,23 +80,9 @@ namespace Stargate.StateMachine
                 }
                 finally { currentOperation = i; }
 
-               
+                i++;
             }
            
-
-            //Delegate handler = DelegateMethod;
-
-            //handler();
-
-            /*
-           enumerator = queue.GetEnumerator();
-
-           while (enumerator.MoveNext())
-            {
-                enumerator.Current.Play();
-            }
-            */
-
 
             
         }

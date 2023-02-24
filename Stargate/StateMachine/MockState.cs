@@ -1,5 +1,4 @@
 ﻿using Stargate.Stargate;
-using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
 using Stargate.Stargate.StateMachine;
 using System;
@@ -12,18 +11,14 @@ using System.Threading.Tasks;
 
 namespace Stargate.StateMachine
 {
-    public class StargatePhase : StatePhase 
+    public class  MockState : StateAction
     {
 
-        public StargatePhase(GameState gs) {
-            gameState = gs;
-        }
-
-        public GameState gameState = null;
-
-        public void SendEvent(StargateResult r)
+        public override void Play(StateEvent e = null)
         {
-            gameState.ForwardEvent(r);
+            Debug.WriteLine("mock state");
         }
+
     }
+
 }
