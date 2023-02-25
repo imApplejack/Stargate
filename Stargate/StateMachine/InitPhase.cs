@@ -27,16 +27,16 @@ namespace Stargate.StateMachine
 
        public void Draw(StateEvent e = null)
        {
-           SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
-           SendEvent(gameState.CardService.Draw(gameState.GetHeroPlayer()));
+           SendEvent(gameState.Draw(gameState.GetHeroPlayer()));
+           SendEvent(gameState.Draw(gameState.GetHeroPlayer()));
 
-           SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
+           SendEvent(gameState.Draw(gameState.GetEnemyPlayer()));
            //SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
        }
 
         public void ChooseParty(StateEvent e = null)
         {
-            SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = gameState.CardService.CardRepository.GetPlayerTeamCharactersReady(gameState.CurrentPlayer) });
+            SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = gameState.CardRepository.GetPlayerTeamCharactersReady(gameState.CurrentPlayer) });
         }
 
         public void ChoosePartyEvent(StateEvent e = null)

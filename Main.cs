@@ -1,7 +1,6 @@
 using Godot;
 using Stargate;
 using Stargate.Mock;
-using Stargate.Service;
 using Stargate.SGGodot;
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
@@ -35,11 +34,8 @@ public class Main : Node
         StargateGameMock.InitPlayersWithMock(game);
 
 
-
-
-
         MappingMVC mappingMVC = new MappingMVC();
-        mappingMVC.InitRessources(game.CardService.GetAllCards());
+        mappingMVC.InitRessources(game.GameState.GetAllCards());
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
         Player1Vue.Player = game.GameState.player1;
         Player1Vue.Api = this; // :'(
@@ -49,7 +45,7 @@ public class Main : Node
 
 
         MappingMVC mappingMVC2 = new MappingMVC();
-        mappingMVC2.InitRessources(game.CardService.GetAllCards());
+        mappingMVC2.InitRessources(game.GameState.GetAllCards());
         Player2Vue = (PlayerControl)this.FindNode("PlayerControl2");
         Player2Vue.Player = game.GameState.player2;
         Player2Vue.Api = this; // :'(

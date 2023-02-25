@@ -42,7 +42,7 @@ namespace Stargate.StateMachine
 
         public void PlayMission(StateEvent e = null)
         {
-            SendEvent(gameState.CardService.PlayMission(gameState.CurrentPlayer));
+            SendEvent(gameState.PlayMission(gameState.CurrentPlayer));
         }
 
 
@@ -65,7 +65,7 @@ namespace Stargate.StateMachine
 
                     case EventType.PLAYCARD:
 
-                        StargateResult sr = gameState.CardService.PlayCard((PlayCardEvent)myEvent);
+                        StargateResult sr = gameState.PlayCard((PlayCardEvent)myEvent);
                         GD.Print(sr);
                         SendEvent(sr);
                         SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
@@ -74,7 +74,7 @@ namespace Stargate.StateMachine
 
 
                     case EventType.ASSIGNCHAR:
-                        SendEvent(gameState.CardService.AssignChar((AssignCharEvent)myEvent));
+                        SendEvent(gameState.AssignChar((AssignCharEvent)myEvent));
                         break;
 
 

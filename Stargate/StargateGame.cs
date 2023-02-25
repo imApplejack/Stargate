@@ -1,4 +1,4 @@
-﻿using Stargate.Service;
+﻿
 using Stargate.Stargate;
 using System;
 using System.Collections.Generic;
@@ -17,26 +17,15 @@ namespace Stargate
 
 
 
-
-        public CardService CardService { get; set; }  = new CardService();
-
         public Library Library { get; set; }
-        
+
         public GameState GameState { get; set; } = null;
-
-
-
-   
 
         public StargateGame(Library library)
         {
             Library = library;
-            GameState = new GameState() { player1 = new Player(), player2 = new Player(), CardService = CardService};
+            GameState = new GameState() { player1 = new Player(), player2 = new Player() };
         }
-
-      
-
-
 
     }
 }

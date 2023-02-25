@@ -1,4 +1,4 @@
-﻿using Stargate.Service;
+﻿
 using Stargate.Stargate;
 using System;
 using System.Collections.Generic;
@@ -15,16 +15,16 @@ namespace Stargate.Mock
         {
             StargateGameMock.InitPlayerWithMock(stargateGame, stargateGame.GameState.player1);
             StargateGameMock.InitPlayerWithMock(stargateGame, stargateGame.GameState.player2);
-            stargateGame.CardService.InitPlayersLibraryAndMissions();
+            stargateGame.GameState.InitPlayersLibraryAndMissions();
         }
 
       
 
         public static void InitPlayerWithMock(StargateGame stargateGame, Player p)
         {
-            stargateGame.CardService.CreatePlayerDeck(p, stargateGame.Library.GetCardsFromGuidList(new List<string> { "79974bc9-9b81-41e1-8868-c75f8fc58837", "79974bc9-9b81-41e1-8868-c75f8fc58837", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1" }));
-            stargateGame.CardService.CreatePlayerTeam(p, stargateGame.Library.GetCardsFromGuidList(new List<string> { "4901fb59-e7cc-47d4-8f3a-4f1f2e93f78d", "c5358e72-16ac-450e-a2b8-923d4964f52c" }));
-            stargateGame.CardService.CreatePlayerMissions(p, stargateGame.Library.GetCardsFromGuidList(new List<string> { "c81249ce-abc2-489c-a32c-28ca0e18293b" }));
+            stargateGame.GameState.CreatePlayerDeck(p, stargateGame.Library.GetCardsFromGuidList(new List<string> { "79974bc9-9b81-41e1-8868-c75f8fc58837", "79974bc9-9b81-41e1-8868-c75f8fc58837", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1", "dd59e9ee-9cf8-4d61-b891-5477c550b2b1" }));
+            stargateGame.GameState.CreatePlayerTeam(p, stargateGame.Library.GetCardsFromGuidList(new List<string> { "4901fb59-e7cc-47d4-8f3a-4f1f2e93f78d", "c5358e72-16ac-450e-a2b8-923d4964f52c" }));
+            stargateGame.GameState.CreatePlayerMissions(p, stargateGame.Library.GetCardsFromGuidList(new List<string> { "c81249ce-abc2-489c-a32c-28ca0e18293b" }));
 
 
         }
