@@ -15,6 +15,9 @@ namespace Stargate.StateMachine
     public class QuestPhase : StargatePhase
     {
 
+
+
+
         public QuestPhase(GameState gs) : base(gs)
         {
             AddAction(PlayMission)

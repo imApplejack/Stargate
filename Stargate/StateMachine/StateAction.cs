@@ -20,6 +20,12 @@ namespace Stargate.StateMachine
             Debug.WriteLine("poua");
         }
 
+        public virtual void Init() {
+
+            Debug.WriteLine("StateAction:Init");
+        }
+
+
     }
 
 }

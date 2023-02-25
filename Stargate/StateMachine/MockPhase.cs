@@ -14,11 +14,11 @@ namespace Stargate.StateMachine
     public class MockPhase : StatePhase 
     {
 
-        private int toto = 0;
-       
+        private int toto;
 
-        public MockPhase() 
+        public override void Init()
         {
+            toto = 0;
             this
                  .AddAction(new StateAction())
                  .AddAction(MyInitDelegateMethod)

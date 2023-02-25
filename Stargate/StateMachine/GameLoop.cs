@@ -19,6 +19,8 @@ namespace Stargate.StateMachine
             ;
         }
 
+        
+
         /*
         public MPPhase(GameState gameState = null) : base(gameState)
         {

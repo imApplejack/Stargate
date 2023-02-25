@@ -22,6 +22,10 @@ namespace Stargate.StateMachine
         public Dictionary<int, Delegate> delegates = new Dictionary<int, Delegate>();
         public Queue<StateAction> queue = new Queue<StateAction>();
 
+        public StatePhase()
+        {
+            Init();
+        }
 
         public int currentOperation = 0;
 
