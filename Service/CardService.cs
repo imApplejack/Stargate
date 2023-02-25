@@ -61,9 +61,9 @@ namespace Stargate.Service
 
 
         public StargateResult PlayCard(PlayCardEvent playCardEvent){
-            if (CardRepository.IsInHand(playCardEvent.player, playCardEvent.cardModel) && playCardEvent.player.Energy >= playCardEvent.cardModel.Card.Cost)
+            if (CardRepository.IsInHand(playCardEvent.Sender, playCardEvent.cardModel) && playCardEvent.Sender.Energy >= playCardEvent.cardModel.Card.Cost)
             {
-                playCardEvent.player.Energy -= playCardEvent.cardModel.Card.Cost;
+                playCardEvent.Sender.Energy -= playCardEvent.cardModel.Card.Cost;
                 playCardEvent.cardModel.State = CardState.Ready; // probablement passer par le repository pour faire ca
                 return new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = playCardEvent.cardModel };
             }

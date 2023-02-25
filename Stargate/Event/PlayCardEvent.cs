@@ -12,8 +12,6 @@ namespace Stargate.Stargate.Event
     public class PlayCardEvent : StargateEvent
     {
 
-        public Player player { get; set; }
-
         public CardModel cardModel { get; set; }
 
         public PlayCardEvent()
@@ -24,7 +22,7 @@ namespace Stargate.Stargate.Event
 
         public override string ToString()
         {
-            return base.ToString() + " " + player + " " + cardModel;
+            return base.ToString() + " " + cardModel;
         }
 
 

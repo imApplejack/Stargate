@@ -45,7 +45,7 @@ public class PlayerControl : Control
     public void _on_PassButton_button_down()
     {
         GD.Print("PASSBUTTK");
-        Api.SendEvent(new PassEvent() { player = Player });
+        Api.SendEvent(new PassEvent() { Sender = Player });
     }
 
     public void EnterZoom(GDCard card)
@@ -86,6 +86,8 @@ public class PlayerControl : Control
     public void PlayEvent(SGEventContainer container)
     {
         GD.Print("reception de event play event" + container);
+        StargateEvent se = container.SGEvent;
+        se.Sender = player;
         Api.SendEvent(container.SGEvent);
     }
 
@@ -317,8 +319,9 @@ public class PlayerControl : Control
         SGPopupDialog instance = (SGPopupDialog)scene.Instance();
         
         instance.Init(GetCards(popupdialogattr.cards), popupdialogattr.count);
-
         this.AddChild(instance);
+        instance.FindNode("HBoxContainer").Connect("SendEvent", this, "PlayEvent");
+
         instance.Show();
     }
 

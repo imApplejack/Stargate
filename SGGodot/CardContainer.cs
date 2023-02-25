@@ -7,19 +7,19 @@ using System.Collections.Generic;
 public class CardContainer : Container
 {
 
-    protected PlayEvent playEvent { get; set; }
 
+    [Signal] public delegate void SendEvent(SGEventContainer myEvent);
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        playEvent = GetNode<PlayEvent>("/root/PlayEvent");
+        
     }
 
 
     public void ForwardEvent(StargateEvent sgevent)
     {
-        playEvent.EmitSignal("PlaySGEvent", new SGEventContainer(sgevent));
+        EmitSignal("SendEvent", new SGEventContainer(sgevent));
     }
 
 

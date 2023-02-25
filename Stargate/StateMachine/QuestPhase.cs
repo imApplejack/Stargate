@@ -33,8 +33,8 @@ namespace Stargate.StateMachine
             .AddAction(PlayAction)
             ;
 
-            //questCurrentPlayer = gameState.CurrentPlayer;
-            //questPhasePass = new Dictionary<Player, bool>() { [gameState.CurrentPlayer] = false, [gameState.GetEnemyPlayer()] = false };
+            questCurrentPlayer = gameState.CurrentPlayer;
+            questPhasePass = new Dictionary<Player, bool>() { [gameState.CurrentPlayer] = false, [gameState.GetEnemyPlayer()] = false };
 
 
         }
@@ -51,40 +51,52 @@ namespace Stargate.StateMachine
         {
 
             GD.Print("Questphase playaction");
-           // throw new StateResultException(StateResult.STOP);
-           
-            
+            // throw new StateResultException(StateResult.STOP);
+
+
             StargateEvent myEvent = (StargateEvent)e;
 
 
-
-            switch (myEvent.Type)
+            if (myEvent.Sender == questCurrentPlayer)
             {
 
-                case EventType.PLAYCARD:
+                switch (myEvent.Type)
+                {
 
-                    StargateResult sr = gameState.CardService.PlayCard((PlayCardEvent)myEvent);
-                    GD.Print(sr);
-                    SendEvent(sr);
-                    SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).player });
+                    case EventType.PLAYCARD:
 
-                    break;
+                        StargateResult sr = gameState.CardService.PlayCard((PlayCardEvent)myEvent);
+                        GD.Print(sr);
+                        SendEvent(sr);
+                        SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
 
-
-                case EventType.ASSIGNCHAR:
-                    SendEvent(gameState.CardService.AssignChar((AssignCharEvent)myEvent));
-                    break;
+                        break;
 
 
-                case EventType.PASS:
-                    //GD.Print((PassEvent)myEvent);
-                    break;
+                    case EventType.ASSIGNCHAR:
+                        SendEvent(gameState.CardService.AssignChar((AssignCharEvent)myEvent));
+                        break;
+
+
+                    case EventType.PASS:
+                        //GD.Print((PassEvent)myEvent);
+                        break;
+
+                }
+
+                questCurrentPlayer = gameState.GetOtherPlayer(questCurrentPlayer);
+
+                throw new StateResultException(StateResult.STOP);
+               
 
             }
-
-            throw new StateResultException(StateResult.STOP);
-
-
         }
+
+            
+
+          
+
+
+        
     }
 }

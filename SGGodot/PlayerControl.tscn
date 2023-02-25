@@ -137,3 +137,6 @@ alignment = 1
 script = ExtResource( 4 )
 
 [connection signal="button_down" from="PassButton" to="." method="_on_PassButton_button_down"]
+[connection signal="SendEvent" from="PlayerContainer/HBoxContainer/TeamContainer" to="." method="PlayEvent"]
+[connection signal="SendEvent" from="PlayerContainer/HBoxContainer/BoardContainer" to="." method="PlayEvent"]
+[connection signal="SendEvent" from="PlayerContainer/HandContainer" to="." method="PlayEvent"]

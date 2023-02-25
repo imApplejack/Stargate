@@ -13,11 +13,13 @@ public class HandContainer : CardContainer
     // Called when the node enters the scene tree for the first time.
 
 
+
+
     public override void ProcessCardAction(GDCard card)
     {
         if ( card.Card.State == CardState.Hand)
         {
-            ForwardEvent(new PlayCardEvent() { player = card.Card.Owner, cardModel = card.Card });
+            ForwardEvent(new PlayCardEvent() { cardModel = card.Card });
         }   
     }
 

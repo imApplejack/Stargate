@@ -12,9 +12,6 @@ namespace Stargate.Stargate.Event
     public class PassEvent : StargateEvent
     {
 
-        public Player player { get; set; }
-
-
         public PassEvent()
         {
             Type = EventType.PASS;
@@ -23,7 +20,7 @@ namespace Stargate.Stargate.Event
 
         public override string ToString()
         {
-            return base.ToString() + " " + player;
+            return base.ToString();
         }
 
 

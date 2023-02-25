@@ -40,6 +40,16 @@ namespace Stargate.Stargate
 
 
 
+        public Player GetOtherPlayer(Player player)
+        {
+            if(player == GetHeroPlayer())
+            {
+                return GetEnemyPlayer();
+            }
+            return GetHeroPlayer();
+
+        }
+
        public Player GetEnemyPlayer()
         {
             if(CurrentPlayer == player1)
