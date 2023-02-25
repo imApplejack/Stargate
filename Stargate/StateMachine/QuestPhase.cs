@@ -16,13 +16,27 @@ namespace Stargate.StateMachine
     {
 
 
-
-
         public QuestPhase(GameState gs) : base(gs)
+        {
+           
+        }
+
+
+        private Dictionary<Player, bool> questPhasePass = new Dictionary<Player, bool>();
+
+        private Player questCurrentPlayer;
+
+
+        public override void InitSG()
         {
             AddAction(PlayMission)
             .AddAction(PlayAction)
             ;
+
+            //questCurrentPlayer = gameState.CurrentPlayer;
+            //questPhasePass = new Dictionary<Player, bool>() { [gameState.CurrentPlayer] = false, [gameState.GetEnemyPlayer()] = false };
+
+
         }
 
 

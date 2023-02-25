@@ -22,7 +22,7 @@ namespace Stargate.StateMachine
 
         public virtual void Init() {
 
-            Debug.WriteLine("StateAction:Init");
+            //Debug.WriteLine("StateAction:Init");
         }
 
 

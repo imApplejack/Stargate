@@ -25,10 +25,12 @@ namespace Stargate.Stargate.Event
 
         public EventType Type { get; set; }
 
+        public Player Sender { get; set; }
+
 
         public override string ToString()
         {
-            return Type.ToString();
+            return Type.ToString() + Sender;
         }
 
 

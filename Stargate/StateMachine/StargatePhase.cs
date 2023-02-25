@@ -17,7 +17,10 @@ namespace Stargate.StateMachine
 
         public StargatePhase(GameState gs) {
             gameState = gs;
+            InitSG();
         }
+
+        public virtual void InitSG() { }
 
         public GameState gameState = null;
 
