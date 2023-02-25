@@ -78,8 +78,6 @@ namespace Stargate.Stargate
         }
 
 
-        public void Update() { }
-
         public void ProcessEvent(StargateEvent myEvent)
         {
             Godot.GD.Print(myEvent);

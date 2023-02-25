@@ -32,42 +32,39 @@ public class Main : Node
 
         //cardService.Draw(Player1);
         game = new StargateGame(library);
-        
         StargateGameMock.InitPlayersWithMock(game);
+
+
+
 
 
         MappingMVC mappingMVC = new MappingMVC();
         mappingMVC.InitRessources(game.CardService.GetAllCards());
-
-
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
-        Player1Vue.Player = game.player1;
+        Player1Vue.Player = game.GameState.player1;
         Player1Vue.Api = this; // :'(
         Player1Vue.MappingMVC = mappingMVC;
-
-
         game.GameState.StargateResultHandler += Player1Vue.HandleResult;
-
         Player1Vue.Init();
-
-
 
 
         MappingMVC mappingMVC2 = new MappingMVC();
         mappingMVC2.InitRessources(game.CardService.GetAllCards());
-
         Player2Vue = (PlayerControl)this.FindNode("PlayerControl2");
-        Player2Vue.Player = game.player2;
+        Player2Vue.Player = game.GameState.player2;
         Player2Vue.Api = this; // :'(
         Player2Vue.MappingMVC = mappingMVC2;
         game.GameState.StargateResultHandler += Player2Vue.HandleResult;
-
         Player2Vue.Init();
-        
+
+
+
+        game.GameState.InitGame(1);
+
 
         // MajVue(game.CardService.PlayMission(game.player1));
 
-        game.GameState.InitGame(1);
+
 
 
         /*

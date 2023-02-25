@@ -16,8 +16,7 @@ namespace Stargate
     {
 
 
-        public Player player1 { get; set; } = null;
-        public Player player2 { get; set; } = null;
+
 
         public CardService CardService { get; set; }  = new CardService();
 
@@ -32,9 +31,7 @@ namespace Stargate
         public StargateGame(Library library)
         {
             Library = library;
-            player1 = new Player();
-            player2 = new Player();
-            GameState = new GameState() { player1 = player1, player2 = player2, CardService = CardService};
+            GameState = new GameState() { player1 = new Player(), player2 = new Player(), CardService = CardService};
         }
 
       

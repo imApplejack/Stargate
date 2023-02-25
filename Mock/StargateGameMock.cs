@@ -13,8 +13,8 @@ namespace Stargate.Mock
 
         public static  void InitPlayersWithMock(StargateGame stargateGame)
         {
-            StargateGameMock.InitPlayerWithMock(stargateGame, stargateGame.player1);
-            StargateGameMock.InitPlayerWithMock(stargateGame, stargateGame.player2);
+            StargateGameMock.InitPlayerWithMock(stargateGame, stargateGame.GameState.player1);
+            StargateGameMock.InitPlayerWithMock(stargateGame, stargateGame.GameState.player2);
             stargateGame.CardService.InitPlayersLibraryAndMissions();
         }
 
