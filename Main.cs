@@ -8,6 +8,7 @@ using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 public class Main : Node
 {
@@ -25,8 +26,9 @@ public class Main : Node
     {
 
 
-        Library library = new Library("C:\\Users\\lolec\\Documents\\Projets\\Stargate\\Sets\\");
+        Library library = new Library(ProjectSettings.GlobalizePath("res://Sets/"));
 
+ 
 
         //cardService.Draw(Player1);
         game = new StargateGame(library);
