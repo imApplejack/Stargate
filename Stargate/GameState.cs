@@ -200,16 +200,30 @@ namespace Stargate.Stargate
             random = new Random(seed);
             CurrentPlayer = player1;
             GameStack = new InitPhase(this);
-            GameStack.Play();
+
+            try
+            {
+                GameStack.Play();
+            }catch(StateResultException e)
+            {
+
+            }
         }
 
 
         public void ProcessEvent(StargateEvent myEvent)
         {
             //Godot.GD.Print(myEvent);
-            GameStack.Play(myEvent);
+            try
+            {
+                GameStack.Play(myEvent);
+            }
+            catch (StateResultException e)
+            {
 
-           
+            }
+
+
         }
 
         public void ForwardEvent(StargateResult e)

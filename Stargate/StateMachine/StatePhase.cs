@@ -79,7 +79,8 @@ namespace Stargate.StateMachine
                    
                     if(ex.response == StateResult.STOP)
                     {
-                        return;
+                        throw ex;
+                        //return;
                     }
                 }
                 finally { currentOperation = i; }

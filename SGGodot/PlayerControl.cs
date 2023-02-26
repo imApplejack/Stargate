@@ -177,7 +177,7 @@ public class PlayerControl : Control
         GDCard GDCard = this.GetCard(card);
         GDCard.ClearIngameInstances();
 
-        GD.Print(GDCard.Card);
+        //GD.Print(GDCard.Card);
 
         if (card.Owner == this.player)
         {

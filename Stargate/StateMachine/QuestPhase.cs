@@ -65,13 +65,16 @@ namespace Stargate.StateMachine
                         case EventType.PLAYCARD:
                             SendEvent(gameState.PlayHeroCard((PlayCardEvent)myEvent));
                             SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
+                            questPhasePass[questCurrentPlayer] = false;
                             break;
                         case EventType.ASSIGNCHAR:
                             SendEvent(gameState.AssignHeroChar((AssignCharEvent)myEvent));
+                            questPhasePass[questCurrentPlayer] = false;
                             break;
                         case EventType.PASS:
-                            //GD.Print((PassEvent)myEvent);
+                            questPhasePass[questCurrentPlayer] = true;
                             break;
+                        default: throw new StateResultException(StateResult.STOP);
 
                     }
 
@@ -85,27 +88,43 @@ namespace Stargate.StateMachine
                         case EventType.PLAYCARD:
                             SendEvent(gameState.PlayMonsterBoss((PlayCardEvent)myEvent));
                             SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
+                            questPhasePass[questCurrentPlayer] = false;
                             break;
                         case EventType.ASSIGNCHAR:
                             SendEvent(gameState.AssignVillanChar((AssignCharEvent)myEvent));
+                            questPhasePass[questCurrentPlayer] = false;
                             break;
                         case EventType.PASS:
+                            questPhasePass[questCurrentPlayer] = true;
                             //GD.Print((PassEvent)myEvent);
                             break;
+                        default: throw new StateResultException(StateResult.STOP);
 
                     }
-
-
                 }
 
                
-
-
-
-
                 questCurrentPlayer = gameState.GetOtherPlayer(questCurrentPlayer);
-                throw new StateResultException(StateResult.STOP);
+
+                if ( !questPhasePass[gameState.CurrentPlayer] || !questPhasePass[gameState.GetEnemyPlayer()])
+                {
+                    //GD.Print("STOP MACHINE A ETAT");
+                    Debug.WriteLine("STOP MACHINE A ETAT");
+                    throw new StateResultException(StateResult.STOP);
+                }
+                else
+                {
+                    Debug.WriteLine("CONTINUE MACHINE A ETAT");
+                    //GD.Print("CONTINUE MACHINE A ETAT");
+                }
+
+
+                
             }
+            else
+            {
+                throw new StateResultException(StateResult.STOP);
+            } 
 
 
 

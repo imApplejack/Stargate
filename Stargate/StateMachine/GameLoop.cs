@@ -16,6 +16,7 @@ namespace Stargate.StateMachine
         {
             AddAction(new MPPhase(gs))
             .AddAction(new QuestPhase(gs))
+            .AddAction(new StateAction())
             ;
         }
 
