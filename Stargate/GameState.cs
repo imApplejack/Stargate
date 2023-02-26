@@ -33,7 +33,6 @@ namespace Stargate.Stargate
         }
 
 
-
         public List<CardModel> GetAllCards()
         {
             return this.CardRepository.GetAll();

@@ -7,10 +7,11 @@
 script = ExtResource( 1 )
 
 [node name="PlayerControl" parent="." instance=ExtResource( 2 )]
-margin_right = -800.0
 
 [node name="PlayerControl2" parent="." instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 800.0
-__meta__ = {
-"_edit_use_anchors_": true
-}
+margin_right = 800.0
+margin_bottom = 800.0
