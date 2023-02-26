@@ -31,7 +31,6 @@ namespace Stargate.Stargate
         }
        */
 
-        public static event EventHandler CardModelObservable;
 
         public int Id { get; set; } // unique id 
         public CardState State { get; set; }
@@ -49,19 +48,14 @@ namespace Stargate.Stargate
         }
 
 
-        public void RefreshView()
-        {
-            CardModelObservable(this, new CardModelEventArgs());
-        }
 
-    }
 
-    class CardModelEventArgs : EventArgs
-    {
         public override string ToString()
         {
-            return "CardModel call handler kikoo";
+            return State.ToString();
         }
+
     }
+
 
 }

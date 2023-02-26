@@ -8,27 +8,31 @@ namespace Stargate.Stargate.Enum
 {
     public enum CardState
     {
-        Hand,
-        Library,
-        Ready,
-        Mission,
-        Stop,
-        Disabled,
-        Destroy,
-        MissionPile
+        NONE = 0,
+        Hand = 1,
+        Library = 2,
+        Ready = 4,
+        Mission = 8,
+        Stop = 16,
+        Disabled = 32,
+        Destroy = 64,
+        MissionPile = 128,
+        Board = Ready | Stop | Disabled
     };
 
 
     public enum CardType
     {
-        Adversary,
-        SupportCharacter,
-        Event,
-        Gear,
-        Obstacle,
-        TeamCharacter,
-        Mission,
-        NONE
+        NONE = 0,
+        Adversary = 1,
+        SupportCharacter = 2,
+        Event = 4,
+        Gear = 8,
+        Obstacle = 16,
+        TeamCharacter = 32,
+        Mission = 64,
+        Character = SupportCharacter | TeamCharacter | Adversary,
+        
     };
 
     public enum Glyphe

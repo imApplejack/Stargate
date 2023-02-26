@@ -16,22 +16,16 @@ namespace Stargate.Stargate
     public class GameState
     {
 
-
         public Random random = null;
-
         public Player CurrentPlayer { get; set; } = null;
-
         public Player player1 { get; set; } = null;
         public Player player2 { get; set; } = null;
-
-
 
         public StateAction GameStack { get; set; }
 
         public event EventHandler StargateResultHandler;
 
         public CardRepository CardRepository { get; set; } = new CardRepository();
-
 
         public GameState()
         {
@@ -171,7 +165,7 @@ namespace Stargate.Stargate
 
         public void ProcessEvent(StargateEvent myEvent)
         {
-            Godot.GD.Print(myEvent);
+            //Godot.GD.Print(myEvent);
             GameStack.Play(myEvent);
 
            

@@ -73,13 +73,13 @@ public class GDCard : Control
 
     public void _on_Panel_mouse_entered()
     {
-        GD.Print("enter " + this);
+        //GD.Print("enter " + this);
         zoomEvent.EmitSignal("Enter", this);
     }
 
     public void _on_Panel_mouse_exited()
     {
-        GD.Print("leave " + this);
+        //GD.Print("leave " + this);
         zoomEvent.EmitSignal("Leave", this);
     }
 
@@ -116,6 +116,8 @@ public class GDCard : Control
     {
         return this;
     }
+
+   
 
 
 }

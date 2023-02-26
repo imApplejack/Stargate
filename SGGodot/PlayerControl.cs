@@ -44,7 +44,7 @@ public class PlayerControl : Control
 
     public void _on_PassButton_button_down()
     {
-        GD.Print("PASSBUTTK");
+        //GD.Print("PASSBUTTK");
         Api.SendEvent(new PassEvent() { Sender = Player });
     }
 
@@ -53,7 +53,7 @@ public class PlayerControl : Control
        // if (card.Card.Owner == player)
         // hack nul à cause des message partagés
         {
-            GD.PrintErr("zoom sur la carte", card);
+            //GD.PrintErr("zoom sur la carte", card);
 
             if (IsInstanceValid(card) && !card.IsQueuedForDeletion())
             {
@@ -68,7 +68,7 @@ public class PlayerControl : Control
         //if (card.Card.Owner == player)
         // hack nul à cause des message partagés
         {
-            GD.PrintErr("dezoom sur la carte", card);
+            //GD.PrintErr("dezoom sur la carte", card);
             foreach (Node item in ZoomContainer.GetChildren())
             {
 
@@ -85,7 +85,7 @@ public class PlayerControl : Control
     
     public void PlayEvent(SGEventContainer container)
     {
-        GD.Print("reception de event play event" + container);
+        //GD.Print("reception de event play event" + container);
         StargateEvent se = container.SGEvent;
         se.Sender = player;
         Api.SendEvent(container.SGEvent);
@@ -177,60 +177,31 @@ public class PlayerControl : Control
         GDCard GDCard = this.GetCard(card);
         GDCard.ClearIngameInstances();
 
+        GD.Print(GDCard.Card);
+
         if (card.Owner == this.player)
         {
-            switch (GDCard.Card.State)
+            if ((GDCard.Card.State & CardState.Hand) != 0)
+                {
+                    HandContainer.AddChild(GDCard.GetClone());
+                        
+                }
+            else if ((GDCard.Card.State & CardState.Board) != 0)
+                {
+
+                    if (GDCard.Card.Card.Type == CardType.TeamCharacter)
+                    {
+                        TeamContainer.AddChild(GDCard.GetClone());
+                    }
+                    else
+                    {
+                        BoardContainer.AddChild(GDCard.GetClone());
+                    }
+                       
+                }
+            else if ((GDCard.Card.State & CardState.Mission) != 0)
             {
-                case CardState.Hand:
-                    {
-                        HandContainer.AddChild(GDCard.GetClone());
-                        break;
-                    }
-                
-                
-                
-                
-                
-                case CardState.Ready:
-                    {
-
-                        if (GDCard.Card.Card.Type == CardType.TeamCharacter)
-                        {
-                            TeamContainer.AddChild(GDCard.GetClone());
-                        }
-                        else
-                        {
-                            BoardContainer.AddChild(GDCard.GetClone());
-                        }
-                        break;
-                    }
-
-                case CardState.Stop:
-                    {
-
-                        if (GDCard.Card.Card.Type == CardType.TeamCharacter)
-                        {
-                            TeamContainer.AddChild(GDCard.GetClone());
-                        }
-                        else
-                        {
-                            BoardContainer.AddChild(GDCard.GetClone());
-                        }
-                        break;
-                    }
-
-
-
-
-
-                case CardState.Mission:
-                    {
-                        MissionContainer.Assign(GDCard.GetClone());
-                        break;
-                    }
-
-                default:
-                    break;
+                MissionContainer.Assign(GDCard.GetClone());    
             }
         }
         else

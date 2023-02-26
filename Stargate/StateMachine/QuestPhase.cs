@@ -50,7 +50,7 @@ namespace Stargate.StateMachine
         public void PlayAction(StateEvent e = null)
         {
 
-            GD.Print("Questphase playaction");
+            //GD.Print("Questphase playaction");
             // throw new StateResultException(StateResult.STOP);
 
 
@@ -66,7 +66,7 @@ namespace Stargate.StateMachine
                     case EventType.PLAYCARD:
 
                         StargateResult sr = gameState.PlayCard((PlayCardEvent)myEvent);
-                        GD.Print(sr);
+                        //GD.Print(sr);
                         SendEvent(sr);
                         SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
 

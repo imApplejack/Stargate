@@ -16,12 +16,12 @@ public class Zoom : Control
 
     public void _on_Character_focus_entered()
     {
-        GD.Print("focus");
+       // GD.Print("focus");
     }
 
     public void _on_Button_mouse_entered()
     {
-        GD.Print("ouver button");
+        //GD.Print("ouver button");
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
