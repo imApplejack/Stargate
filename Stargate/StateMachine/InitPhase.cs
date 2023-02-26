@@ -29,10 +29,15 @@ namespace Stargate.StateMachine
        {
            SendEvent(gameState.Draw(gameState.GetHeroPlayer()));
            SendEvent(gameState.Draw(gameState.GetHeroPlayer()));
+            SendEvent(gameState.Draw(gameState.GetHeroPlayer()));
+            SendEvent(gameState.Draw(gameState.GetHeroPlayer()));
 
-           SendEvent(gameState.Draw(gameState.GetEnemyPlayer()));
-           //SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
-       }
+
+            SendEvent(gameState.Draw(gameState.GetEnemyPlayer()));
+            SendEvent(gameState.Draw(gameState.GetEnemyPlayer()));
+            SendEvent(gameState.Draw(gameState.GetEnemyPlayer()));
+            SendEvent(gameState.Draw(gameState.GetEnemyPlayer()));//SendEvent(gameState.CardService.Draw(gameState.GetEnemyPlayer()));
+        }
 
         public void ChooseParty(StateEvent e = null)
         {

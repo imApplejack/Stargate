@@ -79,6 +79,27 @@ namespace Stargate.Stargate
         }
 
 
+        public StargateResult PlayHeroCard(PlayCardEvent playCardEvent)
+        {
+            if((playCardEvent.cardModel.Card.Type & CardType.HeroPlayerAction) != 0)
+            {
+                return PlayCard(playCardEvent);
+            }
+
+            return new StargateResult() { actionResult = ActionResult.Failure };
+        }
+
+
+        public StargateResult PlayMonsterBoss(PlayCardEvent playCardEvent)
+        {
+            if ((playCardEvent.cardModel.Card.Type & CardType.VillanPlayerAction) != 0)
+            {
+                return PlayCard(playCardEvent);
+            }
+
+            return new StargateResult() { actionResult = ActionResult.Failure };
+        }
+
         public StargateResult PlayCard(PlayCardEvent playCardEvent)
         {
             if (CardRepository.IsInHand(playCardEvent.Sender, playCardEvent.cardModel) && playCardEvent.Sender.Energy >= playCardEvent.cardModel.Card.Cost)
@@ -92,6 +113,27 @@ namespace Stargate.Stargate
                 return new StargateResult() { actionResult = ActionResult.Failure };
             }
         }
+
+
+
+        public StargateResult AssignHeroChar(AssignCharEvent assignCardEvent)
+        {
+            if ((assignCardEvent.cardModel.Card.Type & CardType.HeroPlayerAction) != 0)
+            {
+                return AssignChar(assignCardEvent);
+            }
+            return new StargateResult() { actionResult = ActionResult.Failure };
+        }
+
+        public StargateResult AssignVillanChar(AssignCharEvent assignCardEvent)
+        {
+            if ((assignCardEvent.cardModel.Card.Type & CardType.VillanPlayerAction) != 0)
+            {
+                return AssignChar(assignCardEvent);
+            }
+            return new StargateResult() { actionResult = ActionResult.Failure };
+        }
+
 
         public StargateResult AssignChar(AssignCharEvent assignCardEvent)
         {

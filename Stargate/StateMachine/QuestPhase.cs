@@ -32,11 +32,8 @@ namespace Stargate.StateMachine
             AddAction(PlayMission)
             .AddAction(PlayAction)
             ;
-
             questCurrentPlayer = gameState.CurrentPlayer;
             questPhasePass = new Dictionary<Player, bool>() { [gameState.CurrentPlayer] = false, [gameState.GetEnemyPlayer()] = false };
-
-
         }
 
 
@@ -55,41 +52,63 @@ namespace Stargate.StateMachine
 
 
             StargateEvent myEvent = (StargateEvent)e;
-
-
             if (myEvent.Sender == questCurrentPlayer)
             {
 
-                switch (myEvent.Type)
+
+                if(questCurrentPlayer == gameState.GetHeroPlayer())
                 {
 
-                    case EventType.PLAYCARD:
+                    switch (myEvent.Type)
+                    {
 
-                        StargateResult sr = gameState.PlayCard((PlayCardEvent)myEvent);
-                        //GD.Print(sr);
-                        SendEvent(sr);
-                        SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
+                        case EventType.PLAYCARD:
+                            SendEvent(gameState.PlayHeroCard((PlayCardEvent)myEvent));
+                            SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
+                            break;
+                        case EventType.ASSIGNCHAR:
+                            SendEvent(gameState.AssignHeroChar((AssignCharEvent)myEvent));
+                            break;
+                        case EventType.PASS:
+                            //GD.Print((PassEvent)myEvent);
+                            break;
 
-                        break;
+                    }
 
+                }
+                else
+                {
 
-                    case EventType.ASSIGNCHAR:
-                        SendEvent(gameState.AssignChar((AssignCharEvent)myEvent));
-                        break;
+                    switch (myEvent.Type)
+                    {
 
+                        case EventType.PLAYCARD:
+                            SendEvent(gameState.PlayMonsterBoss((PlayCardEvent)myEvent));
+                            SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
+                            break;
+                        case EventType.ASSIGNCHAR:
+                            SendEvent(gameState.AssignVillanChar((AssignCharEvent)myEvent));
+                            break;
+                        case EventType.PASS:
+                            //GD.Print((PassEvent)myEvent);
+                            break;
 
-                    case EventType.PASS:
-                        //GD.Print((PassEvent)myEvent);
-                        break;
+                    }
+
 
                 }
 
-                questCurrentPlayer = gameState.GetOtherPlayer(questCurrentPlayer);
-
-                throw new StateResultException(StateResult.STOP);
                
 
+
+
+
+                questCurrentPlayer = gameState.GetOtherPlayer(questCurrentPlayer);
+                throw new StateResultException(StateResult.STOP);
             }
+
+
+
         }
 
             

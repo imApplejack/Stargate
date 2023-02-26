@@ -31,8 +31,9 @@ namespace Stargate.Stargate.Enum
         Obstacle = 16,
         TeamCharacter = 32,
         Mission = 64,
-        Character = SupportCharacter | TeamCharacter | Adversary,
-        
+        Character =  SupportCharacter | TeamCharacter | Adversary,
+        HeroPlayerAction = TeamCharacter | SupportCharacter | Gear | Event,
+        VillanPlayerAction = Adversary | Obstacle
     };
 
     public enum Glyphe
