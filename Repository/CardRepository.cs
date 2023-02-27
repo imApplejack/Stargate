@@ -99,6 +99,20 @@ namespace Stargate.Repository
             return Cards.Exists(cardModel => cardModel.Owner == player && cardModel.State == CardState.Hand && cardModel == card);
         }
 
+        public List<CardModel> GetCardsInMission(Player player)
+        {
+            return Cards.FindAll(cardModel => cardModel.State == CardState.Mission && cardModel.Owner == player);
+        }
+
+
+        public CardModel GetCurrentMission()
+        {
+            return Cards.Find(cardModel => cardModel.State == CardState.Mission && cardModel.Card.Type == CardType.Mission);
+        }
+
+
+
+
         public StargateResult Draw(Player player)
         {
             /// TODO faire les cas bibliotheque vide ect... 

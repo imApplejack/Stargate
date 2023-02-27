@@ -33,7 +33,12 @@ namespace Stargate.StateMachine
         {
             Debug.WriteLine("MyInitDelegateMethod" +  " toto = " + toto);
             toto++;
+
+
             QueueAction(new MockState());
+
+           
+
         }
 
         public void MyInitDelegateMethod2(StateEvent e = null)

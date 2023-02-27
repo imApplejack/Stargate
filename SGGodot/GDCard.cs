@@ -103,8 +103,7 @@ public class GDCard : Control
                 {
                     parent.ProcessCardAction(this);
                 }
-
-                
+  
 
                 //GD.Print("bouton sur une carte");
                 //playEvent.EmitSignal("PlayCard", this);

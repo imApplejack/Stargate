@@ -13,8 +13,6 @@ public class HandContainer : CardContainer
     // Called when the node enters the scene tree for the first time.
 
 
-
-
     public override void ProcessCardAction(GDCard card)
     {
         if ( card.Card.State == CardState.Hand)

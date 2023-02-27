@@ -18,7 +18,10 @@ namespace Stargate.StateMachine
 
         public QuestResolution(GameState gs) : base(gs)
         {
-            AddAction(new StateAction());
+            AddAction(QuestResolutionAbilities)
+            .AddAction(TestQuestVictory)
+
+           ;
         }
 
 
@@ -29,7 +32,18 @@ namespace Stargate.StateMachine
         }
 
 
+        public void QuestResolutionAbilities(StateEvent e = null)
+        {
+            
         }
+
+        public void TestQuestVictory(StateEvent e = null)
+        {
+
+        }
+
+
+    }
     
     
 }

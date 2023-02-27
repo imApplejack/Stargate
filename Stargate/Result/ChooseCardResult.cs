@@ -20,5 +20,7 @@ namespace Stargate.Stargate.Result
 
         public int count = 1;
 
+
+
     }
 }

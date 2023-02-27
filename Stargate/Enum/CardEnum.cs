@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stargate.Stargate.Enum
 {
+
     public enum CardState
     {
         NONE = 0,

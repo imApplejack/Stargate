@@ -1,17 +1,19 @@
-﻿using Stargate.Repository;
+﻿using Godot;
+using Stargate.Repository;
+using Stargate.Stargate.Card;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
 using Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Stargate.Stargate
 {
 
-    
 
     public class GameState
     {
@@ -29,7 +31,7 @@ namespace Stargate.Stargate
 
         public GameState()
         {
-             
+
         }
 
 
@@ -41,7 +43,19 @@ namespace Stargate.Stargate
 
         public CardModel CreateCardModel(SGCard card)
         {
-            return new CardModel(card);
+           
+            switch (card.Type)
+            {
+                 case CardType.Mission:
+                 return  new MissionModel() { Card = card };
+
+                    //@TODO
+
+
+
+                default: return new CardModel(card);
+            }
+
         }
 
         /** 
@@ -52,7 +66,11 @@ namespace Stargate.Stargate
             foreach (SGCard card in cards)
             {
                 // faire des if pour verifier la pertinance IsNotTeam
-                CardModel cl = new CardModel(card) { Owner = player, State = CardState.Library };
+                CardModel cl = CreateCardModel(card);
+                cl.Owner = player;
+                cl.State = CardState.Library;
+                
+                
                 this.CardRepository.AddCard(cl);
             }
         }
@@ -62,7 +80,9 @@ namespace Stargate.Stargate
             foreach (SGCard card in cards)
             {
                 // faire des if pour verifier la pertinance IsTeam
-                CardModel cl = new CardModel(card) { Owner = player, State = CardState.Ready };
+                CardModel cl = CreateCardModel(card);
+                cl.Owner = player;
+                cl.State = CardState.Ready;
                 this.CardRepository.AddCard(cl);
             }
         }
@@ -72,7 +92,9 @@ namespace Stargate.Stargate
             foreach (SGCard card in cards)
             {
                 // faire des if pour verifier la pertinance isMission
-                CardModel cl = new CardModel(card) { Owner = player, State = CardState.MissionPile };
+                CardModel cl = CreateCardModel(card);
+                cl.Owner = player;
+                cl.State = CardState.MissionPile;
                 this.CardRepository.AddCard(cl);
             }
         }
@@ -80,7 +102,7 @@ namespace Stargate.Stargate
 
         public StargateResult PlayHeroCard(PlayCardEvent playCardEvent)
         {
-            if((playCardEvent.cardModel.Card.Type & CardType.HeroPlayerAction) != 0)
+            if ((playCardEvent.cardModel.Card.Type & CardType.HeroPlayerAction) != 0)
             {
                 return PlayCard(playCardEvent);
             }
@@ -148,6 +170,18 @@ namespace Stargate.Stargate
         }
 
 
+        public bool CheckQuestVictory()
+        {
+            CardModel mission = CardRepository.GetCurrentMission();
+            List<CardModel> heros = CardRepository.GetCardsInMission(GetHeroPlayer());
+            List<CardModel> peripeties = CardRepository.GetCardsInMission(GetEnemyPlayer());
+
+
+
+            return true;
+        }
+
+
         public void InitPlayersLibraryAndMissions()
         {
             this.CardRepository.InitPlayersLibrary();
@@ -168,7 +202,7 @@ namespace Stargate.Stargate
 
         public Player GetOtherPlayer(Player player)
         {
-            if(player == GetHeroPlayer())
+            if (player == GetHeroPlayer())
             {
                 return GetEnemyPlayer();
             }
@@ -176,9 +210,9 @@ namespace Stargate.Stargate
 
         }
 
-       public Player GetEnemyPlayer()
+        public Player GetEnemyPlayer()
         {
-            if(CurrentPlayer == player1)
+            if (CurrentPlayer == player1)
             {
                 return player2;
             }
@@ -204,7 +238,8 @@ namespace Stargate.Stargate
             try
             {
                 GameStack.Play();
-            }catch(StateResultException e)
+            }
+            catch (StateResultException e)
             {
 
             }
@@ -228,21 +263,21 @@ namespace Stargate.Stargate
 
         public void ForwardEvent(StargateResult e)
         {
-            if(e.actionResult == ActionResult.Success)
+            if (e.actionResult == ActionResult.Success)
             {
                 StargateResultHandler?.Invoke(this, e);
             }
-           
+
         }
 
-        
+
     }
 
 
 
 }
 
-       
+
 
 
 

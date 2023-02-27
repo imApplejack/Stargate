@@ -125,12 +125,6 @@ public class PlayerControl : Control
               p.RectSize = p.RectSize + new Vector2(30.0f, 100.0f);
               p.Show();*/
 
-
-
-
-           
-
-
         }
         catch(Exception e) { }
     
@@ -181,12 +175,13 @@ public class PlayerControl : Control
 
         if (card.Owner == this.player)
         {
+
             if ((GDCard.Card.State & CardState.Hand) != 0)
                 {
                     HandContainer.AddChild(GDCard.GetClone());
-                        
+                       
                 }
-            else if ((GDCard.Card.State & CardState.Board) != 0)
+            else if ( (GDCard.Card.State & CardState.Board) != 0 )
                 {
 
                     if (GDCard.Card.Card.Type == CardType.TeamCharacter)
@@ -199,10 +194,11 @@ public class PlayerControl : Control
                     }
                        
                 }
-            else if ((GDCard.Card.State & CardState.Mission) != 0)
-            {
-                MissionContainer.Assign(GDCard.GetClone());    
-            }
+                else if ((GDCard.Card.State & CardState.Mission) != 0)
+                {
+                    MissionContainer.Assign(GDCard.GetClone());    
+                }
+
         }
         else
         {
