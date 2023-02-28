@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stargate.Stargate
+namespace Stargate.Stargate.Card
 {
 
     public class CardModel
     {
 
- 
+
         public int Id { get; set; } // unique id 
         public CardState State { get; set; }
         public Player Owner { get; set; }
@@ -24,7 +24,7 @@ namespace Stargate.Stargate
         }
         public CardModel(SGCard card)
         {
-            this.Card = card;
+            Card = card;
         }
 
 

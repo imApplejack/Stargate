@@ -1,7 +1,7 @@
 using Godot;
 using Stargate;
 using Stargate.SGGodot;
-using Stargate.Stargate;
+using Stargate.Stargate.Card;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
 using Stargate.Stargate.Result;

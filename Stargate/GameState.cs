@@ -49,6 +49,10 @@ namespace Stargate.Stargate
                  case CardType.Mission:
                  return  new MissionModel() { Card = card };
 
+                case CardType.Character:
+                    return new CharacterModel() { Card = card };
+
+
                     //@TODO
 
 
@@ -69,8 +73,6 @@ namespace Stargate.Stargate
                 CardModel cl = CreateCardModel(card);
                 cl.Owner = player;
                 cl.State = CardState.Library;
-                
-                
                 this.CardRepository.AddCard(cl);
             }
         }
@@ -172,13 +174,26 @@ namespace Stargate.Stargate
 
         public bool CheckQuestVictory()
         {
-            CardModel mission = CardRepository.GetCurrentMission();
-            List<CardModel> heros = CardRepository.GetCardsInMission(GetHeroPlayer());
-            List<CardModel> peripeties = CardRepository.GetCardsInMission(GetEnemyPlayer());
+            MissionModel mission = CardRepository.GetCurrentMission();
+            List<CardModel> heros = CardRepository.GetCardsInMission(GetHeroPlayer(), CardType.HeroPlayerMissionObjets);
+            List<CardModel> peripeties = CardRepository.GetCardsInMission(GetEnemyPlayer(), CardType.HeroPlayerMissionObjets);
+
+            int difficulty = 0;
+            foreach (CharacterModel card in peripeties)
+            {
+                difficulty += (int)card.GetSkill(mission.GetMissionSkill());
+            }
+
+
+            int totalStats = 0;
+            foreach (CharacterModel card in heros)
+            {
+                totalStats += (int)card.GetSkill(mission.GetMissionSkill());
+            }
 
 
 
-            return true;
+            return totalStats > difficulty;
         }
 
 

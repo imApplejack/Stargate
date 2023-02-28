@@ -1,5 +1,5 @@
 using Godot;
-using Stargate.Stargate;
+using Stargate.Stargate.Card;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -7,6 +7,17 @@ using System.Threading.Tasks;
 namespace Stargate.Stargate.Enum
 {
 
+
+    public enum Skill
+    {
+        None = 0,
+        Culture = 1,
+        Science= 2,
+        Combat = 4,
+        Ingenuity = 8,
+        ALL = Culture & Science & Combat & Ingenuity
+    };
+
     public enum CardState
     {
         NONE = 0,
@@ -32,6 +43,8 @@ namespace Stargate.Stargate.Enum
         Obstacle = 16,
         TeamCharacter = 32,
         Mission = 64,
+        HeroPlayerMissionObjets = SupportCharacter | TeamCharacter,
+        VIllanPlayerMissionObjects = Adversary | Obstacle,
         Character =  SupportCharacter | TeamCharacter | Adversary,
         HeroPlayerAction = TeamCharacter | SupportCharacter | Gear | Event,
         VillanPlayerAction = Adversary | Obstacle

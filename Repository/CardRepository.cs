@@ -1,4 +1,4 @@
-﻿using Stargate.Stargate;
+﻿using Stargate.Stargate.Card;
 using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
@@ -99,13 +99,13 @@ namespace Stargate.Repository
             return Cards.Exists(cardModel => cardModel.Owner == player && cardModel.State == CardState.Hand && cardModel == card);
         }
 
-        public List<CardModel> GetCardsInMission(Player player)
+        public List<CardModel> GetCardsInMission(Player player, CardType cardType)
         {
-            return Cards.FindAll(cardModel => cardModel.State == CardState.Mission && cardModel.Owner == player);
+            return Cards.FindAll(cardModel => cardModel.State == CardState.Mission && cardModel.Owner == player && cardModel.Card.Type == cardType);
         }
 
 
-        public CardModel GetCurrentMission()
+        public MissionModel GetCurrentMission()
         {
             return Cards.Find(cardModel => cardModel.State == CardState.Mission && cardModel.Card.Type == CardType.Mission);
         }

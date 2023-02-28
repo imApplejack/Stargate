@@ -1,6 +1,6 @@
 using Godot;
 using Stargate;
-using Stargate.Stargate;
+using Stargate.Stargate.Card;
 using Stargate.Stargate.Event;
 using System;
 using System.Collections.Generic;
