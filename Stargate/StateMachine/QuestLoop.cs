@@ -18,8 +18,16 @@ namespace Stargate.StateMachine
 
         public QuestLoop(GameState gs) : base(gs)
         {
-           AddAction(new QuestPhase(gs))
-           .AddAction(new QuestResolution(gs)); 
+            Debug.WriteLine("QUEST LOOP");
+
+        
+        }
+
+        public override void InitSG()
+        {
+            AddAction(new QuestPhase(gameState))
+           .AddAction(new QuestResolution(gameState));
+
         }
 
 

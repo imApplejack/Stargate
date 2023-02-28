@@ -107,7 +107,7 @@ namespace Stargate.Repository
 
         public MissionModel GetCurrentMission()
         {
-            return Cards.Find(cardModel => cardModel.State == CardState.Mission && cardModel.Card.Type == CardType.Mission);
+            return (MissionModel)Cards.Find(cardModel => cardModel.State == CardState.Mission && cardModel.Card.Type == CardType.Mission);
         }
 
 

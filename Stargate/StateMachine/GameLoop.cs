@@ -14,12 +14,18 @@ namespace Stargate.StateMachine
 
         public GameLoop(GameState gs) : base(gs)
         {
-            AddAction(new MPPhase(gs))
-            .AddAction(new QuestLoop(gs))
-            ;
+          
         }
 
-        
+
+        public override void InitSG()
+        {
+            AddAction(new MPPhase(gameState))
+          .AddAction(new QuestLoop(gameState))
+          ;
+        }
+
+
 
         /*
         public MPPhase(GameState gameState = null) : base(gameState)

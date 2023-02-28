@@ -22,6 +22,8 @@ namespace Stargate.StateMachine
 
         public virtual void InitSG() { }
 
+      
+
         public GameState gameState = null;
 
         public void SendEvent(StargateResult r)

@@ -1,4 +1,5 @@
-﻿using Stargate.Stargate.Enum;
+﻿using Stargate.Stargate.Card.Interface;
+using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Stargate.Stargate.Card
 {
-    public  class CharacterModel : CardModel
+    public  class CharacterModel : CardModel, ISGSkill
     {
 
         public int? GetSkill(Skill skill) {

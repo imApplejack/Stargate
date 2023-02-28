@@ -18,17 +18,18 @@ namespace Stargate.StateMachine
 
         public QuestResolution(GameState gs) : base(gs)
         {
-            AddAction(QuestResolutionAbilities)
-            .AddAction(CheckQuestResolution)
-
-           ;
+         
         }
 
 
 
         public override void InitSG()
         {
-          
+            AddAction(QuestResolutionAbilities)
+           .AddAction(CheckQuestResolution)
+            .AddAction(CheckQuestResolution)
+             .AddAction(ContinueToNextQuest)
+          ;
         }
 
 
@@ -40,6 +41,22 @@ namespace Stargate.StateMachine
         public void CheckQuestResolution(StateEvent e = null)
         {
 
+            if (gameState.CheckQuestVictory())
+            {
+                QueueAction(new Victory(gameState));
+            }
+            else
+            {
+                QueueAction(new Defeat(gameState));
+            }
+
+        }
+
+        public void ContinueToNextQuest(StateEvent e = null) {
+            //((QuestLoop)parent).RestartPhase();
+            //((QuestLoop)parent).InitSG();
+
+            Debug.WriteLine("");
         }
 
 

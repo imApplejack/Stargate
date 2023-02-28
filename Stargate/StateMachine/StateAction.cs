@@ -14,7 +14,10 @@ using System.Threading.Tasks;
 namespace Stargate.StateMachine
 {
     public class StateAction 
-    {      
+    {
+
+        public StatePhase parent = null;
+
         public virtual void Play(StateEvent e = null)
         {
             Debug.WriteLine("poua");

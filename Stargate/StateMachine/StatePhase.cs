@@ -22,17 +22,30 @@ namespace Stargate.StateMachine
         public Dictionary<int, Delegate> delegates = new Dictionary<int, Delegate>();
         public Queue<StateAction> queue = new Queue<StateAction>();
 
-        public StatePhase()
-        {
-            Init();
-        }
 
         public int currentOperation = 0;
 
         public int numElements = 0;
 
+        public StatePhase()
+        {
+            //RestartPhase();   
+        }
+
+        public void RestartPhase()
+        {
+            currentOperation = 0;
+            numElements = 0;
+            actions = new Dictionary<int, StateAction>();
+            delegates = new Dictionary<int, Delegate>();
+            queue = new Queue<StateAction>();
+        
+        }
+
+
         public StatePhase AddAction(StateAction myAction)
         {
+            myAction.parent = this;
             actions[numElements] = myAction;
             numElements++;
             return this;
@@ -47,6 +60,7 @@ namespace Stargate.StateMachine
 
         public StatePhase QueueAction(StateAction myAction)
         {
+            myAction.parent = this;
             queue.Enqueue(myAction);
             return this;
         }
@@ -91,6 +105,36 @@ namespace Stargate.StateMachine
 
             
         }
+
+        public override string ToString() { 
+
+
+            string retour = "///////////\n";
+            retour += "moi : " + this.GetType().Name + "\n";
+
+            retour += "mes enfants :" + "\n";
+
+            foreach (var action in actions)
+            {
+                retour += action.Value.GetType().Name + " ";
+
+            }
+            retour += "\n";
+
+            if (parent != null)
+            retour += "mon parent :" + parent.GetType().Name + "\n";
+
+
+           retour += "//////////";
+
+
+
+
+            return retour;
+
+            //return this.GetType().Name;
+        }
+
 
 
     }
