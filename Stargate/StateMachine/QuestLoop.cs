@@ -25,6 +25,8 @@ namespace Stargate.StateMachine
 
         public override void InitSG()
         {
+
+            Debug.WriteLine("INIT QUEST LOOP");
             AddAction(new QuestPhase(gameState))
            .AddAction(new QuestResolution(gameState));
 

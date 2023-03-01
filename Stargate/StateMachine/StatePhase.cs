@@ -29,7 +29,7 @@ namespace Stargate.StateMachine
 
         public StatePhase()
         {
-            //RestartPhase();   
+            Init(); 
         }
 
         public void RestartPhase()
@@ -88,16 +88,21 @@ namespace Stargate.StateMachine
                     {
                         ((Delegate)delegates[i])(e);
                     }
+
+                    
                 }
                 catch(StateResultException ex) { 
                    
                     if(ex.response == StateResult.STOP)
                     {
+                       
                         throw ex;
                         //return;
                     }
                 }
-                finally { currentOperation = i; }
+                finally {
+                    currentOperation = i;
+                }
 
                 i++;
             }
