@@ -58,51 +58,11 @@ public class Main : Node
         game.GameState.InitGame(1);
 
 
-        // MajVue(game.CardService.PlayMission(game.player1));
 
+       
 
-
-
-        /*
-        Popup p = (Popup)this.FindNode("PopupDialog");
-        p.RectSize = ((HBoxContainer)p.FindNode("HBoxContainer")).RectSize;
-        p.RectSize = p.RectSize +  new Vector2(30.0f, 100.0f);
-         p.Show();
-        */
-
-
-        //ConfirmationDialog cg = (ConfirmationDialog)FindNode("ConfirmationDialog");
-
-
-        /*
-        PackedScene cg = GD.Load<PackedScene>("res://SGGodot/ContinueQuestContainer.tscn");
-        ConfirmationDialog cgI = (ConfirmationDialog)cg.Instance();
-        AddChild(cgI);
-        cgI.Connect("confirmed", this, "pAccept");
-        cgI.Connect("popup_hide", this, "pClose");
-        cgI.Popup_();
-
-        */
-
-        /*
-        PackedScene cg = GD.Load<PackedScene>("res://SGGodot/ContinueQuestContainer.tscn");
-        ConfirmationDialog cgI = (ConfirmationDialog)cg.Instance();
-        AddChild(cgI);
-        //cgI.Connect("confirmed", this, "pAccept");
-        //cgI.Connect("popup_hide", this, "pClose");
-        cgI.Popup_();
-        */
     }
 
-    public void pAccept()
-    {
-        GD.Print("aceptation popup");
-    }
-
-    public void pClose()
-    {
-        GD.Print("refus popup");
-    }
 
 
 
@@ -111,6 +71,10 @@ public class Main : Node
 
         // caller le reseau ici ?
           game.GameState.ProcessEvent(stargateEvent);
+
+
+        //((NetworkClient)FindNode("Client1")).Rpc("CallRemote");
+
     }
 
 
