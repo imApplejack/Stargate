@@ -47,6 +47,12 @@ namespace Stargate.StateMachine
 
             QueueAction(new MockState()).QueueAction(new MockState());
 
+
+            
+
+
+            //RestartPhase();
+            //Init();
         }
 
         public void MyBlockingAction(StateEvent e = null)

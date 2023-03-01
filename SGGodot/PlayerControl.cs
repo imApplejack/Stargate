@@ -118,6 +118,15 @@ public class PlayerControl : Control
 
 
 
+        /*
+        ConfirmationDialog cg = new ConfirmationDialog();
+        AddChild(cg);
+        cg.Show();
+        */
+
+
+
+
         try
         {
             /*  Popup p = (Popup)this.FindNode("PopupDialog");
@@ -127,8 +136,8 @@ public class PlayerControl : Control
 
         }
         catch(Exception e) { }
-    
-      
+
+        
     }
 
 
@@ -292,6 +301,17 @@ public class PlayerControl : Control
         instance.Show();
     }
 
+    public void ContinueQuestDialog()
+    {
+        
+        PackedScene cg = GD.Load<PackedScene>("res://SGGodot/ContinueQuestContainer.tscn");
+        ConfirmationDialog cgI = (ConfirmationDialog)cg.Instance();
+        AddChild(cgI);
+        //cgI.Connect("confirmed", this, "pAccept");
+        //cgI.Connect("popup_hide", this, "pClose");
+        cgI.Popup_();
+    }
+
 
     public void MajVue(StargateResult result)
     {
@@ -325,6 +345,19 @@ public class PlayerControl : Control
 
                         break;
                     }
+
+
+                case StargateResultType.ContinueQuest:
+                    {
+                        ContinueQuestResult e = (ContinueQuestResult)result;
+                        if (e.player == player)
+                        {
+                            ContinueQuestDialog();
+                        }
+
+                        break;
+                    }
+
 
             }
         }

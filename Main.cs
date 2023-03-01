@@ -71,9 +71,37 @@ public class Main : Node
         */
 
 
+        //ConfirmationDialog cg = (ConfirmationDialog)FindNode("ConfirmationDialog");
 
 
+        /*
+        PackedScene cg = GD.Load<PackedScene>("res://SGGodot/ContinueQuestContainer.tscn");
+        ConfirmationDialog cgI = (ConfirmationDialog)cg.Instance();
+        AddChild(cgI);
+        cgI.Connect("confirmed", this, "pAccept");
+        cgI.Connect("popup_hide", this, "pClose");
+        cgI.Popup_();
 
+        */
+
+        /*
+        PackedScene cg = GD.Load<PackedScene>("res://SGGodot/ContinueQuestContainer.tscn");
+        ConfirmationDialog cgI = (ConfirmationDialog)cg.Instance();
+        AddChild(cgI);
+        //cgI.Connect("confirmed", this, "pAccept");
+        //cgI.Connect("popup_hide", this, "pClose");
+        cgI.Popup_();
+        */
+    }
+
+    public void pAccept()
+    {
+        GD.Print("aceptation popup");
+    }
+
+    public void pClose()
+    {
+        GD.Print("refus popup");
     }
 
 

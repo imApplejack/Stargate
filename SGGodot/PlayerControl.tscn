@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://SGGodot/CardContainer.cs" type="Script" id=1]
 [ext_resource path="res://SGGodot/PlayerControl.cs" type="Script" id=2]
 [ext_resource path="res://SGGodot/MissionContainer.cs" type="Script" id=3]
 [ext_resource path="res://SGGodot/HandContainer.cs" type="Script" id=4]
 [ext_resource path="res://SGGodot/ReadyContainer.cs" type="Script" id=5]
+[ext_resource path="res://SGGodot/ContinueQuestContainer.tscn" type="PackedScene" id=6]
 
 [node name="PlayerControl" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 2, 3 )
 script = ExtResource( 2 )
 
 [node name="ZoomContainer" type="HBoxContainer" parent="."]
@@ -144,6 +146,8 @@ margin_right = 576.0
 margin_bottom = 408.0
 alignment = 1
 script = ExtResource( 4 )
+
+[node name="ConfirmationDialog" parent="." instance=ExtResource( 6 )]
 
 [connection signal="button_down" from="PassButton" to="." method="_on_PassButton_button_down"]
 [connection signal="SendEvent" from="PlayerContainer/HBoxContainer/TeamContainer" to="." method="PlayEvent"]

@@ -2,6 +2,7 @@
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
+using Stargate.Stargate.Result;
 using Stargate.Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,8 @@ namespace Stargate.StateMachine
             //((QuestLoop)parent).RestartPhase();
             //((QuestLoop)parent).InitSG();
 
-            Debug.WriteLine("");
+            SendEvent(new ContinueQuestResult() { player = gameState.CurrentPlayer });
+
         }
 
 

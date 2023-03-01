@@ -112,35 +112,20 @@ namespace Stargate.StateMachine
         }
 
         public override string ToString() { 
-
-
             string retour = "///////////\n";
             retour += "moi : " + this.GetType().Name + "\n";
-
             retour += "mes enfants :" + "\n";
-
             foreach (var action in actions)
             {
                 retour += action.Value.GetType().Name + " ";
 
             }
             retour += "\n";
-
             if (parent != null)
             retour += "mon parent :" + parent.GetType().Name + "\n";
-
-
-           retour += "//////////";
-
-
-
-
+            retour += "//////////";
             return retour;
-
-            //return this.GetType().Name;
         }
-
-
 
     }
 

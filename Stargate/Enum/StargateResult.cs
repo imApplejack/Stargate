@@ -16,7 +16,8 @@ namespace Stargate.Stargate.Enum
     {
         ChangeCard,
         ChangePlayerAttr,
-        ChooseCard
+        ChooseCard,
+        ContinueQuest
     }
 
 
