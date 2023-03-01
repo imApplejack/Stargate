@@ -57,7 +57,7 @@ namespace Stargate.StateMachine
         public void ContinueToNextQuest(StateEvent e = null)
         {
 
-            Debug.WriteLine("DEFEAT ContinueToNextQuest");
+            Debug.WriteLine("DEFEAT ContinueToNextQuest stateevent " + e);
             
             try
             {
@@ -66,9 +66,16 @@ namespace Stargate.StateMachine
                 if (theevent != null && theevent.Sender == gameState.GetHeroPlayer() && theevent.Type == EventType.CONTINUEQUEST)
                 {
 
+                    Debug.WriteLine("BON SENDER ContinueToNextQuest" + e);
+
                     if (theevent.response == ContinueQuestEventResponse.YES)
                     {
+                        Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE YES");
                         AddAction(SetQuestAside).AddAction(GiveEnnemy1MPForEachFailedQuest);
+                    }
+                    else
+                    {
+                        Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE NO");
                     }
                 }
                 else

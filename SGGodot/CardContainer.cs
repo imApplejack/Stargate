@@ -4,7 +4,7 @@ using Stargate.Stargate.Event;
 using System;
 using System.Collections.Generic;
 
-public class CardContainer : Container
+public class CardContainer : Node
 {
 
 

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using Stargate;
 using Stargate.SGGodot;
 using Stargate.Stargate.Card;
@@ -85,7 +86,7 @@ public class PlayerControl : Control
     
     public void PlayEvent(SGEventContainer container)
     {
-        //GD.Print("reception de event play event" + container);
+        GD.Print("Reception de event " + container.SGEvent);
         StargateEvent se = container.SGEvent;
         se.Sender = player;
         Api.SendEvent(container.SGEvent);
@@ -302,17 +303,17 @@ public class PlayerControl : Control
     }
 
     public void ContinueQuestDialog()
-    {
-        
+    {  
         PackedScene cg = GD.Load<PackedScene>("res://SGGodot/ContinueQuestContainer.tscn");
         ConfirmationDialog cgI = (ConfirmationDialog)cg.Instance();
         AddChild(cgI);
-        //cgI.Connect("confirmed", this, "pAccept");
-        //cgI.Connect("popup_hide", this, "pClose");
+        cgI.Connect("confirmed", this, "PlayEvent", new Godot.Collections.Array() { new SGEventContainer(new ContinueQuestEvent() { response = ContinueQuestEventResponse.YES })});
+        cgI.GetCancel().Connect("pressed", this, "PlayEvent", new Godot.Collections.Array() { new SGEventContainer(new ContinueQuestEvent() { response = ContinueQuestEventResponse.NO }) });
         cgI.Popup_();
     }
 
 
+  
     public void MajVue(StargateResult result)
     {
 

@@ -1,4 +1,5 @@
-﻿using Stargate.Stargate.Enum;
+﻿using Stargate.Stargate.Card;
+using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,11 @@ namespace Stargate.Stargate.Event
         public ContinueQuestEvent()
         {
             Type = EventType.CONTINUEQUEST;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + " " + response;
         }
     }
 }
