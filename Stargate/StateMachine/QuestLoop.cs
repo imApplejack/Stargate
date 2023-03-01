@@ -18,9 +18,7 @@ namespace Stargate.StateMachine
 
         public QuestLoop(GameState gs) : base(gs)
         {
-            Debug.WriteLine("QUEST LOOP");
 
-        
         }
 
         public override void InitSG()

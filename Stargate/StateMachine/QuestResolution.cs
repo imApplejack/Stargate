@@ -28,8 +28,6 @@ namespace Stargate.StateMachine
         {
             AddAction(QuestResolutionAbilities)
            .AddAction(CheckQuestResolution)
-            .AddAction(CheckQuestResolution)
-             .AddAction(ContinueToNextQuest)
           ;
         }
 
@@ -53,13 +51,7 @@ namespace Stargate.StateMachine
 
         }
 
-        public void ContinueToNextQuest(StateEvent e = null) {
-            //((QuestLoop)parent).RestartPhase();
-            //((QuestLoop)parent).InitSG();
-
-            SendEvent(new ContinueQuestResult() { player = gameState.CurrentPlayer });
-
-        }
+      
 
 
     }

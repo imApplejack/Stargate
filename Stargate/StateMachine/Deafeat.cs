@@ -2,6 +2,7 @@
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
+using Stargate.Stargate.Result;
 using Stargate.Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,9 @@ namespace Stargate.StateMachine
         {
             AddAction(ScoreReviveorDestroyBoss).
                     AddAction(DestroyAllMonsterAndComplications).
-                    AddAction(StopAllAssignedCharacterAndBoss)
+                    AddAction(StopAllAssignedCharacterAndBoss).
+                    AddAction(ContinueToNextQuest);
+   
                     ;
         }
 
@@ -40,6 +43,50 @@ namespace Stargate.StateMachine
         {
             Debug.WriteLine("DEFEAT StopAllAssignedCharacterAndBoss");
         }
+
+        public void SetQuestAside(StateEvent e = null)
+        {
+            Debug.WriteLine("DEFEAT SetQuestAside");
+        }
+
+        public void GiveEnnemy1MPForEachFailedQuest(StateEvent e = null)
+        {
+            Debug.WriteLine("DEFEAT GiveEnnemy1MPForEachFailedQuest");
+        }
+
+        public void ContinueToNextQuest(StateEvent e = null)
+        {
+
+            Debug.WriteLine("DEFEAT ContinueToNextQuest");
+            
+            try
+            {
+
+                ContinueQuestEvent theevent = (ContinueQuestEvent)e;
+                if (theevent != null && theevent.Sender == gameState.GetHeroPlayer() && theevent.Type == EventType.CONTINUEQUEST)
+                {
+
+                    if (theevent.response == ContinueQuestEventResponse.YES)
+                    {
+                        AddAction(SetQuestAside).AddAction(GiveEnnemy1MPForEachFailedQuest);
+                    }
+                }
+                else
+                {
+                    throw new StateResultException(StateResult.STOP);
+                }
+            }catch
+            {
+                SendEvent(new ContinueQuestResult() { player = gameState.CurrentPlayer });
+                throw new StateResultException(StateResult.STOP);
+            }
+          
+        }
+
+
+
+       
+
 
     }
     

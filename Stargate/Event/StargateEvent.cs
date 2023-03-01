@@ -15,8 +15,8 @@ namespace Stargate.Stargate.Event
         PLAYCARD,
         ASSIGNCHAR,
         PASS,
-        DRAWCARD,
-        SELECTCARD
+        SELECTCARD,
+        CONTINUEQUEST
     }
 
 

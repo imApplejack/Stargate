@@ -77,7 +77,9 @@ namespace Stargate.StateMachine
 
                     while(queue.Count > 0)
                     {
-                        queue.Dequeue().Play(e);
+                        queue.Peek().Play(e);
+                        queue.Dequeue();
+
                     }
 
                     if (actions.ContainsKey(i))

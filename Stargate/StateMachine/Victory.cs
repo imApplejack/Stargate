@@ -2,6 +2,7 @@
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
+using Stargate.Stargate.Result;
 using Stargate.Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace Stargate.StateMachine
                 AddAction(DestroyAllMonsterAndComplications).
                 AddAction(AttacheAffinityToAssignedCharacter)
             .AddAction(ActivateEarnAffinityAbilities).
-            AddAction(StopAllAssignedCharacterAndBoss);
+            AddAction(StopAllAssignedCharacterAndBoss)
+            .AddAction(ContinueToNextQuest);
         }
 
 
@@ -50,6 +52,33 @@ namespace Stargate.StateMachine
         public void StopAllAssignedCharacterAndBoss(StateEvent e = null)
         {
             Debug.WriteLine("VICTORY StopAllAssignedCharacterAndBoss");
+        }
+
+        public void ContinueToNextQuest(StateEvent e = null)
+        {
+            throw new StateResultException(StateResult.STOP);
+            try
+            {
+                ContinueQuestEvent theevent = (ContinueQuestEvent)e;
+                if (theevent != null && theevent.Sender == gameState.GetHeroPlayer() && theevent.Type == EventType.CONTINUEQUEST)
+                {
+
+                    if (theevent.response == ContinueQuestEventResponse.YES)
+                    {
+                        AddAction(new QuestPhase(gameState));
+                    }
+                }
+                else
+                {
+                    throw new StateResultException(StateResult.STOP);
+                }
+            }
+            catch
+            {
+                SendEvent(new ContinueQuestResult() { player = gameState.CurrentPlayer });
+                throw new StateResultException(StateResult.STOP);
+            }
+
         }
 
 
