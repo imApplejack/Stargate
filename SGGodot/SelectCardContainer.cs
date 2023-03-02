@@ -15,7 +15,7 @@ public class SelectCardContainer : CardContainer
 
     public override void ProcessCardAction(GDCard card)
     {
-        ForwardEvent(new SelectCardEvent() { cardModel = card.Card });
+        ForwardEvent(new SelectCardEvent() { CardModelId = card.Card.Id });
         //GetParent().QueueFree();
         EmitSignal("close_popup");
     }

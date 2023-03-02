@@ -19,6 +19,8 @@ public class CardContainer : Node
 
     public void ForwardEvent(StargateEvent sgevent)
     {
+
+        GD.Print(sgevent);
         EmitSignal("SendEvent", new SGEventContainer(sgevent));
     }
 

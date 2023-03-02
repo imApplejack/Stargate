@@ -16,10 +16,22 @@ namespace Stargate.Stargate.Event
 
         public CardModel cardModel { get; set; }
 
+        public int? CardModelId { get; set; }
+
         public AssignCharEvent()
         {
             Type = EventType.ASSIGNCHAR;
 
+        }
+
+
+        public override void Hydrate(StargateGame game)
+        {
+            base.Hydrate(game);
+            if (CardModelId != null)
+            {
+                cardModel = game.GameState.CardRepository.GetCardModelFromId((int)CardModelId);
+            }
         }
 
         public override string ToString()

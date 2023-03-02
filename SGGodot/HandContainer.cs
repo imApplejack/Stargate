@@ -17,7 +17,7 @@ public class HandContainer : CardContainer
     {
         if ( card.Card.State == CardState.Hand)
         {
-            ForwardEvent(new PlayCardEvent() { cardModel = card.Card });
+            ForwardEvent(new PlayCardEvent() { CardModelId = card.Card.Id });
         }   
     }
 

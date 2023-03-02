@@ -2,6 +2,7 @@
 using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,9 +42,12 @@ namespace Stargate.Repository
             CardModel cm = Cards.Find(cardModel => cardModel.Id == id);
             if (cm != null)
             {
+                Debug.Print("trouve le bonhomme" + cm);
                 return cm;
             }
-            else { return null; }
+            else {
+                Debug.Print("bonheomme inconnu");
+                return null; }
         }
 
 

@@ -88,7 +88,7 @@ public class PlayerControl : Control
     {
         GD.Print("Reception de event " + container.SGEvent);
         StargateEvent se = container.SGEvent;
-        se.Sender = player;
+        se.SenderId = player.id;
         Api.SendEvent(container.SGEvent);
     }
 

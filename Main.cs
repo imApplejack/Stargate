@@ -5,7 +5,7 @@ using Stargate.SGGodot;
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
-using Stargate.Stargate.Event.Network;
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -74,28 +74,14 @@ public class Main : Node
 
 
 
-        if(stargateEvent is SelectCardEvent)
-        {
-            
+        stargateEvent.Hydrate(game);
 
-            NetworkSelectCardEvent netevent = NetworkSelectCardEvent.CreateFromStargateEvent((SelectCardEvent)stargateEvent, game);
-            SelectCardEvent myNewStargateEvent = NetworkSelectCardEvent.ConvertToStargateEvent(netevent, game);
+        GD.Print("Main:79" + stargateEvent);
 
-
-            GD.Print(netevent);
-
-            game.GameState.ProcessEvent(myNewStargateEvent);
-
-        }
+        game.GameState.ProcessEvent(stargateEvent);
 
 
-        else
-        {
-            game.GameState.ProcessEvent(stargateEvent);
-
-        }
-
-
+   
 
 
         // caller le reseau ici ?
