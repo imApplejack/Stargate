@@ -16,6 +16,21 @@ namespace Stargate
     {
 
 
+        public int GetPlayerId(Player player)
+        {
+            if (GameState.player1 == player) { return GameState.player1.id; }
+            else if (GameState.player2 == player) { return GameState.player2.id; }
+            else { return 0; }   
+        }
+
+        public Player GetPlayerById(int id)
+        {
+            if (GameState.player1.id == id) { return GameState.player1; }
+            else if (GameState.player2.id == id) { return GameState.player2; }
+            else { return null; }  
+        }
+
+
 
         public Library Library { get; set; }
 

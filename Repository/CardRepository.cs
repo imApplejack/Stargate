@@ -26,6 +26,27 @@ namespace Stargate.Repository
             return card;
         }
 
+        public int GetIdFromCardModel(CardModel card)
+        {
+            CardModel cm =  Cards.Find(cardModel => cardModel == card);
+            if(cm != null)
+            {
+                return cm.Id;
+            }
+            else { return 0; }
+        }
+
+        public CardModel GetCardModelFromId(int id)
+        {
+            CardModel cm = Cards.Find(cardModel => cardModel.Id == id);
+            if (cm != null)
+            {
+                return cm;
+            }
+            else { return null; }
+        }
+
+
         public void InitPlayersLibrary()
         {
             Libraries = new Dictionary<Player, List<CardModel>>();

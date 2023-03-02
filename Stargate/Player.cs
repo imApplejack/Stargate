@@ -11,6 +11,9 @@ namespace Stargate
     public class Player
     {
 
+
+        public int id { get; set; }
+
         public int Energy { get; set; } 
 
         public Player() { 

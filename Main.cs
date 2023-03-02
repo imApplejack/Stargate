@@ -5,6 +5,7 @@ using Stargate.SGGodot;
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
+using Stargate.Stargate.Event.Network;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -32,6 +33,8 @@ public class Main : Node
         //cardService.Draw(Player1);
         game = new StargateGame(library);
         StargateGameMock.InitPlayersWithMock(game);
+        game.GameState.player1.id = 1;
+        game.GameState.player2.id = 2;
 
 
         MappingMVC mappingMVC = new MappingMVC();
@@ -69,8 +72,34 @@ public class Main : Node
 
     public void SendEvent(StargateEvent stargateEvent){
 
+
+
+        if(stargateEvent is SelectCardEvent)
+        {
+            
+
+            NetworkSelectCardEvent netevent = NetworkSelectCardEvent.CreateFromStargateEvent((SelectCardEvent)stargateEvent, game);
+            SelectCardEvent myNewStargateEvent = NetworkSelectCardEvent.ConvertToStargateEvent(netevent, game);
+
+
+            GD.Print(netevent);
+
+            game.GameState.ProcessEvent(myNewStargateEvent);
+
+        }
+
+
+        else
+        {
+            game.GameState.ProcessEvent(stargateEvent);
+
+        }
+
+
+
+
         // caller le reseau ici ?
-          game.GameState.ProcessEvent(stargateEvent);
+         
 
 
         //((NetworkClient)FindNode("Client1")).Rpc("CallRemote");
