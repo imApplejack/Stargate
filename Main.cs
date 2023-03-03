@@ -26,9 +26,13 @@ public class Main : Node
     {
 
 
-        Library library = new Library(ProjectSettings.GlobalizePath("res://Sets/"));
+        var host = new NetworkedMultiplayerENet();
+        host.CreateServer(6112, 10);
+        GetTree().NetworkPeer = host;
+        GD.Print(GetTree().NetworkPeer);
+        GD.Print(GetTree().IsNetworkServer());
 
- 
+        Library library = new Library(ProjectSettings.GlobalizePath("res://Sets/"));
 
         //cardService.Draw(Player1);
         game = new StargateGame(library);
@@ -56,42 +60,26 @@ public class Main : Node
         game.GameState.StargateResultHandler += Player2Vue.HandleResult;
         Player2Vue.Init();
 
-
-
         game.GameState.InitGame(1);
-
-
-
-       
-
     }
 
-
-
-
+    [Sync]
+    public void SendEventnetwork(NetworkEvent stargateEvent)
+    {
+        stargateEvent.stargateEvent.Hydrate(game);
+        game.GameState.ProcessEvent(stargateEvent.stargateEvent);
+    }
 
     public void SendEvent(StargateEvent stargateEvent){
-
-
-
-        stargateEvent.Hydrate(game);
-
-        GD.Print("Main:79" + stargateEvent);
-
-        game.GameState.ProcessEvent(stargateEvent);
-
-
-   
-
-
-        // caller le reseau ici ?
-         
-
-
-        //((NetworkClient)FindNode("Client1")).Rpc("CallRemote");
-
+        if (GetTree().NetworkPeer.GetConnectionStatus() == NetworkedMultiplayerPeer.ConnectionStatus.Connected)
+        {
+            Rpc("SendEventnetwork", new NetworkEvent() { stargateEvent = stargateEvent });
+        }
+        else
+        {
+            SendEventnetwork(new NetworkEvent() { stargateEvent = stargateEvent });
+        }
     }
-
 
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
