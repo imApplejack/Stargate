@@ -29,6 +29,9 @@ namespace Stargate.StateMachine
 
         public override void InitSG()
         {
+
+            Debug.Print("QUEST PHASE current player : " + gameState.CurrentPlayer.id);
+
             AddAction(PlayMission)
             .AddAction(PlayAction)
             ;

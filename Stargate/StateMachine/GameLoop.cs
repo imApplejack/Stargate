@@ -21,8 +21,7 @@ namespace Stargate.StateMachine
         public override void InitSG()
         {
             AddAction(new MPPhase(gameState))
-           .AddAction(new QuestPhase(gameState))
-           .AddAction(new QuestResolution(gameState))
+           .AddAction(new QuestLoop(gameState))
            .AddAction(new InnPhase(gameState));
           ;
         }

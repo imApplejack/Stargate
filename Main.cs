@@ -33,9 +33,6 @@ public class Main : Node
         //cardService.Draw(Player1);
         game = new StargateGame(library);
         StargateGameMock.InitPlayersWithMock(game);
-        game.GameState.player1.id = 1;
-        game.GameState.player2.id = 2;
-
 
         MappingMVC mappingMVC = new MappingMVC();
         mappingMVC.InitRessources(game.GameState.GetAllCards());

@@ -71,11 +71,13 @@ namespace Stargate.StateMachine
                     if (theevent.response == ContinueQuestEventResponse.YES)
                     {
                         Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE YES");
-                        AddAction(SetQuestAside).AddAction(GiveEnnemy1MPForEachFailedQuest);
+                        //AddAction(SetQuestAside).AddAction(GiveEnnemy1MPForEachFailedQuest) ; 
+                        QueueAction(new SetQuestAside(gameState)).QueueAction(new GiveEnemy1MPForEachFailedQuest(gameState)).QueueAction(new QuestLoop(gameState));
                     }
                     else
                     {
                         Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE NO");
+                        ;
                     }
                 }
                 else
