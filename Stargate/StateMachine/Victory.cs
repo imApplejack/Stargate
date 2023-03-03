@@ -65,7 +65,7 @@ namespace Stargate.StateMachine
 
                     if (theevent.response == ContinueQuestEventResponse.YES)
                     {
-                        AddAction(new QuestPhase(gameState));
+                        QueueAction(new SetQuestAside(gameState)).QueueAction(new QuestLoop(gameState));
                     }
                 }
                 else
