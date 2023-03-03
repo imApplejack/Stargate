@@ -57,7 +57,13 @@ namespace Stargate.StateMachine
 
         public void EnnemyProcessMPPhase(StateEvent e = null)
         {
-            Debug.Print("EnnemyProcessMPPhase");
+           
+
+            //Debug.Print("EnnemyProcessMPPhase");
+
+            gameState.SwitchPlayersRole();
+            AddAction(new GameLoop(gameState));
+
         }
 
     }
