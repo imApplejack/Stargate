@@ -8,6 +8,7 @@ using Stargate.Stargate.Event;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 
 public class Main : Node
@@ -70,6 +71,7 @@ public class Main : Node
     public void SendEvent(StargateEvent stargateEvent){
         if (GetTree().NetworkPeer.GetConnectionStatus() == NetworkedMultiplayerPeer.ConnectionStatus.Connected)
         {
+            Debug.WriteLine("RPC");
             Rpc("SendEventnetwork", new NetworkEvent() { stargateEvent = stargateEvent });
         }
         else
