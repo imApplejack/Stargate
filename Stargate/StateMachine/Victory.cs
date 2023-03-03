@@ -56,7 +56,7 @@ namespace Stargate.StateMachine
 
         public void ContinueToNextQuest(StateEvent e = null)
         {
-            throw new StateResultException(StateResult.STOP);
+            //throw new StateResultException(StateResult.STOP);
             try
             {
                 ContinueQuestEvent theevent = (ContinueQuestEvent)e;

@@ -14,7 +14,7 @@ namespace Stargate.StateMachine
 
         public GameLoop(GameState gs) : base(gs)
         {
-          
+            
         }
 
 

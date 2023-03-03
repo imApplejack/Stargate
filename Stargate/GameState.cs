@@ -238,6 +238,12 @@ namespace Stargate.Stargate
         }
 
 
+
+        public void SwitchPlayersRole()
+        {
+            CurrentPlayer = GetEnemyPlayer();
+        }
+
         public Player GetHeroPlayer()
         {
             return CurrentPlayer;
