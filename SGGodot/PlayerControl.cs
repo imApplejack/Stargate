@@ -46,7 +46,7 @@ public class PlayerControl : Control
     public void _on_PassButton_button_down()
     {
         //GD.Print("PASSBUTTK");
-        Api.SendEvent(new PassEvent() { Sender = Player });
+        Api.SendEvent(new PassEvent() { SenderId = Player.id });
     }
 
     public void EnterZoom(GDCard card)
@@ -86,7 +86,7 @@ public class PlayerControl : Control
     
     public void PlayEvent(SGEventContainer container)
     {
-        GD.Print("Reception de event " + container.SGEvent);
+        //GD.Print("Reception de event " + container.SGEvent);
         StargateEvent se = container.SGEvent;
         se.SenderId = player.id;
         Api.SendEvent(container.SGEvent);

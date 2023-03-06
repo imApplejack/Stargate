@@ -36,7 +36,7 @@ namespace Stargate.Stargate.Event
 
         public override string ToString()
         {
-            return base.ToString() + " " + cardModel;
+            return base.ToString() + " CardModel " + CardModelId + " " + cardModel;
         }
 
 

@@ -30,23 +30,23 @@ namespace Stargate.StateMachine
 
         public void ReviveorDestroyBoss(StateEvent e = null)
         {
-            Debug.WriteLine("VICTORY ReviveorDestroyBoss");
+            //Debug.WriteLine("VICTORY ReviveorDestroyBoss");
         }
 
 
         public void DestroyAllMonsterAndComplications(StateEvent e = null)
         {
-            Debug.WriteLine("VICTORY DestroyAllMonsterAndComplications");
+            //Debug.WriteLine("VICTORY DestroyAllMonsterAndComplications");
         }
 
         public void AttacheAffinityToAssignedCharacter(StateEvent e = null)
         {
-            Debug.WriteLine("VICTORY AttacheAffinityToAssignedCharacter");
+            //Debug.WriteLine("VICTORY AttacheAffinityToAssignedCharacter");
         }
 
         public void ActivateEarnAffinityAbilities(StateEvent e = null)
         {
-            Debug.WriteLine("VICTORY ActivateEarnAffinityAbilities");
+            //Debug.WriteLine("VICTORY ActivateEarnAffinityAbilities");
         }
 
 

@@ -111,12 +111,12 @@ namespace Stargate.StateMachine
                 if ( !questPhasePass[gameState.CurrentPlayer] || !questPhasePass[gameState.GetEnemyPlayer()])
                 {
                     //GD.Print("STOP MACHINE A ETAT");
-                    Debug.WriteLine("STOP MACHINE A ETAT");
+                    //Debug.WriteLine("STOP MACHINE A ETAT");
                     throw new StateResultException(StateResult.STOP);
                 }
                 else
                 {
-                    Debug.WriteLine("CONTINUE MACHINE A ETAT");
+                    //Debug.WriteLine("CONTINUE MACHINE A ETAT");
                     //GD.Print("CONTINUE MACHINE A ETAT");
                 }
 

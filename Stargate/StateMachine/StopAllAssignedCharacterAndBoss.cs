@@ -18,7 +18,8 @@ namespace Stargate.Stargate.StateMachine
 
         public void StopAllAssignedCharacterAndBossMethod(StateEvent e = null)
         {
-            Debug.Print("StopAllAssignedCharacterAndBoss");
+            //Debug.Print("StopAllAssignedCharacterAndBoss");
+            gameState.StopAllAssignedCharacterAndBoss();
         }
 
     }

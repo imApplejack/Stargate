@@ -27,7 +27,7 @@ namespace Stargate.StateMachine
 
         public void GiveEnnemyMP(StateEvent e = null)
         {
-            Debug.Print("GiveEnemy1MPForEachFailedQuest");
+            //Debug.Print("GiveEnemy1MPForEachFailedQuest");
         }
 
 

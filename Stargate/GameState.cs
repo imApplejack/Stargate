@@ -6,6 +6,7 @@ using Stargate.Stargate.Event;
 using Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -172,6 +173,25 @@ namespace Stargate.Stargate
         }
 
 
+        public void StopAllAssignedCharacterAndBoss()
+        {
+            List<CardModel> charactersInMission = CardRepository.GetMissionCharacters();
+
+            Debug.WriteLine("characther in mission : " + charactersInMission.Count);
+
+            charactersInMission.ForEach(character => { 
+                character.State = CardState.Stop;
+
+                //Debug.Print(new StargateResult().ToString() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = character });
+
+                StargateResult r = new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = character };
+                //Debug.WriteLine(r);
+                ForwardEvent(r);
+            });
+
+        }
+
+
         public bool CheckQuestVictory()
         {
             MissionModel mission = CardRepository.GetCurrentMission();
@@ -190,8 +210,6 @@ namespace Stargate.Stargate
             {
                 totalStats += (int)card.GetSkill(mission.GetMissionSkill());
             }
-
-
 
             return totalStats > difficulty;
         }

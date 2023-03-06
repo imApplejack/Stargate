@@ -42,11 +42,11 @@ namespace Stargate.Repository
             CardModel cm = Cards.Find(cardModel => cardModel.Id == id);
             if (cm != null)
             {
-                Debug.Print("trouve le bonhomme" + cm);
+                //Debug.Print("trouve le bonhomme" + cm);
                 return cm;
             }
             else {
-                Debug.Print("bonheomme inconnu");
+                //Debug.Print("bonheomme inconnu");
                 return null; }
         }
 
@@ -126,13 +126,18 @@ namespace Stargate.Repository
 
         public List<CardModel> GetCardsInMission(Player player, CardType cardType)
         {
-            return Cards.FindAll(cardModel => cardModel.State == CardState.Mission && cardModel.Owner == player && cardModel.Card.Type == cardType);
+            return Cards.FindAll(cardModel => cardModel.State == CardState.Mission && cardModel.Owner == player && cardModel.Card.Type == cardType); //TODO revoir cette methode
         }
 
 
         public MissionModel GetCurrentMission()
         {
             return (MissionModel)Cards.Find(cardModel => cardModel.State == CardState.Mission && cardModel.Card.Type == CardType.Mission);
+        }
+
+        public List<CardModel> GetMissionCharacters()
+        {
+            return Cards.FindAll(cardModel => (cardModel.Card.Type & CardType.Character) != 0 && cardModel.State == CardState.Mission);
         }
 
 

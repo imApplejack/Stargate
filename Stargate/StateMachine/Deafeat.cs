@@ -29,31 +29,31 @@ namespace Stargate.StateMachine
 
         public void ScoreReviveorDestroyBoss(StateEvent e = null)
         {
-            Debug.WriteLine("DEFEAT ScoreReviveorDestroyBoss");
+            //Debug.WriteLine("DEFEAT ScoreReviveorDestroyBoss");
         }
 
 
         public void DestroyAllMonsterAndComplications(StateEvent e = null)
         {
-            Debug.WriteLine("DEFEAT DestroyAllMonsterAndComplications");
+            //Debug.WriteLine("DEFEAT DestroyAllMonsterAndComplications");
         }
 
 
 
         public void SetQuestAside(StateEvent e = null)
         {
-            Debug.WriteLine("DEFEAT SetQuestAside");
+            //Debug.WriteLine("DEFEAT SetQuestAside");
         }
 
         public void GiveEnnemy1MPForEachFailedQuest(StateEvent e = null)
         {
-            Debug.WriteLine("DEFEAT GiveEnnemy1MPForEachFailedQuest");
+            //Debug.WriteLine("DEFEAT GiveEnnemy1MPForEachFailedQuest");
         }
 
         public void ContinueToNextQuest(StateEvent e = null)
         {
 
-            Debug.WriteLine("DEFEAT ContinueToNextQuest stateevent " + e);
+            //Debug.WriteLine("DEFEAT ContinueToNextQuest stateevent " + e);
             
             try
             {
@@ -62,17 +62,17 @@ namespace Stargate.StateMachine
                 if (theevent != null && theevent.Sender == gameState.GetHeroPlayer() && theevent.Type == EventType.CONTINUEQUEST)
                 {
 
-                    Debug.WriteLine("BON SENDER ContinueToNextQuest" + e);
+                    //Debug.WriteLine("BON SENDER ContinueToNextQuest" + e);
 
                     if (theevent.response == ContinueQuestEventResponse.YES)
                     {
-                        Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE YES");
+                       // Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE YES");
                         //AddAction(SetQuestAside).AddAction(GiveEnnemy1MPForEachFailedQuest) ; 
                         QueueAction(new SetQuestAside(gameState)).QueueAction(new GiveEnemy1MPForEachFailedQuest(gameState)).QueueAction(new QuestLoop(gameState));
                     }
                     else
                     {
-                        Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE NO");
+                       // Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE NO");
                         ;
                     }
                 }

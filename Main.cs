@@ -69,9 +69,12 @@ public class Main : Node
     }
 
     public void SendEvent(StargateEvent stargateEvent){
+        GD.Print(stargateEvent);
+
+
         if (GetTree().NetworkPeer.GetConnectionStatus() == NetworkedMultiplayerPeer.ConnectionStatus.Connected)
         {
-            Debug.WriteLine("RPC");
+            //Debug.WriteLine("RPC");
             Rpc("SendEventnetwork", new NetworkEvent() { stargateEvent = stargateEvent });
         }
         else

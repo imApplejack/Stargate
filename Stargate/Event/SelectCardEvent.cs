@@ -25,7 +25,7 @@ namespace Stargate.Stargate.Event
 
         public override string ToString()
         {
-            return base.ToString() + " " + CardModelId;
+            return base.ToString() + " CardModel " + CardModelId + " " + cardModel;
         }
 
         public override void Hydrate(StargateGame game)

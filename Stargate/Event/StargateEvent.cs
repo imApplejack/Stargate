@@ -43,7 +43,7 @@ namespace Stargate.Stargate.Event
 
         public override string ToString()
         {
-            return Type.ToString() + Sender;
+            return Type.ToString() + " " + "Sender " + SenderId;
         }
 
 
