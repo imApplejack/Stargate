@@ -23,7 +23,7 @@ namespace Stargate.StateMachine
                 AddAction(DestroyAllMonsterAndComplications).
                 AddAction(AttacheAffinityToAssignedCharacter)
             .AddAction(ActivateEarnAffinityAbilities).
-            AddAction(StopAllAssignedCharacterAndBoss)
+            AddAction(new StopAllAssignedCharacterAndBoss(gs))
             .AddAction(ContinueToNextQuest);
         }
 
@@ -49,10 +49,7 @@ namespace Stargate.StateMachine
             Debug.WriteLine("VICTORY ActivateEarnAffinityAbilities");
         }
 
-        public void StopAllAssignedCharacterAndBoss(StateEvent e = null)
-        {
-            Debug.WriteLine("VICTORY StopAllAssignedCharacterAndBoss");
-        }
+
 
         public void ContinueToNextQuest(StateEvent e = null)
         {

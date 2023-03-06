@@ -21,9 +21,8 @@ namespace Stargate.StateMachine
         {
             AddAction(ScoreReviveorDestroyBoss).
                     AddAction(DestroyAllMonsterAndComplications).
-                    AddAction(StopAllAssignedCharacterAndBoss).
+                    AddAction(new StopAllAssignedCharacterAndBoss(gs)).
                     AddAction(ContinueToNextQuest);
-   
                     ;
         }
 
@@ -39,10 +38,7 @@ namespace Stargate.StateMachine
             Debug.WriteLine("DEFEAT DestroyAllMonsterAndComplications");
         }
 
-        public void StopAllAssignedCharacterAndBoss(StateEvent e = null)
-        {
-            Debug.WriteLine("DEFEAT StopAllAssignedCharacterAndBoss");
-        }
+
 
         public void SetQuestAside(StateEvent e = null)
         {
