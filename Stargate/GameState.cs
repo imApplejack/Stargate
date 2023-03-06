@@ -44,22 +44,18 @@ namespace Stargate.Stargate
 
         public CardModel CreateCardModel(SGCard card)
         {
-           
-            switch (card.Type)
+         
+            
+            if(card.Type == CardType.Mission)
             {
-                 case CardType.Mission:
-                 return  new MissionModel() { Card = card };
-
-                case CardType.Character:
-                    return new CharacterModel() { Card = card };
-
-
-                    //@TODO
-
-
-
-                default: return new CardModel(card);
+                return new MissionModel() { Card = card };
             }
+            else if ((card.Type & CardType.Character) != 0)
+            {
+                return new CharacterModel() { Card = card };
+            }
+
+            return new CardModel(card);
 
         }
 
@@ -196,19 +192,27 @@ namespace Stargate.Stargate
         {
             MissionModel mission = CardRepository.GetCurrentMission();
             List<CardModel> heros = CardRepository.GetCardsInMission(GetHeroPlayer(), CardType.HeroPlayerMissionObjets);
-            List<CardModel> peripeties = CardRepository.GetCardsInMission(GetEnemyPlayer(), CardType.HeroPlayerMissionObjets);
+            List<CardModel> peripeties = CardRepository.GetCardsInMission(GetEnemyPlayer(), CardType.VIllanPlayerMissionObjects);
 
-            int difficulty = 0;
+            int difficulty = (int)mission.getMissionDifficulty();
+
+
             foreach (CharacterModel card in peripeties)
             {
-                difficulty += (int)card.GetSkill(mission.GetMissionSkill());
+                if(card.GetSkill(mission.GetMissionSkill()) != null)
+                {
+                    difficulty += (int)card.GetSkill(mission.GetMissionSkill());
+                }
             }
 
 
             int totalStats = 0;
             foreach (CharacterModel card in heros)
             {
-                totalStats += (int)card.GetSkill(mission.GetMissionSkill());
+                if(card.GetSkill(mission.GetMissionSkill()) != null)
+                {
+                    totalStats += (int)card.GetSkill(mission.GetMissionSkill());
+                }
             }
 
             return totalStats > difficulty;

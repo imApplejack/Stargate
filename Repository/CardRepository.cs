@@ -126,8 +126,11 @@ namespace Stargate.Repository
 
         public List<CardModel> GetCardsInMission(Player player, CardType cardType)
         {
-            return Cards.FindAll(cardModel => cardModel.State == CardState.Mission && cardModel.Owner == player && cardModel.Card.Type == cardType); //TODO revoir cette methode
+            return Cards.FindAll(cardModel => cardModel.State == CardState.Mission && cardModel.Owner == player && (cardModel.Card.Type & cardType) != 0); //TODO revoir cette methode
+
+            //return Cards.FindAll(cardModel => cardModel.State == CardState.Mission && cardModel.Owner == player && cardModel.Card.Type == cardType); //TODO revoir cette methode
         }
+   
 
 
         public MissionModel GetCurrentMission()
