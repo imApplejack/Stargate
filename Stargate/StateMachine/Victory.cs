@@ -64,6 +64,10 @@ namespace Stargate.StateMachine
                     {
                         QueueAction(new SetQuestAside(gameState)).QueueAction(new QuestLoop(gameState));
                     }
+                    else
+                    {
+                        QueueAction(new SetQuestAside(gameState));
+                    }
                 }
                 else
                 {

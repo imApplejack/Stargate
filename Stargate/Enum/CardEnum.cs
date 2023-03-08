@@ -29,6 +29,7 @@ namespace Stargate.Stargate.Enum
         Disabled = 32,
         Destroy = 64,
         MissionPile = 128,
+        Aside = 256,
         Board = Ready | Stop | Disabled
     };
 

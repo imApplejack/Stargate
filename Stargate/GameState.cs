@@ -236,6 +236,12 @@ namespace Stargate.Stargate
         }
 
 
+        public void SetQuestAside()
+        {
+            MissionModel m = CardRepository.GetCurrentMission();
+            m.State = CardState.Aside;
+            ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+        }
 
         public Player GetOtherPlayer(Player player)
         {

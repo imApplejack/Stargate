@@ -72,7 +72,8 @@ namespace Stargate.StateMachine
                     }
                     else
                     {
-                       // Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE NO");
+                        QueueAction(new SetQuestAside(gameState))
+                        // Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE NO");
                         ;
                     }
                 }
