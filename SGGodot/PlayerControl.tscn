@@ -136,6 +136,9 @@ rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 498, 186 )
 alignment = 1
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="PlayerMissionContainer" type="HBoxContainer" parent="MissionContainer"]
 margin_left = 488.0
@@ -170,6 +173,9 @@ grow_vertical = 2
 rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 292, 812 )
 alignment = 1
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerContainer"]
 margin_top = 404.0
