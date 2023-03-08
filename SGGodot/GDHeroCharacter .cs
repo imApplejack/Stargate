@@ -20,12 +20,12 @@ public class GDHeroCharacter : GDCharacter
     //  }
 
 
-    public Node glypheContainer = null;
+   // public Node glypheContainer = null;
 
     public override void _Ready()
     {
        base._Ready();
-       glypheContainer = FindNode("Glyphes");
+       //glypheContainer = FindNode("Glyphes"); // ca ca bug je sais pas pourquoi
     }
 
 
@@ -34,10 +34,27 @@ public class GDHeroCharacter : GDCharacter
         base.Decorate(mvc);
         //HeroCharacterModel buffer = (HeroCharacterModel)Card;
 
+
+        Node glypheContainer = FindNode("Glyphes");
+
+        foreach (Node item in glypheContainer.GetChildren())
+        {
+            GD.Print("dans le foreach");
+
+            item.QueueFree();
+        }
+ 
+
+        GD.Print("count glype" + ((HeroCharacterModel)Card).glyphsEarned.Count);
+
         foreach (MissionModel item in ((HeroCharacterModel)Card).glyphsEarned)
         {
             TextureRect t = new TextureRect();
             t.Texture = ((GDMission)mvc.Get(item)).GlyphTexture;
+
+            GD.PrintErr("t.Texture : "+ t.Texture+ " glypheContainer :  " + FindNode("Glyphes"));
+
+
             glypheContainer.AddChild(t); 
         }
         return this;

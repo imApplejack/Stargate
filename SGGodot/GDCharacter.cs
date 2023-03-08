@@ -31,6 +31,10 @@ public class GDCharacter : GDCard
         {
             ((CanvasItem)FindNode("Stop")).Visible = true;
         }
+        else
+        {
+            ((CanvasItem)FindNode("Stop")).Visible = false;
+        }
         return this;
     }
 

@@ -199,6 +199,12 @@ namespace Stargate.Stargate
         }
 
 
+        public List<CardModel> GetHeroPlayerCardsInMission()
+        {
+            return CardRepository.GetCardsInMission(GetHeroPlayer(), CardType.HeroPlayerMissionObjets);
+        }
+
+
         public bool CheckQuestVictory()
         {
             MissionModel mission = CardRepository.GetCurrentMission();
@@ -226,7 +232,7 @@ namespace Stargate.Stargate
                 }
             }
 
-            return totalStats > difficulty;
+            return totalStats >= difficulty;
         }
 
 

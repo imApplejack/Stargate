@@ -1,5 +1,7 @@
 ﻿using Godot;
+using Stargate.Repository;
 using Stargate.Stargate;
+using Stargate.Stargate.Card;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
 using Stargate.Stargate.Result;
@@ -41,6 +43,24 @@ namespace Stargate.StateMachine
 
         public void AttacheAffinityToAssignedCharacter(StateEvent e = null)
         {
+
+           
+
+            if (e == null || ((StargateEvent)e).Type != EventType.SELECTCARD || ((StargateEvent)e).Sender != gameState.GetHeroPlayer())
+            {
+                SendEvent(new ChooseCardResult() { player = gameState.GetHeroPlayer(), cards = gameState.GetHeroPlayerCardsInMission() });
+                throw new StateResultException(StateResult.STOP);
+            }
+            else
+            {
+
+                GD.Print("AttacheAffinityToAssignedCharacter ACTION");
+
+                SelectCardEvent sle = (SelectCardEvent)e;
+                ((HeroCharacterModel)sle.cardModel).glyphsEarned.Add(gameState.CardRepository.GetCurrentMission());
+                SendEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = sle.cardModel });
+            }
+
             //Debug.WriteLine("VICTORY AttacheAffinityToAssignedCharacter");
         }
 

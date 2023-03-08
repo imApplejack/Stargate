@@ -178,6 +178,8 @@ public class PlayerControl : Control
     public void MajCardControl(CardModel card)
     {
 
+        GD.PrintErr("Maj card control");
+
         GDCard GDCard = this.GetCard(card);
         GDCard.ClearIngameInstances();
 
@@ -316,6 +318,9 @@ public class PlayerControl : Control
   
     public void MajVue(StargateResult result)
     {
+
+
+        GD.PrintErr("MAJ VUE " + result);
 
         if (result.actionResult == ActionResult.Success)
         {
