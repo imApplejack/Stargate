@@ -27,7 +27,7 @@ public class SGPopupDialog : PopupDialog
     {
         foreach (GDCard item in list)
         {
-            ((SelectCardContainer)FindNode("HBoxContainer")).AddChild(item.GetClone());
+            ((SelectCardContainer)FindNode("HBoxContainer")).AddChild(item.GetClone()); // attention ici il n'y a pas le decorate
         } 
     }
 

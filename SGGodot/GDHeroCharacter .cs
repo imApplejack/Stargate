@@ -33,29 +33,19 @@ public class GDHeroCharacter : GDCharacter
     {
         base.Decorate(mvc);
         //HeroCharacterModel buffer = (HeroCharacterModel)Card;
-
-
         Node glypheContainer = FindNode("Glyphes");
-
         foreach (Node item in glypheContainer.GetChildren())
         {
-            GD.Print("dans le foreach");
-
+            //GD.Print("dans le foreach");
             item.QueueFree();
         }
- 
-
-        GD.Print("count glype" + ((HeroCharacterModel)Card).glyphsEarned.Count);
-
+        //GD.Print("count glype" + ((HeroCharacterModel)Card).glyphsEarned.Count);
         foreach (MissionModel item in ((HeroCharacterModel)Card).glyphsEarned)
         {
             TextureRect t = new TextureRect();
             t.Texture = ((GDMission)mvc.Get(item)).GlyphTexture;
-
-            GD.PrintErr("t.Texture : "+ t.Texture+ " glypheContainer :  " + FindNode("Glyphes"));
-
-
-            glypheContainer.AddChild(t); 
+            //GD.PrintErr("t.Texture : "+ t.Texture+ " glypheContainer :  " + FindNode("Glyphes"));
+             glypheContainer.AddChild(t); 
         }
         return this;
     }
