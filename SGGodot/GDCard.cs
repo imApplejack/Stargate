@@ -1,5 +1,6 @@
 using Godot;
 using Stargate;
+using Stargate.SGGodot;
 using Stargate.Stargate.Card;
 using Stargate.Stargate.Event;
 using System;
@@ -114,7 +115,7 @@ public abstract class GDCard : Control
         }
     }
 
-    public virtual GDCard Decorate()
+    public virtual GDCard Decorate(MappingMVC mvc)
     {
         return this;
     }

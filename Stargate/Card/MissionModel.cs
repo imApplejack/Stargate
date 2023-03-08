@@ -10,8 +10,7 @@ namespace Stargate.Stargate.Card
 {
     public  class MissionModel : CardModel , ISGSkill
     {
-        
-        
+                
         public int getMissionDifficulty()
         {
             return (int)GetSkill(GetMissionSkill());

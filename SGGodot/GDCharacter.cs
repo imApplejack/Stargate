@@ -1,4 +1,5 @@
 using Godot;
+using Stargate.SGGodot;
 using Stargate.Stargate;
 using Stargate.Stargate.Enum;
 using System;
@@ -24,12 +25,14 @@ public class GDCharacter : GDCard
 
     }
 
-    public override GDCard Decorate()
+    public override GDCard Decorate(MappingMVC mvc)
     {
         if (Card.State == CardState.Stop)
         {
             ((CanvasItem)FindNode("Stop")).Visible = true;
         }
+
+
         return this;
     }
 

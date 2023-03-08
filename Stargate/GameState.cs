@@ -52,7 +52,18 @@ namespace Stargate.Stargate
             }
             else if ((card.Type & CardType.Character) != 0)
             {
-                return new CharacterModel() { Card = card };
+
+                switch (card.Type)
+                {
+                    case (CardType.SupportCharacter):
+                        return new HeroCharacterModel() { Card = card};
+                    case (CardType.TeamCharacter):
+                        return new HeroCharacterModel() { Card = card };
+                    case (CardType.Adversary):
+                        return new AdversaryModel() { Card = card };
+                }
+                
+                //return new CharacterModel() { Card = card };
             }
 
             return new CardModel(card);

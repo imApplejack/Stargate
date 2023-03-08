@@ -267,7 +267,7 @@ public class PlayerControl : Control
 
     private GDCard GetCard(CardModel card)
     {
-        GDCard retour = this.MappingMVC.Get(card).Decorate();
+        GDCard retour = this.MappingMVC.Get(card).Decorate(MappingMVC);
         return retour;
     }
 
@@ -277,7 +277,7 @@ public class PlayerControl : Control
         List<GDCard> retour = this.MappingMVC.Get(cards);
         foreach(GDCard card in retour)
         {
-            card.Decorate();
+            card.Decorate(this.MappingMVC);
         }
         return retour;
     }

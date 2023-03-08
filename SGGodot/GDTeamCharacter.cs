@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class TeamCharacter : GDCharacter
+public class GDTeamCharacter : GDCharacter
 {
     // Declare member variables here. Examples:
     // private int a = 2;
