@@ -1,10 +1,9 @@
 using Godot;
 using Stargate.SGGodot;
-using Stargate.Stargate;
 using Stargate.Stargate.Enum;
 using System;
 
-public class GDCharacter : GDCard
+public class GDHeroCharacter : GDCharacter
 {
     // Declare member variables here. Examples:
     // private int a = 2;
@@ -18,19 +17,11 @@ public class GDCharacter : GDCard
     //  {
     //      
     //  }
-    
-    
-    public override void ExtraInit()
-    {
 
-    }
 
     public override GDCard Decorate(MappingMVC mvc)
     {
-        if (Card.State == CardState.Stop)
-        {
-            ((CanvasItem)FindNode("Stop")).Visible = true;
-        }
+        base.Decorate(mvc);
         return this;
     }
 
