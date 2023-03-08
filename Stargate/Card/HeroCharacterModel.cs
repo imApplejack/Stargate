@@ -11,7 +11,7 @@ namespace Stargate.Stargate.Card
     public  class HeroCharacterModel : CharacterModel, ISGSkill
     {
        
-        List<MissionModel> glyphsEarned = new List<MissionModel>();
+        public List<MissionModel> glyphsEarned = new List<MissionModel>();
 
 
     }
