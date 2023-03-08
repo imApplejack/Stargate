@@ -18,24 +18,29 @@ public class GDCharacter : GDCard
     //  {
     //      
     //  }
-    
-    
+
+
+    //private TextureRect stop;
+
+    public override void _Ready()
+    {
+        base._Ready();
+    }
+
     public override void ExtraInit()
     {
-
     }
 
     public override void Decorate(MappingMVC mvc)
     {
+        TextureRect stop = (TextureRect)FindNode("Stop");
         if (Card.State == CardState.Stop)
         {
-            ((CanvasItem)FindNode("Stop")).Visible = true;
+            stop.Visible = true;
         }
         else
         {
-            ((CanvasItem)FindNode("Stop")).Visible = false;
+            stop.Visible = false;
         }
-       
     }
-
 }

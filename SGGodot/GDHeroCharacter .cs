@@ -20,12 +20,12 @@ public class GDHeroCharacter : GDCharacter
     //  }
 
 
-   // public Node glypheContainer = null;
+    //public VBoxContainer glypheContainer = null;
 
     public override void _Ready()
     {
        base._Ready();
-       //glypheContainer = FindNode("Glyphes"); // ca ca bug je sais pas pourquoi
+      //  glypheContainer = (VBoxContainer)FindNode("Glyphes"); // ca ca bug je sais pas pourquoi
     }
 
 
