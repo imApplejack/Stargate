@@ -175,17 +175,36 @@ public class PlayerControl : Control
     }
 
 
+    public GDCard CreateDecoratedCloneInstance(GDCard card)
+    {
+        GDCard Cloned = card.GetClone();
+        Cloned.Decorate(MappingMVC);
+        return Cloned;
+    }
+
+    public List<GDCard> CreateDecoratedCloneInstance(List<GDCard> cards)
+    {
+        List<GDCard> retour = new List<GDCard>();
+        foreach (GDCard card in cards)
+        {
+            GDCard Cloned = card.GetClone();
+            Cloned.Decorate(MappingMVC);
+            retour.Add(Cloned);
+        }
+        return retour;
+    }
+
     public void MajCardControl(CardModel card)
     {
 
         GD.PrintErr("Maj card control");
 
-        GDCard GDCard = this.GetCard(card);
+        GDCard GDCard = MappingMVC.Get(card);
         GDCard.ClearIngameInstances();
 
 
-        GDCard Cloned = GDCard.GetClone();
-        Cloned.Decorate(MappingMVC);
+        GDCard Cloned = CreateDecoratedCloneInstance(GDCard);
+    
 
         //GD.Print(GDCard.Card);
 
@@ -271,24 +290,6 @@ public class PlayerControl : Control
     }
 
 
-    private GDCard GetCard(CardModel card)
-    {
-        GDCard retour = this.MappingMVC.Get(card);
-        //retour.Decorate(MappingMVC);
-        return retour;
-    }
-
-
-    private List<GDCard> GetCards(List<CardModel> cards)
-    {
-        List<GDCard> retour = this.MappingMVC.Get(cards);
-        foreach(GDCard card in retour)
-        {
-          //  card.Decorate(this.MappingMVC);
-        }
-        return retour;
-    }
-
 
     public void HandleResult(object sender, EventArgs e)
     {
@@ -302,7 +303,7 @@ public class PlayerControl : Control
         PackedScene scene = GD.Load<PackedScene>("res://SGGodot/SGPopupDialog.tscn");
         SGPopupDialog instance = (SGPopupDialog)scene.Instance();
         
-        instance.Init(GetCards(popupdialogattr.cards), popupdialogattr.count);
+        instance.Init(CreateDecoratedCloneInstance(MappingMVC.Get(popupdialogattr.cards)), popupdialogattr.count);
         this.AddChild(instance);
         instance.FindNode("HBoxContainer").Connect("SendEvent", this, "PlayEvent");
 
