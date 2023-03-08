@@ -190,7 +190,7 @@ public class PlayerControl : Control
 
             if ((GDCard.Card.State & CardState.Hand) != 0)
                 {
-                    HandContainer.AddChild(GDCard.GetClone());
+                    HandContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
                        
                 }
             else if ( (GDCard.Card.State & CardState.Board) != 0 )
@@ -198,17 +198,17 @@ public class PlayerControl : Control
 
                     if (GDCard.Card.Card.Type == CardType.TeamCharacter)
                     {
-                        TeamContainer.AddChild(GDCard.GetClone());
+                        TeamContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
                     }
                     else
                     {
-                        BoardContainer.AddChild(GDCard.GetClone());
+                        BoardContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
                     }
                        
                 }
                 else if ((GDCard.Card.State & CardState.Mission) != 0)
                 {
-                    MissionContainer.Assign(GDCard.GetClone());    
+                    MissionContainer.Assign(GDCard.GetClone().Decorate(MappingMVC));    
                 }
 
         }
@@ -219,7 +219,7 @@ public class PlayerControl : Control
             {
                 case CardState.Hand:
                     {
-                        EnemyHandContainer.AddChild(GDCard.GetClone());
+                        EnemyHandContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
                         break;
                     }
 
@@ -228,11 +228,11 @@ public class PlayerControl : Control
 
                         if(GDCard.Card.Card.Type == CardType.TeamCharacter)
                         {
-                            EnemyTeamContainer.AddChild(GDCard.GetClone());
+                            EnemyTeamContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
                         }
                         else
                         {
-                            EnemyBoardContainer.AddChild(GDCard.GetClone());
+                            EnemyBoardContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
                         }
                         break;
                     }
@@ -243,11 +243,11 @@ public class PlayerControl : Control
 
                         if (GDCard.Card.Card.Type == CardType.TeamCharacter)
                         {
-                            EnemyTeamContainer.AddChild(GDCard.GetClone());
+                            EnemyTeamContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
                         }
                         else
                         {
-                            EnemyBoardContainer.AddChild(GDCard.GetClone());
+                            EnemyBoardContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
                         }
                         break;
                     }
@@ -255,7 +255,7 @@ public class PlayerControl : Control
 
                 case CardState.Mission:
                     {
-                        MissionContainer.Assign(GDCard.GetClone());
+                        MissionContainer.Assign(GDCard.GetClone().Decorate(MappingMVC));
                         break;
                     }
 
