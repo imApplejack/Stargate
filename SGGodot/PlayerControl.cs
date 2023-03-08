@@ -165,7 +165,7 @@ public class PlayerControl : Control
 
         if (player == _player)
         {
-            ((Label)FindNode("PowerLabel")).Text = _player.Energy.ToString();
+            ((Label)FindNode("PowerLabel")).Text = "Power :" + _player.Energy.ToString();
         }
         else
         {
