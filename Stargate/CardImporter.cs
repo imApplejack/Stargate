@@ -45,14 +45,14 @@ namespace Stargate.Stargate
             {
                 
                 // TODO le texte n'est pas une value a faire
-                string value = element.Attributes["value"].Value;
+                //string value = element.Attributes["value"].Value;
 
                 switch (element.Attributes["name"].Value)
                 {
 
 
                     case "Type":
-                        switch (value)
+                        switch (element.Attributes["value"].Value)
                         {
                             case "Adversary" :  c.Type = CardType.Adversary; break;
                             case "Support Character": c.Type = CardType.SupportCharacter; break;
@@ -65,31 +65,55 @@ namespace Stargate.Stargate
 
 
                     case "Subtitle":
-                        c.Subtitle = value;
+                        c.Subtitle = element.Attributes["value"].Value;
                         break;
 
                     case "Cost":
-                        c.Cost = int.Parse(value);
+                        c.Cost = int.Parse(element.Attributes["value"].Value);
                         break;
 
                     case "Culture":
-                        c.Culture = int.Parse(value);
+                        c.Culture = int.Parse(element.Attributes["value"].Value);
                         break;
 
                     case "Science":
-                        c.Science = int.Parse(value);
+                        c.Science = int.Parse(element.Attributes["value"].Value);
                         break;
 
                     case "Ingenuity":
-                        c.Ingenuity = int.Parse(value);
+                        c.Ingenuity = int.Parse(element.Attributes["value"].Value);
                         break;
 
                     case "Combat":
-                        c.Combat = int.Parse(value);
+                        c.Combat = int.Parse(element.Attributes["value"].Value);
                         break;
 
                     case "Revive":
-                        c.Revive = int.Parse(value);
+                        c.Revive = int.Parse(element.Attributes["value"].Value);
+                        break;
+
+                    case "Glyph":
+                        switch (element.FirstChild.Attributes["value"].Value)
+                        {
+                            case "l":
+                                c.Glyphe = Glyphe.Libra;
+                                break;
+                            case "o":
+                                c.Glyphe = Glyphe.Orion;
+                                break;
+                            case "p":
+                                c.Glyphe = Glyphe.Pisces;
+                                break;
+                            case "s":
+                                c.Glyphe = Glyphe.Scorpius;
+                                break;
+                            case "t":
+                                c.Glyphe = Glyphe.Triangulum;
+                                break;
+                            case "g":
+                                c.Glyphe = Glyphe.Gemini;
+                                break;
+                        }
                         break;
 
                 }

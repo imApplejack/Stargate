@@ -54,6 +54,12 @@ namespace Stargate.Stargate.Enum
     public enum Glyphe
     {
         Orion,
+        Libra,
+        Pisces,
+        Scorpius,
+        Triangulum,
+        Gemini,
+
         NONE
     };
 }

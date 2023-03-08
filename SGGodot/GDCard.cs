@@ -6,10 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 
-public class GDCard : Control
+public abstract class GDCard : Control
 {
     // Declare member variables here. Examples:
     // private int a = 2;
+
+
+    public abstract void ExtraInit();
 
 
     private CardModel card = null;

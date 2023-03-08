@@ -29,8 +29,10 @@ namespace Stargate.SGGodot
             TextureRect cardBackground = (TextureRect)instance.FindNode("Cardbackground");
             cardBackground.Texture = ResourceLoader.Load(Const.AssetPath + "/" + model.Card.Id + ".jpg") as Texture;
 
+
             //CardModel.CardModelObservable += new EventHandler(instance.HandleRefreshCard);
             instance.Card = model;
+            instance.ExtraInit();
             this.Add(model, instance);
         }
 

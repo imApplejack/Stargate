@@ -23,5 +23,15 @@ namespace Stargate
         public Glyphe Glyphe { get; set; } = Glyphe.NONE;
 
 
+
+        public override string ToString()
+        {
+            return Id+" "+ Name + " " + Type + " " + Subtitle+ " " + Cost+ " " + Culture +" " + Science +" " + Combat + " " + Ingenuity + " " + Revive +" "+ Experience +" " + Glyphe ;
+        }
+
     }
+
+   
+
+
 }
