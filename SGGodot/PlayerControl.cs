@@ -58,7 +58,7 @@ public class PlayerControl : Control
 
             if (IsInstanceValid(card) && !card.IsQueuedForDeletion())
             {
-                GDCard myZoomedCard = (GDCard)card.GetClone();
+                GDCard myZoomedCard = (GDCard)card.Duplicate();
                 ZoomContainer.AddChild(myZoomedCard);
             }
         }
@@ -183,6 +183,10 @@ public class PlayerControl : Control
         GDCard GDCard = this.GetCard(card);
         GDCard.ClearIngameInstances();
 
+
+        GDCard Cloned = GDCard.GetClone();
+        Cloned.Decorate(MappingMVC);
+
         //GD.Print(GDCard.Card);
 
         if (card.Owner == this.player)
@@ -190,25 +194,25 @@ public class PlayerControl : Control
 
             if ((GDCard.Card.State & CardState.Hand) != 0)
                 {
-                    HandContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
+                    HandContainer.AddChild(Cloned);
                        
                 }
             else if ( (GDCard.Card.State & CardState.Board) != 0 )
                 {
-
+               
                     if (GDCard.Card.Card.Type == CardType.TeamCharacter)
                     {
-                        TeamContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
+                        TeamContainer.AddChild(Cloned);
                     }
                     else
                     {
-                        BoardContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
+                        BoardContainer.AddChild(Cloned);
                     }
                        
                 }
                 else if ((GDCard.Card.State & CardState.Mission) != 0)
                 {
-                    MissionContainer.Assign(GDCard.GetClone().Decorate(MappingMVC));    
+                    MissionContainer.Assign(Cloned);    
                 }
 
         }
@@ -219,7 +223,7 @@ public class PlayerControl : Control
             {
                 case CardState.Hand:
                     {
-                        EnemyHandContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
+                        EnemyHandContainer.AddChild(Cloned);
                         break;
                     }
 
@@ -228,11 +232,11 @@ public class PlayerControl : Control
 
                         if(GDCard.Card.Card.Type == CardType.TeamCharacter)
                         {
-                            EnemyTeamContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
+                            EnemyTeamContainer.AddChild(Cloned);
                         }
                         else
                         {
-                            EnemyBoardContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
+                            EnemyBoardContainer.AddChild(Cloned);
                         }
                         break;
                     }
@@ -243,11 +247,11 @@ public class PlayerControl : Control
 
                         if (GDCard.Card.Card.Type == CardType.TeamCharacter)
                         {
-                            EnemyTeamContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
+                            EnemyTeamContainer.AddChild(Cloned);
                         }
                         else
                         {
-                            EnemyBoardContainer.AddChild(GDCard.GetClone().Decorate(MappingMVC));
+                            EnemyBoardContainer.AddChild(Cloned);
                         }
                         break;
                     }
@@ -255,7 +259,7 @@ public class PlayerControl : Control
 
                 case CardState.Mission:
                     {
-                        MissionContainer.Assign(GDCard.GetClone().Decorate(MappingMVC));
+                        MissionContainer.Assign(Cloned);
                         break;
                     }
 
@@ -269,7 +273,8 @@ public class PlayerControl : Control
 
     private GDCard GetCard(CardModel card)
     {
-        GDCard retour = this.MappingMVC.Get(card).Decorate(MappingMVC);
+        GDCard retour = this.MappingMVC.Get(card);
+        //retour.Decorate(MappingMVC);
         return retour;
     }
 
@@ -279,7 +284,7 @@ public class PlayerControl : Control
         List<GDCard> retour = this.MappingMVC.Get(cards);
         foreach(GDCard card in retour)
         {
-            card.Decorate(this.MappingMVC);
+          //  card.Decorate(this.MappingMVC);
         }
         return retour;
     }

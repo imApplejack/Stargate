@@ -25,7 +25,7 @@ public class GDCharacter : GDCard
 
     }
 
-    public override GDCard Decorate(MappingMVC mvc)
+    public override void Decorate(MappingMVC mvc)
     {
         if (Card.State == CardState.Stop)
         {
@@ -35,7 +35,7 @@ public class GDCharacter : GDCard
         {
             ((CanvasItem)FindNode("Stop")).Visible = false;
         }
-        return this;
+       
     }
 
 }

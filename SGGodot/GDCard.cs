@@ -115,9 +115,9 @@ public abstract class GDCard : Control
         }
     }
 
-    public virtual GDCard Decorate(MappingMVC mvc)
+    public virtual void Decorate(MappingMVC mvc)
     {
-        return this;
+       
     }
 
    

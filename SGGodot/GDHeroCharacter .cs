@@ -29,15 +29,17 @@ public class GDHeroCharacter : GDCharacter
     }
 
 
-    public override GDCard Decorate(MappingMVC mvc)
+    public override void Decorate(MappingMVC mvc)
     {
         base.Decorate(mvc);
         //HeroCharacterModel buffer = (HeroCharacterModel)Card;
         Node glypheContainer = FindNode("Glyphes");
+        
+        
         foreach (Node item in glypheContainer.GetChildren())
         {
             //GD.Print("dans le foreach");
-            item.QueueFree();
+            //item.QueueFree();
         }
         //GD.Print("count glype" + ((HeroCharacterModel)Card).glyphsEarned.Count);
         foreach (MissionModel item in ((HeroCharacterModel)Card).glyphsEarned)
@@ -47,7 +49,6 @@ public class GDHeroCharacter : GDCharacter
             //GD.PrintErr("t.Texture : "+ t.Texture+ " glypheContainer :  " + FindNode("Glyphes"));
              glypheContainer.AddChild(t); 
         }
-        return this;
     }
 
 }
