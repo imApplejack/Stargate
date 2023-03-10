@@ -13,7 +13,7 @@ public class ReadyContainer : CardContainer
 
     public override void ProcessCardAction(GDCard card)
     {
-        ForwardEvent(new AssignCharEvent() { CardModelId = card.Card.Id });
+        ShowCardAction(card);
     }
 
 

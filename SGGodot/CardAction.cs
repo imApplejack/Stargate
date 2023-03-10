@@ -29,6 +29,14 @@ public class CardAction : WindowDialog
         button.Connect("button_down", this, "CardActionSignal", new Godot.Collections.Array() { new SGEventContainer( new PlayCardEvent() { CardModelId = Card.Card.Id } ) } );
         return button;
     }
+    private Button AssignCardButton()
+    {
+        Button button = new Button();
+        button.Text = "Assign Card";
+        button.Connect("button_down", this, "CardActionSignal", new Godot.Collections.Array() { new SGEventContainer(new AssignCharEvent() { CardModelId = Card.Card.Id }) });
+        return button;
+    }
+
 
 
     // Called when the node enters the scene tree for the first time.
@@ -42,6 +50,13 @@ public class CardAction : WindowDialog
         {
             ActionContainer.AddChild(PlayCardButton());
         }
+
+
+        if (Card.Card.State == CardState.Ready && (Card.Card.Card.Type & CardType.Character ) != 0)
+        {
+            ActionContainer.AddChild(AssignCardButton());
+        }
+
 
     }
 
