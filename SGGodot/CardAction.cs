@@ -17,8 +17,12 @@ public class CardAction : WindowDialog
 
 
     public void CardActionSignal(SGEventContainer stargateEventContainer){
+
+       
+
         CardContainer parent = (CardContainer)GetParent();
         parent.ForwardEvent(stargateEventContainer.SGEvent);
+        QueueFree();
     }
 
 

@@ -4,7 +4,6 @@
 [ext_resource path="res://Asset/Cards/bad4982e-a94d-4023-8dc9-38b1c9ceccf9/Cards/0508f8aa-7cc8-4a40-aa9d-72db3ac3df2a.jpg" type="Texture" id=2]
 
 [node name="WindowDialog" type="WindowDialog"]
-visible = true
 margin_right = 303.0
 margin_bottom = 218.0
 script = ExtResource( 1 )
