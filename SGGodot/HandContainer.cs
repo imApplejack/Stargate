@@ -18,16 +18,7 @@ public class HandContainer : CardContainer
         if ( card.Card.State == CardState.Hand)
         {
             //ForwardEvent(new PlayCardEvent() { CardModelId = card.Card.Id });
-
-
-
-            PackedScene scene = GD.Load<PackedScene>("res://SGGodot/CardAction.tscn");
-            CardAction instance = (CardAction)scene.Instance();
-            instance.Init(card);
-            AddChild(instance);
-            instance.PopupCentered();
-
-
+            ShowCardAction(card);
         }   
     }
 

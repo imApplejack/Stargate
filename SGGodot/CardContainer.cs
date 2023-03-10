@@ -24,6 +24,15 @@ public class CardContainer : Node
         EmitSignal("SendEvent", new SGEventContainer(sgevent));
     }
 
+    protected void ShowCardAction(GDCard card)
+    {
+        PackedScene scene = GD.Load<PackedScene>("res://SGGodot/CardAction.tscn");
+        CardAction instance = (CardAction)scene.Instance();
+        instance.Init(card);
+        AddChild(instance);
+        instance.PopupCentered();
+    }
+
 
     public virtual void ProcessCardAction(GDCard card) // d'autres attr peut etre ?
     {
