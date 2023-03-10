@@ -18,6 +18,8 @@ public abstract class GDCard : Control
 
     private CardModel card = null;
 
+    public TextureRect Cardbackground;
+
     public CardModel Card
     {
         get
@@ -38,7 +40,7 @@ public abstract class GDCard : Control
 
 
     // permet de connaitre la GDCard Original situe dans le mappingMVC pour simplifier le code dans les appels depuis les enfants
-    private GDCard Origin { get; set; } = null; 
+    public GDCard Origin { get; set; } = null; 
 
     public void ClearIngameInstances()
     {
@@ -73,6 +75,8 @@ public abstract class GDCard : Control
     {
         zoomEvent = GetNode<ZoomEvent>("/root/ZoomEvent");
         playEvent = GetNode<PlayEvent>("/root/PlayEvent");
+        Cardbackground = (TextureRect)FindNode("Cardbackground");
+
     }
 
     public void _on_Panel_mouse_entered()

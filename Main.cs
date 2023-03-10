@@ -62,10 +62,7 @@ public class Main : Node
 
 
 
-        PackedScene scene = GD.Load<PackedScene>("res://SGGodot/CardAction.tscn");
-        WindowDialog instance = (WindowDialog)scene.Instance();
-        AddChild(instance);
-        instance.PopupCentered();
+      
 
     }
 

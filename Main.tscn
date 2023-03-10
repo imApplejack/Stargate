@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Main.cs" type="Script" id=1]
 [ext_resource path="res://SGGodot/PlayerControl.tscn" type="PackedScene" id=2]
-[ext_resource path="res://SGGodot/CardAction.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -12,5 +11,3 @@ anchor_right = 0.5
 
 [node name="PlayerControl2" parent="." instance=ExtResource( 2 )]
 anchor_left = 0.5
-
-[node name="WindowDialog" parent="." instance=ExtResource( 3 )]

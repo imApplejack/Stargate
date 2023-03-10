@@ -16,7 +16,6 @@ public class GDMission : GDCard
     {
 
         GD.PrintErr(Card.Card);
-
          GlyphTexture = ResourceLoader.Load("res://Asset/" +  (Card.Card.Glyphe).ToString().ToLower() + ".png") as Texture;
     }
 
