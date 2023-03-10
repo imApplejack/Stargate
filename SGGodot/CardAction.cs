@@ -26,18 +26,24 @@ public class CardAction : WindowDialog
     }
 
 
+    private Godot.Collections.Array EventSignalUtil(StargateEvent se)
+    {
+        return new Godot.Collections.Array() { new SGEventContainer(se) };
+    }
+
+
     private Button PlayCardButton()
     {
         Button button = new Button();
         button.Text = "Play Card";
-        button.Connect("button_down", this, "CardActionSignal", new Godot.Collections.Array() { new SGEventContainer( new PlayCardEvent() { CardModelId = Card.Card.Id } ) } );
+        button.Connect("button_down", this, "CardActionSignal", EventSignalUtil(new PlayCardEvent() { CardModelId = Card.Card.Id } ));
         return button;
     }
     private Button AssignCardButton()
     {
         Button button = new Button();
         button.Text = "Assign Card";
-        button.Connect("button_down", this, "CardActionSignal", new Godot.Collections.Array() { new SGEventContainer(new AssignCharEvent() { CardModelId = Card.Card.Id }) });
+        button.Connect("button_down", this, "CardActionSignal", EventSignalUtil(new AssignCharEvent() { CardModelId = Card.Card.Id }));
         return button;
     }
 
