@@ -59,6 +59,14 @@ public class Main : Node
         Player2Vue.Init();
 
         game.GameState.InitGame(1);
+
+
+
+        PackedScene scene = GD.Load<PackedScene>("res://SGGodot/CardAction.tscn");
+        WindowDialog instance = (WindowDialog)scene.Instance();
+        AddChild(instance);
+        instance.PopupCentered();
+
     }
 
     [Sync]

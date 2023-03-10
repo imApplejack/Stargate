@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Asset/Cards/bad4982e-a94d-4023-8dc9-38b1c9ceccf9/Cards/0508f8aa-7cc8-4a40-aa9d-72db3ac3df2a.jpg" type="Texture" id=2]
+
+[node name="WindowDialog" type="WindowDialog"]
+visible = true
+margin_right = 303.0
+margin_bottom = 218.0
+
+[node name="Texture" type="TextureRect" parent="."]
+margin_left = 11.0
+margin_top = 8.0
+margin_right = 297.0
+margin_bottom = 412.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -134.0
+margin_top = 10.0
+margin_right = -15.0
+margin_bottom = -13.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 63.0
+margin_right = 119.0
+margin_bottom = 83.0
+text = "dsfds"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+margin_top = 87.0
+margin_right = 119.0
+margin_bottom = 107.0
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+margin_top = 111.0
+margin_right = 119.0
+margin_bottom = 131.0
