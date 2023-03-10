@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://SGGodot/GDCard.cs" type="Script" id=1]
-[ext_resource path="res://Asset/Cards/bad4982e-a94d-4023-8dc9-38b1c9ceccf9/Cards/0a124022-4054-4952-83d9-3ac43d16e7a1.jpg" type="Texture" id=2]
+[ext_resource path="res://Asset/Cards/bad4982e-a94d-4023-8dc9-38b1c9ceccf9/Cards/4901fb59-e7cc-47d4-8f3a-4f1f2e93f78d.jpg" type="Texture" id=2]
 [ext_resource path="res://Asset/Cards/LAYOUTOVERRIDE.png" type="Texture" id=3]
 [ext_resource path="res://Asset/stop.png" type="Texture" id=4]
 [ext_resource path="res://SGGodot/GDMission.cs" type="Script" id=5]
+[ext_resource path="res://SGGodot/Skill.tscn" type="PackedScene" id=6]
 
 [node name="Character" type="Control"]
 margin_right = 286.0
@@ -31,46 +32,6 @@ margin_bottom = 40.0
 texture = ExtResource( 3 )
 stretch_mode = 1
 
-[node name="Science" type="Label" parent="Panel"]
-visible = false
-margin_left = 33.0
-margin_top = 89.0
-margin_right = 82.0
-margin_bottom = 103.0
-rect_pivot_offset = Vector2( 25, 8 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Science"
-
-[node name="Culture" type="Label" parent="Panel"]
-visible = false
-modulate = Color( 0.0196078, 0.0156863, 0.0156863, 1 )
-margin_left = 33.0
-margin_top = 63.0
-margin_right = 79.0
-margin_bottom = 77.0
-rect_pivot_offset = Vector2( 25, 8 )
-text = "Culture"
-
-[node name="Combat" type="Label" parent="Panel"]
-visible = false
-margin_left = 32.0
-margin_top = 115.0
-margin_right = 81.0
-margin_bottom = 129.0
-rect_pivot_offset = Vector2( 25, 8 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Combat"
-
-[node name="Ingenuity" type="Label" parent="Panel"]
-visible = false
-margin_left = 33.0
-margin_top = 140.0
-margin_right = 93.0
-margin_bottom = 154.0
-rect_pivot_offset = Vector2( 25, 8 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Ingenuity"
-
 [node name="Cost" type="Label" parent="Panel"]
 visible = false
 margin_left = 22.0
@@ -89,6 +50,38 @@ margin_bottom = 190.0
 texture = ExtResource( 4 )
 stretch_mode = 5
 
+[node name="Ingenuity" parent="Panel" instance=ExtResource( 6 )]
+visible = false
+margin_left = 41.0
+margin_top = 190.0
+margin_right = 51.0
+margin_bottom = 208.0
+mouse_filter = 2
+
+[node name="Culture" parent="Panel" instance=ExtResource( 6 )]
+visible = false
+margin_left = 41.0
+margin_top = 81.0
+margin_right = 51.0
+margin_bottom = 99.0
+mouse_filter = 2
+
+[node name="Combat" parent="Panel" instance=ExtResource( 6 )]
+visible = false
+margin_left = 42.0
+margin_top = 153.0
+margin_right = 52.0
+margin_bottom = 171.0
+mouse_filter = 2
+
+[node name="Science" parent="Panel" instance=ExtResource( 6 )]
+visible = false
+margin_left = 41.0
+margin_top = 118.0
+margin_right = 51.0
+margin_bottom = 136.0
+mouse_filter = 2
+
 [node name="Glyphes" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -97,6 +90,7 @@ margin_top = 45.0
 margin_right = 191.0
 margin_bottom = 66.0
 rect_scale = Vector2( 0.25, 0.25 )
+mouse_filter = 2
 script = ExtResource( 5 )
 
 [connection signal="gui_input" from="Panel" to="." method="_on_Panel_gui_input"]

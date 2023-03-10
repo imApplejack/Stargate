@@ -5,3 +5,15 @@
 
 [node name="Character" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="Ingenuity" parent="Panel" index="4"]
+visible = false
+
+[node name="Culture" parent="Panel" index="5"]
+visible = false
+
+[node name="Combat" parent="Panel" index="6"]
+visible = false
+
+[node name="Science" parent="Panel" index="7"]
+visible = false

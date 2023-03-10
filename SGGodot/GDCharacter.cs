@@ -1,6 +1,9 @@
 using Godot;
+using Stargate;
 using Stargate.SGGodot;
 using Stargate.Stargate;
+using Stargate.Stargate.Card;
+using Stargate.Stargate.Card.Interface;
 using Stargate.Stargate.Enum;
 using System;
 
@@ -42,5 +45,30 @@ public class GDCharacter : GDCard
         {
             stop.Visible = false;
         }
+
+
+        ManageSkillsVisibility(Skill.Ingenuity);
+        ManageSkillsVisibility(Skill.Combat);
+        ManageSkillsVisibility(Skill.Science);
+        ManageSkillsVisibility(Skill.Culture);
+
+        //Control Ingenuity = (Control)FindNode("Ingenuity");
+        //Ingenuity.Visible = true;
     }
+
+
+
+    private void ManageSkillsVisibility(Skill skill)
+    {
+        ISGSkill chara = (ISGSkill)Card;
+        if (chara.GetSkill(skill) != null)
+        {
+            Control loc = (Control)FindNode(skill.ToString());
+            ((Label)loc.FindNode("Label")).Text = ((int)chara.GetSkill(skill)).ToString();
+            loc.Visible = true;
+        }
+    }
+
+
+
 }
