@@ -294,9 +294,16 @@ namespace Stargate.Stargate
         }
 
 
-        public StargateResult PlayMission(Player player)
+        public void PlayMission(Player player)
         {
-            return (this.CardRepository.PlayMission(player));
+            try
+            {
+                ForwardEvent(new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = CardRepository.PlayMission(player) });
+            }
+            catch (EmptyMissionPileException e)
+            {
+                throw e;
+            } 
         }
 
 

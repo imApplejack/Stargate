@@ -184,19 +184,19 @@ namespace Stargate.Repository
         }
 
 
-        public StargateResult PlayMission(Player player)
+        public CardModel PlayMission(Player player)
         {
             /// TODO faire les cas bibliotheque vide ect... 
             try
             {
                 CardModel topCardMission = Missions[player].Peek();
                 topCardMission.State = CardState.Mission;
-                Libraries[player].Dequeue();
-                return new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = topCardMission };
+                Missions[player].Dequeue();
+                return topCardMission;
             }
             catch (Exception e)
             {
-                return new StargateResult { actionResult = ActionResult.Failure };
+                throw new EmptyMissionPileException();
             }
         }
 

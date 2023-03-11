@@ -42,7 +42,7 @@ namespace Stargate.StateMachine
 
         public void PlayMission(StateEvent e = null)
         {
-            SendEvent(gameState.PlayMission(gameState.CurrentPlayer));
+            gameState.PlayMission(gameState.CurrentPlayer);
         }
 
 
