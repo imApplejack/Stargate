@@ -154,6 +154,11 @@ namespace Stargate.Stargate
             }
         }
 
+        public void PlayComplication(PlayComplicationEvent myEvent)
+        {
+           
+        }
+
 
 
         public StargateResult AssignHeroChar(AssignCharEvent assignCardEvent)

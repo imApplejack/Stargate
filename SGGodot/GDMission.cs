@@ -1,5 +1,7 @@
 using Godot;
 using Stargate.SGGodot;
+using Stargate.Stargate.Card;
+using Stargate.Stargate.Enum;
 using System;
 
 public class GDMission : GDCard
@@ -17,6 +19,15 @@ public class GDMission : GDCard
 
         // GD.PrintErr(Card.Card);
          GlyphTexture = ResourceLoader.Load("res://Asset/" +  (Card.Card.Glyphe).ToString().ToLower() + ".png") as Texture;
+    }
+
+
+
+    public override void Decorate(MappingMVC mvc)
+    {
+        Label Difficulty = (Label)FindNode("Difficulty");
+        Difficulty.Text = ((MissionModel)Card).getMissionDifficulty().ToString();
+
     }
 
 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://SGGodot/GDMission.cs" type="Script" id=1]
 [ext_resource path="res://Asset/Cards/bad4982e-a94d-4023-8dc9-38b1c9ceccf9/Cards/c81249ce-abc2-489c-a32c-28ca0e18293b.jpg" type="Texture" id=2]
-[ext_resource path="res://Asset/Cards/LAYOUTOVERRIDE.png" type="Texture" id=3]
+[ext_resource path="res://Asset/Cards/MissionOverride.png" type="Texture" id=4]
 
 [node name="Mission" type="Control"]
 margin_right = 404.0
@@ -21,61 +21,22 @@ margin_bottom = 286.0
 texture = ExtResource( 2 )
 stretch_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Panel"]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 3 )
-stretch_mode = 1
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+margin_left = 52.0
+margin_top = 52.0
+margin_right = 110.0
+margin_bottom = 94.0
+mouse_filter = 2
+texture = ExtResource( 4 )
 
-[node name="Science" type="Label" parent="Panel"]
-visible = false
-margin_left = 33.0
-margin_top = 89.0
-margin_right = 82.0
-margin_bottom = 103.0
-rect_pivot_offset = Vector2( 25, 8 )
+[node name="Difficulty" type="Label" parent="Panel"]
+margin_left = 61.0
+margin_top = 57.0
+margin_right = 101.0
+margin_bottom = 71.0
+rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Science"
-
-[node name="Culture" type="Label" parent="Panel"]
-visible = false
-modulate = Color( 0.0196078, 0.0156863, 0.0156863, 1 )
-margin_left = 33.0
-margin_top = 63.0
-margin_right = 79.0
-margin_bottom = 77.0
-rect_pivot_offset = Vector2( 25, 8 )
-text = "Culture"
-
-[node name="Combat" type="Label" parent="Panel"]
-visible = false
-margin_left = 32.0
-margin_top = 115.0
-margin_right = 81.0
-margin_bottom = 129.0
-rect_pivot_offset = Vector2( 25, 8 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Combat"
-
-[node name="Ingenuity" type="Label" parent="Panel"]
-visible = false
-margin_left = 33.0
-margin_top = 140.0
-margin_right = 93.0
-margin_bottom = 154.0
-rect_pivot_offset = Vector2( 25, 8 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Ingenuity"
-
-[node name="Cost" type="Label" parent="Panel"]
-visible = false
-margin_left = 22.0
-margin_top = 26.0
-margin_right = 72.0
-margin_bottom = 50.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Cost"
+text = "0"
 
 [connection signal="mouse_entered" from="Panel" to="." method="_on_Panel_mouse_entered"]
 [connection signal="mouse_exited" from="Panel" to="." method="_on_Panel_mouse_exited"]

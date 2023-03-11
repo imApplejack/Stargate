@@ -120,6 +120,12 @@ namespace Stargate.StateMachine
                             //GD.Print((PassEvent)myEvent);
                             break;
 
+                        case EventType.PLAYCOMPLICATION:
+                            gameState.PlayComplication((PlayComplicationEvent)myEvent);
+                            questPhasePass[questCurrentPlayer] = false;
+                            //GD.Print((PassEvent)myEvent);
+                            break;
+
 
 
                         default: throw new StateResultException(StateResult.STOP);
