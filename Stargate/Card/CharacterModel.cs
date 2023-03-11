@@ -12,7 +12,6 @@ namespace Stargate.Stargate.Card
     {
 
 
-        private List<CardModel> boosts = new List<CardModel>();
 
         public int? GetSkill(Skill skill)
         {
@@ -31,20 +30,7 @@ namespace Stargate.Stargate.Card
         }
 
 
-        public bool HasBoost()
-        {
-           return boosts.Count > 0;
-        }
-
-        public void AddBoost(CharacterModel boost)
-        {
-            boosts.Add(boost);
-        }
-
-        public void ClearBoosts()
-        {
-            boosts = new List<CardModel>();
-        }
+       
 
     }
 }

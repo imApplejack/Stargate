@@ -10,20 +10,17 @@ namespace Stargate.Stargate.Card
 {
     public  class MissionModel : CardModel , ISGSkill
     {
-           
-        
-
 
 
         public int getMissionDifficulty()
         {
-            return (int)GetSkill(GetMissionSkill());
+            return (int)GetSkill(GetMissionSkill()) + boosts.Count;
         }
         
         public Skill GetMissionSkill()
         {
-            if (Card.Ingenuity != null) { return Skill.Ingenuity; }
-            else if (Card.Combat != null) { return Skill.Combat; }
+            if (Card.Ingenuity != null) { return Skill.Ingenuity ; }
+            else if (Card.Combat != null) { return Skill.Combat ; }
             else if (Card.Science != null) { return Skill.Science; }
             else if (Card.Culture != null) { return Skill.Culture; }
             else { return Skill.None; }

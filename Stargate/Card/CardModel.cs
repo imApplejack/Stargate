@@ -11,6 +11,24 @@ namespace Stargate.Stargate.Card
     public class CardModel
     {
 
+        public List<CardModel> boosts = new List<CardModel>();
+
+        public bool HasBoost()
+        {
+            return boosts.Count > 0;
+        }
+
+        public void AddBoost(CardModel boost)
+        {
+            boosts.Add(boost);
+        }
+
+        // ici probablement typer avec boostype pour les enlevages en fonctions des phases
+        public void ClearBoosts()
+        {
+            boosts = new List<CardModel>();
+        }
+
 
         public int Id { get; set; } // unique id 
         public CardState State { get; set; }
