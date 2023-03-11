@@ -42,24 +42,14 @@ public class Main : Node
         MappingMVC mappingMVC = new MappingMVC();
         mappingMVC.InitRessources(game.GameState.GetAllCards());
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
-        
-        
-
-        
-        Player1Vue.Pouet(game.GameState.player1, game.GameState.player2, mappingMVC, this);
-
+        Player1Vue.InitControl(game.GameState.player1, game.GameState.player2, mappingMVC, this);
         game.GameState.StargateResultHandler += Player1Vue.HandleResult;
 
 
         MappingMVC mappingMVC2 = new MappingMVC();
         mappingMVC2.InitRessources(game.GameState.GetAllCards());
-        Player2Vue = (PlayerControl)this.FindNode("PlayerControl2");
-        Player2Vue.Player = game.GameState.player2;
-        Player2Vue.Api = this; // :'(
-        Player2Vue.MappingMVC = mappingMVC2;
-       
-        Player2Vue.Pouet(game.GameState.player2, game.GameState.player1, mappingMVC2, this);
-
+        Player2Vue = (PlayerControl)this.FindNode("PlayerControl2");       
+        Player2Vue.InitControl(game.GameState.player2, game.GameState.player1, mappingMVC2, this);
         game.GameState.StargateResultHandler += Player2Vue.HandleResult;
 
         game.GameState.InitGame(1);

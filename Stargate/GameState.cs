@@ -32,7 +32,8 @@ namespace Stargate.Stargate
 
         public GameState()
         {
-
+            player1 = new Player() { id = 1, gameState = this};
+            player2 = new Player() { id = 2, gameState = this };
         }
 
 

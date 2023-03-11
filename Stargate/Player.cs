@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Stargate.Stargate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace Stargate
 
         public int id { get; set; }
 
-        public int Energy { get; set; } 
+        public int Energy { get; set; }
+
+        public GameState gameState { get; set; }
 
         public Player() { 
         

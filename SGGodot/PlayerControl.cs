@@ -29,6 +29,11 @@ public class PlayerControl : Control
     public MappingMVC MappingMVC { get; set; }
 
     private Player player;
+
+    private PlayerUX PlayerUX;
+
+    private PlayerUX EnnemyUX;
+
     
     public Player Player { get { return player; } set {
             player = value; 
@@ -117,7 +122,8 @@ public class PlayerControl : Control
         playEvent = GetNode<PlayEvent>("/root/PlayEvent");
         playEvent.Connect("PlaySGEvent", this, "PlayEvent");
 
-
+        PlayerUX = (PlayerUX)FindNode("PlayerUX");
+        EnnemyUX = (PlayerUX)FindNode("EnnemyUX");
 
         /*
         ConfirmationDialog cg = new ConfirmationDialog();
@@ -136,20 +142,19 @@ public class PlayerControl : Control
               p.Show();*/
 
         }
-        catch(Exception e) { }
-
-        
+        catch(Exception e) { }   
     }
 
+ 
 
-    public void Pouet(Player theplayer, Player theotherPlayer, MappingMVC mappingMVC, Main api)
+    public void InitControl(Player theplayer, Player theotherPlayer, MappingMVC mappingMVC, Main api)
     {
-
-
         Player = theplayer;
         Api = api;
         MappingMVC = mappingMVC;
 
+        PlayerUX.player = theplayer;
+        EnnemyUX.player = theotherPlayer;
 
         MissionContainer.player = player;
         MajControl();
@@ -165,20 +170,6 @@ public class PlayerControl : Control
         {
             MajCardControl(item.Key);
         }
-    }
-
-    public void MajPlayerAttr(Player _player)
-    {
-
-        if (player == _player)
-        {
-            ((Label)FindNode("PowerLabel")).Text = "Power :" + _player.Energy.ToString();
-        }
-        else
-        {
-            // @todo adversaire
-        }
-
     }
 
 
@@ -347,12 +338,14 @@ public class PlayerControl : Control
                         break;
                     }
 
-                case StargateResultType.ChangePlayerAttr:
+
+                 // refaire lui peut etre ?
+                /*case StargateResultType.ChangePlayerAttr:
                     {
                         Player card = (Player)result.attr;
-                        MajPlayerAttr(card);
+                      
                         break;
-                    }
+                    }*/
 
                 case StargateResultType.ChooseCard:
                     {
@@ -379,6 +372,9 @@ public class PlayerControl : Control
 
 
             }
+
+            PlayerUX.Update();
+            EnnemyUX.Update();
         }
     }
 

@@ -39,7 +39,7 @@ namespace Stargate
         public StargateGame(Library library)
         {
             Library = library;
-            GameState = new GameState() { player1 = new Player() { id = 1}, player2 = new Player() { id = 2} };
+            GameState = new GameState();  
         }
 
     }
