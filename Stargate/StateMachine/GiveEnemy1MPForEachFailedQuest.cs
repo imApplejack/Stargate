@@ -18,7 +18,6 @@ namespace Stargate.StateMachine
            
         }
 
-
         public override void InitSG()
         {
             AddAction(GiveEnnemyMP);
@@ -27,11 +26,8 @@ namespace Stargate.StateMachine
 
         public void GiveEnnemyMP(StateEvent e = null)
         {
-            gameState.GetEnemyPlayer().Energy++; // @TODO  a refaire
+            gameState.GetEnemyPlayer().Energy += gameState.CardRepository.GetAllFailedQuest().Count;
             SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = gameState.GetEnemyPlayer() });
-
         }
-
-
     }
 }

@@ -22,13 +22,10 @@ namespace Stargate.StateMachine
 
         public void Energy(StateEvent e = null)
         {
-           
-            gameState.CurrentPlayer.Energy = 3; // RG à ajouter + joueur 2 
+            int energy = 3 + gameState.GlyphCount(gameState.CurrentPlayer);
+            gameState.CurrentPlayer.Energy = energy;
+            gameState.GetEnemyPlayer().Energy  = energy;
             SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = gameState.CurrentPlayer });
-            gameState.GetEnemyPlayer().Energy = 3; // RG à ajouter + joueur 2 
-            SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = gameState.GetEnemyPlayer() });
         }
-
-      
     }
 }

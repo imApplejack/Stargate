@@ -23,5 +23,11 @@ namespace Stargate.Stargate.Card
             }
             return retour;
         }
+
+        public int CountGlyph()
+        {
+            return glyphsEarned.Count;
+        }
+
     }
 }

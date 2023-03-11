@@ -18,17 +18,11 @@ namespace Stargate.StateMachine
 
         public InitPhase(GameState gs) : base (gs)
         {
-            this.AddAction(Draw)
+            this.AddAction(new DrawUpTo8Phase(gs))
                 //.AddAction(ChooseParty)
                 //.AddAction(ChoosePartyEvent)
                 .AddAction(new GameLoop(gs))
                 ;
-        }
-
-       public void Draw(StateEvent e = null)
-       {
-            gameState.DrawUpTo(gameState.GetHeroPlayer(), 8);
-            gameState.DrawUpTo(gameState.GetEnemyPlayer(), 8);
         }
 
         public void ChooseParty(StateEvent e = null)

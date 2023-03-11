@@ -15,18 +15,18 @@ namespace Stargate.StateMachine
 
         public InnPhase(GameState gs) : base(gs)
         {
-           
+            AddAction(INNPhaseAbilities)
+                   .AddAction(FailQuestInBottom)
+                   .AddAction(Mp0)
+                   .AddAction(ReadyAllStoppedCardsAndStopAllkosCards)
+                   .AddAction(new DrawUpTo8Phase(gs))
+                   .AddAction(EnnemyProcessMPPhase);
         }
 
 
         public override void InitSG()
         {
-            AddAction(INNPhaseAbilities)
-                    .AddAction(FailQuestInBottom)
-                    .AddAction(Mp0)
-                    .AddAction(ReadyAllStoppedCardsAndStopAllkosCards)
-                    .AddAction(RefillHands)
-                    .AddAction(EnnemyProcessMPPhase);
+          
         }
 
 
@@ -42,7 +42,8 @@ namespace Stargate.StateMachine
 
         public void Mp0(StateEvent e = null)
         {
-            Debug.Print("Mp0");
+            gameState.player1.Energy = 0;
+            gameState.player2.Energy = 0;
         }
 
         public void ReadyAllStoppedCardsAndStopAllkosCards(StateEvent e = null)
@@ -50,15 +51,9 @@ namespace Stargate.StateMachine
             Debug.Print("ReadyAllStoppedCardsAndStopAllkosCards");
         }
 
-        public void RefillHands(StateEvent e = null)
-        {
-            Debug.Print("RefillHands");
-        }
-
         public void EnnemyProcessMPPhase(StateEvent e = null)
         {
            
-
             //Debug.Print("EnnemyProcessMPPhase");
 
             gameState.SwitchPlayersRole();

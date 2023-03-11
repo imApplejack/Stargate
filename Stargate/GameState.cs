@@ -218,6 +218,17 @@ namespace Stargate.Stargate
             return retour;
         }
 
+
+        public int GlyphCount(Player player)
+        {
+            int retour = 0;
+            foreach (HeroCharacterModel item in CardRepository.GetPlayerTeamCharactersWithGlyph(player))
+            {
+                retour += item.CountGlyph();
+            }
+            return retour;
+        }
+
         public int VictoryTotal(Player player)
         {
             int retour = 0;
@@ -314,26 +325,31 @@ namespace Stargate.Stargate
         }
 
 
-       /* public void SetQuestAside()
+        /* public void SetQuestAside()
+         {
+             MissionModel m = CardRepository.GetCurrentMission();
+             m.State = CardState.Aside;
+             ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+         }
+        */
+
+
+        public void ChangeCardState(CardModel model, CardState state)
         {
-            MissionModel m = CardRepository.GetCurrentMission();
-            m.State = CardState.Aside;
-            ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+            model.State = state;
+            ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = model });
         }
-       */
 
         public void SetQuestFailed()
         {
             MissionModel m = CardRepository.GetCurrentMission();
-            m.State = CardState.FailedQuest;
-            ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+            ChangeCardState(m, CardState.FailedQuest);
         }
 
         public void SetQuestAffinity()
         {
             MissionModel m = CardRepository.GetCurrentMission();
-            m.State = CardState.Affinity;
-            ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+            ChangeCardState(m, CardState.Affinity);
         }
 
 
