@@ -19,6 +19,8 @@ public class PlayerUX : Panel
 
     protected Label library;
 
+    protected Label missionPile;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -26,21 +28,18 @@ public class PlayerUX : Panel
         victoryProgressBar = (ProgressBar)FindNode("VictoryProgressBar");
         villanProgressBar = (ProgressBar)FindNode("VillanProgressBar");
         library = (Label)FindNode("Library");
+        missionPile = (Label)FindNode("MissionPile");
     }
 
     public override void _Draw()
     {
         base._Draw();
 
-
         powerLabel.Text = "Power : " + player.Energy.ToString();
         library.Text = "Library : " + player.Library();
-
-
+        missionPile.Text = "Mission Pile : " + player.MissionPile();
         victoryProgressBar.MaxValue = player.TotalExperience();
         victoryProgressBar.Value = player.VictoryTotal();
-
-
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -61,21 +61,11 @@ namespace Stargate.StateMachine
                 ContinueQuestEvent theevent = (ContinueQuestEvent)e;
                 if (theevent != null && theevent.Sender == gameState.GetHeroPlayer() && theevent.Type == EventType.CONTINUEQUEST)
                 {
-
-                    //Debug.WriteLine("BON SENDER ContinueToNextQuest" + e);
-
                     if (theevent.response == ContinueQuestEventResponse.YES)
                     {
-                       // Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE YES");
-                        //AddAction(SetQuestAside).AddAction(GiveEnnemy1MPForEachFailedQuest) ; 
-                        QueueAction(new SetQuestFailed(gameState)).QueueAction(new GiveEnemy1MPForEachFailedQuest(gameState)).QueueAction(new QuestLoop(gameState));
+                       QueueAction(new GiveEnemy1MPForEachFailedQuest(gameState)).QueueAction(new QuestLoop(gameState));
                     }
-                    else
-                    {
-                        QueueAction(new SetQuestFailed(gameState))
-                        // Debug.WriteLine("BON SENDER ContinueToNextQuest RESPONSE NO");
-                        ;
-                    }
+                    gameState.SetQuestFailed();
                 }
                 else
                 {

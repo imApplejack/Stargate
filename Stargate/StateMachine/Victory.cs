@@ -44,8 +44,6 @@ namespace Stargate.StateMachine
         public void AttacheAffinityToAssignedCharacter(StateEvent e = null)
         {
 
-           
-
             if (e == null || ((StargateEvent)e).Type != EventType.SELECTCARD || ((StargateEvent)e).Sender != gameState.GetHeroPlayer())
             {
                 SendEvent(new ChooseCardResult() { player = gameState.GetHeroPlayer(), cards = gameState.GetHeroPlayerCardsInMission() });
@@ -54,10 +52,8 @@ namespace Stargate.StateMachine
             else
             {
 
-               // GD.Print("AttacheAffinityToAssignedCharacter ACTION");
-
                 SelectCardEvent sle = (SelectCardEvent)e;
-                ((HeroCharacterModel)sle.cardModel).glyphsEarned.Add(gameState.CardRepository.GetCurrentMission());
+                ((HeroCharacterModel)sle.cardModel).glyphsEarned.Add(gameState.GetCurrentMission());
                 SendEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = sle.cardModel });
             }
 
@@ -82,12 +78,10 @@ namespace Stargate.StateMachine
 
                     if (theevent.response == ContinueQuestEventResponse.YES)
                     {
-                        QueueAction(new SetQuestAside(gameState)).QueueAction(new QuestLoop(gameState));
+                        QueueAction(new QuestLoop(gameState));
                     }
-                    else
-                    {
-                        QueueAction(new SetQuestAside(gameState));
-                    }
+                    gameState.SetQuestAffinity();
+                    
                 }
                 else
                 {

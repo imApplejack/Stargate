@@ -42,6 +42,10 @@ namespace Stargate
             return gameState.CardRepository.Libraries[this].Count;
         }
 
-       
+        public int MissionPile()
+        {
+            return gameState.CardRepository.Missions[this].Count;
+        }
+
     }
 }

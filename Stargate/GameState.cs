@@ -99,6 +99,13 @@ namespace Stargate.Stargate
             }
         }
 
+
+
+        public MissionModel GetCurrentMission()
+        {
+            return CardRepository.GetCurrentMission();
+        }
+
         public void CreatePlayerMissions(Player player, List<SGCard> cards)
         {
             foreach (SGCard card in cards)
@@ -302,17 +309,18 @@ namespace Stargate.Stargate
             }
             catch (EmptyMissionPileException e)
             {
-                throw e;
+             
             } 
         }
 
 
-        public void SetQuestAside()
+       /* public void SetQuestAside()
         {
             MissionModel m = CardRepository.GetCurrentMission();
             m.State = CardState.Aside;
             ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
         }
+       */
 
         public void SetQuestFailed()
         {
@@ -320,6 +328,25 @@ namespace Stargate.Stargate
             m.State = CardState.FailedQuest;
             ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
         }
+
+        public void SetQuestAffinity()
+        {
+            MissionModel m = CardRepository.GetCurrentMission();
+            m.State = CardState.Affinity;
+            ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+        }
+
+
+        public void PlaceAllFailedQuestInBottomOfLibrary()
+        {
+            foreach (MissionModel item in CardRepository.GetAllFailedQuest().Cast<MissionModel>())
+            {
+                item.State = CardState.MissionPile;
+                CardRepository.Missions[item.Owner].Enqueue(item);
+                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = item });
+            }
+        }
+
 
         public Player GetOtherPlayer(Player player)
         {

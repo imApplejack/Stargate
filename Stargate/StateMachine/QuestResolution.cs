@@ -42,12 +42,20 @@ namespace Stargate.StateMachine
 
             if (gameState.CheckQuestVictory())
             {
+                //gameState.GetCurrentMission().State = CardState.Affinity;
+                //gameState.SetQuestAffinity();
                 QueueAction(new Victory(gameState));
             }
             else
             {
+                //gameState.SetQuestFailed();
                 QueueAction(new Defeat(gameState));
             }
+
+            //SendEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = gameState.GetCurrentMission() });
+
+           // gameState.F
+
 
         }
 

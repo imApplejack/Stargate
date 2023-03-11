@@ -37,7 +37,7 @@ namespace Stargate.StateMachine
 
         public void FailQuestInBottom(StateEvent e = null)
         {
-            Debug.Print("FailQuestInBottom");
+            gameState.PlaceAllFailedQuestInBottomOfLibrary();
         }
 
         public void Mp0(StateEvent e = null)

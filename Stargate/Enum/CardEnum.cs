@@ -29,9 +29,8 @@ namespace Stargate.Stargate.Enum
         Disabled = 32,
         Destroy = 64,
         MissionPile = 128,
-        Aside = 256,       // quest
-        FailedQuest = 512, // quest
-
+        FailedQuest = 256, // quest
+        Affinity = 512,
         Board = Ready | Stop | Disabled
     };
 

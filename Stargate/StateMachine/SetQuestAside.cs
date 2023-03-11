@@ -27,7 +27,7 @@ namespace Stargate.StateMachine
 
         public void SetQuestAsideMethod(StateEvent e = null)
         {
-            gameState.SetQuestAside();
+           // gameState.SetQuestAside();
         }
 
 

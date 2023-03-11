@@ -149,6 +149,10 @@ namespace Stargate.Repository
         }
 
 
+        public List<CardModel> GetAllFailedQuest()
+        {
+            return Cards.FindAll(cardModel => cardModel.State == CardState.FailedQuest && cardModel.Card.Type == CardType.Mission);
+        }
 
         public MissionModel GetCurrentMission()
         {

@@ -4,7 +4,7 @@
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -145.0
-margin_bottom = 200.0
+margin_bottom = 197.0
 
 [node name="PowerLabel" type="Label" parent="."]
 anchor_left = 1.0
@@ -73,3 +73,14 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Library"
 align = 1
+
+[node name="MissionPile" type="Label" parent="."]
+margin_left = 34.0
+margin_top = 159.0
+margin_right = 112.0
+margin_bottom = 173.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Mission Pile"
+align = 1
+valign = 1

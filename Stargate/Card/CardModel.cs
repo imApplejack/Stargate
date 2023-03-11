@@ -32,7 +32,7 @@ namespace Stargate.Stargate.Card
 
         public override string ToString()
         {
-            return State.ToString();
+            return "Id : " + Id + "  State : " + State;
         }
 
     }

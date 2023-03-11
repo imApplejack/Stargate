@@ -27,7 +27,7 @@ namespace Stargate.StateMachine
 
         public void GiveEnnemyMP(StateEvent e = null)
         {
-            gameState.GetEnemyPlayer().Energy++; // a refaire
+            gameState.GetEnemyPlayer().Energy++; // @TODO  a refaire
             SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = gameState.GetEnemyPlayer() });
 
         }
