@@ -101,6 +101,11 @@ namespace Stargate.Repository
             return Cards.FindAll(cardModel => cardModel.Owner == player);
         }
 
+        public List<CardModel> getPlayerCardsByState(Player player, CardState state)
+        {
+            return Cards.FindAll(cardModel => cardModel.Owner == player && cardModel.State == state);
+        }
+
         public List<CardModel> getCardsByState(CardState state)
         {
             return Cards.FindAll(cardModel => cardModel.State == state);

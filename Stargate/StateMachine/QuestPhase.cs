@@ -53,7 +53,6 @@ namespace Stargate.StateMachine
         }
 
 
-
         public void PlayAction(StateEvent e = null)
         {
 

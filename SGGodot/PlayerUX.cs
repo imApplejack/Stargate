@@ -21,6 +21,8 @@ public class PlayerUX : Panel
 
     protected Label missionPile;
 
+    protected Label destroyed;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -29,6 +31,9 @@ public class PlayerUX : Panel
         villanProgressBar = (ProgressBar)FindNode("VillanProgressBar");
         library = (Label)FindNode("Library");
         missionPile = (Label)FindNode("MissionPile");
+        destroyed = (Label)FindNode("Destroyed");
+
+        
     }
 
     public override void _Draw()
@@ -40,6 +45,7 @@ public class PlayerUX : Panel
         missionPile.Text = "Mission Pile : " + player.MissionPile();
         victoryProgressBar.MaxValue = player.TotalExperience();
         victoryProgressBar.Value = player.VictoryTotal();
+        destroyed.Text = "Destroyed : " + player.Destroyed().ToString();
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

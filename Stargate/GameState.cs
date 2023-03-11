@@ -255,6 +255,11 @@ namespace Stargate.Stargate
             //return CardRepository.GetPlayerTeamCharacters(player).Count;
         }
 
+        public int Destroyed(Player player)
+        {
+            return CardRepository.getPlayerCardsByState(player, CardState.Destroy).Count;
+        }
+
 
         public List<CardModel> GetHeroPlayerCardsInMission()
         {
@@ -395,6 +400,10 @@ namespace Stargate.Stargate
             {
                 m.AddBoost((CharacterModel)myEvent.cardModel);
                 ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+
+                myEvent.cardModel.State = CardState.Destroy;
+                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = myEvent.cardModel });
+
             }
         }
 
@@ -475,7 +484,7 @@ namespace Stargate.Stargate
 
         }
 
-     
+       
     }
 
 
