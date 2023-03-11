@@ -142,8 +142,15 @@ public class PlayerControl : Control
     }
 
 
-    public void Init()
+    public void Pouet(Player theplayer, Player theotherPlayer, MappingMVC mappingMVC, Main api)
     {
+
+
+        Player = theplayer;
+        Api = api;
+        MappingMVC = mappingMVC;
+
+
         MissionContainer.player = player;
         MajControl();
     }

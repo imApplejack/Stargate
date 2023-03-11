@@ -42,11 +42,13 @@ public class Main : Node
         MappingMVC mappingMVC = new MappingMVC();
         mappingMVC.InitRessources(game.GameState.GetAllCards());
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
-        Player1Vue.Player = game.GameState.player1;
-        Player1Vue.Api = this; // :'(
-        Player1Vue.MappingMVC = mappingMVC;
+        
+        
+
+        
+        Player1Vue.Pouet(game.GameState.player1, game.GameState.player2, mappingMVC, this);
+
         game.GameState.StargateResultHandler += Player1Vue.HandleResult;
-        Player1Vue.Init();
 
 
         MappingMVC mappingMVC2 = new MappingMVC();
@@ -55,8 +57,10 @@ public class Main : Node
         Player2Vue.Player = game.GameState.player2;
         Player2Vue.Api = this; // :'(
         Player2Vue.MappingMVC = mappingMVC2;
+       
+        Player2Vue.Pouet(game.GameState.player2, game.GameState.player1, mappingMVC2, this);
+
         game.GameState.StargateResultHandler += Player2Vue.HandleResult;
-        Player2Vue.Init();
 
         game.GameState.InitGame(1);
 
