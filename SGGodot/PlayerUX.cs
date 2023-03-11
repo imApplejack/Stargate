@@ -1,5 +1,6 @@
 using Godot;
 using Stargate;
+using Stargate.Stargate;
 using System;
 
 public class PlayerUX : Panel
@@ -16,12 +17,15 @@ public class PlayerUX : Panel
 
     protected ProgressBar villanProgressBar;
 
+    protected Label library;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         powerLabel = (Label)FindNode("PowerLabel");
         victoryProgressBar = (ProgressBar)FindNode("VictoryProgressBar");
         villanProgressBar = (ProgressBar)FindNode("VillanProgressBar");
+        library = (Label)FindNode("Library");
     }
 
     public override void _Draw()
@@ -30,6 +34,7 @@ public class PlayerUX : Panel
 
 
         powerLabel.Text = "Power : " + player.Energy.ToString();
+        library.Text = "Library : " + player.Library();
 
 
         victoryProgressBar.MaxValue = player.TotalExperience();

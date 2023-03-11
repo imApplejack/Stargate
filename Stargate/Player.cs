@@ -37,6 +37,11 @@ namespace Stargate
             return gameState.VictoryTotal(this);
         }
 
+        public int Library()
+        {
+            return gameState.CardRepository.Libraries[this].Count;
+        }
+
        
     }
 }

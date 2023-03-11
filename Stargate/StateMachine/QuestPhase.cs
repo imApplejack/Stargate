@@ -55,7 +55,7 @@ namespace Stargate.StateMachine
 
 
             StargateEvent myEvent = (StargateEvent)e;
-            if (myEvent.Sender == questCurrentPlayer)
+            if (myEvent != null && myEvent.Sender == questCurrentPlayer)
             {
 
                 if(questCurrentPlayer == gameState.GetHeroPlayer())

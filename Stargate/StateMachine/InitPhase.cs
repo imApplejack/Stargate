@@ -19,8 +19,8 @@ namespace Stargate.StateMachine
         public InitPhase(GameState gs) : base (gs)
         {
             this.AddAction(Draw)
-                .AddAction(ChooseParty)
-                .AddAction(ChoosePartyEvent)
+                //.AddAction(ChooseParty)
+                //.AddAction(ChoosePartyEvent)
                 .AddAction(new GameLoop(gs))
                 ;
         }

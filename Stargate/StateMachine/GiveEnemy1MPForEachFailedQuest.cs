@@ -27,7 +27,9 @@ namespace Stargate.StateMachine
 
         public void GiveEnnemyMP(StateEvent e = null)
         {
-            //Debug.Print("GiveEnemy1MPForEachFailedQuest");
+            gameState.GetEnemyPlayer().Energy++; // a refaire
+            SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = gameState.GetEnemyPlayer() });
+
         }
 
 
