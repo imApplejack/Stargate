@@ -219,6 +219,21 @@ namespace Stargate.Stargate
         }
 
 
+        public void ReadyAllStoppedCardsAndStopAllKOCards()
+        {
+            foreach (CardModel item in CardRepository.getCardsByState(CardState.Stop))
+            {
+                item.State = CardState.Ready;
+                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = item });
+            }
+            foreach (CardModel item in CardRepository.getCardsByState(CardState.KO))
+            {
+                item.State = CardState.Stop;
+                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = item });
+            }
+        }
+
+
         public int GlyphCount(Player player)
         {
             int retour = 0;

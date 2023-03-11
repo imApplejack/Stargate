@@ -1,6 +1,7 @@
 ﻿using Stargate.Stargate.Card;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.StargateException;
+using Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -100,7 +101,10 @@ namespace Stargate.Repository
             return Cards.FindAll(cardModel => cardModel.Owner == player);
         }
 
-
+        public List<CardModel> getCardsByState(CardState state)
+        {
+            return Cards.FindAll(cardModel => cardModel.State == state);
+        }
 
 
         public List<CardModel> GetAll()
@@ -181,9 +185,6 @@ namespace Stargate.Repository
             catch(Exception e)
             {
                 throw new EmptyLibraryException();
-           //     Debug.Print("exception draw");
-           //
-           //     //return new StargateResult { actionResult = ActionResult.Failure};
             }
         }
 

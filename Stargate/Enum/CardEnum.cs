@@ -26,12 +26,12 @@ namespace Stargate.Stargate.Enum
         Ready = 4,
         Mission = 8,
         Stop = 16,
-        Disabled = 32,
+        KO = 32,
         Destroy = 64,
         MissionPile = 128,
         FailedQuest = 256, // quest
         Affinity = 512,
-        Board = Ready | Stop | Disabled
+        Board = Ready | Stop | KO
     };
 
 

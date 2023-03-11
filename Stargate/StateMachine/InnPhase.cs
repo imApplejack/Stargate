@@ -48,7 +48,7 @@ namespace Stargate.StateMachine
 
         public void ReadyAllStoppedCardsAndStopAllkosCards(StateEvent e = null)
         {
-            Debug.Print("ReadyAllStoppedCardsAndStopAllkosCards");
+            gameState.ReadyAllStoppedCardsAndStopAllKOCards();
         }
 
         public void EnnemyProcessMPPhase(StateEvent e = null)
