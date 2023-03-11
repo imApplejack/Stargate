@@ -407,6 +407,22 @@ namespace Stargate.Stargate
             }
         }
 
+        public void BoostHeroCharacter(BoostCharEvent myEvent)
+        {
+            HeroCharacterModel m = CardRepository.GetHeroCharacterInMissionWithSubtitle(myEvent.cardModel.Card.Subtitle);
+            if (m != null)
+            {
+                m.AddBoost((CharacterModel)myEvent.cardModel);
+                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+
+                myEvent.cardModel.State = CardState.Destroy;
+                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = myEvent.cardModel });
+            }
+        }
+        
+
+
+
 
         public Player GetOtherPlayer(Player player)
         {

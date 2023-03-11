@@ -82,6 +82,13 @@ namespace Stargate.StateMachine
                         case EventType.PASS:
                             questPhasePass[questCurrentPlayer] = true;
                             break;
+
+                        case EventType.BOOSTCHAR:
+                            gameState.BoostHeroCharacter((BoostCharEvent)myEvent);
+                            questPhasePass[questCurrentPlayer] = false;
+                            //GD.Print((PassEvent)myEvent);
+                            break;
+
                         default: throw new StateResultException(StateResult.STOP);
 
                     }

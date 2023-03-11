@@ -147,14 +147,14 @@ public class PlayerControl : Control
 
  
 
-    public void InitControl(Player theplayer, Player theotherPlayer, MappingMVC mappingMVC, Main api)
+    public void InitControl(Player theplayer, Player theOtherPlayer, MappingMVC mappingMVC, Main api)
     {
         Player = theplayer;
         Api = api;
         MappingMVC = mappingMVC;
 
         PlayerUX.player = theplayer;
-        EnnemyUX.player = theotherPlayer;
+        EnnemyUX.player = theOtherPlayer;
 
         MissionContainer.player = player;
         MajControl();

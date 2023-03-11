@@ -85,8 +85,6 @@ public class CardAction : WindowDialog
                 ActionContainer.AddChild(BoostButton());
             }
 
-
-
         }
 
 

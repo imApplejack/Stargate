@@ -179,6 +179,11 @@ namespace Stargate.Repository
             return (AdversaryModel)Cards.Find(cardModel => cardModel.State == CardState.Mission && cardModel.Card.Type == CardType.Adversary && cardModel.Card.Subtitle == subtitle);
         }
 
+        public HeroCharacterModel GetHeroCharacterInMissionWithSubtitle(string subtitle)
+        {
+            return (HeroCharacterModel)Cards.Find(cardModel => cardModel.State == CardState.Mission && (cardModel.Card.Type & CardType.HeroPlayerCharacter) != 0 && cardModel.Card.Subtitle == subtitle);
+        }
+
         public List<CardModel> GetCharsWithBoost()
         {
             return Cards.FindAll(cardModel =>  (cardModel.Card.Type & CardType.Character ) != 0 && ((CharacterModel)cardModel).HasBoost() );

@@ -32,8 +32,7 @@ public class PlayerUX : Panel
         library = (Label)FindNode("Library");
         missionPile = (Label)FindNode("MissionPile");
         destroyed = (Label)FindNode("Destroyed");
-
-        
+ 
     }
 
     public override void _Draw()
