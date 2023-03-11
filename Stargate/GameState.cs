@@ -283,6 +283,13 @@ namespace Stargate.Stargate
             ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
         }
 
+        public void SetQuestFailed()
+        {
+            MissionModel m = CardRepository.GetCurrentMission();
+            m.State = CardState.FailedQuest;
+            ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+        }
+
         public Player GetOtherPlayer(Player player)
         {
             if (player == GetHeroPlayer())
