@@ -195,7 +195,7 @@ public class PlayerControl : Control
     public void MajCardControl(CardModel card)
     {
 
-        GD.PrintErr("Maj card control");
+        //GD.PrintErr("Maj card control");
 
         GDCard GDCard = MappingMVC.Get(card);
         GDCard.ClearIngameInstances();

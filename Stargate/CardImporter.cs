@@ -92,6 +92,10 @@ namespace Stargate.Stargate
                         c.Revive = int.Parse(element.Attributes["value"].Value);
                         break;
 
+                    case "Experience":
+                        c.Experience = int.Parse(element.Attributes["value"].Value);
+                        break;
+
                     case "Glyph":
                         switch (element.FirstChild.Attributes["value"].Value)
                         {

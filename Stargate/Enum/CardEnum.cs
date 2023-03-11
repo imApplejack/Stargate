@@ -44,6 +44,7 @@ namespace Stargate.Stargate.Enum
         Obstacle = 16,
         TeamCharacter = 32,
         Mission = 64,
+        HeroPlayerCharacter = SupportCharacter | TeamCharacter,
         HeroPlayerMissionObjets = SupportCharacter | TeamCharacter,
         VIllanPlayerMissionObjects = Adversary | Obstacle,
         Character =  SupportCharacter | TeamCharacter | Adversary,

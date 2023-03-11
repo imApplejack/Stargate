@@ -200,6 +200,28 @@ namespace Stargate.Stargate
         }
 
 
+        public int TotalExperience(Player player)
+        {
+            int retour = 0;
+            foreach (HeroCharacterModel item in CardRepository.GetPlayerTeamCharacters(player))
+            {
+                retour += item.Card.Cost;
+            }
+            return retour;
+        }
+
+        public int VictoryTotal(Player player)
+        {
+            int retour = 0;
+            foreach (HeroCharacterModel item in CardRepository.GetPlayerTeamCharactersWithGlyph(player))
+            {
+                retour += item.GetVictoryTotal();
+            }
+            return retour;
+            //return CardRepository.GetPlayerTeamCharacters(player).Count;
+        }
+
+
         public List<CardModel> GetHeroPlayerCardsInMission()
         {
             return CardRepository.GetCardsInMission(GetHeroPlayer(), CardType.HeroPlayerMissionObjets);

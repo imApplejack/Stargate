@@ -12,10 +12,16 @@ public class PlayerUX : Panel
 
     protected Label powerLabel;
 
+    protected ProgressBar victoryProgressBar;
+
+    protected ProgressBar villanProgressBar;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         powerLabel = (Label)FindNode("PowerLabel");
+        victoryProgressBar = (ProgressBar)FindNode("VictoryProgressBar");
+        villanProgressBar = (ProgressBar)FindNode("VillanProgressBar");
     }
 
     public override void _Draw()
@@ -24,6 +30,11 @@ public class PlayerUX : Panel
 
 
         powerLabel.Text = "Power : " + player.Energy.ToString();
+
+
+        victoryProgressBar.MaxValue = player.TotalExperience();
+        victoryProgressBar.Value = player.VictoryTotal();
+
 
     }
 

@@ -38,10 +38,7 @@ margin_left = -124.0
 margin_top = 63.0
 margin_right = -21.0
 margin_bottom = 80.0
-max_value = 20.0
 step = 1.0
-value = 4.0
-percent_visible = false
 
 [node name="VillanScore" type="Label" parent="."]
 anchor_left = 1.0

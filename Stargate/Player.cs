@@ -1,5 +1,7 @@
 ﻿using Godot;
+using Stargate.Repository;
 using Stargate.Stargate;
+using Stargate.Stargate.Card;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +21,22 @@ namespace Stargate
 
         public GameState gameState { get; set; }
 
-        public Player() { 
-        
+        public Player()
+        {
 
         }
+
+
+        public int TotalExperience()
+        {
+            return gameState.TotalExperience(this);
+        }
+
+        public int VictoryTotal()
+        {
+            return gameState.VictoryTotal(this);
+        }
+
+       
     }
 }

@@ -54,7 +54,7 @@ namespace Stargate.StateMachine
             else
             {
 
-                GD.Print("AttacheAffinityToAssignedCharacter ACTION");
+               // GD.Print("AttacheAffinityToAssignedCharacter ACTION");
 
                 SelectCardEvent sle = (SelectCardEvent)e;
                 ((HeroCharacterModel)sle.cardModel).glyphsEarned.Add(gameState.CardRepository.GetCurrentMission());

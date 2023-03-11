@@ -114,10 +114,21 @@ namespace Stargate.Repository
 
 
 
-        public List<CardModel> GetPlayerTeamCharactersReady(Player player)
+        public List<CardModel> GetPlayerTeamCharacters(Player player)
         {
             return Cards.FindAll(cardModel => cardModel.Owner == player && cardModel.Card.Type == CardType.TeamCharacter);
         }
+
+        public List<CardModel> GetPlayerTeamCharactersReady(Player player)
+        {
+            return Cards.FindAll(cardModel => cardModel.Owner == player && cardModel.Card.Type == CardType.TeamCharacter && cardModel.State == CardState.Ready);
+        }
+
+        public List<CardModel> GetPlayerTeamCharactersWithGlyph(Player player)
+        {
+            return Cards.FindAll(cardModel => cardModel.Owner == player && ((cardModel.Card.Type & CardType.HeroPlayerCharacter) != 0) && ((HeroCharacterModel)cardModel).glyphsEarned.Count > 0  );
+        }
+
 
         public bool IsInHand(Player player, CardModel card)
         {

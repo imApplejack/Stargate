@@ -14,5 +14,14 @@ namespace Stargate.Stargate.Card
         public List<MissionModel> glyphsEarned = new List<MissionModel>();
 
 
+        public int GetVictoryTotal()
+        {
+            int retour = 0;
+            foreach (MissionModel item in glyphsEarned)
+            {
+                retour += (int)item.Card.Experience;
+            }
+            return retour;
+        }
     }
 }
