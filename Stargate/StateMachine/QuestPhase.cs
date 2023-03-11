@@ -30,15 +30,22 @@ namespace Stargate.StateMachine
         public override void InitSG()
         {
 
-            Debug.Print("QUEST PHASE current player : " + gameState.CurrentPlayer.id);
+            //Debug.Print("QUEST PHASE current player : " + gameState.CurrentPlayer.id);
 
-            AddAction(PlayMission)
+             AddAction(ClearBoosts)
+            .AddAction(PlayMission)
             .AddAction(PlayAction)
             ;
             questCurrentPlayer = gameState.CurrentPlayer;
             questPhasePass = new Dictionary<Player, bool>() { [gameState.CurrentPlayer] = false, [gameState.GetEnemyPlayer()] = false };
         }
 
+
+        //  clear les boosts des phases precedentes
+        public void ClearBoosts(StateEvent e = null)
+        {
+            gameState.ClearAllBoosts();
+        }
 
         public void PlayMission(StateEvent e = null)
         {
@@ -100,6 +107,15 @@ namespace Stargate.StateMachine
                             questPhasePass[questCurrentPlayer] = true;
                             //GD.Print((PassEvent)myEvent);
                             break;
+
+                        case EventType.BOOSTCHAR:
+                            gameState.BoostBossMonster((BoostCharEvent)myEvent);
+                            questPhasePass[questCurrentPlayer] = false;
+                            //GD.Print((PassEvent)myEvent);
+                            break;
+
+
+
                         default: throw new StateResultException(StateResult.STOP);
 
                     }

@@ -48,6 +48,24 @@ public class CardAction : WindowDialog
     }
 
 
+    private Button PlayComplicationButton()
+    {
+        Button button = new Button();
+        button.Text = "Play complication";
+        button.Connect("button_down", this, "CardActionSignal", EventSignalUtil(new PlayComplicationEvent() { CardModelId = Card.Card.Id }));
+        return button;
+    }
+
+
+    private Button BoostButton()
+    {
+        Button button = new Button();
+        button.Text = "Boost";
+        button.Connect("button_down", this, "CardActionSignal", EventSignalUtil(new BoostCharEvent() { CardModelId = Card.Card.Id }));
+        return button;
+    }
+
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -59,6 +77,16 @@ public class CardAction : WindowDialog
         if(Card.Card.State == CardState.Hand)
         {
             ActionContainer.AddChild(PlayCardButton());
+            ActionContainer.AddChild(PlayComplicationButton());
+
+
+            if( (Card.Card.Card.Type & CardType.Character ) != 0)
+            {
+                ActionContainer.AddChild(BoostButton());
+            }
+
+
+
         }
 
 

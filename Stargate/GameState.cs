@@ -378,6 +378,26 @@ namespace Stargate.Stargate
             }
         }
 
+        public void ClearAllBoosts()
+        {
+            foreach (CharacterModel item in CardRepository.GetCharsWithBoost())
+            {
+                item.ClearBoosts();
+                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = item });
+            }
+        }
+
+
+        public void BoostBossMonster(BoostCharEvent myEvent)
+        {
+            AdversaryModel m  =  CardRepository.GetAdversaryInMissionWithSubtitle(myEvent.cardModel.Card.Subtitle);
+            if(m != null)
+            {
+                m.AddBoost((CharacterModel)myEvent.cardModel);
+                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = m });
+            }
+        }
+
 
         public Player GetOtherPlayer(Player player)
         {
@@ -455,7 +475,7 @@ namespace Stargate.Stargate
 
         }
 
-
+     
     }
 
 

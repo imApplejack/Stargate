@@ -37,6 +37,8 @@ namespace Stargate.StateMachine
             
         }
 
+       
+
         public void CheckQuestResolution(StateEvent e = null)
         {
 
