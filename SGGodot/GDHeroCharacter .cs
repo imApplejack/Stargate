@@ -46,6 +46,7 @@ public class GDHeroCharacter : GDCharacter
         {
             TextureRect t = new TextureRect();
             t.Texture = ((GDMission)mvc.Get(item)).GlyphTexture;
+            t.MouseFilter = MouseFilterEnum.Ignore;
             //GD.PrintErr("t.Texture : "+ t.Texture+ " glypheContainer :  " + FindNode("Glyphes"));
              glypheContainer.AddChild(t); 
         }

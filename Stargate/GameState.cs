@@ -156,15 +156,9 @@ namespace Stargate.Stargate
 
         public void PlayComplication(PlayComplicationEvent myEvent)
         {
-
-            Debug.WriteLine("play complication");
-
            if(GetCurrentMission() != null && GetCurrentMission().boosts.Count + 1 <= myEvent.Sender.Energy)
             {
-                Debug.WriteLine("play complication dans le if");
-
                 GetCurrentMission().AddBoost(myEvent.cardModel);
-
                 myEvent.Sender.Energy -= GetCurrentMission().boosts.Count ;
                 ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = GetCurrentMission() });
                 ChangeCardState(myEvent.cardModel, CardState.Destroy);
@@ -264,7 +258,7 @@ namespace Stargate.Stargate
         public int VictoryTotal(Player player)
         {
             int retour = 0;
-            foreach (HeroCharacterModel item in CardRepository.GetPlayerTeamCharactersWithGlyph(player))
+            foreach (HeroCharacterModel item in CardRepository.GetPlayerTeamCharactersWithGlyph(GetOtherPlayer(player)))
             {
                 retour += item.GetVictoryTotal();
             }
