@@ -3,6 +3,7 @@ using Stargate.Repository;
 using Stargate.Stargate.Card;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
+using Stargate.Stargate.StargateException;
 using Stargate.StateMachine;
 using System;
 using System.Collections.Generic;
@@ -265,10 +266,33 @@ namespace Stargate.Stargate
             this.CardRepository.InitPlayersMissions();
         }
 
-        public StargateResult Draw(Player player)
+        public void Draw(Player player)
         {
-            return (this.CardRepository.Draw(player));
+            try
+            {
+                ForwardEvent(new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = CardRepository.Draw(player) });
+            }
+            catch (EmptyLibraryException e)
+            {
+                throw e;
+            }
         }
+
+        public void DrawUpTo(Player player, int upTo)
+        {
+            try
+            {
+                while (CardRepository.GetPlayerHand(player).Count < upTo)
+                {
+                    Draw(player);
+                }
+            }
+            catch (EmptyLibraryException e)
+            {
+
+            }
+        }
+
 
         public StargateResult PlayMission(Player player)
         {

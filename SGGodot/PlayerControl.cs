@@ -200,6 +200,7 @@ public class PlayerControl : Control
         GDCard GDCard = MappingMVC.Get(card);
         GDCard.ClearIngameInstances();
 
+       
 
         GDCard Cloned = CreateDecoratedCloneInstance(GDCard);
     
@@ -324,7 +325,7 @@ public class PlayerControl : Control
     {
 
 
-        GD.PrintErr("MAJ VUE " + result);
+       // GD.PrintErr("MAJ VUE " + result);
 
         if (result.actionResult == ActionResult.Success)
         {

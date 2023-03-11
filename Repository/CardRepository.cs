@@ -1,5 +1,6 @@
 ﻿using Stargate.Stargate.Card;
 using Stargate.Stargate.Enum;
+using Stargate.Stargate.StargateException;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,9 +16,9 @@ namespace Stargate.Repository
         public List<CardModel> Cards = new List<CardModel>();
 
         // librairie à part pour des raisons de cassecouilleness shuffle ect...
-        public Dictionary<Player, List<CardModel>> Libraries = new Dictionary<Player, List<CardModel>>();
+        public Dictionary<Player, Queue<CardModel>> Libraries = new Dictionary<Player, Queue<CardModel>>();
 
-        public Dictionary<Player, List<CardModel>> Missions = new Dictionary<Player, List<CardModel>>();
+        public Dictionary<Player, Queue<CardModel>> Missions = new Dictionary<Player, Queue<CardModel>>();
 
         public CardModel AddCard(CardModel card)
         {
@@ -53,7 +54,7 @@ namespace Stargate.Repository
 
         public void InitPlayersLibrary()
         {
-            Libraries = new Dictionary<Player, List<CardModel>>();
+            Libraries = new Dictionary<Player, Queue<CardModel>>();
 
             foreach (CardModel card in this.Cards)
             {
@@ -61,12 +62,12 @@ namespace Stargate.Repository
                 {
                     if(Libraries.ContainsKey(card.Owner))
                     {
-                        Libraries[card.Owner].Add(card);
+                        Libraries[card.Owner].Enqueue(card);
                     }
                     else
                     {
-                        Libraries.Add(card.Owner, new List<CardModel>());
-                        Libraries[card.Owner].Add(card);
+                        Libraries.Add(card.Owner, new Queue<CardModel>());
+                        Libraries[card.Owner].Enqueue(card);
                     }
                 }
             }
@@ -74,7 +75,7 @@ namespace Stargate.Repository
 
         public void InitPlayersMissions()
         {
-            Missions = new Dictionary<Player, List<CardModel>>();
+            Missions = new Dictionary<Player, Queue<CardModel>>();
 
             foreach (CardModel card in this.Cards)
             {
@@ -82,12 +83,12 @@ namespace Stargate.Repository
                 {
                     if (Missions.ContainsKey(card.Owner))
                     {
-                        Missions[card.Owner].Add(card);
+                        Missions[card.Owner].Enqueue(card);
                     }
                     else
                     {
-                        Missions.Add(card.Owner, new List<CardModel>());
-                        Missions[card.Owner].Add(card);
+                        Missions.Add(card.Owner, new Queue<CardModel>());
+                        Missions[card.Owner].Enqueue(card);
                     }
                 }
             }
@@ -141,7 +142,12 @@ namespace Stargate.Repository
 
             //return Cards.FindAll(cardModel => cardModel.State == CardState.Mission && cardModel.Owner == player && cardModel.Card.Type == cardType); //TODO revoir cette methode
         }
-   
+
+        public List<CardModel> GetPlayerHand(Player player)
+        {
+            return Cards.FindAll(cardModel => cardModel.Owner == player && cardModel.State == CardState.Hand);
+        }
+
 
 
         public MissionModel GetCurrentMission()
@@ -156,21 +162,24 @@ namespace Stargate.Repository
         }
 
 
-
-
-        public StargateResult Draw(Player player)
+        public CardModel Draw(Player player)
         {
             /// TODO faire les cas bibliotheque vide ect... 
             try
             {
-                CardModel topCardLibrary = Libraries[player][Libraries[player].Count - 1];
+                CardModel topCardLibrary = Libraries[player].Peek();
                 topCardLibrary.State = CardState.Hand;
-                Libraries[player].Remove(topCardLibrary);
-                return new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = topCardLibrary };
+                Libraries[player].Dequeue();
+
+                return topCardLibrary;
+               // return new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = topCardLibrary };
             }
             catch(Exception e)
             {
-                return new StargateResult { actionResult = ActionResult.Failure};
+                throw new EmptyLibraryException();
+           //     Debug.Print("exception draw");
+           //
+           //     //return new StargateResult { actionResult = ActionResult.Failure};
             }
         }
 
@@ -180,9 +189,9 @@ namespace Stargate.Repository
             /// TODO faire les cas bibliotheque vide ect... 
             try
             {
-                CardModel topCardMission = Missions[player][Missions[player].Count - 1];
+                CardModel topCardMission = Missions[player].Peek();
                 topCardMission.State = CardState.Mission;
-                Libraries[player].Remove(topCardMission);
+                Libraries[player].Dequeue();
                 return new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = topCardMission };
             }
             catch (Exception e)

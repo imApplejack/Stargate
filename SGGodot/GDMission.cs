@@ -15,7 +15,7 @@ public class GDMission : GDCard
     public override void ExtraInit()
     {
 
-        GD.PrintErr(Card.Card);
+        // GD.PrintErr(Card.Card);
          GlyphTexture = ResourceLoader.Load("res://Asset/" +  (Card.Card.Glyphe).ToString().ToLower() + ".png") as Texture;
     }
 
