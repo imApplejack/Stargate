@@ -12,6 +12,8 @@ namespace Stargate.Stargate.Enum
     {
         One = 0,
         UpToOne = 1,
+        OneOrMore = 2,
+        UpToInfinite = 3
     };
 
    

@@ -5,6 +5,7 @@ using Stargate.Stargate.Event;
 using Stargate.Stargate.Result;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SelectCardDialog : WindowDialog
 {
@@ -37,11 +38,43 @@ public class SelectCardDialog : WindowDialog
         QueueFree();
     }
 
-    public void CardSelect(int cardId)
+    public void _on_OkButton_button_down()
     {
-        EmitSignal("SendEvent", new SGEventContainer(new SelectCardEvent() { CardModelId = new List<int>() { cardId } }) );
+        EmitSignal("SendEvent", new SGEventContainer(new SelectCardEvent() { CardModelId = GetSelectedCardModelIds()}));
         QueueFree();
     }
+
+    public void CardSelect(int cardId)
+    {
+        //EmitSignal("SendEvent", new SGEventContainer(new SelectCardEvent() { CardModelId = new List<int>() { cardId } }) );
+        //QueueFree();
+    }
+
+    public List<CardModel> GetSelectedCardModel()
+    {
+        List<CardModel> retour = new List<CardModel>();
+        foreach (TextureRect05 item in BoxContainer.GetChildren())
+        {
+            if (item.IsSelected())
+            {
+                retour.Add(item.Card);
+            }
+        }
+        return retour;
+    }
+
+    public List<int> GetSelectedCardModelIds()
+    {
+        List<int> retour = new List<int>();
+        foreach (CardModel item in GetSelectedCardModel())
+        {
+            retour.Add(item.Id);
+        }
+        return retour;
+    }
+
+
+
 
     public void Init(ChooseCardResult chooseCardResult)
     {

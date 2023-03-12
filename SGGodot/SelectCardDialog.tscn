@@ -22,11 +22,20 @@ scroll_vertical_enabled = false
 alignment = 1
 
 [node name="NoneButton" type="Button" parent="."]
-visible = false
-margin_left = 280.0
-margin_top = 248.0
-margin_right = 335.0
-margin_bottom = 268.0
+margin_left = 360.0
+margin_top = 247.0
+margin_right = 415.0
+margin_bottom = 267.0
+rect_pivot_offset = Vector2( -435, -160 )
 text = "None"
 
+[node name="OkButton" type="Button" parent="."]
+margin_left = 219.0
+margin_top = 248.0
+margin_right = 274.0
+margin_bottom = 268.0
+rect_pivot_offset = Vector2( -435, -160 )
+text = "Ok"
+
 [connection signal="button_down" from="NoneButton" to="." method="_on_NoneButton_button_down"]
+[connection signal="button_down" from="OkButton" to="." method="_on_OkButton_button_down"]

@@ -15,4 +15,27 @@ margin_bottom = 202.0
 texture = ExtResource( 1 )
 expand = true
 
+[node name="SelectOutlet" type="Node2D" parent="."]
+visible = false
+
+[node name="Line2D" type="Line2D" parent="SelectOutlet"]
+position = Vector2( 0, 5 )
+points = PoolVector2Array( 0, 0, 143, 0 )
+default_color = Color( 1, 0.984375, 0, 1 )
+
+[node name="Line2D2" type="Line2D" parent="SelectOutlet"]
+position = Vector2( 0, 197 )
+points = PoolVector2Array( 0, 0, 143, 0 )
+default_color = Color( 1, 0.984375, 0, 1 )
+
+[node name="Line2D3" type="Line2D" parent="SelectOutlet"]
+position = Vector2( -12, 112 )
+points = PoolVector2Array( 17, 90, 17, -112 )
+default_color = Color( 1, 0.984375, 0, 1 )
+
+[node name="Line2D4" type="Line2D" parent="SelectOutlet"]
+position = Vector2( 121, 112 )
+points = PoolVector2Array( 17, 90, 17, -111 )
+default_color = Color( 1, 0.984375, 0, 1 )
+
 [connection signal="gui_input" from="." to="." method="_on_Panel_gui_input"]

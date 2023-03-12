@@ -9,8 +9,9 @@ public class TextureRect05 : Panel
     // private int a = 2;
     // private string b = "text";
 
-    private CardModel Card;
+    public CardModel Card;
     TextureRect texture;
+    Node2D selectOutlet;
 
 
     [Signal]
@@ -22,10 +23,16 @@ public class TextureRect05 : Panel
  
     }
 
+
+    public bool IsSelected()
+    {
+        return selectOutlet.Visible;
+    }
     public void Init(CardModel card)
     {
         Card = card;
         texture = (TextureRect)FindNode("TextureRect");
+        selectOutlet = (Node2D)FindNode("SelectOutlet");
         texture.Texture = ResourceLoader.Load(Const.AssetPath + "/" + card.Card.Id + ".jpg") as Texture;
     }
 
@@ -39,6 +46,7 @@ public class TextureRect05 : Panel
 
             if (myMouseEvent.ButtonIndex == (int)ButtonList.Left && myMouseEvent.Pressed == true)
             {
+                selectOutlet.Visible = !selectOutlet.Visible;
                 EmitSignal("choose_card", Card.Id);
                
             }
