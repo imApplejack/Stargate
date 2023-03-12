@@ -19,22 +19,16 @@ namespace Stargate.StateMachine
         public InitPhase(GameState gs) : base (gs)
         {
             this.AddAction(new DrawUpTo8Phase(gs))
-                .AddAction(ChooseParty)
                 .AddAction(ChoosePartyEvent)
                 .AddAction(new GameLoop(gs))
                 ;
         }
 
-        public void ChooseParty(StateEvent e = null)
-        {
-            SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = gameState.CardRepository.GetPlayerTeamCharactersReady(gameState.CurrentPlayer) });
-        }
-
         public void ChoosePartyEvent(StateEvent e = null)
         {
-
             if (e == null || ((StargateEvent )e).Type != EventType.SELECTCARD)
             {
+                SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = gameState.CardRepository.GetPlayerTeamCharactersReady(gameState.CurrentPlayer) });
                 throw new StateResultException(StateResult.STOP);
             }
             else {

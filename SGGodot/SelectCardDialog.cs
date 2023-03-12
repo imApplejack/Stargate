@@ -16,10 +16,6 @@ public class SelectCardDialog : WindowDialog
     private HBoxContainer BoxContainer;
 
     [Signal]
-    public delegate void choose_card(int cardId);
-
-
-    [Signal]
     public delegate void SendEvent(SGEventContainer myEvent);
 
     public override void _Ready()
@@ -32,6 +28,7 @@ public class SelectCardDialog : WindowDialog
     public void CardSelect(int cardId)
     {
         EmitSignal("SendEvent", new SGEventContainer(new SelectCardEvent() { CardModelId = cardId }) );
+        QueueFree();
     }
 
     public void Init(List<CardModel> list, int count)
