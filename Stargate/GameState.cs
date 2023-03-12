@@ -1,6 +1,7 @@
 ﻿using Godot;
 using Stargate.Repository;
 using Stargate.Stargate.Card;
+using Stargate.Stargate.Card.Interface;
 using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
 using Stargate.Stargate.StargateException;
@@ -66,6 +67,9 @@ namespace Stargate.Stargate
                 }
                 
                 //return new CharacterModel() { Card = card };
+            } else if (card.Type == CardType.Obstacle){
+                
+                return new ObstacleModel() { Card = card };
             }
 
             return new CardModel(card);
@@ -145,7 +149,21 @@ namespace Stargate.Stargate
             if (CardRepository.IsInHand(playCardEvent.Sender, playCardEvent.cardModel) && playCardEvent.Sender.Energy >= playCardEvent.cardModel.Card.Cost)
             {
                 playCardEvent.Sender.Energy -= playCardEvent.cardModel.Card.Cost;
-                playCardEvent.cardModel.State = CardState.Ready; // probablement passer par le repository pour faire ca
+                
+                
+
+                // peut etre laisser les cartes se router ici ?
+                if((playCardEvent.cardModel.Card.Type & CardType.Character) != 0)
+                {
+                    playCardEvent.cardModel.State = CardState.Ready; 
+                }
+                else if (playCardEvent.cardModel.Card.Type == CardType.Obstacle)
+                {
+                    playCardEvent.cardModel.State = CardState.Mission;
+                }
+              
+                
+                
                 return new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = playCardEvent.cardModel };
             }
             else
@@ -321,7 +339,7 @@ namespace Stargate.Stargate
             int difficulty = (int)mission.getMissionDifficulty();
 
 
-            foreach (CharacterModel card in peripeties)
+            foreach (ISGSkill card in peripeties)
             {
                 if(card.GetSkill(mission.GetMissionSkill()) != null)
                 {

@@ -58,6 +58,7 @@ namespace Stargate.Stargate
                             case "Support Character": c.Type = CardType.SupportCharacter; break;
                             case "Mission": c.Type = CardType.Mission   ; break;
                             case "Team Character": c.Type = CardType.TeamCharacter  ; break;
+                            case "Obstacle": c.Type = CardType.Obstacle; break;
 
                         }
 

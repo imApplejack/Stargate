@@ -53,10 +53,7 @@ namespace Stargate.Stargate.Card
             return "Id : " + Id + "  State : " + State;
         }
 
-        public static implicit operator CardModel(List<CardModel> v)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 
 
