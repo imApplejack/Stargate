@@ -331,7 +331,7 @@ namespace Stargate.Stargate
         {
             try
             {
-                while (CardRepository.GetPlayerHand(player).Count < upTo)
+                while (CardRepository.GetPlayerHand(player).Count <= upTo)
                 {
                     Draw(player);
                 }

@@ -15,6 +15,8 @@ public class PlayerControl : Control
     // private int a = 2;
     // private string b = "text";
 
+   
+
 
     public Node TeamContainer;
     public Node BoardContainer;
@@ -296,17 +298,23 @@ public class PlayerControl : Control
     }
 
 
-    public void PopupDialog(ChooseCardResult popupdialogattr)
+    public void ChooseCardDialog(ChooseCardResult popupdialogattr)
     {
-
+        /*
         PackedScene scene = GD.Load<PackedScene>("res://SGGodot/SGPopupDialog.tscn");
-        SGPopupDialog instance = (SGPopupDialog)scene.Instance();
-        
+        SGPopupDialog instance = (SGPopupDialog)scene.Instance(); 
         instance.Init(CreateDecoratedCloneInstance(MappingMVC.Get(popupdialogattr.cards)), popupdialogattr.count);
         this.AddChild(instance);
         instance.FindNode("HBoxContainer").Connect("SendEvent", this, "PlayEvent");
+        instance.Show();*/
+        //SGPopupDialog
+        PackedScene scene = GD.Load<PackedScene>("res://SGGodot/SelectCardDialog.tscn");
+        SelectCardDialog instance = (SelectCardDialog)scene.Instance();
+        this.AddChild(instance);
+        instance.Init(popupdialogattr.cards, popupdialogattr.count);
+        instance.Connect("SendEvent", this, "PlayEvent");
+        instance.PopupCentered();
 
-        instance.Show();
     }
 
     public void ContinueQuestDialog()
@@ -353,7 +361,7 @@ public class PlayerControl : Control
                         ChooseCardResult e = (ChooseCardResult)result;
                         if(e.player == player)
                         {
-                            PopupDialog(e);
+                            ChooseCardDialog(e);
                         }
 
                         break;

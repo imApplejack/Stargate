@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Principal;
 
 public class Main : Node
 {
@@ -55,6 +56,9 @@ public class Main : Node
         game.GameState.InitGame(1);
 
 
+
+       // ((WindowDialog)FindNode("WindowDialog")).PopupCentered();
+        
 
       
 
