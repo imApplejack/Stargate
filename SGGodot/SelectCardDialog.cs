@@ -90,11 +90,6 @@ public class SelectCardDialog : WindowDialog
             instance.Connect("choose_card", this, "CardSelect");
         }
 
-        if((chooseCardResult.Range & SelectCardEnum.UpToOne) != 0)
-        {
-            NoneButton.Visible = true;
-        }
-
     }
 
 
