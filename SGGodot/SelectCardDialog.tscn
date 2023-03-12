@@ -3,6 +3,7 @@
 [ext_resource path="res://SGGodot/SelectCardDialog.cs" type="Script" id=2]
 
 [node name="WindowDialog" type="WindowDialog"]
+visible = true
 margin_right = 623.0
 margin_bottom = 284.0
 window_title = "Choisissez un bonhomme"
@@ -19,3 +20,13 @@ scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
 alignment = 1
+
+[node name="NoneButton" type="Button" parent="."]
+visible = false
+margin_left = 280.0
+margin_top = 248.0
+margin_right = 335.0
+margin_bottom = 268.0
+text = "None"
+
+[connection signal="button_down" from="NoneButton" to="." method="_on_NoneButton_button_down"]

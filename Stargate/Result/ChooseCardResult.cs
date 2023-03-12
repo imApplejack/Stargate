@@ -10,6 +10,9 @@ namespace Stargate.Stargate.Result
 {
     public class ChooseCardResult : StargateResult
     {
+
+        public SelectCardEnum Range { get; set; } = SelectCardEnum.One;
+
         public ChooseCardResult()
         {
             StargateResultType = StargateResultType.ChooseCard;

@@ -311,7 +311,7 @@ public class PlayerControl : Control
         PackedScene scene = GD.Load<PackedScene>("res://SGGodot/SelectCardDialog.tscn");
         SelectCardDialog instance = (SelectCardDialog)scene.Instance();
         this.AddChild(instance);
-        instance.Init(popupdialogattr.cards, popupdialogattr.count);
+        instance.Init(popupdialogattr);
         instance.Connect("SendEvent", this, "PlayEvent");
         instance.PopupCentered();
 

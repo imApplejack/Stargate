@@ -1,6 +1,8 @@
 using Godot;
 using Stargate.Stargate.Card;
+using Stargate.Stargate.Enum;
 using Stargate.Stargate.Event;
+using Stargate.Stargate.Result;
 using System;
 using System.Collections.Generic;
 
@@ -15,15 +17,25 @@ public class SelectCardDialog : WindowDialog
 
     private HBoxContainer BoxContainer;
 
+    private Button NoneButton;
+
     [Signal]
     public delegate void SendEvent(SGEventContainer myEvent);
 
     public override void _Ready()
     {
         BoxContainer = (HBoxContainer)FindNode("HBoxContainer");
+        NoneButton = (Button)FindNode("NoneButton");
         GD.PrintErr(BoxContainer);
     }
 
+
+
+    public void _on_NoneButton_button_down()
+    {
+        EmitSignal("SendEvent", new SGEventContainer(new SelectCardEvent()));
+        QueueFree();
+    }
 
     public void CardSelect(int cardId)
     {
@@ -31,18 +43,23 @@ public class SelectCardDialog : WindowDialog
         QueueFree();
     }
 
-    public void Init(List<CardModel> list, int count)
+    public void Init(ChooseCardResult chooseCardResult)
     {
 
         GD.PrintErr(BoxContainer);
         PackedScene scene = GD.Load<PackedScene>("res://SGGodot/TextureRect05.tscn");
 
-        foreach (CardModel item in list)
+        foreach (CardModel item in chooseCardResult.cards)
         {
             TextureRect05 instance  = (TextureRect05)scene.Instance();
             BoxContainer.AddChild(instance);
             instance.Init(item);
             instance.Connect("choose_card", this, "CardSelect");
+        }
+
+        if((chooseCardResult.Range & SelectCardEnum.UpToOne) != 0)
+        {
+            NoneButton.Visible = true;
         }
 
     }

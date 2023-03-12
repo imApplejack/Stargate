@@ -54,7 +54,7 @@ namespace Stargate.StateMachine
                 }
                 else
                 {
-                    SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = ennemiesInMission });
+                    SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = ennemiesInMission, Range = SelectCardEnum.UpToOne });
                     throw new StateResultException(StateResult.STOP);
                 }
 

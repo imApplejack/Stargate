@@ -27,7 +27,7 @@ namespace Stargate.StateMachine
         public void ChoosePartyEvent(StateEvent e = null)
         {
 
-            SelectCardEvent sle = (SelectCardEvent)e;
+            SelectCardEvent sle = e as SelectCardEvent;
             if (sle == null || sle.Type != EventType.SELECTCARD || sle.cardModel.Count != 1)
             {
                 SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = gameState.CardRepository.GetPlayerTeamCharactersReady(gameState.CurrentPlayer) });

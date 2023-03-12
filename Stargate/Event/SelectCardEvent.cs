@@ -13,6 +13,7 @@ namespace Stargate.Stargate.Event
     public class SelectCardEvent : StargateEvent
     {
 
+    
         public List<CardModel> cardModel { get; set; } = new List<CardModel>();
 
         public List<int> CardModelId { get; set; } = new List<int>();    
