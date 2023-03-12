@@ -47,7 +47,7 @@ public class TextureRect05 : Panel
             if (myMouseEvent.ButtonIndex == (int)ButtonList.Left && myMouseEvent.Pressed == true)
             {
                 selectOutlet.Visible = !selectOutlet.Visible;
-                EmitSignal("choose_card", Card.Id);
+                //EmitSignal("choose_card", Card.Id);
                
             }
         }
