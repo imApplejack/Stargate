@@ -277,6 +277,11 @@ namespace Stargate.Stargate
             return CardRepository.GetCardsInMission(GetHeroPlayer(), CardType.HeroPlayerMissionObjets);
         }
 
+        public List<CardModel> GetEnnemyPlayerAdversaryInMission()
+        {
+            return CardRepository.GetCardsInMission(GetEnemyPlayer(), CardType.Adversary);
+        }
+
 
         public bool CheckQuestVictory()
         {

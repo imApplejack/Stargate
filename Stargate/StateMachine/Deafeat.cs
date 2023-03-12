@@ -29,6 +29,34 @@ namespace Stargate.StateMachine
 
         public void ScoreReviveorDestroyBoss(StateEvent e = null)
         {
+
+
+            if(gameState.GetEnnemyPlayerAdversaryInMission().Count > 0)
+            {
+
+
+                SelectCardEvent theevent = (SelectCardEvent)e;
+
+                if (theevent != null && theevent.Sender == gameState.GetEnemyPlayer() && theevent.Type == EventType.SELECTCARD)
+                {
+                    
+                  
+                    /*
+                    if (theevent.response == ContinueQuestEventResponse.YES)
+                    {
+                        QueueAction(new GiveEnemy1MPForEachFailedQuest(gameState)).QueueAction(new QuestLoop(gameState));
+                    }
+                    gameState.SetQuestFailed();
+                    */
+                }
+
+
+
+
+            }
+
+
+
             //Debug.WriteLine("DEFEAT ScoreReviveorDestroyBoss");
         }
 

@@ -43,11 +43,7 @@ public class SelectCardDialog : WindowDialog
             BoxContainer.AddChild(instance);
             instance.Init(item);
             instance.Connect("choose_card", this, "CardSelect");
-
-           // ((SelectCardContainer)FindNode("HBoxContainer")).AddChild(item.GetClone()); // attention ici il n'y a pas le decorate
         }
-        
-
 
     }
 
