@@ -26,17 +26,18 @@ namespace Stargate.StateMachine
 
         public void ChoosePartyEvent(StateEvent e = null)
         {
-            if (e == null || ((StargateEvent )e).Type != EventType.SELECTCARD)
+
+            SelectCardEvent sle = (SelectCardEvent)e;
+            if (sle == null || sle.Type != EventType.SELECTCARD || sle.cardModel.Count != 1)
             {
                 SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = gameState.CardRepository.GetPlayerTeamCharactersReady(gameState.CurrentPlayer) });
                 throw new StateResultException(StateResult.STOP);
             }
-            else {
-                SelectCardEvent sle = (SelectCardEvent)e;
-                sle.cardModel.State = CardState.Stop;
-                SendEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = sle.cardModel });
+            else 
+                sle.cardModel[0].State = CardState.Stop;
+                SendEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = sle.cardModel[0] });
             }
         }
-    }
+    
 
 }

@@ -1,6 +1,7 @@
 using Godot;
 using Stargate.Stargate.Event;
 using System;
+using System.Collections.Generic;
 
 public class SelectCardContainer : CardContainer
 {
@@ -15,7 +16,7 @@ public class SelectCardContainer : CardContainer
 
     public override void ProcessCardAction(GDCard card)
     {
-        ForwardEvent(new SelectCardEvent() { CardModelId = card.Card.Id });
+        ForwardEvent(new SelectCardEvent() { CardModelId = new List<int>() { card.Card.Id } } );
         //GetParent().QueueFree();
         EmitSignal("close_popup");
     }

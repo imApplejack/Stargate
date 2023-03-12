@@ -27,7 +27,7 @@ public class SelectCardDialog : WindowDialog
 
     public void CardSelect(int cardId)
     {
-        EmitSignal("SendEvent", new SGEventContainer(new SelectCardEvent() { CardModelId = cardId }) );
+        EmitSignal("SendEvent", new SGEventContainer(new SelectCardEvent() { CardModelId = new List<int>() { cardId } }) );
         QueueFree();
     }
 

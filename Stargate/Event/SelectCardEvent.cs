@@ -13,9 +13,9 @@ namespace Stargate.Stargate.Event
     public class SelectCardEvent : StargateEvent
     {
 
-        public CardModel cardModel { get; set; }
+        public List<CardModel> cardModel { get; set; } = new List<CardModel>();
 
-        public int? CardModelId { get; set; }
+        public List<int> CardModelId { get; set; } = new List<int>();    
 
         public SelectCardEvent()
         {
@@ -31,13 +31,11 @@ namespace Stargate.Stargate.Event
         public override void Hydrate(StargateGame game)
         {
             base.Hydrate(game);
-            if(CardModelId != null)
-            {
-                cardModel = game.GameState.CardRepository.GetCardModelFromId((int)CardModelId);
-            } 
+
+            foreach (int cardId in CardModelId) {
+                cardModel.Add(game.GameState.CardRepository.GetCardModelFromId(cardId));
+            }
         }
-
-
 
     }
 }

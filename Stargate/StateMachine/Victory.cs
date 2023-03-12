@@ -43,18 +43,16 @@ namespace Stargate.StateMachine
 
         public void AttacheAffinityToAssignedCharacter(StateEvent e = null)
         {
-
-            if (e == null || ((StargateEvent)e).Type != EventType.SELECTCARD || ((StargateEvent)e).Sender != gameState.GetHeroPlayer())
+            if (e == null || ((StargateEvent)e).Type != EventType.SELECTCARD || ((StargateEvent)e).Sender != gameState.GetHeroPlayer() || ((SelectCardEvent)e).cardModel.Count != 1)
             {
                 SendEvent(new ChooseCardResult() { player = gameState.GetHeroPlayer(), cards = gameState.GetHeroPlayerCardsInMission() });
                 throw new StateResultException(StateResult.STOP);
             }
             else
             {
-
                 SelectCardEvent sle = (SelectCardEvent)e;
-                ((HeroCharacterModel)sle.cardModel).glyphsEarned.Add(gameState.GetCurrentMission());
-                SendEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = sle.cardModel });
+                ((HeroCharacterModel)sle.cardModel[0]).glyphsEarned.Add(gameState.GetCurrentMission());
+                SendEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = sle.cardModel[0] });
             }
 
             //Debug.WriteLine("VICTORY AttacheAffinityToAssignedCharacter");
