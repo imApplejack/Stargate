@@ -18,10 +18,18 @@ namespace Stargate.StateMachine
 
         public InitPhase(GameState gs) : base (gs)
         {
-            this.AddAction(new DrawUpTo8Phase(gs))
+            this.
+                AddAction(Shuffle)
+                 .AddAction(new DrawUpTo8Phase(gs))
                 .AddAction(ChoosePartyEvent)
                 .AddAction(new GameLoop(gs))
                 ;
+        }
+
+
+        public void Shuffle(StateEvent e = null)
+        {
+            gameState.ShuffleDecksAndLibraries();
         }
 
         public void ChoosePartyEvent(StateEvent e = null)

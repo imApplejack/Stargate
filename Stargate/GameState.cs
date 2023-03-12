@@ -528,6 +528,15 @@ namespace Stargate.Stargate
             }
         }
 
+        public void ShuffleDecksAndLibraries()
+        {
+            CardRepository.ShuffleLibrary(CurrentPlayer, random);
+            CardRepository.ShuffleLibrary(GetOtherPlayer(CurrentPlayer), random);
+
+            CardRepository.ShuffleMission(CurrentPlayer, random);
+            CardRepository.ShuffleMission(GetOtherPlayer(CurrentPlayer), random);
+        }
+
 
 
         public void SwitchPlayersRole()

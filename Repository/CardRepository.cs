@@ -11,8 +11,33 @@ using System.Threading.Tasks;
 
 namespace Stargate.Repository
 {
+
+    public static class Shuffler
+    {
+        public static void Shuffle<T>(this IList<T> list, Random rng)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+    }
+
+  
+
+
     public class CardRepository
     {
+
+
+
+       
+
 
         public List<CardModel> Cards = new List<CardModel>();
 
@@ -41,6 +66,9 @@ namespace Stargate.Repository
 
         public CardModel GetCardModelFromId(int id)
         {
+         
+
+
             CardModel cm = Cards.Find(cardModel => cardModel.Id == id);
             if (cm != null)
             {
@@ -73,6 +101,23 @@ namespace Stargate.Repository
                 }
             }
         }
+
+        public void ShuffleMission(Player player, Random rng)
+        {
+            //Missions[player].ToList();
+            List<CardModel> a = Missions[player].ToList();
+            a.Shuffle(rng);
+            Missions[player] = new Queue<CardModel>(a);
+        }
+
+        public void ShuffleLibrary(Player player, Random rng)
+        {
+            //Missions[player].ToList();
+            List<CardModel> a = Libraries[player].ToList();
+            a.Shuffle(rng);
+            Libraries[player] = new Queue<CardModel>(a);
+        }
+
 
         public void InitPlayersMissions()
         {
