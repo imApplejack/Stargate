@@ -27,6 +27,8 @@ namespace Stargate.Stargate.Enum
         public StargateResultType StargateResultType { get; set; }
         public Object attr { get; set; }
 
+        public string Label { get; set; } = String.Empty;
+
 
 
         public override string ToString()

@@ -30,7 +30,7 @@ namespace Stargate.StateMachine
             SelectCardEvent sle = e as SelectCardEvent;
             if (sle == null || sle.Type != EventType.SELECTCARD || sle.cardModel.Count != 1)
             {
-                SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = gameState.CardRepository.GetPlayerTeamCharactersReady(gameState.CurrentPlayer) });
+                SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = gameState.CardRepository.GetPlayerTeamCharactersReady(gameState.CurrentPlayer), Label = "choisissez une personne a stopper" });
                 throw new StateResultException(StateResult.STOP);
             }
             else 

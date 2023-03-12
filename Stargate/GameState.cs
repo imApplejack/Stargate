@@ -215,7 +215,17 @@ namespace Stargate.Stargate
                 //Debug.WriteLine(r);
                 ForwardEvent(r);
             });
+        }
 
+        public int GetReviveCost(List<CardModel> models)
+        {
+            int retour = 0;
+            models.ForEach(adversary =>
+            {
+                retour += (int)adversary.Card.Revive;
+            });
+
+            return retour;
         }
 
 
@@ -339,6 +349,15 @@ namespace Stargate.Stargate
             this.CardRepository.InitPlayersMissions();
         }
 
+        public void DestroyAllMonsterAndComplications()
+        {
+            foreach (CardModel item in CardRepository.GetCardsInMission(GetEnemyPlayer(),CardType.VIllanPlayerMissionObjects))
+            {
+                ChangeCardState(item, CardState.Destroy);
+            }
+        }
+
+
         public void Draw(Player player)
         {
             try
@@ -358,6 +377,21 @@ namespace Stargate.Stargate
                 while (CardRepository.GetPlayerHand(player).Count <= upTo)
                 {
                     Draw(player);
+                }
+            }
+            catch (EmptyLibraryException e)
+            {
+
+            }
+        }
+
+        public void MeuleUpTo(Player player, int upTo)
+        {
+            try
+            {
+                for (int i = 1; i<= upTo; i++)
+                {
+                    CardRepository.Meule(player);
                 }
             }
             catch (EmptyLibraryException e)
@@ -530,7 +564,7 @@ namespace Stargate.Stargate
 
         }
 
-       
+      
     }
 
 

@@ -191,24 +191,32 @@ namespace Stargate.Repository
 
 
 
-        public CardModel Draw(Player player)
+        public CardModel PeekLibrary(Player player, CardState cardState)
         {
-            /// TODO faire les cas bibliotheque vide ect... 
             try
             {
                 CardModel topCardLibrary = Libraries[player].Peek();
-                topCardLibrary.State = CardState.Hand;
+                topCardLibrary.State = cardState;
                 Libraries[player].Dequeue();
 
                 return topCardLibrary;
-               // return new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = topCardLibrary };
+                // return new StargateResult { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = topCardLibrary };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new EmptyLibraryException();
             }
         }
 
+        public CardModel Draw(Player player)
+        {
+            return PeekLibrary(player, CardState.Hand);
+        }
+
+        public CardModel Meule(Player player)
+        {
+            return PeekLibrary(player, CardState.Destroy);
+        }
 
         public CardModel PlayMission(Player player)
         {

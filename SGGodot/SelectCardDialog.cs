@@ -78,6 +78,12 @@ public class SelectCardDialog : WindowDialog
 
     public void Init(ChooseCardResult chooseCardResult)
     {
+        // SelectCardEnum n'est pas vraiment utilise ici
+        if(chooseCardResult.Label != String.Empty)
+        {
+            WindowTitle = chooseCardResult.Label;
+        }
+       
 
         GD.PrintErr(BoxContainer);
         PackedScene scene = GD.Load<PackedScene>("res://SGGodot/TextureRect05.tscn");

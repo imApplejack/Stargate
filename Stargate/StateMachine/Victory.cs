@@ -21,25 +21,17 @@ namespace Stargate.StateMachine
 
         public Victory(GameState gs) : base(gs)
         {
-            AddAction(ReviveorDestroyBoss).
-                AddAction(DestroyAllMonsterAndComplications).
-                AddAction(AttacheAffinityToAssignedCharacter)
-            .AddAction(ActivateEarnAffinityAbilities).
-            AddAction(new StopAllAssignedCharacterAndBoss(gs))
-            .AddAction(ContinueToNextQuest);
+            AddAction(new Revive(gs))
+            .AddAction(new DestroyAllMonsterAndComplications(gs))
+            .AddAction(AttacheAffinityToAssignedCharacter)
+            .AddAction(ActivateEarnAffinityAbilities)
+            .AddAction(new StopAllAssignedCharacterAndBoss(gs))
+            .AddAction(ContinueToNextQuest)
+            ;
         }
 
 
-        public void ReviveorDestroyBoss(StateEvent e = null)
-        {
-            //Debug.WriteLine("VICTORY ReviveorDestroyBoss");
-        }
 
-
-        public void DestroyAllMonsterAndComplications(StateEvent e = null)
-        {
-            //Debug.WriteLine("VICTORY DestroyAllMonsterAndComplications");
-        }
 
         public void AttacheAffinityToAssignedCharacter(StateEvent e = null)
         {
@@ -93,12 +85,6 @@ namespace Stargate.StateMachine
             }
 
         }
-
-
-
-
-
-
 
 
     }

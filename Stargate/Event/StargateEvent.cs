@@ -19,7 +19,8 @@ namespace Stargate.Stargate.Event
         SELECTCARD,
         CONTINUEQUEST,
         BOOSTCHAR,
-        PLAYCOMPLICATION
+        PLAYCOMPLICATION,
+        USED
     }
 
 

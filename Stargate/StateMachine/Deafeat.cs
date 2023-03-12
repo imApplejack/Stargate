@@ -20,9 +20,9 @@ namespace Stargate.StateMachine
 
         public Defeat(GameState gs) : base(gs)
         {
-            AddAction(Score).
-                  AddAction(Revive).
-                    AddAction(DestroyAllMonsterAndComplications).
+                    AddAction(Score).
+                    AddAction(new Revive(gs)).
+                    AddAction(new DestroyAllMonsterAndComplications(gs)).
                     AddAction(new StopAllAssignedCharacterAndBoss(gs)).
                     AddAction(ContinueToNextQuest);
                     ;
@@ -34,43 +34,23 @@ namespace Stargate.StateMachine
             List<CardModel> ennemiesInMission = gameState.GetEnnemyPlayerAdversaryInMission();
             if (ennemiesInMission.Count > 0)
             {
-
-
                 SelectCardEvent theevent = e as SelectCardEvent;
                 if (theevent != null && theevent.Sender == gameState.GetEnemyPlayer() && theevent.Type == EventType.SELECTCARD && theevent.cardModel.Count <= 1)
                 {
-
                     if (theevent.cardModel.Count == 1)
                     {
                         gameState.ChangeCardState(theevent.cardModel.First(), CardState.BossScored);
+                      
                     }
-                    /*
-                    if (theevent.response == ContinueQuestEventResponse.YES)
-                    {
-                        QueueAction(new GiveEnemy1MPForEachFailedQuest(gameState)).QueueAction(new QuestLoop(gameState));
-                    }
-                    gameState.SetQuestFailed();
-                    */
+                      ((StargateEvent)e).Type = EventType.USED;
                 }
                 else
                 {
-                    SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = ennemiesInMission, Range = SelectCardEnum.UpToOne });
+                    SendEvent(new ChooseCardResult() { player = gameState.GetEnemyPlayer(), cards = ennemiesInMission, Range = SelectCardEnum.UpToOne, Label = "Choisissez un boss monster a scorer" });
                     throw new StateResultException(StateResult.STOP);
                 }
-
             }
         }
-
-
-
-        public void Revive(StateEvent e = null)
-        {
-
-        }
-
-
-
-
 
 
 
@@ -80,22 +60,8 @@ namespace Stargate.StateMachine
         }
 
 
-
-        public void SetQuestAside(StateEvent e = null)
-        {
-            //Debug.WriteLine("DEFEAT SetQuestAside");
-        }
-
-        public void GiveEnnemy1MPForEachFailedQuest(StateEvent e = null)
-        {
-            //Debug.WriteLine("DEFEAT GiveEnnemy1MPForEachFailedQuest");
-        }
-
         public void ContinueToNextQuest(StateEvent e = null)
         {
-
-            //Debug.WriteLine("DEFEAT ContinueToNextQuest stateevent " + e);
-            
             try
             {
 
@@ -119,11 +85,6 @@ namespace Stargate.StateMachine
             }
           
         }
-
-
-
-       
-
 
     }
     

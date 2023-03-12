@@ -6,7 +6,7 @@
 visible = true
 margin_right = 623.0
 margin_bottom = 284.0
-window_title = "Choisissez un bonhomme"
+window_title = "string"
 script = ExtResource( 2 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
