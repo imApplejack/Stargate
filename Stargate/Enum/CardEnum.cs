@@ -31,6 +31,7 @@ namespace Stargate.Stargate.Enum
         MissionPile = 128,
         FailedQuest = 256, // quest
         Affinity = 512,
+        BossScored = 1024,
         Board = Ready | Stop | KO
     };
 

@@ -23,6 +23,7 @@ public class PlayerUX : Panel
 
     protected Label destroyed;
 
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -45,6 +46,9 @@ public class PlayerUX : Panel
         victoryProgressBar.MaxValue = player.TotalExperience();
         victoryProgressBar.Value = player.VictoryTotal();
         destroyed.Text = "Destroyed : " + player.Destroyed().ToString();
+        villanProgressBar.MaxValue = player.TotalExperience();
+        villanProgressBar.Value = player.VillanScoreTotal();
+
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

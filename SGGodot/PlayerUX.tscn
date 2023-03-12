@@ -59,10 +59,6 @@ margin_left = -124.0
 margin_top = 109.0
 margin_right = -20.0
 margin_bottom = 125.0
-max_value = 20.0
-step = 1.0
-value = 4.0
-percent_visible = false
 
 [node name="Library" type="Label" parent="."]
 margin_left = 44.0

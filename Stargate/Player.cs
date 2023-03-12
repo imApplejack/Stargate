@@ -27,6 +27,11 @@ namespace Stargate
         }
 
 
+        public int VillanScoreTotal()
+        {
+            return gameState.VillanScoreTotal(this);
+        }
+
         public int TotalExperience()
         {
             return gameState.TotalExperience(this);

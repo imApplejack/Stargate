@@ -230,6 +230,12 @@ namespace Stargate.Stargate
         }
 
 
+
+ 
+
+
+
+
         public void ReadyAllStoppedCardsAndStopAllKOCards()
         {
             foreach (CardModel item in CardRepository.getCardsByState(CardState.Stop))
@@ -265,6 +271,19 @@ namespace Stargate.Stargate
             return retour;
             //return CardRepository.GetPlayerTeamCharacters(player).Count;
         }
+
+        public int VillanScoreTotal(Player player)
+        {
+            int retour = 0;
+            foreach (AdversaryModel item in CardRepository.getPlayerCardsByState(player, CardState.BossScored))
+            {
+                retour += (int)item.Card.Cost;
+            }
+            return retour;
+            //return CardRepository.GetPlayerTeamCharacters(player).Count;
+        }
+
+
 
         public int Destroyed(Player player)
         {
