@@ -68,6 +68,8 @@ public class CardAction : WindowDialog
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+
+        WindowTitle = Card.Card.Card.Name;
         CardTexture = (TextureRect)FindNode("Texture");
         ActionContainer = (Container)FindNode("ActionContainer");
         CardTexture.Texture = Card.Cardbackground.Texture;

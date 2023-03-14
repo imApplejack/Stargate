@@ -26,6 +26,7 @@ public class CardContainer : Node
 
     protected void ShowCardAction(GDCard card)
     {
+       
         PackedScene scene = GD.Load<PackedScene>("res://SGGodot/CardAction.tscn");
         CardAction instance = (CardAction)scene.Instance();
         instance.Init(card);
