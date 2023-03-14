@@ -71,9 +71,7 @@ namespace Stargate.StateMachine
                     {
 
                         case EventType.PLAYCARD:
-                            SendEvent(gameState.PlayHeroCard((PlayCardEvent)myEvent));
-                            SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
-                            questPhasePass[questCurrentPlayer] = false;
+                            questPhasePass[questCurrentPlayer]= !gameState.PlayHeroCard((PlayCardEvent)myEvent);
                             break;
                         case EventType.ASSIGNCHAR:
                             SendEvent(gameState.AssignHeroChar((AssignCharEvent)myEvent));
@@ -101,9 +99,7 @@ namespace Stargate.StateMachine
                     {
 
                         case EventType.PLAYCARD:
-                            SendEvent(gameState.PlayVillanCard((PlayCardEvent)myEvent));
-                            SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
-                            questPhasePass[questCurrentPlayer] = false;
+                            questPhasePass[questCurrentPlayer] = !gameState.PlayVillanCard((PlayCardEvent)myEvent);
                             break;
                         case EventType.ASSIGNCHAR:
                             SendEvent(gameState.AssignVillanChar((AssignCharEvent)myEvent));

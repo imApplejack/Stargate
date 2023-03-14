@@ -136,38 +136,38 @@ namespace Stargate.Stargate
         }
 
 
-        public StargateResult PlayHeroCard(PlayCardEvent playCardEvent)
+        public bool PlayHeroCard(PlayCardEvent playCardEvent)
         {
             if ((playCardEvent.cardModel.Card.Type & CardType.HeroPlayerAction) != 0)
             {
                 return PlayCard(playCardEvent);
             }
 
-            return new StargateResult() { actionResult = ActionResult.Failure };
+            return false;
         }
 
 
-        public StargateResult PlayVillanCard(PlayCardEvent playCardEvent)
+        public bool PlayVillanCard(PlayCardEvent playCardEvent)
         {
             if ((playCardEvent.cardModel.Card.Type & CardType.VillanPlayerAction) != 0)
             {
                 return PlayCard(playCardEvent);
             }
-
-            return new StargateResult() { actionResult = ActionResult.Failure };
+            return false;
         }
 
-        public StargateResult PlayCard(PlayCardEvent playCardEvent)
+        public bool PlayCard(PlayCardEvent playCardEvent)
         {
             if (playCardEvent.cardModel.PlayCardAssert(playCardEvent.Sender))
             {
                 playCardEvent.cardModel.PlayCardCost(playCardEvent.Sender);
                 playCardEvent.cardModel.PlayCardAction();
-                return new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = playCardEvent.cardModel };
+                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = playCardEvent.cardModel });
+                return true;
             }
             else
             {
-                return new StargateResult() { actionResult = ActionResult.Failure };
+                return false;
             }
         }
 
