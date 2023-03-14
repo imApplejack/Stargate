@@ -49,9 +49,11 @@ namespace Stargate.Stargate
         {
          
             
+            CardModel retour ;
+
             if(card.Type == CardType.Mission)
             {
-                return new MissionModel() { Card = card };
+                retour = new MissionModel() { Card = card };
             }
             else if ((card.Type & CardType.Character) != 0)
             {
@@ -59,20 +61,31 @@ namespace Stargate.Stargate
                 switch (card.Type)
                 {
                     case (CardType.SupportCharacter):
-                        return new HeroCharacterModel() { Card = card};
+                        retour = new HeroCharacterModel() { Card = card};
+                        break;
                     case (CardType.TeamCharacter):
-                        return new HeroCharacterModel() { Card = card };
+                        retour = new HeroCharacterModel() { Card = card };
+                        break;
                     case (CardType.Adversary):
-                        return new AdversaryModel() { Card = card };
+                        retour = new AdversaryModel() { Card = card };
+                        break;
+                    default: retour = new CardModel(card);
+                        break;
+
                 }
                 
                 //return new CharacterModel() { Card = card };
             } else if (card.Type == CardType.Obstacle){
-                
-                return new ObstacleModel() { Card = card };
+
+                retour = new ObstacleModel() { Card = card };
+            }
+            else
+            {
+                retour = new CardModel(card);
             }
 
-            return new CardModel(card);
+          retour.GameState = this;
+          return retour;
 
         }
 
@@ -134,7 +147,7 @@ namespace Stargate.Stargate
         }
 
 
-        public StargateResult PlayMonsterBoss(PlayCardEvent playCardEvent)
+        public StargateResult PlayVillanCard(PlayCardEvent playCardEvent)
         {
             if ((playCardEvent.cardModel.Card.Type & CardType.VillanPlayerAction) != 0)
             {
@@ -146,24 +159,10 @@ namespace Stargate.Stargate
 
         public StargateResult PlayCard(PlayCardEvent playCardEvent)
         {
-            if (CardRepository.IsInHand(playCardEvent.Sender, playCardEvent.cardModel) && playCardEvent.Sender.Energy >= playCardEvent.cardModel.Card.Cost)
+            if (playCardEvent.cardModel.PlayCardAssert(playCardEvent.Sender))
             {
-                playCardEvent.Sender.Energy -= playCardEvent.cardModel.Card.Cost;
-                
-                
-
-                // peut etre laisser les cartes se router ici ?
-                if((playCardEvent.cardModel.Card.Type & CardType.Character) != 0)
-                {
-                    playCardEvent.cardModel.State = CardState.Ready; 
-                }
-                else if (playCardEvent.cardModel.Card.Type == CardType.Obstacle)
-                {
-                    playCardEvent.cardModel.State = CardState.Mission;
-                }
-              
-                
-                
+                playCardEvent.cardModel.PlayCardCost(playCardEvent.Sender);
+                playCardEvent.cardModel.PlayCardAction();
                 return new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = playCardEvent.cardModel };
             }
             else

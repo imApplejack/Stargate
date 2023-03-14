@@ -101,7 +101,7 @@ namespace Stargate.StateMachine
                     {
 
                         case EventType.PLAYCARD:
-                            SendEvent(gameState.PlayMonsterBoss((PlayCardEvent)myEvent));
+                            SendEvent(gameState.PlayVillanCard((PlayCardEvent)myEvent));
                             SendEvent(new StargateResult() { StargateResultType = StargateResultType.ChangePlayerAttr, attr = ((PlayCardEvent)myEvent).Sender });
                             questPhasePass[questCurrentPlayer] = false;
                             break;

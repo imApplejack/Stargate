@@ -30,7 +30,13 @@ namespace Stargate.Stargate.Card
         }
 
 
-       
+        public override void PlayCardAction()
+        {
+            base.PlayCardAction();
+            State = CardState.Ready;
+        }
+
+
 
     }
 }

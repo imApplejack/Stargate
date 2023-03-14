@@ -14,6 +14,7 @@ namespace Stargate.Stargate.Event
     public class PlayCardEvent : StargateEvent
     {
 
+
         public CardModel cardModel { get; set; }
 
         public int? CardModelId { get; set; }
