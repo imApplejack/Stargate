@@ -18,6 +18,13 @@ namespace Stargate.Stargate.Event
         {
             return new PlayCardEvent() { CardModelId = cardModel, SenderId = Sender };
         }
+
+
+        public override string ToString()
+        {
+            return "Sender : " + Sender + " cardmodel: " + cardModel ;
+
+        }
     }
 
     public class PlayCardEvent : StargateEvent

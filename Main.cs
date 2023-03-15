@@ -102,10 +102,12 @@ public class Main : Node
     [Sync]
     public void Pouet(NetworkStargateEvent networkStargateEvent)
     {
-        StargateEvent e = networkStargateEvent.GenerateStargateEvent();
-        e.Hydrate(game);
+        // StargateEvent e = networkStargateEvent.GenerateStargateEvent();
+        // e.Hydrate(game);
 
-        game.GameState.ProcessEvent(e);
+        Debug.WriteLine(networkStargateEvent);
+
+        // game.GameState.ProcessEvent(e);
         //Debug.WriteLine("POUET" + e);
     }
 
@@ -121,7 +123,7 @@ public class Main : Node
             //  Debug.WriteLine("RPC");
             //  Rpc("SendEventnetwork", new NetworkEvent() { stargateEvent = stargateEvent });
 
-            Rpc("Pouet", stargateEvent.GenerateNetworkStargateEvent());
+            Rpc("Pouet", new NetworkPlayCardEvent() { cardModel = 10, Sender = 1});
         }
         else
         {
