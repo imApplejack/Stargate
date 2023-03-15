@@ -10,12 +10,22 @@ namespace Stargate.Stargate.Event
 {
 
 
+    public class NetworkAssignCharEvent : NetworkStargateEvent
+    {
+        public int cardModel;
+        public override StargateEvent GenerateStargateEvent()
+        {
+            return new AssignCharEvent() { CardModelId = cardModel, SenderId = Sender };
+        }
+    }
+
+
     public class AssignCharEvent : StargateEvent
     {
 
         public override NetworkStargateEvent GenerateNetworkStargateEvent()
         {
-            throw new NotImplementedException();
+            return  new NetworkAssignCharEvent() { cardModel = (int)CardModelId, Sender = (int)SenderId } ;
         }
 
 

@@ -16,12 +16,21 @@ namespace Stargate.Stargate.Event
         NO
     }
 
+    public class ContinueQuestCardEvent : NetworkStargateEvent
+    {
+        public ContinueQuestEventResponse response;
+        public override StargateEvent GenerateStargateEvent()
+        {
+            return new ContinueQuestEvent() { response = response, SenderId = Sender };
+        }
+    }
+
     public class ContinueQuestEvent : StargateEvent
     {
 
         public override NetworkStargateEvent GenerateNetworkStargateEvent()
         {
-            throw new NotImplementedException();
+            return new ContinueQuestCardEvent() { response = response, Sender = (int)SenderId };
         }
 
         public ContinueQuestEventResponse response;
