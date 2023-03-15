@@ -122,8 +122,64 @@ public class Main : Node
         StargateEvent muhevent = e.GenerateStargateEvent();
         muhevent.Hydrate(game);
         game.GameState.ProcessEvent(muhevent);
-
     }
+
+    [Sync]
+    public void NetworkAssignCharEvent(int Sender, int cardModel)
+    {
+        NetworkAssignCharEvent e = new NetworkAssignCharEvent(Sender, cardModel);
+        StargateEvent muhevent = e.GenerateStargateEvent();
+        muhevent.Hydrate(game);
+        game.GameState.ProcessEvent(muhevent);
+    }
+
+    [Sync]
+    public void NetworkBoostCharEvent(int Sender, int cardModel)
+    {
+        NetworkBoostCharEvent e = new NetworkBoostCharEvent(Sender, cardModel);
+        StargateEvent muhevent = e.GenerateStargateEvent();
+        muhevent.Hydrate(game);
+        game.GameState.ProcessEvent(muhevent);
+    }
+
+    [Sync]
+    public void NetworkContinueQuestCardEvent(int Sender, ContinueQuestEventResponse _response)
+    {
+        NetworkContinueQuestCardEvent e = new NetworkContinueQuestCardEvent(Sender, _response);
+        StargateEvent muhevent = e.GenerateStargateEvent();
+        muhevent.Hydrate(game);
+        game.GameState.ProcessEvent(muhevent);
+    }
+
+    [Sync]
+    public void NetworkPassEvent(int Sender)
+    {
+        NetworkPassEvent e = new NetworkPassEvent(Sender);
+        StargateEvent muhevent = e.GenerateStargateEvent();
+        muhevent.Hydrate(game);
+        game.GameState.ProcessEvent(muhevent);
+    }
+
+    [Sync]
+    public void NetworkPlayCardEvent(int Sender, int cardModel)
+    {
+        NetworkPlayCardEvent e = new NetworkPlayCardEvent(Sender, cardModel);
+        StargateEvent muhevent = e.GenerateStargateEvent();
+        muhevent.Hydrate(game);
+        game.GameState.ProcessEvent(muhevent);
+    }
+
+    [Sync]
+    public void NetworkPlayComplicationEvent(int Sender, int cardModel)
+    {
+        NetworkPlayComplicationEvent e = new NetworkPlayComplicationEvent(Sender, cardModel);
+        StargateEvent muhevent = e.GenerateStargateEvent();
+        muhevent.Hydrate(game);
+        game.GameState.ProcessEvent(muhevent);
+    }
+
+
+
 
     public void SendEvent(StargateEvent stargateEvent){
         GD.Print(stargateEvent);

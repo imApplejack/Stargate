@@ -26,7 +26,7 @@ namespace Stargate.Stargate.Event
         }
         public override object[] RPCAttr()
         {
-            throw new NotImplementedException();
+            return new object[] { Sender };
         }
 
 

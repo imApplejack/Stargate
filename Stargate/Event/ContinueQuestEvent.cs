@@ -16,11 +16,11 @@ namespace Stargate.Stargate.Event
         NO
     }
 
-    public class ContinueQuestCardEvent : NetworkStargateEvent
+    public class NetworkContinueQuestCardEvent : NetworkStargateEvent
     {
         public ContinueQuestEventResponse response;
 
-        public ContinueQuestCardEvent(int senderId, ContinueQuestEventResponse _response)
+        public NetworkContinueQuestCardEvent(int senderId, ContinueQuestEventResponse _response)
         {
             response = _response;
             Sender = senderId;
@@ -33,12 +33,12 @@ namespace Stargate.Stargate.Event
 
         public override object[] RPCAttr()
         {
-            throw new NotImplementedException();
+            return new object[] { Sender, response };
         }
 
         public override string RPCMethod()
         {
-            return "ContinueQuestCardEvent";
+            return "NetworkContinueQuestCardEvent";
         }
     }
 
@@ -47,7 +47,7 @@ namespace Stargate.Stargate.Event
 
         public override NetworkStargateEvent GenerateNetworkStargateEvent()
         {
-            return new ContinueQuestCardEvent((int)SenderId, response);
+            return new NetworkContinueQuestCardEvent((int)SenderId, response);
         }
 
         public ContinueQuestEventResponse response;
