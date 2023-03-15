@@ -100,15 +100,24 @@ public class Main : Node
 
 
     [Sync]
-    public void Pouet(NetworkStargateEvent networkStargateEvent)
+    public void Pouet(EncodedObjectAsID networkStargateEvent)
     {
         // StargateEvent e = networkStargateEvent.GenerateStargateEvent();
         // e.Hydrate(game);
 
-        Debug.WriteLine(networkStargateEvent);
+        ;
+
+        Debug.WriteLine(GD.InstanceFromId(networkStargateEvent.ObjectId));
 
         // game.GameState.ProcessEvent(e);
         //Debug.WriteLine("POUET" + e);
+    }
+
+
+    [Sync]
+    public void SelectCardEvent(int Sender, Godot.Collections.Array<int> cardModels)
+    {
+        GD.PrintErr("Sender : " + Sender + "cardModels : " + cardModels);
     }
 
     public void SendEvent(StargateEvent stargateEvent){
@@ -123,7 +132,11 @@ public class Main : Node
             //  Debug.WriteLine("RPC");
             //  Rpc("SendEventnetwork", new NetworkEvent() { stargateEvent = stargateEvent });
 
-            Rpc("Pouet", new NetworkPlayCardEvent() { cardModel = 10, Sender = 1});
+             NetworkStargateEvent e = stargateEvent.GenerateNetworkStargateEvent();
+
+             Rpc(e.RPCMethod(), e.RPCAttr());
+
+           // Debug.WriteLine(e.RPCMethod() + e.RPCAttr()[0] + e.RPCAttr()[1]);
         }
         else
         {

@@ -10,8 +10,22 @@ namespace Stargate.Stargate.Event
 {
 
     public class NetworkSelectCardEvent : NetworkStargateEvent {
-        public Godot.Collections.Array<int> cardModels = new Godot.Collections.Array<int>();   
-        
+
+
+        public Godot.Collections.Array<int> cardModels = new Godot.Collections.Array<int>();
+
+        public NetworkSelectCardEvent(int senderId, List<int> CardModelIds)
+        {
+            Sender = senderId;
+            cardModels = new Godot.Collections.Array<int>(CardModelIds);
+        }
+
+        public override object[] RPCAttr()
+        {
+            // throw new NotImplementedException();
+            return new object[] { Sender, cardModels };
+        }
+
         public override StargateEvent GenerateStargateEvent()
         {
             return new SelectCardEvent() { CardModelId = cardModels.ToList<int>(), SenderId = Sender };
@@ -24,7 +38,7 @@ namespace Stargate.Stargate.Event
 
         public override NetworkStargateEvent GenerateNetworkStargateEvent()
         {
-            return new NetworkSelectCardEvent() { Sender = (int)SenderId, cardModels = new Godot.Collections.Array<int>(CardModelId) };
+            return new NetworkSelectCardEvent((int)SenderId, CardModelId);
         }
 
 

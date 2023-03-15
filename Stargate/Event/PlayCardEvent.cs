@@ -19,6 +19,11 @@ namespace Stargate.Stargate.Event
             return new PlayCardEvent() { CardModelId = cardModel, SenderId = Sender };
         }
 
+        public override object[] RPCAttr()
+        {
+            throw new NotImplementedException();
+        }
+
 
         public override string ToString()
         {

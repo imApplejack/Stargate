@@ -29,6 +29,13 @@ namespace Stargate.Stargate.Event
 
         public abstract StargateEvent GenerateStargateEvent();
 
+        public abstract object[] RPCAttr();
+
+        public string RPCMethod()
+        {
+            return this.GetType().Name;
+        }
+
     }
 
 

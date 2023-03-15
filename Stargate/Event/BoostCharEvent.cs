@@ -18,6 +18,11 @@ namespace Stargate.Stargate.Event
         {
             return new BoostCharEvent() { CardModelId = cardModel, SenderId = Sender };
         }
+        public override object[] RPCAttr()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 
 

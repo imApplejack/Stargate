@@ -23,6 +23,11 @@ namespace Stargate.Stargate.Event
         {
             return new ContinueQuestEvent() { response = response, SenderId = Sender };
         }
+
+        public override object[] RPCAttr()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ContinueQuestEvent : StargateEvent

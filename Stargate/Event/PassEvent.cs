@@ -18,6 +18,10 @@ namespace Stargate.Stargate.Event
         {
             return new PassEvent() { SenderId = Sender };
         }
+        public override object[] RPCAttr()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class PassEvent : StargateEvent
