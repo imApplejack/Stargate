@@ -67,20 +67,33 @@ public class Main : Node
         game = new StargateGame(library);
         game.InitPlayersWithDeck(deckimporter.Load("o'neil.o8d"), deckimporter.Load("o'neil.o8d"));
 
-         //StargateGameMock.InitPlayersWithMock(game);
+        //StargateGameMock.InitPlayersWithMock(game);
 
-         MappingMVC mappingMVC = new MappingMVC();
-        mappingMVC.InitRessources(game.GameState.GetAllCards());
+
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
-        Player1Vue.InitControl(game.GameState.player1, game.GameState.player2, mappingMVC, this);
-        game.GameState.StargateResultHandler += Player1Vue.HandleResult;
+        if (Player1Vue.Visible)
+        {
+            MappingMVC mappingMVC = new MappingMVC();
+            mappingMVC.InitRessources(game.GameState.GetAllCards());
+            Player1Vue.InitControl(game.GameState.player1, game.GameState.player2, mappingMVC, this);
+            game.GameState.StargateResultHandler += Player1Vue.HandleResult;
+        }
+
+     
 
 
-        MappingMVC mappingMVC2 = new MappingMVC();
-        mappingMVC2.InitRessources(game.GameState.GetAllCards());
-        Player2Vue = (PlayerControl)this.FindNode("PlayerControl2");       
-        Player2Vue.InitControl(game.GameState.player2, game.GameState.player1, mappingMVC2, this);
-        game.GameState.StargateResultHandler += Player2Vue.HandleResult;
+        Player2Vue = (PlayerControl)this.FindNode("PlayerControl2");
+        if (Player2Vue.Visible)
+        {
+            MappingMVC mappingMVC2 = new MappingMVC();
+            mappingMVC2.InitRessources(game.GameState.GetAllCards());
+            Player2Vue.InitControl(game.GameState.player2, game.GameState.player1, mappingMVC2, this);
+            game.GameState.StargateResultHandler += Player2Vue.HandleResult;
+
+        }
+
+
+        
 
         game.GameState.InitGame(seed);
 
