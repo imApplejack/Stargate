@@ -35,12 +35,17 @@ public class Main : Node
         GD.Print(GetTree().IsNetworkServer());
 
         Library library = new Library(ProjectSettings.GlobalizePath("res://Sets/"));
+        DeckImporter deckimporter = new DeckImporter(ProjectSettings.GlobalizePath("res://Sets/Decks/"));
+
+
 
         //cardService.Draw(Player1);
         game = new StargateGame(library);
-        StargateGameMock.InitPlayersWithMock(game);
+        game.InitPlayersWithDeck(deckimporter.Load("o'neil.o8d"), deckimporter.Load("o'neil.o8d"));
 
-        MappingMVC mappingMVC = new MappingMVC();
+         //StargateGameMock.InitPlayersWithMock(game);
+
+         MappingMVC mappingMVC = new MappingMVC();
         mappingMVC.InitRessources(game.GameState.GetAllCards());
         Player1Vue = (PlayerControl)this.FindNode("PlayerControl");
         Player1Vue.InitControl(game.GameState.player1, game.GameState.player2, mappingMVC, this);

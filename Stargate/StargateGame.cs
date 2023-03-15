@@ -31,6 +31,20 @@ namespace Stargate
         }
 
 
+        public void InitPlayersWithDeck(Decklist p1, Decklist p2)
+        {
+            InitPlayerWithDecklist(GameState.player1, p1);
+            InitPlayerWithDecklist(GameState.player2, p2);
+            GameState.InitPlayersLibraryAndMissions();
+        }
+
+        public void InitPlayerWithDecklist(Player p, Decklist deck)
+        {
+            GameState.CreatePlayerTeam(p, Library.GetCardsFromGuidList(deck.team));
+            GameState.CreatePlayerDeck(p, Library.GetCardsFromGuidList(deck.library));
+            GameState.CreatePlayerMissions(p, Library.GetCardsFromGuidList(deck.mission));
+        }
+
 
         public Library Library { get; set; }
 
