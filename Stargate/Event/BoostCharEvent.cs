@@ -14,6 +14,12 @@ namespace Stargate.Stargate.Event
     public class BoostCharEvent : StargateEvent
     {
 
+
+        public override NetworkStargateEvent GenerateNetworkStargateEvent()
+        {
+            throw new NotImplementedException();
+        }
+
         public CardModel cardModel { get; set; }
 
         public int? CardModelId { get; set; }
@@ -37,7 +43,6 @@ namespace Stargate.Stargate.Event
             return base.ToString() +  " CardModel " + CardModelId + " " + cardModel;
         }
 
-
-
+        
     }
 }

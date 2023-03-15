@@ -9,11 +9,25 @@ using System.Threading.Tasks;
 namespace Stargate.Stargate.Event
 {
 
+    public class NetworkSelectCardEvent : NetworkStargateEvent {
+        public Godot.Collections.Array<int> cardModels = new Godot.Collections.Array<int>();   
+        
+        public override StargateEvent GenerateStargateEvent()
+        {
+            return new SelectCardEvent() { CardModelId = cardModels.ToList<int>(), SenderId = Sender };
+        }
+    }
+
 
     public class SelectCardEvent : StargateEvent
     {
 
-    
+        public override NetworkStargateEvent GenerateNetworkStargateEvent()
+        {
+            return new NetworkSelectCardEvent() { Sender = (int)SenderId, cardModels = new Godot.Collections.Array<int>(CardModelId) };
+        }
+
+
         public List<CardModel> cardModel { get; set; } = new List<CardModel>();
 
         public List<int> CardModelId { get; set; } = new List<int>();    
@@ -38,5 +52,6 @@ namespace Stargate.Stargate.Event
             }
         }
 
+       
     }
 }

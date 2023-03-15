@@ -29,4 +29,7 @@
     <None Include="Sets\Decks\teal'c.o8d" />
     <None Include="Sets\Decks\yu.o8d" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="7.0.2" />
+  </ItemGroup>
 </Project>

@@ -23,9 +23,20 @@ namespace Stargate.Stargate.Event
         USED
     }
 
-
-    public class StargateEvent : StateEvent
+    public abstract class NetworkStargateEvent : Godot.Object
     {
+        public int Sender;
+
+        public abstract StargateEvent GenerateStargateEvent();
+
+    }
+
+
+
+    public abstract class StargateEvent : StateEvent
+    {
+
+        public abstract NetworkStargateEvent GenerateNetworkStargateEvent();
 
         public EventType Type { get; set; }
 
@@ -48,7 +59,6 @@ namespace Stargate.Stargate.Event
         {
             return Type.ToString() + " " + "Sender " + SenderId;
         }
-
 
     }
 }

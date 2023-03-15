@@ -41,7 +41,7 @@ public class Main : Node
         var host = new NetworkedMultiplayerENet();
 
         GD.Print(ip);
-        if (ip != String.Empty)
+        if (ip == null)
         {
             GD.Print("server");
             host.CreateServer(port, 10);
@@ -84,9 +84,6 @@ public class Main : Node
         game.GameState.InitGame(seed);
 
 
-
-        GD.PrintErr(ip);
-
        // ((WindowDialog)FindNode("WindowDialog")).PopupCentered();
         
 
@@ -97,8 +94,19 @@ public class Main : Node
     [Sync]
     public void SendEventnetwork(NetworkEvent stargateEvent)
     {
-        stargateEvent.stargateEvent.Hydrate(game);
-        game.GameState.ProcessEvent(stargateEvent.stargateEvent);
+      //  stargateEvent.stargateEvent.Hydrate(game);
+       // game.GameState.ProcessEvent(stargateEvent.stargateEvent);
+    }
+
+
+    [Sync]
+    public void Pouet(NetworkStargateEvent networkStargateEvent)
+    {
+        StargateEvent e = networkStargateEvent.GenerateStargateEvent();
+        e.Hydrate(game);
+
+        game.GameState.ProcessEvent(e);
+        //Debug.WriteLine("POUET" + e);
     }
 
     public void SendEvent(StargateEvent stargateEvent){
@@ -107,14 +115,22 @@ public class Main : Node
 
         if (GetTree().NetworkPeer.GetConnectionStatus() == NetworkedMultiplayerPeer.ConnectionStatus.Connected)
         {
-            //Debug.WriteLine("RPC");
-            Rpc("SendEventnetwork", new NetworkEvent() { stargateEvent = stargateEvent });
+
+            //Rpc("Pouet", 45 , 55);
+            //  Debug.WriteLine("RPC");
+            //  Debug.WriteLine("RPC");
+            //  Rpc("SendEventnetwork", new NetworkEvent() { stargateEvent = stargateEvent });
+
+            Rpc("Pouet", stargateEvent.GenerateNetworkStargateEvent());
         }
         else
         {
-            SendEventnetwork(new NetworkEvent() { stargateEvent = stargateEvent });
+          //  SendEventnetwork(new NetworkEvent() { stargateEvent = stargateEvent });
         }
     }
+
+
+
 
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

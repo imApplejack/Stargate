@@ -19,12 +19,19 @@ namespace Stargate.Stargate.Event
     public class ContinueQuestEvent : StargateEvent
     {
 
+        public override NetworkStargateEvent GenerateNetworkStargateEvent()
+        {
+            throw new NotImplementedException();
+        }
+
         public ContinueQuestEventResponse response;
 
         public ContinueQuestEvent()
         {
             Type = EventType.CONTINUEQUEST;
         }
+
+        
 
         public override string ToString()
         {

@@ -12,11 +12,17 @@ namespace Stargate.Stargate.Event
     public class PassEvent : StargateEvent
     {
 
+        public override NetworkStargateEvent GenerateNetworkStargateEvent()
+        {
+            throw new NotImplementedException();
+        }
+
         public PassEvent()
         {
             Type = EventType.PASS;
 
         }
 
+      
     }
 }

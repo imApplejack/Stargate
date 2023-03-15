@@ -27,6 +27,7 @@ window/size/height=800
 [global]
 
 insta=false
+debug=false
 
 [gui]
 
