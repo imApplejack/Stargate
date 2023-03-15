@@ -15,4 +15,18 @@
     <Content Include="Sets\c7f034ea-d30b-4b58-9923-292f214db512\set.xml" />
     <Content Include="Sets\cb577ebe-a21e-4cfa-a175-51ea768852e0\set.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Sets\Decks\adria.o8d" />
+    <None Include="Sets\Decks\apophis.o8d" />
+    <None Include="Sets\Decks\baal.o8d" />
+    <None Include="Sets\Decks\carter.o8d" />
+    <None Include="Sets\Decks\doci.o8d" />
+    <None Include="Sets\Decks\doran.o8d" />
+    <None Include="Sets\Decks\jackson.o8d" />
+    <None Include="Sets\Decks\mitchell.o8d" />
+    <None Include="Sets\Decks\o'neil.o8d" />
+    <None Include="Sets\Decks\osiris.o8d" />
+    <None Include="Sets\Decks\teal'c.o8d" />
+    <None Include="Sets\Decks\yu.o8d" />
+  </ItemGroup>
 </Project>

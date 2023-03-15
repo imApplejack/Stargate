@@ -57,7 +57,6 @@ namespace Stargate.Stargate
             }
             else if ((card.Type & CardType.Character) != 0)
             {
-
                 switch (card.Type)
                 {
                     case (CardType.SupportCharacter):
@@ -71,7 +70,6 @@ namespace Stargate.Stargate
                         break;
                     default: retour = new CardModel(card);
                         break;
-
                 }
                 
                 //return new CharacterModel() { Card = card };
