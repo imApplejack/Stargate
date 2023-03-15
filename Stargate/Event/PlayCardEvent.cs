@@ -15,8 +15,6 @@ namespace Stargate.Stargate.Event
     {
         public int cardModel;
 
-
-
         public NetworkPlayCardEvent(int senderId, int CardModelId)
         {
             cardModel = CardModelId;

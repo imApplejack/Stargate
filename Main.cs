@@ -116,7 +116,7 @@ public class Main : Node
 
 
     [Sync]
-    public void POUET(int Sender, Godot.Collections.Array<int> cardModels)
+    public void NetworkSelectCardEvent(int Sender, Godot.Collections.Array<int> cardModels)
     {
         NetworkSelectCardEvent e = new NetworkSelectCardEvent(Sender, cardModels.ToList());
         StargateEvent muhevent = e.GenerateStargateEvent();
@@ -139,7 +139,7 @@ public class Main : Node
 
              NetworkStargateEvent e = stargateEvent.GenerateNetworkStargateEvent();
 
-             Rpc("POUET", e.RPCAttr());
+             Rpc(e.RPCMethod(), e.RPCAttr());
 
            // Debug.WriteLine(e.RPCMethod() + e.RPCAttr()[0] + e.RPCAttr()[1]);
         }
