@@ -31,10 +31,7 @@ namespace Stargate.Stargate.Event
 
         public abstract object[] RPCAttr();
 
-        public string RPCMethod()
-        {
-            return this.GetType().Name;
-        }
+        public abstract string RPCMethod();
 
     }
 

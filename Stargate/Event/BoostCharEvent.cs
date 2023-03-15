@@ -14,6 +14,17 @@ namespace Stargate.Stargate.Event
     public class NetworkBoostCharEvent : NetworkStargateEvent
     {
         public int cardModel;
+
+
+
+
+        public NetworkBoostCharEvent(int senderId, int CardModelId)
+        {
+            cardModel = CardModelId;
+            Sender = senderId;
+        }
+
+
         public override StargateEvent GenerateStargateEvent()
         {
             return new BoostCharEvent() { CardModelId = cardModel, SenderId = Sender };
@@ -23,6 +34,10 @@ namespace Stargate.Stargate.Event
             throw new NotImplementedException();
         }
 
+        public override string RPCMethod()
+        {
+            return "NetworkBoostCharEvent";
+        }
     }
 
 
@@ -31,7 +46,7 @@ namespace Stargate.Stargate.Event
 
         public override NetworkStargateEvent GenerateNetworkStargateEvent()
         {
-            return new NetworkBoostCharEvent() { cardModel = (int)CardModelId, Sender = (int)SenderId };
+            return new NetworkBoostCharEvent((int)CardModelId, (int)SenderId);
         }
 
         public CardModel cardModel { get; set; }

@@ -30,6 +30,11 @@ namespace Stargate.Stargate.Event
         {
             return new SelectCardEvent() { CardModelId = cardModels.ToList<int>(), SenderId = Sender };
         }
+
+        public override string RPCMethod()
+        {
+            return  "NetworkSelectCardEvent";
+        }
     }
 
 

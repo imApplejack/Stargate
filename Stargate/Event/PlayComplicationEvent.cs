@@ -15,6 +15,14 @@ namespace Stargate.Stargate.Event
     public class NetworkPlayComplicationEvent : NetworkStargateEvent
     {
         public int cardModel;
+
+
+        public NetworkPlayComplicationEvent(int senderId, int CardModelId)
+        {
+            cardModel = CardModelId;
+            Sender = senderId;
+        }
+
         public override StargateEvent GenerateStargateEvent()
         {
             return new PlayComplicationEvent() { CardModelId = cardModel, SenderId = Sender };
@@ -24,6 +32,11 @@ namespace Stargate.Stargate.Event
         {
             throw new NotImplementedException();
         }
+
+        public override string RPCMethod()
+        {
+            return "NetworkPlayComplicationEvent";
+        }
     }
 
 
@@ -32,7 +45,7 @@ namespace Stargate.Stargate.Event
 
         public override NetworkStargateEvent GenerateNetworkStargateEvent()
         {
-            return new NetworkPlayComplicationEvent() { cardModel = (int)CardModelId, Sender = (int)SenderId };
+            return new NetworkPlayComplicationEvent((int)SenderId, (int)CardModelId);
         }
 
 

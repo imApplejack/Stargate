@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Security.Principal;
 
 public class Main : Node
@@ -115,9 +116,13 @@ public class Main : Node
 
 
     [Sync]
-    public void SelectCardEvent(int Sender, Godot.Collections.Array<int> cardModels)
+    public void POUET(int Sender, Godot.Collections.Array<int> cardModels)
     {
-        GD.PrintErr("Sender : " + Sender + "cardModels : " + cardModels);
+        NetworkSelectCardEvent e = new NetworkSelectCardEvent(Sender, cardModels.ToList());
+        StargateEvent muhevent = e.GenerateStargateEvent();
+        muhevent.Hydrate(game);
+        game.GameState.ProcessEvent(muhevent);
+
     }
 
     public void SendEvent(StargateEvent stargateEvent){
@@ -134,7 +139,7 @@ public class Main : Node
 
              NetworkStargateEvent e = stargateEvent.GenerateNetworkStargateEvent();
 
-             Rpc(e.RPCMethod(), e.RPCAttr());
+             Rpc("POUET", e.RPCAttr());
 
            // Debug.WriteLine(e.RPCMethod() + e.RPCAttr()[0] + e.RPCAttr()[1]);
         }

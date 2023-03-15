@@ -13,7 +13,13 @@ namespace Stargate.Stargate.Event
 
     public class NetworkPassEvent : NetworkStargateEvent
     {
-        public int cardModel;
+
+        public NetworkPassEvent(int senderId)
+        {
+            Sender = senderId;
+        }
+
+
         public override StargateEvent GenerateStargateEvent()
         {
             return new PassEvent() { SenderId = Sender };
@@ -22,6 +28,13 @@ namespace Stargate.Stargate.Event
         {
             throw new NotImplementedException();
         }
+
+
+        public override string RPCMethod()
+        {
+            return "NetworkPassEvent";
+        }
+
     }
 
     public class PassEvent : StargateEvent
@@ -29,7 +42,7 @@ namespace Stargate.Stargate.Event
 
         public override NetworkStargateEvent GenerateNetworkStargateEvent()
         {
-            return new NetworkPassEvent() {Sender = (int)SenderId };
+            return new NetworkPassEvent((int)SenderId);
         }
 
         public PassEvent()

@@ -14,6 +14,15 @@ namespace Stargate.Stargate.Event
     public class NetworkPlayCardEvent : NetworkStargateEvent
     {
         public int cardModel;
+
+
+
+        public NetworkPlayCardEvent(int senderId, int CardModelId)
+        {
+            cardModel = CardModelId;
+            Sender = senderId;
+        }
+
         public override StargateEvent GenerateStargateEvent()
         {
             return new PlayCardEvent() { CardModelId = cardModel, SenderId = Sender };
@@ -25,11 +34,11 @@ namespace Stargate.Stargate.Event
         }
 
 
-        public override string ToString()
+        public override string RPCMethod()
         {
-            return "Sender : " + Sender + " cardmodel: " + cardModel ;
-
+            return "NetworkPlayCardEvent";
         }
+
     }
 
     public class PlayCardEvent : StargateEvent
@@ -37,7 +46,7 @@ namespace Stargate.Stargate.Event
 
         public override NetworkStargateEvent GenerateNetworkStargateEvent()
         {
-            return new NetworkPlayCardEvent() { cardModel = (int)CardModelId, Sender = (int)SenderId };
+            return new NetworkPlayCardEvent((int)SenderId, (int)CardModelId);
         }
 
         public CardModel cardModel { get; set; }
