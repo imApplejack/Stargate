@@ -5,6 +5,8 @@
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
+port = 36112
+seed = 1
 
 [node name="PlayerControl" parent="." instance=ExtResource( 2 )]
 anchor_right = 0.5
