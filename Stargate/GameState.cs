@@ -79,8 +79,15 @@ namespace Stargate.Stargate
 
                 retour = new ObstacleModel() { Card = card };
             }
-            else
+            else if(card.Type == CardType.Gear)
             {
+                retour = new GearModel() { Card = card };
+            }
+            else if (card.Type == CardType.Event)
+            {
+                retour = new EventModel() { Card = card };
+            }
+            else { 
                 retour = new CardModel(card);
             }
 
@@ -162,7 +169,11 @@ namespace Stargate.Stargate
             {
                 playCardEvent.cardModel.PlayCardCost(playCardEvent.Sender);
                 playCardEvent.cardModel.PlayCardAction();
-                ForwardEvent(new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = playCardEvent.cardModel });
+
+                StargateResult r = new StargateResult() { actionResult = ActionResult.Success, StargateResultType = StargateResultType.ChangeCard, attr = playCardEvent.cardModel };
+                
+                GD.PrintErr(r);
+                ForwardEvent(r);
                 return true;
             }
             else

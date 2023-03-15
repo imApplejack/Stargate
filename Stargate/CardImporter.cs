@@ -59,6 +59,8 @@ namespace Stargate.Stargate
                             case "Mission": c.Type = CardType.Mission   ; break;
                             case "Team Character": c.Type = CardType.TeamCharacter  ; break;
                             case "Obstacle": c.Type = CardType.Obstacle; break;
+                            case "Gear": c.Type = CardType.Gear; break;
+                            case "Event": c.Type = CardType.Event ; break;
 
                         }
 
