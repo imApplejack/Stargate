@@ -34,7 +34,7 @@ namespace Stargate
 
         public int TotalExperience()
         {
-            return gameState.TotalExperience(this);
+            return gameState.TotalExperience(gameState.GetOtherPlayer(this));
         }
 
         public int VictoryTotal()

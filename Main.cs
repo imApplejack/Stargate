@@ -200,26 +200,14 @@ public class Main : Node
 
         if (GetTree().NetworkPeer.GetConnectionStatus() == NetworkedMultiplayerPeer.ConnectionStatus.Connected)
         {
-
-            //Rpc("Pouet", 45 , 55);
-            //  Debug.WriteLine("RPC");
-            //  Debug.WriteLine("RPC");
-            //  Rpc("SendEventnetwork", new NetworkEvent() { stargateEvent = stargateEvent });
-
              NetworkStargateEvent e = stargateEvent.GenerateNetworkStargateEvent();
-
              Rpc(e.RPCMethod(), e.RPCAttr());
-
-           // Debug.WriteLine(e.RPCMethod() + e.RPCAttr()[0] + e.RPCAttr()[1]);
         }
         else
         {
           //  SendEventnetwork(new NetworkEvent() { stargateEvent = stargateEvent });
         }
     }
-
-
-
 
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

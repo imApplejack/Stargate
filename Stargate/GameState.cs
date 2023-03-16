@@ -300,7 +300,7 @@ namespace Stargate.Stargate
         public int VictoryTotal(Player player)
         {
             int retour = 0;
-            foreach (HeroCharacterModel item in CardRepository.GetPlayerTeamCharactersWithGlyph(GetOtherPlayer(player)))
+            foreach (HeroCharacterModel item in CardRepository.GetPlayerTeamCharactersWithGlyph(player))
             {
                 retour += item.GetVictoryTotal();
             }
