@@ -23,15 +23,18 @@ namespace Stargate.Stargate.Event
         USED
     }
 
-    public abstract class NetworkStargateEvent : Godot.Object
+    public abstract class NetworkStargateEvent
     {
         public int Sender;
 
-        public abstract StargateEvent GenerateStargateEvent();
+        public abstract StargateEvent GenerateStargateEvent(params object[] list);
 
-        public abstract object[] RPCAttr();
+        public abstract object[] RPCAttr(StargateEvent eEvent);
 
-        public abstract string RPCMethod();
+        public static string RPCMethod()
+        {
+            return nameof(StargateEvent);
+        }
 
     }
 

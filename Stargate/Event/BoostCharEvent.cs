@@ -21,18 +21,23 @@ namespace Stargate.Stargate.Event
             Sender = senderId;
         }
 
-        public override StargateEvent GenerateStargateEvent()
+        public NetworkBoostCharEvent()
         {
-            return new BoostCharEvent() { CardModelId = cardModel, SenderId = Sender };
-        }
-        public override object[] RPCAttr()
-        {
-            return new object[] { Sender, cardModel };
         }
 
-        public override string RPCMethod()
+        public override StargateEvent GenerateStargateEvent(params object[] list)
         {
-            return "NetworkBoostCharEvent";
+            return new BoostCharEvent() { SenderId = (int)list[0], CardModelId = (int)list[1] };
+        }
+        public override object[] RPCAttr(StargateEvent eEvent)
+        {
+            BoostCharEvent e = eEvent as BoostCharEvent;
+            return new object[] { e.SenderId, e.CardModelId };
+        }
+
+         public static new string RPCMethod()
+        {
+            return nameof(NetworkAssignCharEvent);
         }
     }
 

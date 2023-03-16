@@ -2,6 +2,7 @@
 using Stargate.Stargate.Enum;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,20 +21,26 @@ namespace Stargate.Stargate.Event
             cardModels = new Godot.Collections.Array<int>(CardModelIds);
         }
 
-        public override object[] RPCAttr()
+        public NetworkSelectCardEvent()
         {
-            // throw new NotImplementedException();
-            return new object[] { Sender, cardModels };
         }
 
-        public override StargateEvent GenerateStargateEvent()
+        public override object[] RPCAttr(StargateEvent eEvent)
         {
-            return new SelectCardEvent() { CardModelId = cardModels.ToList<int>(), SenderId = Sender };
+            SelectCardEvent e = eEvent as SelectCardEvent;
+            return new object[] { e.SenderId, new Godot.Collections.Array<int>(e.CardModelId) };
         }
 
-        public override string RPCMethod()
+        public override StargateEvent GenerateStargateEvent(params object[] list)
         {
-            return  "NetworkSelectCardEvent";
+            Godot.Collections.Array<int> e = new Godot.Collections.Array<int>((Godot.Collections.Array)list[1]);
+            List<int> tiit = new List<int>(e);
+            return new SelectCardEvent() { SenderId = (int)list[0], CardModelId = tiit };
+        }
+
+        public static new string RPCMethod()
+        {
+            return nameof(NetworkSelectCardEvent);
         }
     }
 

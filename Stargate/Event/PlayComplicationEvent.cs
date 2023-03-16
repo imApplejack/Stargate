@@ -23,19 +23,24 @@ namespace Stargate.Stargate.Event
             Sender = senderId;
         }
 
-        public override StargateEvent GenerateStargateEvent()
+        public NetworkPlayComplicationEvent()
         {
-            return new PlayComplicationEvent() { CardModelId = cardModel, SenderId = Sender };
         }
 
-        public override object[] RPCAttr()
+        public override StargateEvent GenerateStargateEvent(params object[] list)
         {
-            return new object[] { Sender, cardModel };
+            return new PlayComplicationEvent() { SenderId = (int)list[0], CardModelId = (int)list[1] };
         }
 
-        public override string RPCMethod()
+        public override object[] RPCAttr(StargateEvent eEvent)
         {
-            return "NetworkPlayComplicationEvent";
+            PlayCardEvent e = eEvent as PlayCardEvent;
+            return new object[] { e.Sender, e.cardModel };
+        }
+
+        public static new string RPCMethod()
+        {
+            return nameof(NetworkPlayComplicationEvent);
         }
     }
 

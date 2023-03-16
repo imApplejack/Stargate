@@ -12,7 +12,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Security.Principal;
-
 public class Main : Node
 {
    
@@ -22,6 +21,8 @@ public class Main : Node
 
      public PlayerControl Player1Vue;
      public PlayerControl Player2Vue;
+
+    public NetworkManager NetworkManager;
 
     [Export]
     public string ip;
@@ -38,6 +39,8 @@ public class Main : Node
     public override void _Ready()
     {
 
+
+        NetworkManager = new NetworkManager();
 
         var host = new NetworkedMultiplayerENet();
 
@@ -99,99 +102,17 @@ public class Main : Node
 
 
        // ((WindowDialog)FindNode("WindowDialog")).PopupCentered();
-        
-
-      
-
     }
 
-    [Sync]
-    public void SendEventnetwork(NetworkEvent stargateEvent)
-    {
-      //  stargateEvent.stargateEvent.Hydrate(game);
-       // game.GameState.ProcessEvent(stargateEvent.stargateEvent);
-    }
 
 
     [Sync]
-    public void Pouet(EncodedObjectAsID networkStargateEvent)
+    public void Network(string a , object[] b)
     {
-        // StargateEvent e = networkStargateEvent.GenerateStargateEvent();
-        // e.Hydrate(game);
-
-        ;
-
-        Debug.WriteLine(GD.InstanceFromId(networkStargateEvent.ObjectId));
-
-        // game.GameState.ProcessEvent(e);
-        //Debug.WriteLine("POUET" + e);
+         StargateEvent stargateEvent =  NetworkManager.GenerateStargateEvent(a, b);
+         stargateEvent.Hydrate(game);
+         game.GameState.ProcessEvent(stargateEvent);
     }
-
-
-    [Sync]
-    public void NetworkSelectCardEvent(int Sender, Godot.Collections.Array<int> cardModels)
-    {
-        NetworkSelectCardEvent e = new NetworkSelectCardEvent(Sender, cardModels.ToList());
-        StargateEvent muhevent = e.GenerateStargateEvent();
-        muhevent.Hydrate(game);
-        game.GameState.ProcessEvent(muhevent);
-    }
-
-    [Sync]
-    public void NetworkAssignCharEvent(int Sender, int cardModel)
-    {
-        NetworkAssignCharEvent e = new NetworkAssignCharEvent(Sender, cardModel);
-        StargateEvent muhevent = e.GenerateStargateEvent();
-        muhevent.Hydrate(game);
-        game.GameState.ProcessEvent(muhevent);
-    }
-
-    [Sync]
-    public void NetworkBoostCharEvent(int Sender, int cardModel)
-    {
-        NetworkBoostCharEvent e = new NetworkBoostCharEvent(Sender, cardModel);
-        StargateEvent muhevent = e.GenerateStargateEvent();
-        muhevent.Hydrate(game);
-        game.GameState.ProcessEvent(muhevent);
-    }
-
-    [Sync]
-    public void NetworkContinueQuestCardEvent(int Sender, ContinueQuestEventResponse _response)
-    {
-        NetworkContinueQuestCardEvent e = new NetworkContinueQuestCardEvent(Sender, _response);
-        StargateEvent muhevent = e.GenerateStargateEvent();
-        muhevent.Hydrate(game);
-        game.GameState.ProcessEvent(muhevent);
-    }
-
-    [Sync]
-    public void NetworkPassEvent(int Sender)
-    {
-        NetworkPassEvent e = new NetworkPassEvent(Sender);
-        StargateEvent muhevent = e.GenerateStargateEvent();
-        muhevent.Hydrate(game);
-        game.GameState.ProcessEvent(muhevent);
-    }
-
-    [Sync]
-    public void NetworkPlayCardEvent(int Sender, int cardModel)
-    {
-        NetworkPlayCardEvent e = new NetworkPlayCardEvent(Sender, cardModel);
-        StargateEvent muhevent = e.GenerateStargateEvent();
-        muhevent.Hydrate(game);
-        game.GameState.ProcessEvent(muhevent);
-    }
-
-    [Sync]
-    public void NetworkPlayComplicationEvent(int Sender, int cardModel)
-    {
-        NetworkPlayComplicationEvent e = new NetworkPlayComplicationEvent(Sender, cardModel);
-        StargateEvent muhevent = e.GenerateStargateEvent();
-        muhevent.Hydrate(game);
-        game.GameState.ProcessEvent(muhevent);
-    }
-
-
 
 
     public void SendEvent(StargateEvent stargateEvent){
@@ -200,8 +121,10 @@ public class Main : Node
 
         if (GetTree().NetworkPeer.GetConnectionStatus() == NetworkedMultiplayerPeer.ConnectionStatus.Connected)
         {
-             NetworkStargateEvent e = stargateEvent.GenerateNetworkStargateEvent();
-             Rpc(e.RPCMethod(), e.RPCAttr());
+             //NetworkStargateEvent e = stargateEvent.GenerateNetworkStargateEvent();
+             
+            
+            Rpc("Network", NetworkManager.GenerateRPCAttr(stargateEvent));
         }
         else
         {

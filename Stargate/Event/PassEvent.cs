@@ -19,20 +19,25 @@ namespace Stargate.Stargate.Event
             Sender = senderId;
         }
 
-
-        public override StargateEvent GenerateStargateEvent()
+        public NetworkPassEvent()
         {
-            return new PassEvent() { SenderId = Sender };
-        }
-        public override object[] RPCAttr()
-        {
-            return new object[] { Sender };
         }
 
 
-        public override string RPCMethod()
+        public override StargateEvent GenerateStargateEvent(params object[] list)
         {
-            return "NetworkPassEvent";
+            return new PassEvent() { SenderId = (int)list[0] };
+        }
+        public override object[] RPCAttr(StargateEvent eEvent)
+        {
+            PassEvent e = eEvent as PassEvent;
+            return new object[] { e.SenderId };
+        }
+
+
+        public static new string RPCMethod()
+        {
+            return nameof(NetworkPassEvent);
         }
 
     }
